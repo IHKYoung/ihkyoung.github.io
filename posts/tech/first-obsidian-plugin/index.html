@@ -1,0 +1,942 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+    MathJax = {
+        tex: {
+            inlineMath: [['$', '$'], ['\\(', '\\)']],
+            displayMath: [['$$', '$$'], ['\\[', '\\]']],
+            processEscapes: true,
+            processEnvironments: true
+        },
+        options: {
+            skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+        }
+    };
+
+    window.addEventListener('load', (event) => {
+        document.querySelectorAll("mjx-container").forEach(function (x) {
+            x.parentElement.classList += 'has-jax'
+        })
+    });
+</script>
+
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script type="text/javascript" id="MathJax-script" async
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+
+
+<html lang="zh" dir="zh-cn">
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>顺手写了个Obsidian插件😄 | AhaKnow</title>
+<meta name="keywords" content="Code">
+<meta name="description" content="感觉自己很牛逼！！！ 为啥想到写这个插件呢？ 因为我想把Obsidian和Hugo结合起来，但是有两个小问题很麻烦，虽然很小，但用多了会很烦！会">
+<meta name="author" content="CKYoung">
+<link rel="canonical" href="https://ahaknow.com/posts/tech/first-obsidian-plugin/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.css" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://ahaknow.com/Q.gif">
+<link rel="icon" type="image/png" sizes="16x16" href="https://ahaknow.com/Q.gif">
+<link rel="icon" type="image/png" sizes="32x32" href="https://ahaknow.com/Q.gif">
+<link rel="apple-touch-icon" href="https://ahaknow.com/Q.gif">
+<link rel="mask-icon" href="https://ahaknow.com/Q.gif">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="zh" href="https://ahaknow.com/posts/tech/first-obsidian-plugin/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript>
+  
+
+<meta property="og:title" content="顺手写了个Obsidian插件😄" />
+<meta property="og:description" content="感觉自己很牛逼！！！ 为啥想到写这个插件呢？ 因为我想把Obsidian和Hugo结合起来，但是有两个小问题很麻烦，虽然很小，但用多了会很烦！会" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://ahaknow.com/posts/tech/first-obsidian-plugin/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2024-12-10T22:33:17+08:00" />
+<meta property="article:modified_time" content="2024-12-10T22:33:17+08:00" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="顺手写了个Obsidian插件😄"/>
+<meta name="twitter:description" content="感觉自己很牛逼！！！ 为啥想到写这个插件呢？ 因为我想把Obsidian和Hugo结合起来，但是有两个小问题很麻烦，虽然很小，但用多了会很烦！会"/>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "🚀 天天向上",
+      "item": "https://ahaknow.com/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "✨技术",
+      "item": "https://ahaknow.com/posts/tech/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  3 ,
+      "name": "顺手写了个Obsidian插件😄",
+      "item": "https://ahaknow.com/posts/tech/first-obsidian-plugin/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "顺手写了个Obsidian插件😄",
+  "name": "顺手写了个Obsidian插件😄",
+  "description": "感觉自己很牛逼！！！ 为啥想到写这个插件呢？ 因为我想把Obsidian和Hugo结合起来，但是有两个小问题很麻烦，虽然很小，但用多了会很烦！会",
+  "keywords": [
+    "Code"
+  ],
+  "articleBody": "感觉自己很牛逼！！！ 为啥想到写这个插件呢？ 因为我想把Obsidian和Hugo结合起来，但是有两个小问题很麻烦，虽然很小，但用多了会很烦！会写代码的一般都很懒，所以绝对不会干出手动复制粘贴这种蠢事的。 问题有两个，先解决其中一个：\nmarkdown的==表示的高亮无法识别，使用html的mark标识可以，但是我懒得打\u003c\u003e这个括号，双击等于号多快啊。 所以我就想到了，写一个脚本来转换 一开始想到的是Python脚本，在每次上传的时候自动遍历文件修改一下，但转念一想，这多慢啊，直接Obsidian插件吧，实时识别和更换，应该就是正则匹配就行了。\n于是，就有了下面的实现：\nimport { App, Editor, MarkdownView, Notice, Plugin, PluginSettingTab, Setting } from 'obsidian'; /** * 替换 Markdown 内容中的 ==xxx== 为 xxx，但忽略代码块和行内代码中的 ==。 * 支持 ``` 和 ~~~ 作为代码块标记。 * @param content 原始 Markdown 内容 * @returns 替换后的 Markdown 内容 */ function replaceHighlight(content: string): string { const lines = content.split('\\n'); let inCodeBlock = false; let codeBlockDelimiter = ''; // 用于记录当前代码块的分隔符（``` 或 ~~~） const replacedLines = lines.map(line =\u003e { // 检查代码块开始或结束 const codeBlockMatch = line.match(/^(```|~~~)/); if (codeBlockMatch) { if (!inCodeBlock) { inCodeBlock = true; codeBlockDelimiter = codeBlockMatch[1]; } else if (codeBlockMatch[1] === codeBlockDelimiter) { inCodeBlock = false; codeBlockDelimiter = ''; } return line; } if (inCodeBlock) { // 处于代码块中，跳过替换 return line; } else { // 处理行内代码 // 暂时保护行内代码中的 ==，避免替换 const inlineCodeRegex = /`([^`]+)`/g; let protectedLine = line; const inlineCodes: string[] = []; let match; while ((match = inlineCodeRegex.exec(line)) !== null) { inlineCodes.push(match[1]); protectedLine = protectedLine.replace(match[0], `__INLINE_CODE_${inlineCodes.length - 1}__`); } // 替换 ==xxx== 为 xxx protectedLine = protectedLine.replace(/==(.+?)==/g, '$1'); // 恢复行内代码 protectedLine = protectedLine.replace(/__INLINE_CODE_(\\d+)__/g, (m, p1) =\u003e { const index = parseInt(p1); return `\\`${inlineCodes[index]}\\``; }); return protectedLine; } }); return replacedLines.join('\\n'); } export default class Mark2HighlightPlugin extends Plugin { private onEditHandler: () =\u003e void; async onload() { // 添加一个命令用于高亮替换 this.addCommand({ id: 'convert-highlight', name: 'Convert ==xxx== to xxx', editorCallback: (editor: Editor, view: MarkdownView) =\u003e { // 获取编辑器内容 const content = editor.getValue(); // 使用辅助函数替换 ==xxx== 为 xxx const updatedContent = replaceHighlight(content); // 更新编辑器内容 editor.setValue(updatedContent); new Notice('✨ Markdown Highlight Converted!'); } }); // 自动监听编辑器变化并进行替换 this.onEditHandler = () =\u003e { const activeView = this.app.workspace.getActiveViewOfType(MarkdownView); if (activeView) { const editor = activeView.editor; const content = editor.getValue(); const updatedContent = replaceHighlight(content); if (content !== updatedContent) { editor.setValue(updatedContent); new Notice('✨ Markdown Highlight Converted Automatically!'); } } }; this.registerEvent(this.app.workspace.on('editor-change', this.onEditHandler)); // 如果不需要设置选项卡，可以移除以下行 // this.addSettingTab(new Mark2HighlightSettingTab(this.app, this)); } onunload() { console.log('Mark to Highlight Plugin Unloaded.'); } } 具体而言，是在基础的sample上面进行修改的：\nnpx degit obsidianmd/obsidian-sample-plugin my-plugin cd my-plugin npm install 修改完ts文件后使用：\nnpm run build 想到了下一个插件，就是中英字符的自动切换，描述如下： 比如输入》空格，或者〉空格，就是自动转成\u003e 比如输入·空格，或者···空格，就自动转成makrdown下的代码框标识\n于是就有了下面这个：\nimport { App, Editor, MarkdownView, Notice, Plugin, PluginSettingTab, Setting } from 'obsidian'; /** * 插件的设置接口 */ interface AutoConvertCharsPluginSettings { autoConvertDelay: number; // 自动转换的延迟时间（毫秒） } /** * 插件的默认设置 */ const DEFAULT_SETTINGS: AutoConvertCharsPluginSettings = { autoConvertDelay: 100 }; /** * 判断指定行是否在代码块内 * @param lines 所有行内容 * @param lineNumber 当前行号（从0开始） * @returns 是否在代码块内 */ function isLineInCodeBlock(lines: string[], lineNumber: number): boolean { let inCodeBlock = false; let codeBlockDelimiter = ''; for (let i = 0; i \u003c= lineNumber; i++) { const line = lines[i]; const codeBlockMatch = line.match(/^(```|~~~)/); if (codeBlockMatch) { if (!inCodeBlock) { inCodeBlock = true; codeBlockDelimiter = codeBlockMatch[1]; } else if (codeBlockMatch[1] === codeBlockDelimiter) { inCodeBlock = false; codeBlockDelimiter = ''; } } } return inCodeBlock; } /** * 替换单行中的特定字符组合为目标符号，忽略行内代码中的匹配 * @param line 原始行内容 * @returns 替换后的行内容及是否进行了替换 */ function replacePatternsInLine(line: string): { newLine: string; replaced: boolean } { // **重要**：将更长的触发字符组合放在前面，避免部分匹配 const patterns = [ { trigger: '··· ', replacement: '``````' }, // 六个反引号 { trigger: '· ', replacement: '``' }, // 两个反引号 { trigger: '》 ', replacement: '\u003e' }, // 引用符号 { trigger: '〉 ', replacement: '\u003e' } // 引用符号 ]; let inInlineCode = false; let result = ''; let replaced = false; for (let i = 0; i \u003c line.length; i++) { const char = line[i]; // 处理行内代码的切换 if (char === '`') { inInlineCode = !inInlineCode; result += char; continue; } if (!inInlineCode) { let matched = false; for (const pattern of patterns) { const triggerLength = pattern.trigger.length; const triggerSubstring = line.substring(i, i + triggerLength); if (triggerSubstring === pattern.trigger) { result += pattern.replacement; i += triggerLength - 1; // 跳过触发字符 replaced = true; matched = true; break; // 跳出当前循环，继续下一个字符 } } if (matched) { continue; // 已经替换，跳过添加当前字符 } } result += char; } return { newLine: result, replaced }; } /** * 简单的防抖函数实现 * @param func 需要防抖的函数 * @param wait 防抖的时间间隔（毫秒） * @returns 防抖后的函数 */ function debounceFunc(func: () =\u003e void, wait: number) { let timeout: number | undefined; return () =\u003e { if (timeout !== undefined) { clearTimeout(timeout); } timeout = window.setTimeout(() =\u003e { func(); }, wait); }; } export default class AutoConvertCharsPlugin extends Plugin { settings: AutoConvertCharsPluginSettings; private onEditHandler: () =\u003e void; /** * 加载插件时的初始化逻辑 */ async onload() { await this.loadSettings(); // 创建防抖后的编辑器变化处理函数 this.onEditHandler = debounceFunc(() =\u003e { const activeView = this.app.workspace.getActiveViewOfType(MarkdownView); if (activeView) { const editor = activeView.editor; this.convertPatterns(editor); } }, this.settings.autoConvertDelay); // 注册编辑器变化事件 this.registerEvent(this.app.workspace.on('editor-change', this.onEditHandler)); // 添加设置选项卡 this.addSettingTab(new AutoConvertCharsSettingTab(this.app, this)); } /** * 卸载插件时的清理逻辑 */ onunload() { console.log('Auto Convert Chars Plugin Unloaded.'); } /** * 加载插件设置 */ async loadSettings() { this.settings = Object.assign({}, DEFAULT_SETTINGS, await this.loadData()); } /** * 保存插件设置 */ async saveSettings() { await this.saveData(this.settings); } /** * 更新自动转换延迟时间 * @param newDelay 新的延迟时间（毫秒） */ public updateAutoConvertDelay(newDelay: number) { this.settings.autoConvertDelay = newDelay; this.saveSettings(); // 移除旧的事件监听 this.app.workspace.off('editor-change', this.onEditHandler); // 创建新的防抖处理函数 this.onEditHandler = debounceFunc(() =\u003e { const activeView = this.app.workspace.getActiveViewOfType(MarkdownView); if (activeView) { const editor = activeView.editor; this.convertPatterns(editor); } }, this.settings.autoConvertDelay); // 重新注册编辑器变化事件 this.registerEvent(this.app.workspace.on('editor-change', this.onEditHandler)); } /** * 执行特定字符组合的自动转换，并保持光标位置 * @param editor 当前编辑器实例 */ private convertPatterns(editor: Editor) { const cursor = editor.getCursor(); // 保存光标位置 const currentLineNumber = cursor.line; const currentLineText = editor.getLine(currentLineNumber); // 获取所有行内容 const allLines = editor.getValue().split('\\n'); // 判断当前行是否在代码块内 const inCodeBlock = isLineInCodeBlock(allLines, currentLineNumber); if (inCodeBlock) { // 当前行在代码块内，跳过替换 return; } // 获取替换后的行内容 const { newLine, replaced } = replacePatternsInLine(currentLineText); if (replaced) { // 获取光标在行内的位置 const beforeCursorText = currentLineText.substring(0, cursor.ch); // 计算替换前触发字符的位置和长度 let triggerStart = -1; let triggerLength = 0; let matchedPattern: { trigger: string; replacement: string } | null = null; const patterns = [ { trigger: '··· ', replacement: '``````' }, // 六个反引号 { trigger: '· ', replacement: '``' }, // 两个反引号 { trigger: '》 ', replacement: '\u003e' }, // 引用符号 { trigger: '〉 ', replacement: '\u003e' } // 引用符号 ]; for (const pattern of patterns) { const index = beforeCursorText.lastIndexOf(pattern.trigger); if (index !== -1) { triggerStart = index; triggerLength = pattern.trigger.length; matchedPattern = pattern; break; } } if (triggerStart !== -1 \u0026\u0026 matchedPattern !== null) { // 定义替换范围 const from = { line: currentLineNumber, ch: triggerStart }; const to = { line: currentLineNumber, ch: triggerStart + triggerLength }; // 定义替换内容 const replacement = matchedPattern.replacement; if (replacement) { // 执行替换 editor.replaceRange(replacement, from, to); // 设置光标位置到替换后的中间 // 对于 '· ' → '`` '，光标应在两个反引号之间，即位置 1 // 对于 '··· ' → '`````` '，光标应在前三个反引号之后，即位置 3 let newCursorCh: number; if (matchedPattern.trigger === '· ') { newCursorCh = triggerStart + 1; // After first backtick } else if (matchedPattern.trigger === '··· ') { newCursorCh = triggerStart + 3; // After third backtick } else { // For other patterns like '》 ' and '〉 ', place cursor after replacement newCursorCh = triggerStart + replacement.length; } editor.setCursor({ line: currentLineNumber, ch: newCursorCh }); new Notice('✨ Auto Convert Markdown Chars ✨'); } } } } } /** * 插件的设置选项卡 */ class AutoConvertCharsSettingTab extends PluginSettingTab { plugin: AutoConvertCharsPlugin; constructor(app: App, plugin: AutoConvertCharsPlugin) { super(app, plugin); this.plugin = plugin; } display(): void { const { containerEl } = this; containerEl.empty(); // 设置标题 containerEl.createEl('h2', { text: 'Auto Convert Chars 设置' }); // 自动识别延迟设置 new Setting(containerEl) .setName('自动转换延迟（毫秒）') .setDesc('设置自动识别并转换特定字符组合的延迟时间，默认100毫秒。') .addText(text =\u003e text .setPlaceholder('100') .setValue(this.plugin.settings.autoConvertDelay.toString()) .onChange(async (value) =\u003e { const parsed = parseInt(value); if (!isNaN(parsed) \u0026\u0026 parsed \u003e= 0) { // 调用插件的公共方法更新延迟时间 this.plugin.updateAutoConvertDelay(parsed); new Notice(`自动转换延迟已设置为 ${parsed} 毫秒`); } else { new Notice('请输入有效的毫秒数（非负整数）。'); } })); } } ",
+  "wordCount" : "2533",
+  "inLanguage": "zh",
+  "datePublished": "2024-12-10T22:33:17+08:00",
+  "dateModified": "2024-12-10T22:33:17+08:00",
+  "author":[{
+    "@type": "Person",
+    "name": "CKYoung"
+  }],
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://ahaknow.com/posts/tech/first-obsidian-plugin/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "AhaKnow",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://ahaknow.com/Q.gif"
+    }
+  }
+}
+</script>
+    
+    
+    
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://ahaknow.com/" accesskey="h" title="AhaKnow (Alt + H)">
+                <img src="https://ahaknow.com/Q.gif" alt="" aria-label="logo"
+                    height="35">AhaKnow</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://ahaknow.com/search" title="🪄魔法 (Alt &#43; /)" accesskey=/>
+                    <span>🪄魔法</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://ahaknow.com/" title="🏡主页">
+                    <span>🏡主页</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://ahaknow.com/posts" title="🚀天天向上">
+                    <span>🚀天天向上</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://ahaknow.com/archives" title="⏱️时间线">
+                    <span>⏱️时间线</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://ahaknow.com/tags" title="🏷️标签">
+                    <span>🏷️标签</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://ahaknow.com/categories" title="🖇归档">
+                    <span>🖇归档</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://ahaknow.com/toolkits" title="🧰医疗箱">
+                    <span>🧰医疗箱</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    <div class="breadcrumbs"><a href="https://ahaknow.com/">🏡主页</a>&nbsp;»&nbsp;<a href="https://ahaknow.com/posts/">🚀 天天向上</a>&nbsp;»&nbsp;<a href="https://ahaknow.com/posts/tech/">✨技术</a></div>
+    <h1 class="post-title entry-hint-parent">
+      顺手写了个Obsidian插件😄
+    </h1>
+    <div class="post-meta">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
+<span class="parent-post-meta">
+        <span id="post_meta_style_1">
+            <span class="fa fa-calendar-check-o"></span>
+            <span>2024-12-10
+                &nbsp;&nbsp;
+            </span>
+        </span>
+        <span id="post_meta_style_2">
+        <span class="fa fa-calendar-plus-o"></span>
+        <span>2024-12-10
+            &nbsp;&nbsp;
+        </span>
+    </span>
+    <span id="post_meta_style_3">
+        <span class="fa fa-file-word-o"></span>
+        <span>2533 字
+            &nbsp;&nbsp;
+        </span>
+    </span>
+    <span id="post_meta_style_4">
+        <span class="fa fa-clock-o"></span>
+        <span>6 分钟
+            &nbsp;&nbsp;
+        </span>
+    </span>
+    <span id="post_meta_style_5">
+        <span class="fa fa-user-o"></span>
+        <span>CKYoung
+            &nbsp;&nbsp;
+        </span>
+    </span>
+    <span id="post_meta_style_6">
+        <span class="fa fa-tags" style="opacity: 0.8"></span>
+        <span>
+            <span class="post-tags-meta">
+                <a href="https://ahaknow.com/tags/code/" style="color: var(--secondary)!important;">Code</a>
+            </span>
+        </span>
+    </span>
+</span>
+
+</div>
+  </header> 
+  <div class="post-content"><p><mark>感觉自己很牛逼！！！</mark>
+为啥想到写这个插件呢？
+因为我想把Obsidian和Hugo结合起来，但是有两个小问题很麻烦，虽然很小，但用多了会很烦！<mark>会写代码的一般都很懒</mark>，所以绝对不会干出手动复制粘贴这种蠢事的。
+问题有两个，先解决其中一个：</p>
+<ul>
+<li>markdown的<code>==</code>表示的高亮无法识别，使用html的mark标识可以，但是我懒得打<code>&lt;&gt;</code>这个括号，双击等于号多快啊。
+<mark>所以我就想到了，写一个脚本来转换</mark></li>
+</ul>
+<p>一开始想到的是Python脚本，在每次上传的时候自动遍历文件修改一下，<mark>但转念一想，这多慢啊，直接Obsidian插件吧，实时识别和更换，应该就是正则匹配就行了。</mark></p>
+<p>于是，就有了下面的实现：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">App</span><span class="p">,</span> <span class="nx">Editor</span><span class="p">,</span> <span class="nx">MarkdownView</span><span class="p">,</span> <span class="nx">Notice</span><span class="p">,</span> <span class="nx">Plugin</span><span class="p">,</span> <span class="nx">PluginSettingTab</span><span class="p">,</span> <span class="nx">Setting</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;obsidian&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="cm">/**
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * 替换 Markdown 内容中的 ==xxx== 为 &lt;mark&gt;xxx&lt;/mark&gt;，但忽略代码块和行内代码中的 ==。
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * 支持 ``` 和 ~~~ 作为代码块标记。
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * @param content 原始 Markdown 内容
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * @returns 替换后的 Markdown 内容
+</span></span></span><span class="line"><span class="cl"><span class="cm"> */</span>
+</span></span><span class="line"><span class="cl"><span class="kd">function</span> <span class="nx">replaceHighlight</span><span class="p">(</span><span class="nx">content</span>: <span class="kt">string</span><span class="p">)</span><span class="o">:</span> <span class="kt">string</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kr">const</span> <span class="nx">lines</span> <span class="o">=</span> <span class="nx">content</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="s1">&#39;\n&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">let</span> <span class="nx">inCodeBlock</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">let</span> <span class="nx">codeBlockDelimiter</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">;</span> <span class="c1">// 用于记录当前代码块的分隔符（``` 或 ~~~）
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">    <span class="kr">const</span> <span class="nx">replacedLines</span> <span class="o">=</span> <span class="nx">lines</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="nx">line</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 检查代码块开始或结束
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="kr">const</span> <span class="nx">codeBlockMatch</span> <span class="o">=</span> <span class="nx">line</span><span class="p">.</span><span class="nx">match</span><span class="p">(</span><span class="sr">/^(```|~~~)/</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="nx">codeBlockMatch</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">inCodeBlock</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="nx">inCodeBlock</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="nx">codeBlockDelimiter</span> <span class="o">=</span> <span class="nx">codeBlockMatch</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">codeBlockMatch</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">===</span> <span class="nx">codeBlockDelimiter</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="nx">inCodeBlock</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="nx">codeBlockDelimiter</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="nx">line</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="nx">inCodeBlock</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="c1">// 处于代码块中，跳过替换
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="k">return</span> <span class="nx">line</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="c1">// 处理行内代码
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="c1">// 暂时保护行内代码中的 ==，避免替换
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="kr">const</span> <span class="nx">inlineCodeRegex</span> <span class="o">=</span> <span class="sr">/`([^`]+)`/g</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="kd">let</span> <span class="nx">protectedLine</span> <span class="o">=</span> <span class="nx">line</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="kr">const</span> <span class="nx">inlineCodes</span>: <span class="kt">string</span><span class="p">[]</span> <span class="o">=</span> <span class="p">[];</span>
+</span></span><span class="line"><span class="cl">            <span class="kd">let</span> <span class="nx">match</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="k">while</span> <span class="p">((</span><span class="nx">match</span> <span class="o">=</span> <span class="nx">inlineCodeRegex</span><span class="p">.</span><span class="nx">exec</span><span class="p">(</span><span class="nx">line</span><span class="p">))</span> <span class="o">!==</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="nx">inlineCodes</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">match</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl">                <span class="nx">protectedLine</span> <span class="o">=</span> <span class="nx">protectedLine</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="nx">match</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="sb">`__INLINE_CODE_</span><span class="si">${</span><span class="nx">inlineCodes</span><span class="p">.</span><span class="nx">length</span> <span class="o">-</span> <span class="mi">1</span><span class="si">}</span><span class="sb">__`</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="c1">// 替换 ==xxx== 为 &lt;mark&gt;xxx&lt;/mark&gt;
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="nx">protectedLine</span> <span class="o">=</span> <span class="nx">protectedLine</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/==(.+?)==/g</span><span class="p">,</span> <span class="s1">&#39;&lt;mark&gt;$1&lt;/mark&gt;&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="c1">// 恢复行内代码
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="nx">protectedLine</span> <span class="o">=</span> <span class="nx">protectedLine</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/__INLINE_CODE_(\d+)__/g</span><span class="p">,</span> <span class="p">(</span><span class="nx">m</span><span class="p">,</span> <span class="nx">p1</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="kr">const</span> <span class="nx">index</span> <span class="o">=</span> <span class="nb">parseInt</span><span class="p">(</span><span class="nx">p1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                <span class="k">return</span> <span class="sb">`\`</span><span class="si">${</span><span class="nx">inlineCodes</span><span class="p">[</span><span class="nx">index</span><span class="p">]</span><span class="si">}</span><span class="sb">\``</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">});</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="nx">protectedLine</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">});</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="nx">replacedLines</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="s1">&#39;\n&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">export</span> <span class="k">default</span> <span class="kr">class</span> <span class="nx">Mark2HighlightPlugin</span> <span class="kr">extends</span> <span class="nx">Plugin</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kr">private</span> <span class="nx">onEditHandler</span><span class="o">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="k">void</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kr">async</span> <span class="nx">onload() {</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 添加一个命令用于高亮替换
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">this</span><span class="p">.</span><span class="nx">addCommand</span><span class="p">({</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">id</span><span class="o">:</span> <span class="s1">&#39;convert-highlight&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;Convert ==xxx== to &lt;mark&gt;xxx&lt;/mark&gt;&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">editorCallback</span><span class="o">:</span> <span class="p">(</span><span class="nx">editor</span>: <span class="kt">Editor</span><span class="p">,</span> <span class="nx">view</span>: <span class="kt">MarkdownView</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="c1">// 获取编辑器内容
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="kr">const</span> <span class="nx">content</span> <span class="o">=</span> <span class="nx">editor</span><span class="p">.</span><span class="nx">getValue</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">                <span class="c1">// 使用辅助函数替换 ==xxx== 为 &lt;mark&gt;xxx&lt;/mark&gt;
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="kr">const</span> <span class="nx">updatedContent</span> <span class="o">=</span> <span class="nx">replaceHighlight</span><span class="p">(</span><span class="nx">content</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                <span class="c1">// 更新编辑器内容
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="nx">editor</span><span class="p">.</span><span class="nx">setValue</span><span class="p">(</span><span class="nx">updatedContent</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                <span class="k">new</span> <span class="nx">Notice</span><span class="p">(</span><span class="s1">&#39;✨ Markdown Highlight Converted!&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">});</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1">// 自动监听编辑器变化并进行替换
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">this</span><span class="p">.</span><span class="nx">onEditHandler</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="kr">const</span> <span class="nx">activeView</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">app</span><span class="p">.</span><span class="nx">workspace</span><span class="p">.</span><span class="nx">getActiveViewOfType</span><span class="p">(</span><span class="nx">MarkdownView</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="nx">activeView</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="kr">const</span> <span class="nx">editor</span> <span class="o">=</span> <span class="nx">activeView</span><span class="p">.</span><span class="nx">editor</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="kr">const</span> <span class="nx">content</span> <span class="o">=</span> <span class="nx">editor</span><span class="p">.</span><span class="nx">getValue</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">                <span class="kr">const</span> <span class="nx">updatedContent</span> <span class="o">=</span> <span class="nx">replaceHighlight</span><span class="p">(</span><span class="nx">content</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                <span class="k">if</span> <span class="p">(</span><span class="nx">content</span> <span class="o">!==</span> <span class="nx">updatedContent</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="nx">editor</span><span class="p">.</span><span class="nx">setValue</span><span class="p">(</span><span class="nx">updatedContent</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                    <span class="k">new</span> <span class="nx">Notice</span><span class="p">(</span><span class="s1">&#39;✨ Markdown Highlight Converted Automatically!&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">this</span><span class="p">.</span><span class="nx">registerEvent</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">app</span><span class="p">.</span><span class="nx">workspace</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;editor-change&#39;</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">onEditHandler</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1">// 如果不需要设置选项卡，可以移除以下行
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="c1">// this.addSettingTab(new Mark2HighlightSettingTab(this.app, this));
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nx">onunload() {</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Mark to Highlight Plugin Unloaded.&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>具体而言，是在基础的sample上面进行修改的：</p>
+<pre tabindex="0"><code>npx degit obsidianmd/obsidian-sample-plugin my-plugin
+cd my-plugin
+npm install
+</code></pre><p>修改完<code>ts</code>文件后使用：</p>
+<pre tabindex="0"><code>npm run build
+</code></pre><hr>
+<p>想到了下一个插件，就是中英字符的自动切换，描述如下：
+比如输入》空格，或者〉空格，就是自动转成&gt;
+比如输入·空格，或者···空格，就自动转成makrdown下的代码框标识</p>
+<p>于是就有了下面这个：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">App</span><span class="p">,</span> <span class="nx">Editor</span><span class="p">,</span> <span class="nx">MarkdownView</span><span class="p">,</span> <span class="nx">Notice</span><span class="p">,</span> <span class="nx">Plugin</span><span class="p">,</span> <span class="nx">PluginSettingTab</span><span class="p">,</span> <span class="nx">Setting</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;obsidian&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="cm">/**
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * 插件的设置接口
+</span></span></span><span class="line"><span class="cl"><span class="cm"> */</span>
+</span></span><span class="line"><span class="cl"><span class="kr">interface</span> <span class="nx">AutoConvertCharsPluginSettings</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">autoConvertDelay</span>: <span class="kt">number</span><span class="p">;</span> <span class="c1">// 自动转换的延迟时间（毫秒）
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="cm">/**
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * 插件的默认设置
+</span></span></span><span class="line"><span class="cl"><span class="cm"> */</span>
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">DEFAULT_SETTINGS</span>: <span class="kt">AutoConvertCharsPluginSettings</span> <span class="o">=</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">autoConvertDelay</span>: <span class="kt">100</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="cm">/**
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * 判断指定行是否在代码块内
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * @param lines 所有行内容
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * @param lineNumber 当前行号（从0开始）
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * @returns 是否在代码块内
+</span></span></span><span class="line"><span class="cl"><span class="cm"> */</span>
+</span></span><span class="line"><span class="cl"><span class="kd">function</span> <span class="nx">isLineInCodeBlock</span><span class="p">(</span><span class="nx">lines</span>: <span class="kt">string</span><span class="p">[],</span> <span class="nx">lineNumber</span>: <span class="kt">number</span><span class="p">)</span><span class="o">:</span> <span class="kr">boolean</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">let</span> <span class="nx">inCodeBlock</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">let</span> <span class="nx">codeBlockDelimiter</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;=</span> <span class="nx">lineNumber</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kr">const</span> <span class="nx">line</span> <span class="o">=</span> <span class="nx">lines</span><span class="p">[</span><span class="nx">i</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">        <span class="kr">const</span> <span class="nx">codeBlockMatch</span> <span class="o">=</span> <span class="nx">line</span><span class="p">.</span><span class="nx">match</span><span class="p">(</span><span class="sr">/^(```|~~~)/</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="nx">codeBlockMatch</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">inCodeBlock</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="nx">inCodeBlock</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="nx">codeBlockDelimiter</span> <span class="o">=</span> <span class="nx">codeBlockMatch</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">codeBlockMatch</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">===</span> <span class="nx">codeBlockDelimiter</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="nx">inCodeBlock</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="nx">codeBlockDelimiter</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="nx">inCodeBlock</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="cm">/**
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * 替换单行中的特定字符组合为目标符号，忽略行内代码中的匹配
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * @param line 原始行内容
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * @returns 替换后的行内容及是否进行了替换
+</span></span></span><span class="line"><span class="cl"><span class="cm"> */</span>
+</span></span><span class="line"><span class="cl"><span class="kd">function</span> <span class="nx">replacePatternsInLine</span><span class="p">(</span><span class="nx">line</span>: <span class="kt">string</span><span class="p">)</span><span class="o">:</span> <span class="p">{</span> <span class="nx">newLine</span>: <span class="kt">string</span><span class="p">;</span> <span class="nx">replaced</span>: <span class="kt">boolean</span> <span class="p">}</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// **重要**：将更长的触发字符组合放在前面，避免部分匹配
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kr">const</span> <span class="nx">patterns</span> <span class="o">=</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">        <span class="p">{</span> <span class="nx">trigger</span><span class="o">:</span> <span class="s1">&#39;··· &#39;</span><span class="p">,</span> <span class="nx">replacement</span><span class="o">:</span> <span class="s1">&#39;``````&#39;</span> <span class="p">},</span> <span class="c1">// 六个反引号
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="p">{</span> <span class="nx">trigger</span><span class="o">:</span> <span class="s1">&#39;· &#39;</span><span class="p">,</span> <span class="nx">replacement</span><span class="o">:</span> <span class="s1">&#39;``&#39;</span> <span class="p">},</span>        <span class="c1">// 两个反引号
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="p">{</span> <span class="nx">trigger</span><span class="o">:</span> <span class="s1">&#39;》 &#39;</span><span class="p">,</span> <span class="nx">replacement</span><span class="o">:</span> <span class="s1">&#39;&gt;&#39;</span> <span class="p">},</span>        <span class="c1">// 引用符号
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="p">{</span> <span class="nx">trigger</span><span class="o">:</span> <span class="s1">&#39;〉 &#39;</span><span class="p">,</span> <span class="nx">replacement</span><span class="o">:</span> <span class="s1">&#39;&gt;&#39;</span> <span class="p">}</span>         <span class="c1">// 引用符号
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">];</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kd">let</span> <span class="nx">inInlineCode</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">let</span> <span class="nx">result</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">let</span> <span class="nx">replaced</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">line</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kr">const</span> <span class="nx">char</span> <span class="o">=</span> <span class="nx">line</span><span class="p">[</span><span class="nx">i</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1">// 处理行内代码的切换
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">if</span> <span class="p">(</span><span class="nx">char</span> <span class="o">===</span> <span class="s1">&#39;`&#39;</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">inInlineCode</span> <span class="o">=</span> <span class="o">!</span><span class="nx">inInlineCode</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">result</span> <span class="o">+=</span> <span class="nx">char</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="k">continue</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">inInlineCode</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="kd">let</span> <span class="nx">matched</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="k">for</span> <span class="p">(</span><span class="kr">const</span> <span class="nx">pattern</span> <span class="k">of</span> <span class="nx">patterns</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="kr">const</span> <span class="nx">triggerLength</span> <span class="o">=</span> <span class="nx">pattern</span><span class="p">.</span><span class="nx">trigger</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="kr">const</span> <span class="nx">triggerSubstring</span> <span class="o">=</span> <span class="nx">line</span><span class="p">.</span><span class="nx">substring</span><span class="p">(</span><span class="nx">i</span><span class="p">,</span> <span class="nx">i</span> <span class="o">+</span> <span class="nx">triggerLength</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                <span class="k">if</span> <span class="p">(</span><span class="nx">triggerSubstring</span> <span class="o">===</span> <span class="nx">pattern</span><span class="p">.</span><span class="nx">trigger</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="nx">result</span> <span class="o">+=</span> <span class="nx">pattern</span><span class="p">.</span><span class="nx">replacement</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                    <span class="nx">i</span> <span class="o">+=</span> <span class="nx">triggerLength</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span> <span class="c1">// 跳过触发字符
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                    <span class="nx">replaced</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                    <span class="nx">matched</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                    <span class="k">break</span><span class="p">;</span> <span class="c1">// 跳出当前循环，继续下一个字符
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="nx">matched</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="k">continue</span><span class="p">;</span> <span class="c1">// 已经替换，跳过添加当前字符
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="nx">result</span> <span class="o">+=</span> <span class="nx">char</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="p">{</span> <span class="nx">newLine</span>: <span class="kt">result</span><span class="p">,</span> <span class="nx">replaced</span> <span class="p">};</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="cm">/**
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * 简单的防抖函数实现
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * @param func 需要防抖的函数
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * @param wait 防抖的时间间隔（毫秒）
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * @returns 防抖后的函数
+</span></span></span><span class="line"><span class="cl"><span class="cm"> */</span>
+</span></span><span class="line"><span class="cl"><span class="kd">function</span> <span class="nx">debounceFunc</span><span class="p">(</span><span class="nx">func</span><span class="o">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="k">void</span><span class="p">,</span> <span class="nx">wait</span>: <span class="kt">number</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">let</span> <span class="nx">timeout</span>: <span class="kt">number</span> <span class="o">|</span> <span class="kc">undefined</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="nx">timeout</span> <span class="o">!==</span> <span class="kc">undefined</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">clearTimeout</span><span class="p">(</span><span class="nx">timeout</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">timeout</span> <span class="o">=</span> <span class="nb">window</span><span class="p">.</span><span class="nx">setTimeout</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">func</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="p">},</span> <span class="nx">wait</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">};</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">export</span> <span class="k">default</span> <span class="kr">class</span> <span class="nx">AutoConvertCharsPlugin</span> <span class="kr">extends</span> <span class="nx">Plugin</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">settings</span>: <span class="kt">AutoConvertCharsPluginSettings</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kr">private</span> <span class="nx">onEditHandler</span><span class="o">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="k">void</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="cm">/**
+</span></span></span><span class="line"><span class="cl"><span class="cm">     * 加载插件时的初始化逻辑
+</span></span></span><span class="line"><span class="cl"><span class="cm">     */</span>
+</span></span><span class="line"><span class="cl">    <span class="kr">async</span> <span class="nx">onload() {</span>
+</span></span><span class="line"><span class="cl">        <span class="k">await</span> <span class="k">this</span><span class="p">.</span><span class="nx">loadSettings</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1">// 创建防抖后的编辑器变化处理函数
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">this</span><span class="p">.</span><span class="nx">onEditHandler</span> <span class="o">=</span> <span class="nx">debounceFunc</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="kr">const</span> <span class="nx">activeView</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">app</span><span class="p">.</span><span class="nx">workspace</span><span class="p">.</span><span class="nx">getActiveViewOfType</span><span class="p">(</span><span class="nx">MarkdownView</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="nx">activeView</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="kr">const</span> <span class="nx">editor</span> <span class="o">=</span> <span class="nx">activeView</span><span class="p">.</span><span class="nx">editor</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="k">this</span><span class="p">.</span><span class="nx">convertPatterns</span><span class="p">(</span><span class="nx">editor</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">},</span> <span class="k">this</span><span class="p">.</span><span class="nx">settings</span><span class="p">.</span><span class="nx">autoConvertDelay</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1">// 注册编辑器变化事件
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">this</span><span class="p">.</span><span class="nx">registerEvent</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">app</span><span class="p">.</span><span class="nx">workspace</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;editor-change&#39;</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">onEditHandler</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1">// 添加设置选项卡
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">this</span><span class="p">.</span><span class="nx">addSettingTab</span><span class="p">(</span><span class="k">new</span> <span class="nx">AutoConvertCharsSettingTab</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">app</span><span class="p">,</span> <span class="k">this</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="cm">/**
+</span></span></span><span class="line"><span class="cl"><span class="cm">     * 卸载插件时的清理逻辑
+</span></span></span><span class="line"><span class="cl"><span class="cm">     */</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">onunload() {</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Auto Convert Chars Plugin Unloaded.&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="cm">/**
+</span></span></span><span class="line"><span class="cl"><span class="cm">     * 加载插件设置
+</span></span></span><span class="line"><span class="cl"><span class="cm">     */</span>
+</span></span><span class="line"><span class="cl">    <span class="kr">async</span> <span class="nx">loadSettings() {</span>
+</span></span><span class="line"><span class="cl">        <span class="k">this</span><span class="p">.</span><span class="nx">settings</span> <span class="o">=</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">assign</span><span class="p">({},</span> <span class="nx">DEFAULT_SETTINGS</span><span class="p">,</span> <span class="k">await</span> <span class="k">this</span><span class="p">.</span><span class="nx">loadData</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="cm">/**
+</span></span></span><span class="line"><span class="cl"><span class="cm">     * 保存插件设置
+</span></span></span><span class="line"><span class="cl"><span class="cm">     */</span>
+</span></span><span class="line"><span class="cl">    <span class="kr">async</span> <span class="nx">saveSettings() {</span>
+</span></span><span class="line"><span class="cl">        <span class="k">await</span> <span class="k">this</span><span class="p">.</span><span class="nx">saveData</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">settings</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="cm">/**
+</span></span></span><span class="line"><span class="cl"><span class="cm">     * 更新自动转换延迟时间
+</span></span></span><span class="line"><span class="cl"><span class="cm">     * @param newDelay 新的延迟时间（毫秒）
+</span></span></span><span class="line"><span class="cl"><span class="cm">     */</span>
+</span></span><span class="line"><span class="cl">    <span class="kr">public</span> <span class="nx">updateAutoConvertDelay</span><span class="p">(</span><span class="nx">newDelay</span>: <span class="kt">number</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">this</span><span class="p">.</span><span class="nx">settings</span><span class="p">.</span><span class="nx">autoConvertDelay</span> <span class="o">=</span> <span class="nx">newDelay</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">this</span><span class="p">.</span><span class="nx">saveSettings</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1">// 移除旧的事件监听
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">this</span><span class="p">.</span><span class="nx">app</span><span class="p">.</span><span class="nx">workspace</span><span class="p">.</span><span class="nx">off</span><span class="p">(</span><span class="s1">&#39;editor-change&#39;</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">onEditHandler</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1">// 创建新的防抖处理函数
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">this</span><span class="p">.</span><span class="nx">onEditHandler</span> <span class="o">=</span> <span class="nx">debounceFunc</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="kr">const</span> <span class="nx">activeView</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">app</span><span class="p">.</span><span class="nx">workspace</span><span class="p">.</span><span class="nx">getActiveViewOfType</span><span class="p">(</span><span class="nx">MarkdownView</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="nx">activeView</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="kr">const</span> <span class="nx">editor</span> <span class="o">=</span> <span class="nx">activeView</span><span class="p">.</span><span class="nx">editor</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="k">this</span><span class="p">.</span><span class="nx">convertPatterns</span><span class="p">(</span><span class="nx">editor</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">},</span> <span class="k">this</span><span class="p">.</span><span class="nx">settings</span><span class="p">.</span><span class="nx">autoConvertDelay</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1">// 重新注册编辑器变化事件
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">this</span><span class="p">.</span><span class="nx">registerEvent</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">app</span><span class="p">.</span><span class="nx">workspace</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;editor-change&#39;</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">onEditHandler</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="cm">/**
+</span></span></span><span class="line"><span class="cl"><span class="cm">     * 执行特定字符组合的自动转换，并保持光标位置
+</span></span></span><span class="line"><span class="cl"><span class="cm">     * @param editor 当前编辑器实例
+</span></span></span><span class="line"><span class="cl"><span class="cm">     */</span>
+</span></span><span class="line"><span class="cl">    <span class="kr">private</span> <span class="nx">convertPatterns</span><span class="p">(</span><span class="nx">editor</span>: <span class="kt">Editor</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kr">const</span> <span class="nx">cursor</span> <span class="o">=</span> <span class="nx">editor</span><span class="p">.</span><span class="nx">getCursor</span><span class="p">();</span> <span class="c1">// 保存光标位置
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="kr">const</span> <span class="nx">currentLineNumber</span> <span class="o">=</span> <span class="nx">cursor</span><span class="p">.</span><span class="nx">line</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="kr">const</span> <span class="nx">currentLineText</span> <span class="o">=</span> <span class="nx">editor</span><span class="p">.</span><span class="nx">getLine</span><span class="p">(</span><span class="nx">currentLineNumber</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1">// 获取所有行内容
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="kr">const</span> <span class="nx">allLines</span> <span class="o">=</span> <span class="nx">editor</span><span class="p">.</span><span class="nx">getValue</span><span class="p">().</span><span class="nx">split</span><span class="p">(</span><span class="s1">&#39;\n&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1">// 判断当前行是否在代码块内
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="kr">const</span> <span class="nx">inCodeBlock</span> <span class="o">=</span> <span class="nx">isLineInCodeBlock</span><span class="p">(</span><span class="nx">allLines</span><span class="p">,</span> <span class="nx">currentLineNumber</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="nx">inCodeBlock</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="c1">// 当前行在代码块内，跳过替换
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="k">return</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1">// 获取替换后的行内容
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="kr">const</span> <span class="p">{</span> <span class="nx">newLine</span><span class="p">,</span> <span class="nx">replaced</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">replacePatternsInLine</span><span class="p">(</span><span class="nx">currentLineText</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="nx">replaced</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="c1">// 获取光标在行内的位置
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="kr">const</span> <span class="nx">beforeCursorText</span> <span class="o">=</span> <span class="nx">currentLineText</span><span class="p">.</span><span class="nx">substring</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nx">cursor</span><span class="p">.</span><span class="nx">ch</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="c1">// 计算替换前触发字符的位置和长度
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="kd">let</span> <span class="nx">triggerStart</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="kd">let</span> <span class="nx">triggerLength</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="kd">let</span> <span class="nx">matchedPattern</span><span class="o">:</span> <span class="p">{</span> <span class="nx">trigger</span>: <span class="kt">string</span><span class="p">;</span> <span class="nx">replacement</span>: <span class="kt">string</span> <span class="p">}</span> <span class="o">|</span> <span class="kc">null</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="kr">const</span> <span class="nx">patterns</span> <span class="o">=</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">                <span class="p">{</span> <span class="nx">trigger</span><span class="o">:</span> <span class="s1">&#39;··· &#39;</span><span class="p">,</span> <span class="nx">replacement</span><span class="o">:</span> <span class="s1">&#39;``````&#39;</span> <span class="p">},</span> <span class="c1">// 六个反引号
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="p">{</span> <span class="nx">trigger</span><span class="o">:</span> <span class="s1">&#39;· &#39;</span><span class="p">,</span> <span class="nx">replacement</span><span class="o">:</span> <span class="s1">&#39;``&#39;</span> <span class="p">},</span>        <span class="c1">// 两个反引号
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="p">{</span> <span class="nx">trigger</span><span class="o">:</span> <span class="s1">&#39;》 &#39;</span><span class="p">,</span> <span class="nx">replacement</span><span class="o">:</span> <span class="s1">&#39;&gt;&#39;</span> <span class="p">},</span>        <span class="c1">// 引用符号
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="p">{</span> <span class="nx">trigger</span><span class="o">:</span> <span class="s1">&#39;〉 &#39;</span><span class="p">,</span> <span class="nx">replacement</span><span class="o">:</span> <span class="s1">&#39;&gt;&#39;</span> <span class="p">}</span>         <span class="c1">// 引用符号
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="p">];</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="k">for</span> <span class="p">(</span><span class="kr">const</span> <span class="nx">pattern</span> <span class="k">of</span> <span class="nx">patterns</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="kr">const</span> <span class="nx">index</span> <span class="o">=</span> <span class="nx">beforeCursorText</span><span class="p">.</span><span class="nx">lastIndexOf</span><span class="p">(</span><span class="nx">pattern</span><span class="p">.</span><span class="nx">trigger</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                <span class="k">if</span> <span class="p">(</span><span class="nx">index</span> <span class="o">!==</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="nx">triggerStart</span> <span class="o">=</span> <span class="nx">index</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                    <span class="nx">triggerLength</span> <span class="o">=</span> <span class="nx">pattern</span><span class="p">.</span><span class="nx">trigger</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                    <span class="nx">matchedPattern</span> <span class="o">=</span> <span class="nx">pattern</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                    <span class="k">break</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="nx">triggerStart</span> <span class="o">!==</span> <span class="o">-</span><span class="mi">1</span> <span class="o">&amp;&amp;</span> <span class="nx">matchedPattern</span> <span class="o">!==</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="c1">// 定义替换范围
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="kr">const</span> <span class="kr">from</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">line</span>: <span class="kt">currentLineNumber</span><span class="p">,</span> <span class="nx">ch</span>: <span class="kt">triggerStart</span> <span class="p">};</span>
+</span></span><span class="line"><span class="cl">                <span class="kr">const</span> <span class="nx">to</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">line</span>: <span class="kt">currentLineNumber</span><span class="p">,</span> <span class="nx">ch</span>: <span class="kt">triggerStart</span> <span class="o">+</span> <span class="nx">triggerLength</span> <span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">                <span class="c1">// 定义替换内容
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="kr">const</span> <span class="nx">replacement</span> <span class="o">=</span> <span class="nx">matchedPattern</span><span class="p">.</span><span class="nx">replacement</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">                <span class="k">if</span> <span class="p">(</span><span class="nx">replacement</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="c1">// 执行替换
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                    <span class="nx">editor</span><span class="p">.</span><span class="nx">replaceRange</span><span class="p">(</span><span class="nx">replacement</span><span class="p">,</span> <span class="kr">from</span><span class="p">,</span> <span class="nx">to</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">                    <span class="c1">// 设置光标位置到替换后的中间
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                    <span class="c1">// 对于 &#39;· &#39; → &#39;`` &#39;，光标应在两个反引号之间，即位置 1
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                    <span class="c1">// 对于 &#39;··· &#39; → &#39;`````` &#39;，光标应在前三个反引号之后，即位置 3
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                    <span class="kd">let</span> <span class="nx">newCursorCh</span>: <span class="kt">number</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">                    <span class="k">if</span> <span class="p">(</span><span class="nx">matchedPattern</span><span class="p">.</span><span class="nx">trigger</span> <span class="o">===</span> <span class="s1">&#39;· &#39;</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                        <span class="nx">newCursorCh</span> <span class="o">=</span> <span class="nx">triggerStart</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span> <span class="c1">// After first backtick
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">matchedPattern</span><span class="p">.</span><span class="nx">trigger</span> <span class="o">===</span> <span class="s1">&#39;··· &#39;</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                        <span class="nx">newCursorCh</span> <span class="o">=</span> <span class="nx">triggerStart</span> <span class="o">+</span> <span class="mi">3</span><span class="p">;</span> <span class="c1">// After third backtick
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                        <span class="c1">// For other patterns like &#39;》 &#39; and &#39;〉 &#39;, place cursor after replacement
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                        <span class="nx">newCursorCh</span> <span class="o">=</span> <span class="nx">triggerStart</span> <span class="o">+</span> <span class="nx">replacement</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">                    <span class="nx">editor</span><span class="p">.</span><span class="nx">setCursor</span><span class="p">({</span> <span class="nx">line</span>: <span class="kt">currentLineNumber</span><span class="p">,</span> <span class="nx">ch</span>: <span class="kt">newCursorCh</span> <span class="p">});</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">                    <span class="k">new</span> <span class="nx">Notice</span><span class="p">(</span><span class="s1">&#39;✨ Auto Convert Markdown Chars ✨&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="cm">/**
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * 插件的设置选项卡
+</span></span></span><span class="line"><span class="cl"><span class="cm"> */</span>
+</span></span><span class="line"><span class="cl"><span class="kr">class</span> <span class="nx">AutoConvertCharsSettingTab</span> <span class="kr">extends</span> <span class="nx">PluginSettingTab</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">plugin</span>: <span class="kt">AutoConvertCharsPlugin</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kr">constructor</span><span class="p">(</span><span class="nx">app</span>: <span class="kt">App</span><span class="p">,</span> <span class="nx">plugin</span>: <span class="kt">AutoConvertCharsPlugin</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kr">super</span><span class="p">(</span><span class="nx">app</span><span class="p">,</span> <span class="nx">plugin</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">this</span><span class="p">.</span><span class="nx">plugin</span> <span class="o">=</span> <span class="nx">plugin</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nx">display</span><span class="p">()</span><span class="o">:</span> <span class="k">void</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kr">const</span> <span class="p">{</span> <span class="nx">containerEl</span> <span class="p">}</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">containerEl</span><span class="p">.</span><span class="nx">empty</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1">// 设置标题
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="nx">containerEl</span><span class="p">.</span><span class="nx">createEl</span><span class="p">(</span><span class="s1">&#39;h2&#39;</span><span class="p">,</span> <span class="p">{</span> <span class="nx">text</span><span class="o">:</span> <span class="s1">&#39;Auto Convert Chars 设置&#39;</span> <span class="p">});</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1">// 自动识别延迟设置
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">new</span> <span class="nx">Setting</span><span class="p">(</span><span class="nx">containerEl</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="p">.</span><span class="nx">setName</span><span class="p">(</span><span class="s1">&#39;自动转换延迟（毫秒）&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="p">.</span><span class="nx">setDesc</span><span class="p">(</span><span class="s1">&#39;设置自动识别并转换特定字符组合的延迟时间，默认100毫秒。&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="p">.</span><span class="nx">addText</span><span class="p">(</span><span class="nx">text</span> <span class="o">=&gt;</span> <span class="nx">text</span>
+</span></span><span class="line"><span class="cl">                <span class="p">.</span><span class="nx">setPlaceholder</span><span class="p">(</span><span class="s1">&#39;100&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                <span class="p">.</span><span class="nx">setValue</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">plugin</span><span class="p">.</span><span class="nx">settings</span><span class="p">.</span><span class="nx">autoConvertDelay</span><span class="p">.</span><span class="nx">toString</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl">                <span class="p">.</span><span class="nx">onChange</span><span class="p">(</span><span class="kr">async</span> <span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="kr">const</span> <span class="nx">parsed</span> <span class="o">=</span> <span class="nb">parseInt</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nb">isNaN</span><span class="p">(</span><span class="nx">parsed</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="nx">parsed</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                        <span class="c1">// 调用插件的公共方法更新延迟时间
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                        <span class="k">this</span><span class="p">.</span><span class="nx">plugin</span><span class="p">.</span><span class="nx">updateAutoConvertDelay</span><span class="p">(</span><span class="nx">parsed</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                        <span class="k">new</span> <span class="nx">Notice</span><span class="p">(</span><span class="sb">`自动转换延迟已设置为 </span><span class="si">${</span><span class="nx">parsed</span><span class="si">}</span><span class="sb"> 毫秒`</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                        <span class="k">new</span> <span class="nx">Notice</span><span class="p">(</span><span class="s1">&#39;请输入有效的毫秒数（非负整数）。&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">                <span class="p">}));</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div>
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://ahaknow.com/tags/code/">Code</a></li>
+    </ul>
+<nav class="paginav">
+  <a class="prev" href="https://ahaknow.com/posts/know/notes-one-sows-and-another-reaps/">
+    <span class="title">« 上一页</span>
+    <br>
+    <span>站在前人的肩膀上：笔记收集录</span>
+  </a>
+  <a class="next" href="https://ahaknow.com/posts/diary/2024-12-10/">
+    <span class="title">下一页 »</span>
+    <br>
+    <span>今天来学习Obsidian怎么用！</span>
+  </a>
+</nav>
+
+  </footer>
+</article>
+</main>
+
+<footer class="footer">
+    <span>&copy; 2024 <a href="https://ahaknow.com/">AhaKnow</a></span>
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/IHKYoung/CKPaper/" rel="noopener" target="_blank">CKPaper</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = '🖨️打印';
+
+        function copyingDone() {
+            copybutton.innerHTML = '📋备份';
+            setTimeout(() => {
+                copybutton.innerHTML = '🖨️打印';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                
+                
+                let copyText = codeblock.textContent + '\r\n————————————————\r\n' + '版权声明：本文为「'+"AhaKnow"+'」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。' + '\r\n原文链接：' + location.href;
+                navigator.clipboard.writeText(copyText);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        document.querySelectorAll('pre > code[class*="language-"]').forEach(function(codeblock) {
+            
+            
+            let language = codeblock.className.match(/language-(\w+)/)[1] || "code";
+
+            
+            let macCodeBlock = document.createElement("div");
+            let macButtons = document.createElement("div");
+            let buttons = ['close', 'minimize', 'maximize'].map(function(className) {
+                let button = document.createElement("div");
+                button.setAttribute('class', `mac-button ${className}`);
+                return button;
+            });
+            let languageType = document.createElement("div");
+            languageType.innerText = language;
+            languageType.setAttribute('class', 'language-type');
+
+            
+            macButtons.setAttribute('class', 'mac-buttons');
+            buttons.forEach(function(button) {
+                macButtons.appendChild(button);
+            });
+            macCodeBlock.appendChild(macButtons);
+            macCodeBlock.appendChild(languageType);
+            macCodeBlock.setAttribute('class', 'mac-code-block');
+
+            
+            codeblock.parentNode.insertBefore(macCodeBlock, codeblock);
+        });
+    });
+</script>
+
+
+</body>
+
+</html>

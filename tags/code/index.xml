@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Code on AhaKnow</title>
+    <link>https://ahaknow.com/tags/code/</link>
+    <description>Recent content in Code on AhaKnow</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Tue, 10 Dec 2024 22:33:17 +0800</lastBuildDate>
+    <atom:link href="https://ahaknow.com/tags/code/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>顺手写了个Obsidian插件😄</title>
+      <link>https://ahaknow.com/posts/tech/first-obsidian-plugin/</link>
+      <pubDate>Tue, 10 Dec 2024 22:33:17 +0800</pubDate>
+      <guid>https://ahaknow.com/posts/tech/first-obsidian-plugin/</guid>
+      <description>感觉自己很牛逼！！！ 为啥想到写这个插件呢？ 因为我想把Obsidian和Hugo结合起来，但是有两个小问题很麻烦，虽然很小，但用多了会很烦！会</description>
+    </item>
+  </channel>
+</rss>
