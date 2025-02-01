@@ -6,7 +6,7 @@
     <description>Recent content on AhaKnow</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Tue, 10 Dec 2024 22:33:17 +0800</lastBuildDate>
+    <lastBuildDate>Sat, 01 Feb 2025 18:22:55 +0800</lastBuildDate>
     <atom:link href="https://ahaknow.com/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>逐镜探维：置身三维重建而后生</title>
@@ -21,6 +21,20 @@
       <pubDate>Wed, 24 Apr 2024 10:26:36 +0800</pubDate>
       <guid>https://ahaknow.com/posts/know/notes-one-sows-and-another-reaps/</guid>
       <description>前人栽树，后人乘凉。 或者说，不造轮子要造车。 总之，就是有些东西，在互联网上已经有记录了，可以收集起来为己用！ Github添加Waka记录 可以</description>
+    </item>
+    <item>
+      <title>🪄ChatGPT&amp;LLMs 中文调教指南🚀</title>
+      <link>https://ahaknow.com/posts/know/chatgptllms-%E4%B8%AD%E6%96%87%E8%B0%83%E6%95%99%E6%8C%87%E5%8D%97/</link>
+      <pubDate>Sat, 01 Feb 2025 18:22:55 +0800</pubDate>
+      <guid>https://ahaknow.com/posts/know/chatgptllms-%E4%B8%AD%E6%96%87%E8%B0%83%E6%95%99%E6%8C%87%E5%8D%97/</guid>
+      <description>以下内容的原版出自 awesome-chatgpt-prompts 项目，在此特别感谢原者们的辛勤付出与贡献。本指南内容由 CKYoung 翻译并润色，旨在为广大中文用户提供便捷、高效的参考资料。 废话不多</description>
+    </item>
+    <item>
+      <title>macOS 环境下 Python 动态库缺失问题排查与解决方案</title>
+      <link>https://ahaknow.com/posts/tech/macos-%E7%8E%AF%E5%A2%83%E4%B8%8B-python-%E5%8A%A8%E6%80%81%E5%BA%93%E7%BC%BA%E5%A4%B1%E9%97%AE%E9%A2%98%E6%8E%92%E6%9F%A5%E4%B8%8E%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/</link>
+      <pubDate>Sat, 01 Feb 2025 17:19:11 +0800</pubDate>
+      <guid>https://ahaknow.com/posts/tech/macos-%E7%8E%AF%E5%A2%83%E4%B8%8B-python-%E5%8A%A8%E6%80%81%E5%BA%93%E7%BC%BA%E5%A4%B1%E9%97%AE%E9%A2%98%E6%8E%92%E6%9F%A5%E4%B8%8E%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/</guid>
+      <description>在 macOS（特别是 M1/M2 芯片）使用 Python 时，可能会遇到 ImportError: Library not loaded 类错误。这通常是因为 Python 模块在加载动态库时找不到正确的 .dylib 文件。以下是一个系统化的排查与</description>
     </item>
     <item>
       <title>顺手写了个Obsidian插件😄</title>

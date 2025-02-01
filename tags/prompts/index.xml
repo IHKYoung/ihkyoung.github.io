@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Prompts on AhaKnow</title>
+    <link>https://ahaknow.com/tags/prompts/</link>
+    <description>Recent content in Prompts on AhaKnow</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Sat, 01 Feb 2025 18:22:55 +0800</lastBuildDate>
+    <atom:link href="https://ahaknow.com/tags/prompts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>🪄ChatGPT&amp;LLMs 中文调教指南🚀</title>
+      <link>https://ahaknow.com/posts/know/chatgptllms-%E4%B8%AD%E6%96%87%E8%B0%83%E6%95%99%E6%8C%87%E5%8D%97/</link>
+      <pubDate>Sat, 01 Feb 2025 18:22:55 +0800</pubDate>
+      <guid>https://ahaknow.com/posts/know/chatgptllms-%E4%B8%AD%E6%96%87%E8%B0%83%E6%95%99%E6%8C%87%E5%8D%97/</guid>
+      <description>以下内容的原版出自 awesome-chatgpt-prompts 项目，在此特别感谢原者们的辛勤付出与贡献。本指南内容由 CKYoung 翻译并润色，旨在为广大中文用户提供便捷、高效的参考资料。 废话不多</description>
+    </item>
+  </channel>
+</rss>
