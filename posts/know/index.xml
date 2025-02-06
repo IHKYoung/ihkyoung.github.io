@@ -32,6 +32,14 @@
 &lt;p&gt;可以参考以下两个文档，官方文档的说明更清晰一些，初学者指南可以用来对照自己有没有做对～&lt;/p&gt;</description>
     </item>
     <item>
+      <title>🚀Git 自动 Push 脚本：跨平台 (Windows/macOS/Linux) 解决方案</title>
+      <link>https://ahaknow.com/posts/know/git-%E8%87%AA%E5%8A%A8-push-%E8%84%9A%E6%9C%AC/</link>
+      <pubDate>Thu, 06 Feb 2025 21:59:26 +0800</pubDate>
+      <guid>https://ahaknow.com/posts/know/git-%E8%87%AA%E5%8A%A8-push-%E8%84%9A%E6%9C%AC/</guid>
+      <description>&lt;h2 id=&#34;-介绍&#34;&gt;&lt;strong&gt;📌 介绍&lt;/strong&gt;&lt;/h2&gt;
+&lt;p&gt;在软件开发过程中，我们常常需要将本地的 Git 仓库&lt;strong&gt;自动提交并推送&lt;/strong&gt;到远程仓库，以保持代码或内容的最新状态。本文将介绍如何编写一个&lt;strong&gt;适用于 Windows (Git Bash)、macOS 和 Linux&lt;/strong&gt; 的自动 &lt;code&gt;push&lt;/code&gt; 脚本，并详细解析其中的关键点。&lt;/p&gt;</description>
+    </item>
+    <item>
       <title>📝 Git 合并与 Pull 过程中常见问题及解决方案</title>
       <link>https://ahaknow.com/posts/know/-git-%E5%90%88%E5%B9%B6%E4%B8%8E-pull-%E8%BF%87%E7%A8%8B%E4%B8%AD%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98%E5%8F%8A%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/</link>
       <pubDate>Thu, 06 Feb 2025 21:01:54 +0800</pubDate>
@@ -48,9 +56,9 @@
     </item>
     <item>
       <title>✨晕倒不死指南：Scoop包管理</title>
-      <link>https://ahaknow.com/posts/know/%E6%99%95%E5%80%92%E4%B8%8D%E6%AD%BB%E6%8C%87%E5%8D%97scoop%E5%8C%85%E7%AE%A1%E7%90%86/</link>
+      <link>https://ahaknow.com/posts/know/scoop%E5%8C%85%E7%AE%A1%E7%90%86/</link>
       <pubDate>Tue, 04 Feb 2025 13:09:08 +0800</pubDate>
-      <guid>https://ahaknow.com/posts/know/%E6%99%95%E5%80%92%E4%B8%8D%E6%AD%BB%E6%8C%87%E5%8D%97scoop%E5%8C%85%E7%AE%A1%E7%90%86/</guid>
+      <guid>https://ahaknow.com/posts/know/scoop%E5%8C%85%E7%AE%A1%E7%90%86/</guid>
       <description>&lt;h2 id=&#34;1-scoop-简介-&#34;&gt;1. Scoop 简介 ✨&lt;/h2&gt;
 &lt;p&gt;Scoop 是 Windows 下的一个轻量级包管理器，其核心理念是“把命令行工具装进用户目录”，避免对系统全局进行修改。它与 apt（Debian/Ubuntu 等发行版的包管理器）有相似的用户体验，但在 Windows 环境中更为灵活、简单，并且免去了管理员权限的烦恼。&lt;/p&gt;</description>
     </item>
