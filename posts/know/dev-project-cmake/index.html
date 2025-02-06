@@ -46,7 +46,34 @@
 <meta name="robots" content="index, follow">
 <title>开发实战：项目中的CMake技巧 | AhaKnow</title>
 <meta name="keywords" content="">
-<meta name="description" content="一个“好看”的CMake管理应该是这样的： ├── CMakeLists.txt ├── main_class.cpp ├── main.cpp ├── model │ ├── seg_0415.onnx │ └── seg_0415.trt ├── Parser │ ├── CMakeLists.txt │ ├── data_frame_parser.cpp │ └── data_frame_parser.h ├── RoadSeg">
+<meta name="description" content="一个“好看”的CMake管理应该是这样的：
+├── CMakeLists.txt
+├── main_class.cpp
+├── main.cpp
+├── model
+│   ├── seg_0415.onnx
+│   └── seg_0415.trt
+├── Parser
+│   ├── CMakeLists.txt
+│   ├── data_frame_parser.cpp
+│   └── data_frame_parser.h
+├── RoadSeg
+│   ├── CMakeLists.txt
+│   ├── road_segmentation.cpp
+│   └── road_segmentation.hpp
+├── TCPClient
+│   ├── CMakeLists.txt
+│   ├── tcp_frame_client.cpp
+│   └── tcp_frame_client.h
+├── Test
+│   ├── main_simple.cpp
+│   ├── ptr_mat.cpp
+│   └── test_main.cpp
+└── Utils
+    ├── CMakeLists.txt
+    ├── logger.cpp
+    └── logger.h
+具体而言，比如Parser下面的CMakeLists.txt：">
 <meta name="author" content="CKYoung">
 <link rel="canonical" href="https://ahaknow.com/posts/know/dev-project-cmake/">
 <link crossorigin="anonymous" href="/assets/css/stylesheet.css" rel="preload stylesheet" as="style">
@@ -94,11 +121,35 @@
         }
 
     </style>
-</noscript>
-  
-
-<meta property="og:title" content="开发实战：项目中的CMake技巧" />
-<meta property="og:description" content="一个“好看”的CMake管理应该是这样的： ├── CMakeLists.txt ├── main_class.cpp ├── main.cpp ├── model │ ├── seg_0415.onnx │ └── seg_0415.trt ├── Parser │ ├── CMakeLists.txt │ ├── data_frame_parser.cpp │ └── data_frame_parser.h ├── RoadSeg" />
+</noscript><meta property="og:title" content="开发实战：项目中的CMake技巧" />
+<meta property="og:description" content="一个“好看”的CMake管理应该是这样的：
+├── CMakeLists.txt
+├── main_class.cpp
+├── main.cpp
+├── model
+│   ├── seg_0415.onnx
+│   └── seg_0415.trt
+├── Parser
+│   ├── CMakeLists.txt
+│   ├── data_frame_parser.cpp
+│   └── data_frame_parser.h
+├── RoadSeg
+│   ├── CMakeLists.txt
+│   ├── road_segmentation.cpp
+│   └── road_segmentation.hpp
+├── TCPClient
+│   ├── CMakeLists.txt
+│   ├── tcp_frame_client.cpp
+│   └── tcp_frame_client.h
+├── Test
+│   ├── main_simple.cpp
+│   ├── ptr_mat.cpp
+│   └── test_main.cpp
+└── Utils
+    ├── CMakeLists.txt
+    ├── logger.cpp
+    └── logger.h
+具体而言，比如Parser下面的CMakeLists.txt：" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://ahaknow.com/posts/know/dev-project-cmake/" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2024-04-22T22:57:28+08:00" />
@@ -106,7 +157,34 @@
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="开发实战：项目中的CMake技巧"/>
-<meta name="twitter:description" content="一个“好看”的CMake管理应该是这样的： ├── CMakeLists.txt ├── main_class.cpp ├── main.cpp ├── model │ ├── seg_0415.onnx │ └── seg_0415.trt ├── Parser │ ├── CMakeLists.txt │ ├── data_frame_parser.cpp │ └── data_frame_parser.h ├── RoadSeg"/>
+<meta name="twitter:description" content="一个“好看”的CMake管理应该是这样的：
+├── CMakeLists.txt
+├── main_class.cpp
+├── main.cpp
+├── model
+│   ├── seg_0415.onnx
+│   └── seg_0415.trt
+├── Parser
+│   ├── CMakeLists.txt
+│   ├── data_frame_parser.cpp
+│   └── data_frame_parser.h
+├── RoadSeg
+│   ├── CMakeLists.txt
+│   ├── road_segmentation.cpp
+│   └── road_segmentation.hpp
+├── TCPClient
+│   ├── CMakeLists.txt
+│   ├── tcp_frame_client.cpp
+│   └── tcp_frame_client.h
+├── Test
+│   ├── main_simple.cpp
+│   ├── ptr_mat.cpp
+│   └── test_main.cpp
+└── Utils
+    ├── CMakeLists.txt
+    ├── logger.cpp
+    └── logger.h
+具体而言，比如Parser下面的CMakeLists.txt："/>
 
 
 <script type="application/ld+json">
@@ -141,7 +219,7 @@
   "@type": "BlogPosting",
   "headline": "开发实战：项目中的CMake技巧",
   "name": "开发实战：项目中的CMake技巧",
-  "description": "一个“好看”的CMake管理应该是这样的： ├── CMakeLists.txt ├── main_class.cpp ├── main.cpp ├── model │ ├── seg_0415.onnx │ └── seg_0415.trt ├── Parser │ ├── CMakeLists.txt │ ├── data_frame_parser.cpp │ └── data_frame_parser.h ├── RoadSeg",
+  "description": "一个“好看”的CMake管理应该是这样的：\n├── CMakeLists.txt ├── main_class.cpp ├── main.cpp ├── model │ ├── seg_0415.onnx │ └── seg_0415.trt ├── Parser │ ├── CMakeLists.txt │ ├── data_frame_parser.cpp │ └── data_frame_parser.h ├── RoadSeg │ ├── CMakeLists.txt │ ├── road_segmentation.cpp │ └── road_segmentation.hpp ├── TCPClient │ ├── CMakeLists.txt │ ├── tcp_frame_client.cpp │ └── tcp_frame_client.h ├── Test │ ├── main_simple.cpp │ ├── ptr_mat.cpp │ └── test_main.cpp └── Utils ├── CMakeLists.txt ├── logger.cpp └── logger.h 具体而言，比如Parser下面的CMakeLists.txt：\n",
   "keywords": [
     
   ],

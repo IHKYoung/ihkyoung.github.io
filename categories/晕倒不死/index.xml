@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>晕倒不死 on AhaKnow</title>
+    <link>https://ahaknow.com/categories/%E6%99%95%E5%80%92%E4%B8%8D%E6%AD%BB/</link>
+    <description>Recent content in 晕倒不死 on AhaKnow</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Thu, 06 Feb 2025 20:58:45 +0800</lastBuildDate>
+    <atom:link href="https://ahaknow.com/categories/%E6%99%95%E5%80%92%E4%B8%8D%E6%AD%BB/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>📝 Git 仓库自动更新脚本</title>
+      <link>https://ahaknow.com/posts/know/-git-%E4%BB%93%E5%BA%93%E8%87%AA%E5%8A%A8%E6%9B%B4%E6%96%B0%E8%84%9A%E6%9C%AC/</link>
+      <pubDate>Thu, 06 Feb 2025 20:58:45 +0800</pubDate>
+      <guid>https://ahaknow.com/posts/know/-git-%E4%BB%93%E5%BA%93%E8%87%AA%E5%8A%A8%E6%9B%B4%E6%96%B0%E8%84%9A%E6%9C%AC/</guid>
+      <description>&lt;h2 id=&#34;-git-仓库自动更新脚本---解决方案与步骤总结&#34;&gt;📝 &lt;strong&gt;Git 仓库自动更新脚本 - 解决方案与步骤总结&lt;/strong&gt;&lt;/h2&gt;
+&lt;p&gt;在这份文档中，我们将概述如何在 Windows 系统上自动化更新 Git 仓库。此文档包括了如何使用 PowerShell 脚本、任务调度器（Task Scheduler）和 PowerShell 7 来实现每天开机时自动更新 &lt;code&gt;GitAwesome&lt;/code&gt; 文件夹下的所有 Git 仓库。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>✨晕倒不死指南：Scoop包管理</title>
+      <link>https://ahaknow.com/posts/know/%E6%99%95%E5%80%92%E4%B8%8D%E6%AD%BB%E6%8C%87%E5%8D%97scoop%E5%8C%85%E7%AE%A1%E7%90%86/</link>
+      <pubDate>Tue, 04 Feb 2025 13:09:08 +0800</pubDate>
+      <guid>https://ahaknow.com/posts/know/%E6%99%95%E5%80%92%E4%B8%8D%E6%AD%BB%E6%8C%87%E5%8D%97scoop%E5%8C%85%E7%AE%A1%E7%90%86/</guid>
+      <description>&lt;h2 id=&#34;1-scoop-简介-&#34;&gt;1. Scoop 简介 ✨&lt;/h2&gt;
+&lt;p&gt;Scoop 是 Windows 下的一个轻量级包管理器，其核心理念是“把命令行工具装进用户目录”，避免对系统全局进行修改。它与 apt（Debian/Ubuntu 等发行版的包管理器）有相似的用户体验，但在 Windows 环境中更为灵活、简单，并且免去了管理员权限的烦恼。&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

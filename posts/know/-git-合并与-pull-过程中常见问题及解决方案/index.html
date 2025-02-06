@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+    MathJax = {
+        tex: {
+            inlineMath: [['$', '$'], ['\\(', '\\)']],
+            displayMath: [['$$', '$$'], ['\\[', '\\]']],
+            processEscapes: true,
+            processEnvironments: true
+        },
+        options: {
+            skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+        }
+    };
+
+    window.addEventListener('load', (event) => {
+        document.querySelectorAll("mjx-container").forEach(function (x) {
+            x.parentElement.classList += 'has-jax'
+        })
+    });
+</script>
+
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script type="text/javascript" id="MathJax-script" async
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+
+
+<html lang="zh" dir="zh-cn">
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>📝 Git 合并与 Pull 过程中常见问题及解决方案 | AhaKnow</title>
+<meta name="keywords" content="Git">
+<meta name="description" content="在使用 Git 进行 git pull、git merge 等操作时，常常会遇到各种冲突和错误。这份文档总结了 Git 合并相关问题，提供了案例分析、解决方案，并附上清晰的注释，帮助你快速解决问题。💡">
+<meta name="author" content="CKYoung">
+<link rel="canonical" href="https://ahaknow.com/posts/know/-git-%E5%90%88%E5%B9%B6%E4%B8%8E-pull-%E8%BF%87%E7%A8%8B%E4%B8%AD%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98%E5%8F%8A%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.css" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://ahaknow.com/Q.gif">
+<link rel="icon" type="image/png" sizes="16x16" href="https://ahaknow.com/Q.gif">
+<link rel="icon" type="image/png" sizes="32x32" href="https://ahaknow.com/Q.gif">
+<link rel="apple-touch-icon" href="https://ahaknow.com/Q.gif">
+<link rel="mask-icon" href="https://ahaknow.com/Q.gif">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="zh" href="https://ahaknow.com/posts/know/-git-%E5%90%88%E5%B9%B6%E4%B8%8E-pull-%E8%BF%87%E7%A8%8B%E4%B8%AD%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98%E5%8F%8A%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript><meta property="og:title" content="📝 Git 合并与 Pull 过程中常见问题及解决方案" />
+<meta property="og:description" content="在使用 Git 进行 git pull、git merge 等操作时，常常会遇到各种冲突和错误。这份文档总结了 Git 合并相关问题，提供了案例分析、解决方案，并附上清晰的注释，帮助你快速解决问题。💡" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://ahaknow.com/posts/know/-git-%E5%90%88%E5%B9%B6%E4%B8%8E-pull-%E8%BF%87%E7%A8%8B%E4%B8%AD%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98%E5%8F%8A%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2025-02-06T21:01:54+08:00" />
+<meta property="article:modified_time" content="2025-02-06T21:01:54+08:00" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="📝 Git 合并与 Pull 过程中常见问题及解决方案"/>
+<meta name="twitter:description" content="在使用 Git 进行 git pull、git merge 等操作时，常常会遇到各种冲突和错误。这份文档总结了 Git 合并相关问题，提供了案例分析、解决方案，并附上清晰的注释，帮助你快速解决问题。💡"/>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "🚀 天天向上",
+      "item": "https://ahaknow.com/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "🌟知识",
+      "item": "https://ahaknow.com/posts/know/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  3 ,
+      "name": "📝 Git 合并与 Pull 过程中常见问题及解决方案",
+      "item": "https://ahaknow.com/posts/know/-git-%E5%90%88%E5%B9%B6%E4%B8%8E-pull-%E8%BF%87%E7%A8%8B%E4%B8%AD%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98%E5%8F%8A%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "📝 Git 合并与 Pull 过程中常见问题及解决方案",
+  "name": "📝 Git 合并与 Pull 过程中常见问题及解决方案",
+  "description": "在使用 Git 进行 git pull、git merge 等操作时，常常会遇到各种冲突和错误。这份文档总结了 Git 合并相关问题，提供了案例分析、解决方案，并附上清晰的注释，帮助你快速解决问题。💡\n",
+  "keywords": [
+    "Git"
+  ],
+  "articleBody": "在使用 Git 进行 git pull、git merge 等操作时，常常会遇到各种冲突和错误。这份文档总结了 Git 合并相关问题，提供了案例分析、解决方案，并附上清晰的注释，帮助你快速解决问题。💡\n🌟 目录 🔄 git pull 时的常见问题及解决方案 🔗 git merge 相关问题及解决方案 🎯 其他常见 Git 合并相关问题 🏆 最佳实践建议 1️⃣ git pull 时的常见问题及解决方案 git pull 是从远程仓库拉取更新并尝试合并到本地分支的命令，主要执行以下两步：\ngit fetch —— 获取远程更新 git merge —— 合并远程分支到本地 在 git pull 时，可能会遇到以下问题 ：\n🚨 问题 1：Your local changes would be overwritten by merge error: Your local changes to the following files would be overwritten by merge: content/posts/diary/2025-02-04.md Please commit your changes or stash them before you merge. Aborting 💡 原因：\n本地对某些文件进行了修改，而远程仓库也对这些文件做了变更，Git 无法自动合并。 ✅ 解决方案：\n如果本地改动不重要，想丢弃：\ngit reset --hard HEAD # 丢弃本地所有未提交的修改 git pull ⚠️ 警告：此操作会清除所有未提交的本地更改，无法恢复。\n如果想保留本地改动但暂时存储：\ngit stash # 暂存本地修改 git pull # 获取最新远程代码 git stash pop # 恢复本地修改 💡 注意：如果远程仓库对相同的文件有修改，stash pop 可能会导致冲突，需要手动解决。\n如果本地修改是重要的，需要先提交：\ngit add . git commit -m \"保存本地修改\" git pull --rebase # 先拉取远程更新，再应用本地提交 🚨 问题 2：fatal: refusing to merge unrelated histories fatal: refusing to merge unrelated histories 💡 原因：\n远程仓库和本地仓库历史不同，Git 认为它们是两个完全不同的项目，不允许直接合并。 ✅ 解决方案：\ngit pull origin main --allow-unrelated-histories 💡 注意：这通常发生在第一次从空仓库或手动创建的仓库拉取代码时。\n2️⃣ git merge 相关问题及解决方案 git merge 主要用于将一个分支的代码合并到当前分支，有时会遇到冲突，需要手动解决。\n🚨 问题 3：Merge Conflict（合并冲突） Auto-merging example.txt CONFLICT (content): Merge conflict in example.txt Automatic merge failed; fix conflicts and then commit the result. 💡 原因：\n本地和远程仓库在同一文件的相同位置进行了修改，Git 无法自动合并。 ✅ 解决方案：\n打开冲突文件（例如 example.txt），Git 会在冲突部分添加以下标记：\n\u003c\u003c\u003c\u003c\u003c\u003c\u003c HEAD 本地的修改 ======= 远程仓库的修改 \u003e\u003e\u003e\u003e\u003e\u003e\u003e branch_name 你需要手动编辑这些文件，选择保留本地、远程，或者手动合并内容。\n完成后，运行：\ngit add example.txt git commit -m \"Resolved merge conflict\" 🚨 问题 4：fast-forward merge（快进合并） vs. no-ff merge 💡 原因：\nGit 默认使用 fast-forward 合并，可能导致历史不可读。 --no-ff 强制创建合并提交，但可能增加不必要的提交历史。 ✅ 解决方案：\n如果不希望 fast-forward 合并，使用：\ngit merge --no-ff feature-branch 3️⃣ 其他常见 Git 合并相关问题 🚨 问题 5：git rebase 失败 CONFLICT (content): Merge conflict in file.txt error: could not apply commit_hash 💡 原因：\ngit rebase 尝试把本地提交应用到新的 base 分支，但遇到了冲突。 ✅ 解决方案：\n解决冲突后，运行：\ngit rebase --continue 如果 rebase 失败，可以取消：\ngit rebase --abort 🚨 问题 6：Detached HEAD（游离 HEAD） You are in 'detached HEAD' state. You can look around, make experimental changes and commit them, and you can discard any commits you make in this state without impacting any branches. 💡 原因：\n你直接检出了一个提交，而不是一个分支，导致 HEAD 变成“游离”状态。 ✅ 解决方案：\n如果你只是想回到某个分支：\ngit checkout main 如果你希望在游离状态下创建新的分支：\ngit checkout -b new-branch 4️⃣ Git 合并最佳实践 ✅ 始终在合并前检查远程状态\ngit fetch git status ✅ 在合并前确认本地修改已提交\ngit commit -a -m \"Commit before merging\" ✅ 定期使用 git rebase 让分支保持整洁\ngit rebase main ✅ 避免不必要的合并，使用 git pull --rebase\ngit pull --rebase origin main ✅ 使用 git log --oneline --graph 查看分支合并情况\ngit log --oneline --graph --all 🏆 总结 Git 合并和 git pull 可能会遇到各种问题，但通常可以通过：\ngit stash 暂存修改 git reset --hard 丢弃修改 git merge --abort 取消合并 手动解决冲突并提交 来解决。 这份文档涵盖了 git pull、git merge、冲突解决、最佳实践，希望能帮助你更高效地使用 Git！🚀\n你可以随时参考这份文档，并根据你的需求选择适合的解决方案！😃\n",
+  "wordCount" : "1435",
+  "inLanguage": "zh",
+  "datePublished": "2025-02-06T21:01:54+08:00",
+  "dateModified": "2025-02-06T21:01:54+08:00",
+  "author":[{
+    "@type": "Person",
+    "name": "CKYoung"
+  }],
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://ahaknow.com/posts/know/-git-%E5%90%88%E5%B9%B6%E4%B8%8E-pull-%E8%BF%87%E7%A8%8B%E4%B8%AD%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98%E5%8F%8A%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "AhaKnow",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://ahaknow.com/Q.gif"
+    }
+  }
+}
+</script>
+    
+    
+    
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://ahaknow.com/" accesskey="h" title="AhaKnow (Alt + H)">
+                <img src="https://ahaknow.com/Q.gif" alt="" aria-label="logo"
+                    height="35">AhaKnow</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://ahaknow.com/search" title="🪄魔法 (Alt &#43; /)" accesskey=/>
+                    <span>🪄魔法</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://ahaknow.com/" title="🏡主页">
+                    <span>🏡主页</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://ahaknow.com/posts" title="🚀天天向上">
+                    <span>🚀天天向上</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://ahaknow.com/archives" title="⏱️时间线">
+                    <span>⏱️时间线</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://ahaknow.com/tags" title="🏷️标签">
+                    <span>🏷️标签</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://ahaknow.com/categories" title="🖇归档">
+                    <span>🖇归档</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://ahaknow.com/toolkits" title="🧰医疗箱">
+                    <span>🧰医疗箱</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    <div class="breadcrumbs"><a href="https://ahaknow.com/">🏡主页</a>&nbsp;»&nbsp;<a href="https://ahaknow.com/posts/">🚀 天天向上</a>&nbsp;»&nbsp;<a href="https://ahaknow.com/posts/know/">🌟知识</a></div>
+    <h1 class="post-title entry-hint-parent">
+      📝 Git 合并与 Pull 过程中常见问题及解决方案
+    </h1>
+    <div class="post-meta">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
+<span class="parent-post-meta">
+        <span id="post_meta_style_1">
+            <span class="fa fa-calendar-check-o"></span>
+            <span>2025-02-06
+                &nbsp;&nbsp;
+            </span>
+        </span>
+        <span id="post_meta_style_2">
+        <span class="fa fa-calendar-plus-o"></span>
+        <span>2025-02-06
+            &nbsp;&nbsp;
+        </span>
+    </span>
+    <span id="post_meta_style_3">
+        <span class="fa fa-file-word-o"></span>
+        <span>1435 字
+            &nbsp;&nbsp;
+        </span>
+    </span>
+    <span id="post_meta_style_4">
+        <span class="fa fa-clock-o"></span>
+        <span>3 分钟
+            &nbsp;&nbsp;
+        </span>
+    </span>
+    <span id="post_meta_style_5">
+        <span class="fa fa-user-o"></span>
+        <span>CKYoung
+            &nbsp;&nbsp;
+        </span>
+    </span>
+    <span id="post_meta_style_6">
+        <span class="fa fa-tags" style="opacity: 0.8"></span>
+        <span>
+            <span class="post-tags-meta">
+                <a href="https://ahaknow.com/tags/git/" style="color: var(--secondary)!important;">Git</a>
+            </span>
+        </span>
+    </span>
+</span>
+
+</div>
+  </header> <aside id="toc-container" class="toc-container wide">
+    <div class="toc">
+        <details  open>
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details">📚目录</span>
+        </summary>
+
+        <div class="inner"><ul>
+                <li>
+                    <a href="#-%e7%9b%ae%e5%bd%95" aria-label="🌟 目录"><strong>🌟 目录</strong></a></li>
+                <li>
+                    <a href="#1-git-pull-%e6%97%b6%e7%9a%84%e5%b8%b8%e8%a7%81%e9%97%ae%e9%a2%98%e5%8f%8a%e8%a7%a3%e5%86%b3%e6%96%b9%e6%a1%88" aria-label="1️⃣ git pull 时的常见问题及解决方案"><strong>1️⃣ <code>git pull</code> 时的常见问题及解决方案</strong></a><ul>
+                        
+                <li>
+                    <a href="#-%e9%97%ae%e9%a2%98-1your-local-changes-would-be-overwritten-by-merge" aria-label="🚨 问题 1：Your local changes would be overwritten by merge"><strong>🚨 问题 1：Your local changes would be overwritten by merge</strong></a></li>
+                <li>
+                    <a href="#-%e9%97%ae%e9%a2%98-2fatal-refusing-to-merge-unrelated-histories" aria-label="🚨 问题 2：fatal: refusing to merge unrelated histories"><strong>🚨 问题 2：<code>fatal: refusing to merge unrelated histories</code></strong></a></li></ul>
+                </li>
+                <li>
+                    <a href="#2-git-merge-%e7%9b%b8%e5%85%b3%e9%97%ae%e9%a2%98%e5%8f%8a%e8%a7%a3%e5%86%b3%e6%96%b9%e6%a1%88" aria-label="2️⃣ git merge 相关问题及解决方案"><strong>2️⃣ <code>git merge</code> 相关问题及解决方案</strong></a><ul>
+                        
+                <li>
+                    <a href="#-%e9%97%ae%e9%a2%98-3merge-conflict%e5%90%88%e5%b9%b6%e5%86%b2%e7%aa%81" aria-label="🚨 问题 3：Merge Conflict（合并冲突）"><strong>🚨 问题 3：Merge Conflict（合并冲突）</strong></a></li>
+                <li>
+                    <a href="#-%e9%97%ae%e9%a2%98-4fast-forward-merge%e5%bf%ab%e8%bf%9b%e5%90%88%e5%b9%b6-vs-no-ff-merge" aria-label="🚨 问题 4：fast-forward merge（快进合并） vs. no-ff merge"><strong>🚨 问题 4：fast-forward merge（快进合并） vs. no-ff merge</strong></a></li></ul>
+                </li>
+                <li>
+                    <a href="#3-%e5%85%b6%e4%bb%96%e5%b8%b8%e8%a7%81-git-%e5%90%88%e5%b9%b6%e7%9b%b8%e5%85%b3%e9%97%ae%e9%a2%98" aria-label="3️⃣ 其他常见 Git 合并相关问题"><strong>3️⃣ 其他常见 Git 合并相关问题</strong></a><ul>
+                        
+                <li>
+                    <a href="#-%e9%97%ae%e9%a2%98-5git-rebase-%e5%a4%b1%e8%b4%a5" aria-label="🚨 问题 5：git rebase 失败"><strong>🚨 问题 5：git rebase 失败</strong></a></li>
+                <li>
+                    <a href="#-%e9%97%ae%e9%a2%98-6detached-head%e6%b8%b8%e7%a6%bb-head" aria-label="🚨 问题 6：Detached HEAD（游离 HEAD）"><strong>🚨 问题 6：Detached HEAD（游离 HEAD）</strong></a></li></ul>
+                </li>
+                <li>
+                    <a href="#4-git-%e5%90%88%e5%b9%b6%e6%9c%80%e4%bd%b3%e5%ae%9e%e8%b7%b5" aria-label="4️⃣ Git 合并最佳实践"><strong>4️⃣ Git 合并最佳实践</strong></a></li>
+                <li>
+                    <a href="#-%e6%80%bb%e7%bb%93" aria-label="🏆 总结"><strong>🏆 总结</strong></a>
+                </li>
+            </ul>
+        </div>
+        </details>
+    </div>
+</aside>
+<script>
+    let activeElement;
+    let elements;
+    window.addEventListener('DOMContentLoaded', function (event) {
+        checkTocPosition();
+
+        elements = document.querySelectorAll('h1[id],h2[id],h3[id],h4[id],h5[id],h6[id]');
+        
+        activeElement = elements[0];
+        const id = encodeURI(activeElement.getAttribute('id')).toLowerCase();
+        document.querySelector(`.inner ul li a[href="#${id}"]`).classList.add('active');
+    }, false);
+
+    window.addEventListener('resize', function(event) {
+        checkTocPosition();
+    }, false);
+
+    window.addEventListener('scroll', () => {
+        
+        activeElement = Array.from(elements).find((element) => {
+            if ((getOffsetTop(element) - window.pageYOffset) > 0 &&
+                (getOffsetTop(element) - window.pageYOffset) < window.innerHeight/2) {
+                return element;
+            }
+        }) || activeElement
+
+        elements.forEach(element => {
+            const id = encodeURI(element.getAttribute('id')).toLowerCase();
+            if (element === activeElement){
+                document.querySelector(`.inner ul li a[href="#${id}"]`).classList.add('active');
+            } else {
+                document.querySelector(`.inner ul li a[href="#${id}"]`).classList.remove('active');
+            }
+        })
+    }, false);
+
+    const main = parseInt(getComputedStyle(document.body).getPropertyValue('--article-width'), 10);
+    const toc = parseInt(getComputedStyle(document.body).getPropertyValue('--toc-width'), 10);
+    const gap = parseInt(getComputedStyle(document.body).getPropertyValue('--gap'), 10);
+
+    function checkTocPosition() {
+        const width = document.body.scrollWidth;
+
+        if (width - main - (toc * 2) - (gap * 4) > 0) {
+            document.getElementById("toc-container").classList.add("wide");
+        } else {
+            document.getElementById("toc-container").classList.remove("wide");
+        }
+    }
+
+    function getOffsetTop(element) {
+        if (!element.getClientRects().length) {
+            return 0;
+        }
+        let rect = element.getBoundingClientRect();
+        let win = element.ownerDocument.defaultView;
+        return rect.top + win.pageYOffset;
+    }
+</script>
+  <div class="post-content"><p>在使用 Git 进行 <code>git pull</code>、<code>git merge</code> 等操作时，常常会遇到各种冲突和错误。这份文档总结了 <strong>Git 合并相关问题</strong>，提供了<strong>案例分析、解决方案</strong>，并附上清晰的注释，帮助你快速解决问题。💡</p>
+<hr>
+<h2 id="-目录"><strong>🌟 目录</strong><a hidden class="anchor" aria-hidden="true" href="#-目录">#</a></h2>
+<ol>
+<li>🔄 <code>git pull</code> 时的常见问题及解决方案</li>
+<li>🔗 <code>git merge</code> 相关问题及解决方案</li>
+<li>🎯 其他常见 Git 合并相关问题</li>
+<li>🏆 最佳实践建议</li>
+</ol>
+<hr>
+<h2 id="1-git-pull-时的常见问题及解决方案"><strong>1️⃣ <code>git pull</code> 时的常见问题及解决方案</strong><a hidden class="anchor" aria-hidden="true" href="#1-git-pull-时的常见问题及解决方案">#</a></h2>
+<p><code>git pull</code> 是从远程仓库拉取更新并尝试合并到本地分支的命令，主要执行以下两步：</p>
+<ol>
+<li><code>git fetch</code> —— 获取远程更新</li>
+<li><code>git merge</code> —— 合并远程分支到本地</li>
+</ol>
+<p>在 <code>git pull</code> 时，可能会遇到以下问题 ：</p>
+<h3 id="-问题-1your-local-changes-would-be-overwritten-by-merge"><strong>🚨 问题 1：Your local changes would be overwritten by merge</strong><a hidden class="anchor" aria-hidden="true" href="#-问题-1your-local-changes-would-be-overwritten-by-merge">#</a></h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">error: Your <span class="nb">local</span> changes to the following files would be overwritten by merge:
+</span></span><span class="line"><span class="cl">        content/posts/diary/2025-02-04.md
+</span></span><span class="line"><span class="cl">Please commit your changes or stash them before you merge.
+</span></span><span class="line"><span class="cl">Aborting
+</span></span></code></pre></div><p><strong>💡 原因：</strong></p>
+<ul>
+<li>本地对某些文件进行了修改，而远程仓库也对这些文件做了变更，Git 无法自动合并。</li>
+</ul>
+<p><strong>✅ 解决方案：</strong></p>
+<ul>
+<li>
+<p><strong>如果本地改动不重要，想丢弃</strong>：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git reset --hard HEAD  <span class="c1"># 丢弃本地所有未提交的修改</span>
+</span></span><span class="line"><span class="cl">git pull
+</span></span></code></pre></div><p>⚠️ <strong>警告</strong>：此操作会清除所有未提交的本地更改，无法恢复。</p>
+</li>
+<li>
+<p><strong>如果想保留本地改动但暂时存储</strong>：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git stash  <span class="c1"># 暂存本地修改</span>
+</span></span><span class="line"><span class="cl">git pull   <span class="c1"># 获取最新远程代码</span>
+</span></span><span class="line"><span class="cl">git stash pop  <span class="c1"># 恢复本地修改</span>
+</span></span></code></pre></div><p>💡 <strong>注意</strong>：如果远程仓库对相同的文件有修改，<code>stash pop</code> 可能会导致冲突，需要手动解决。</p>
+</li>
+<li>
+<p><strong>如果本地修改是重要的，需要先提交</strong>：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git add .
+</span></span><span class="line"><span class="cl">git commit -m <span class="s2">&#34;保存本地修改&#34;</span>
+</span></span><span class="line"><span class="cl">git pull --rebase  <span class="c1"># 先拉取远程更新，再应用本地提交</span>
+</span></span></code></pre></div></li>
+</ul>
+<hr>
+<h3 id="-问题-2fatal-refusing-to-merge-unrelated-histories"><strong>🚨 问题 2：<code>fatal: refusing to merge unrelated histories</code></strong><a hidden class="anchor" aria-hidden="true" href="#-问题-2fatal-refusing-to-merge-unrelated-histories">#</a></h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">fatal: refusing to merge unrelated histories
+</span></span></code></pre></div><p><strong>💡 原因：</strong></p>
+<ul>
+<li>远程仓库和本地仓库历史不同，Git 认为它们是两个完全不同的项目，不允许直接合并。</li>
+</ul>
+<p><strong>✅ 解决方案：</strong></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git pull origin main --allow-unrelated-histories
+</span></span></code></pre></div><p>💡 <strong>注意</strong>：这通常发生在<strong>第一次</strong>从空仓库或手动创建的仓库拉取代码时。</p>
+<hr>
+<h2 id="2-git-merge-相关问题及解决方案"><strong>2️⃣ <code>git merge</code> 相关问题及解决方案</strong><a hidden class="anchor" aria-hidden="true" href="#2-git-merge-相关问题及解决方案">#</a></h2>
+<p><code>git merge</code> 主要用于将<strong>一个分支</strong>的代码合并到<strong>当前分支</strong>，有时会遇到冲突，需要手动解决。</p>
+<h3 id="-问题-3merge-conflict合并冲突"><strong>🚨 问题 3：Merge Conflict（合并冲突）</strong><a hidden class="anchor" aria-hidden="true" href="#-问题-3merge-conflict合并冲突">#</a></h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">Auto-merging example.txt
+</span></span><span class="line"><span class="cl">CONFLICT <span class="o">(</span>content<span class="o">)</span>: Merge conflict in example.txt
+</span></span><span class="line"><span class="cl">Automatic merge failed<span class="p">;</span> fix conflicts and <span class="k">then</span> commit the result.
+</span></span></code></pre></div><p><strong>💡 原因：</strong></p>
+<ul>
+<li>本地和远程仓库在同一文件的相同位置进行了修改，Git 无法自动合并。</li>
+</ul>
+<p><strong>✅ 解决方案：</strong></p>
+<ol>
+<li>
+<p>打开冲突文件（例如 <code>example.txt</code>），Git 会在冲突部分添加以下标记：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-diff" data-lang="diff"><span class="line"><span class="cl">&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
+</span></span><span class="line"><span class="cl">本地的修改
+</span></span><span class="line"><span class="cl"><span class="gh">=======
+</span></span></span><span class="line"><span class="cl"><span class="gh"></span>远程仓库的修改
+</span></span><span class="line"><span class="cl">&gt;&gt;&gt;&gt;&gt;&gt;&gt; branch_name
+</span></span></code></pre></div></li>
+<li>
+<p>你需要手动编辑这些文件，选择<strong>保留本地</strong>、<strong>远程</strong>，或者<strong>手动合并</strong>内容。</p>
+</li>
+<li>
+<p>完成后，运行：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git add example.txt
+</span></span><span class="line"><span class="cl">git commit -m <span class="s2">&#34;Resolved merge conflict&#34;</span>
+</span></span></code></pre></div></li>
+</ol>
+<hr>
+<h3 id="-问题-4fast-forward-merge快进合并-vs-no-ff-merge"><strong>🚨 问题 4：fast-forward merge（快进合并） vs. no-ff merge</strong><a hidden class="anchor" aria-hidden="true" href="#-问题-4fast-forward-merge快进合并-vs-no-ff-merge">#</a></h3>
+<p><strong>💡 原因：</strong></p>
+<ul>
+<li>Git 默认使用 <code>fast-forward</code> 合并，可能导致历史不可读。</li>
+<li><code>--no-ff</code> 强制创建合并提交，但可能增加不必要的提交历史。</li>
+</ul>
+<p><strong>✅ 解决方案：</strong></p>
+<ul>
+<li>
+<p>如果不希望 <code>fast-forward</code> 合并，使用：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git merge --no-ff feature-branch
+</span></span></code></pre></div></li>
+</ul>
+<hr>
+<h2 id="3-其他常见-git-合并相关问题"><strong>3️⃣ 其他常见 Git 合并相关问题</strong><a hidden class="anchor" aria-hidden="true" href="#3-其他常见-git-合并相关问题">#</a></h2>
+<h3 id="-问题-5git-rebase-失败"><strong>🚨 问题 5：git rebase 失败</strong><a hidden class="anchor" aria-hidden="true" href="#-问题-5git-rebase-失败">#</a></h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">CONFLICT <span class="o">(</span>content<span class="o">)</span>: Merge conflict in file.txt
+</span></span><span class="line"><span class="cl">error: could not apply commit_hash
+</span></span></code></pre></div><p><strong>💡 原因：</strong></p>
+<ul>
+<li><code>git rebase</code> 尝试把本地提交应用到新的 base 分支，但遇到了冲突。</li>
+</ul>
+<p><strong>✅ 解决方案：</strong></p>
+<ol start="4">
+<li>
+<p>解决冲突后，运行：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git rebase --continue
+</span></span></code></pre></div></li>
+<li>
+<p>如果 rebase 失败，可以取消：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git rebase --abort
+</span></span></code></pre></div></li>
+</ol>
+<hr>
+<h3 id="-问题-6detached-head游离-head"><strong>🚨 问题 6：Detached HEAD（游离 HEAD）</strong><a hidden class="anchor" aria-hidden="true" href="#-问题-6detached-head游离-head">#</a></h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">You are in <span class="s1">&#39;detached HEAD&#39;</span> state. You can look around, make experimental
+</span></span><span class="line"><span class="cl">changes and commit them, and you can discard any commits you make in this state
+</span></span><span class="line"><span class="cl">without impacting any branches.
+</span></span></code></pre></div><p><strong>💡 原因：</strong></p>
+<ul>
+<li>你直接检出了一个提交，而不是一个分支，导致 HEAD 变成“游离”状态。</li>
+</ul>
+<p><strong>✅ 解决方案：</strong></p>
+<ol start="6">
+<li>
+<p>如果你只是想回到某个分支：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git checkout main
+</span></span></code></pre></div></li>
+<li>
+<p>如果你希望在游离状态下创建新的分支：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git checkout -b new-branch
+</span></span></code></pre></div></li>
+</ol>
+<hr>
+<h2 id="4-git-合并最佳实践"><strong>4️⃣ Git 合并最佳实践</strong><a hidden class="anchor" aria-hidden="true" href="#4-git-合并最佳实践">#</a></h2>
+<p>✅ <strong>始终在合并前检查远程状态</strong></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git fetch
+</span></span><span class="line"><span class="cl">git status
+</span></span></code></pre></div><p>✅ <strong>在合并前确认本地修改已提交</strong></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git commit -a -m <span class="s2">&#34;Commit before merging&#34;</span>
+</span></span></code></pre></div><p>✅ <strong>定期使用 <code>git rebase</code> 让分支保持整洁</strong></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git rebase main
+</span></span></code></pre></div><p>✅ <strong>避免不必要的合并，使用 <code>git pull --rebase</code></strong></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git pull --rebase origin main
+</span></span></code></pre></div><p>✅ <strong>使用 <code>git log --oneline --graph</code> 查看分支合并情况</strong></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git log --oneline --graph --all
+</span></span></code></pre></div><hr>
+<h2 id="-总结"><strong>🏆 总结</strong><a hidden class="anchor" aria-hidden="true" href="#-总结">#</a></h2>
+<p>Git 合并和 <code>git pull</code> 可能会遇到各种问题，但通常可以通过：</p>
+<ul>
+<li><code>git stash</code> <strong>暂存修改</strong></li>
+<li><code>git reset --hard</code> <strong>丢弃修改</strong></li>
+<li><code>git merge --abort</code> <strong>取消合并</strong></li>
+<li><strong>手动解决冲突并提交</strong> 来解决。</li>
+</ul>
+<p>这份文档涵盖了 <strong><code>git pull</code>、<code>git merge</code>、冲突解决、最佳实践</strong>，希望能帮助你更高效地使用 Git！🚀</p>
+<hr>
+<p>你可以随时参考这份文档，并根据你的需求选择适合的解决方案！😃</p>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://ahaknow.com/tags/git/">Git</a></li>
+    </ul>
+<nav class="paginav">
+  <a class="prev" href="https://ahaknow.com/posts/know/notes-one-sows-and-another-reaps/">
+    <span class="title">« 上一页</span>
+    <br>
+    <span>站在前人的肩膀上：笔记收集录</span>
+  </a>
+  <a class="next" href="https://ahaknow.com/posts/know/-git-%E4%BB%93%E5%BA%93%E8%87%AA%E5%8A%A8%E6%9B%B4%E6%96%B0%E8%84%9A%E6%9C%AC/">
+    <span class="title">下一页 »</span>
+    <br>
+    <span>📝 Git 仓库自动更新脚本</span>
+  </a>
+</nav>
+
+  </footer>
+</article>
+</main>
+
+<footer class="footer">
+    <span>&copy; 2025 <a href="https://ahaknow.com/">AhaKnow</a></span>
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/IHKYoung/CKPaper/" rel="noopener" target="_blank">CKPaper</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = '🖨️打印';
+
+        function copyingDone() {
+            copybutton.innerHTML = '📋备份';
+            setTimeout(() => {
+                copybutton.innerHTML = '🖨️打印';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                
+                
+                let copyText = codeblock.textContent + '\r\n————————————————\r\n' + '版权声明：本文为「'+"AhaKnow"+'」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。' + '\r\n原文链接：' + location.href;
+                navigator.clipboard.writeText(copyText);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        document.querySelectorAll('pre > code[class*="language-"]').forEach(function(codeblock) {
+            
+            
+            let language = codeblock.className.match(/language-(\w+)/)[1] || "code";
+
+            
+            let macCodeBlock = document.createElement("div");
+            let macButtons = document.createElement("div");
+            let buttons = ['close', 'minimize', 'maximize'].map(function(className) {
+                let button = document.createElement("div");
+                button.setAttribute('class', `mac-button ${className}`);
+                return button;
+            });
+            let languageType = document.createElement("div");
+            languageType.innerText = language;
+            languageType.setAttribute('class', 'language-type');
+
+            
+            macButtons.setAttribute('class', 'mac-buttons');
+            buttons.forEach(function(button) {
+                macButtons.appendChild(button);
+            });
+            macCodeBlock.appendChild(macButtons);
+            macCodeBlock.appendChild(languageType);
+            macCodeBlock.setAttribute('class', 'mac-code-block');
+
+            
+            codeblock.parentNode.insertBefore(macCodeBlock, codeblock);
+        });
+    });
+</script>
+
+
+</body>
+
+</html>

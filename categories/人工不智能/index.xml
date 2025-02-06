@@ -6,21 +6,44 @@
     <description>Recent content in 人工不智能 on AhaKnow</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Sat, 01 Feb 2025 18:22:55 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 06 Feb 2025 21:01:54 +0800</lastBuildDate>
     <atom:link href="https://ahaknow.com/categories/%E4%BA%BA%E5%B7%A5%E4%B8%8D%E6%99%BA%E8%83%BD/index.xml" rel="self" type="application/rss+xml" />
     <item>
+      <title>📝 Git 合并与 Pull 过程中常见问题及解决方案</title>
+      <link>https://ahaknow.com/posts/know/-git-%E5%90%88%E5%B9%B6%E4%B8%8E-pull-%E8%BF%87%E7%A8%8B%E4%B8%AD%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98%E5%8F%8A%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/</link>
+      <pubDate>Thu, 06 Feb 2025 21:01:54 +0800</pubDate>
+      <guid>https://ahaknow.com/posts/know/-git-%E5%90%88%E5%B9%B6%E4%B8%8E-pull-%E8%BF%87%E7%A8%8B%E4%B8%AD%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98%E5%8F%8A%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/</guid>
+      <description>&lt;p&gt;在使用 Git 进行 &lt;code&gt;git pull&lt;/code&gt;、&lt;code&gt;git merge&lt;/code&gt; 等操作时，常常会遇到各种冲突和错误。这份文档总结了 &lt;strong&gt;Git 合并相关问题&lt;/strong&gt;，提供了&lt;strong&gt;案例分析、解决方案&lt;/strong&gt;，并附上清晰的注释，帮助你快速解决问题。💡&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>📝 Git 仓库自动更新脚本</title>
+      <link>https://ahaknow.com/posts/know/-git-%E4%BB%93%E5%BA%93%E8%87%AA%E5%8A%A8%E6%9B%B4%E6%96%B0%E8%84%9A%E6%9C%AC/</link>
+      <pubDate>Thu, 06 Feb 2025 20:58:45 +0800</pubDate>
+      <guid>https://ahaknow.com/posts/know/-git-%E4%BB%93%E5%BA%93%E8%87%AA%E5%8A%A8%E6%9B%B4%E6%96%B0%E8%84%9A%E6%9C%AC/</guid>
+      <description>&lt;h2 id=&#34;-git-仓库自动更新脚本---解决方案与步骤总结&#34;&gt;📝 &lt;strong&gt;Git 仓库自动更新脚本 - 解决方案与步骤总结&lt;/strong&gt;&lt;/h2&gt;
+&lt;p&gt;在这份文档中，我们将概述如何在 Windows 系统上自动化更新 Git 仓库。此文档包括了如何使用 PowerShell 脚本、任务调度器（Task Scheduler）和 PowerShell 7 来实现每天开机时自动更新 &lt;code&gt;GitAwesome&lt;/code&gt; 文件夹下的所有 Git 仓库。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>GitHub README 美化经验分享</title>
+      <link>https://ahaknow.com/posts/tech/github-readme/</link>
+      <pubDate>Sat, 01 Feb 2025 21:41:12 +0800</pubDate>
+      <guid>https://ahaknow.com/posts/tech/github-readme/</guid>
+      <description>&lt;p&gt;在 GitHub 上，一个精心设计的个人主页不仅可以展示你的项目、技术栈，还能通过动态数据和动画效果提升个人品牌形象。本文将分享两个经典模块的自动化集成方法：&lt;/p&gt;</description>
+    </item>
+    <item>
       <title>🪄ChatGPT&amp;LLMs 中文调教指南🚀</title>
-      <link>https://ahaknow.com/posts/know/chatgptllms-%E4%B8%AD%E6%96%87%E8%B0%83%E6%95%99%E6%8C%87%E5%8D%97/</link>
+      <link>https://ahaknow.com/posts/know/chatgptllms%E4%B8%AD%E6%96%87%E8%B0%83%E6%95%99%E6%8C%87%E5%8D%97/</link>
       <pubDate>Sat, 01 Feb 2025 18:22:55 +0800</pubDate>
-      <guid>https://ahaknow.com/posts/know/chatgptllms-%E4%B8%AD%E6%96%87%E8%B0%83%E6%95%99%E6%8C%87%E5%8D%97/</guid>
-      <description>以下内容的原版出自 awesome-chatgpt-prompts 项目，在此特别感谢原者们的辛勤付出与贡献。本指南内容由 CKYoung 翻译并润色，旨在为广大中文用户提供便捷、高效的参考资料。 废话不多</description>
+      <guid>https://ahaknow.com/posts/know/chatgptllms%E4%B8%AD%E6%96%87%E8%B0%83%E6%95%99%E6%8C%87%E5%8D%97/</guid>
+      <description>&lt;p&gt;以下内容的原版出自 &lt;a href=&#34;https://github.com/f/awesome-chatgpt-prompts&#34;&gt;awesome-chatgpt-prompts&lt;/a&gt; 项目，在此特别感谢原者们的辛勤付出与贡献。本指南内容由 &lt;a href=&#34;https://github.com/IHKYoung&#34;&gt;CKYoung&lt;/a&gt; 翻译并润色，旨在为广大中文用户提供便捷、高效的参考资料。&lt;/p&gt;
+&lt;p&gt;废话不多说，正文开启：&lt;/p&gt;</description>
     </item>
     <item>
       <title>macOS 环境下 Python 动态库缺失问题排查与解决方案</title>
-      <link>https://ahaknow.com/posts/tech/macos-%E7%8E%AF%E5%A2%83%E4%B8%8B-python-%E5%8A%A8%E6%80%81%E5%BA%93%E7%BC%BA%E5%A4%B1%E9%97%AE%E9%A2%98%E6%8E%92%E6%9F%A5%E4%B8%8E%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/</link>
+      <link>https://ahaknow.com/posts/tech/macos-lib-fix/</link>
       <pubDate>Sat, 01 Feb 2025 17:19:11 +0800</pubDate>
-      <guid>https://ahaknow.com/posts/tech/macos-%E7%8E%AF%E5%A2%83%E4%B8%8B-python-%E5%8A%A8%E6%80%81%E5%BA%93%E7%BC%BA%E5%A4%B1%E9%97%AE%E9%A2%98%E6%8E%92%E6%9F%A5%E4%B8%8E%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/</guid>
-      <description>在 macOS（特别是 M1/M2 芯片）使用 Python 时，可能会遇到 ImportError: Library not loaded 类错误。这通常是因为 Python 模块在加载动态库时找不到正确的 .dylib 文件。以下是一个系统化的排查与</description>
+      <guid>https://ahaknow.com/posts/tech/macos-lib-fix/</guid>
+      <description>&lt;p&gt;在 macOS（特别是 M1/M2 芯片）使用 Python 时，可能会遇到 &lt;strong&gt;ImportError: Library not loaded&lt;/strong&gt; 类错误。这通常是因为 Python 模块在加载动态库时找不到正确的 &lt;code&gt;.dylib&lt;/code&gt; 文件。以下是一个系统化的排查与解决方法，适用于 PyAudio、PortAudio 以及其他类似情况（如 OpenCV、TensorFlow 依赖的库）。&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>

@@ -46,7 +46,30 @@
 <meta name="robots" content="index, follow">
 <title>编程灵感时刻 | AhaKnow</title>
 <meta name="keywords" content="">
-<meta name="description" content="一些实用的小工具 获取时间C&#43;&#43;片段 // Unix时间戳 int64_t getTimestamp() { auto now = std::chrono::system_clock::now(); auto timestamp = std::chrono::time_point_cast&lt;std::chrono::nanoseconds&gt;(now).time_since_epoch().count(); return static_cast&lt;int64_t&gt;(timestamp); } 方便阅读的版本：年_月_日_时_分_秒 std::string getReadableTimestamp() { // 获取当前时间点 auto">
+<meta name="description" content="一些实用的小工具
+获取时间C&#43;&#43;片段
+// Unix时间戳
+int64_t getTimestamp() {
+    auto now = std::chrono::system_clock::now();
+    auto timestamp = std::chrono::time_point_cast&lt;std::chrono::nanoseconds&gt;(now).time_since_epoch().count();
+    return static_cast&lt;int64_t&gt;(timestamp);
+}
+方便阅读的版本：年_月_日_时_分_秒
+std::string getReadableTimestamp() {
+    // 获取当前时间点
+    auto now = std::chrono::system_clock::now();
+    // 转换为 time_t 类型
+    std::time_t now_c = std::chrono::system_clock::to_time_t(now);
+    // 将 time_t 类型转换为 tm 结构体
+    std::tm now_tm = *std::localtime(&amp;now_c);
+
+    // 使用 stringstream 生成格式化的时间字符串
+    std::stringstream ss;
+    ss &lt;&lt; std::put_time(&amp;now_tm, &#34;%Y_%m_%d_%H_%M_%S&#34;);
+
+    return ss.str();
+}
+">
 <meta name="author" content="CKYoung">
 <link rel="canonical" href="https://ahaknow.com/posts/know/coding-inspiration-moments/">
 <link crossorigin="anonymous" href="/assets/css/stylesheet.css" rel="preload stylesheet" as="style">
@@ -94,11 +117,31 @@
         }
 
     </style>
-</noscript>
-  
+</noscript><meta property="og:title" content="编程灵感时刻" />
+<meta property="og:description" content="一些实用的小工具
+获取时间C&#43;&#43;片段
+// Unix时间戳
+int64_t getTimestamp() {
+    auto now = std::chrono::system_clock::now();
+    auto timestamp = std::chrono::time_point_cast&lt;std::chrono::nanoseconds&gt;(now).time_since_epoch().count();
+    return static_cast&lt;int64_t&gt;(timestamp);
+}
+方便阅读的版本：年_月_日_时_分_秒
+std::string getReadableTimestamp() {
+    // 获取当前时间点
+    auto now = std::chrono::system_clock::now();
+    // 转换为 time_t 类型
+    std::time_t now_c = std::chrono::system_clock::to_time_t(now);
+    // 将 time_t 类型转换为 tm 结构体
+    std::tm now_tm = *std::localtime(&amp;now_c);
 
-<meta property="og:title" content="编程灵感时刻" />
-<meta property="og:description" content="一些实用的小工具 获取时间C&#43;&#43;片段 // Unix时间戳 int64_t getTimestamp() { auto now = std::chrono::system_clock::now(); auto timestamp = std::chrono::time_point_cast&lt;std::chrono::nanoseconds&gt;(now).time_since_epoch().count(); return static_cast&lt;int64_t&gt;(timestamp); } 方便阅读的版本：年_月_日_时_分_秒 std::string getReadableTimestamp() { // 获取当前时间点 auto" />
+    // 使用 stringstream 生成格式化的时间字符串
+    std::stringstream ss;
+    ss &lt;&lt; std::put_time(&amp;now_tm, &#34;%Y_%m_%d_%H_%M_%S&#34;);
+
+    return ss.str();
+}
+" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://ahaknow.com/posts/know/coding-inspiration-moments/" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2024-05-08T17:28:00+08:00" />
@@ -106,7 +149,30 @@
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="编程灵感时刻"/>
-<meta name="twitter:description" content="一些实用的小工具 获取时间C&#43;&#43;片段 // Unix时间戳 int64_t getTimestamp() { auto now = std::chrono::system_clock::now(); auto timestamp = std::chrono::time_point_cast&lt;std::chrono::nanoseconds&gt;(now).time_since_epoch().count(); return static_cast&lt;int64_t&gt;(timestamp); } 方便阅读的版本：年_月_日_时_分_秒 std::string getReadableTimestamp() { // 获取当前时间点 auto"/>
+<meta name="twitter:description" content="一些实用的小工具
+获取时间C&#43;&#43;片段
+// Unix时间戳
+int64_t getTimestamp() {
+    auto now = std::chrono::system_clock::now();
+    auto timestamp = std::chrono::time_point_cast&lt;std::chrono::nanoseconds&gt;(now).time_since_epoch().count();
+    return static_cast&lt;int64_t&gt;(timestamp);
+}
+方便阅读的版本：年_月_日_时_分_秒
+std::string getReadableTimestamp() {
+    // 获取当前时间点
+    auto now = std::chrono::system_clock::now();
+    // 转换为 time_t 类型
+    std::time_t now_c = std::chrono::system_clock::to_time_t(now);
+    // 将 time_t 类型转换为 tm 结构体
+    std::tm now_tm = *std::localtime(&amp;now_c);
+
+    // 使用 stringstream 生成格式化的时间字符串
+    std::stringstream ss;
+    ss &lt;&lt; std::put_time(&amp;now_tm, &#34;%Y_%m_%d_%H_%M_%S&#34;);
+
+    return ss.str();
+}
+"/>
 
 
 <script type="application/ld+json">
@@ -141,7 +207,7 @@
   "@type": "BlogPosting",
   "headline": "编程灵感时刻",
   "name": "编程灵感时刻",
-  "description": "一些实用的小工具 获取时间C++片段 // Unix时间戳 int64_t getTimestamp() { auto now = std::chrono::system_clock::now(); auto timestamp = std::chrono::time_point_cast\u0026lt;std::chrono::nanoseconds\u0026gt;(now).time_since_epoch().count(); return static_cast\u0026lt;int64_t\u0026gt;(timestamp); } 方便阅读的版本：年_月_日_时_分_秒 std::string getReadableTimestamp() { // 获取当前时间点 auto",
+  "description": "一些实用的小工具 获取时间C++片段 // Unix时间戳 int64_t getTimestamp() { auto now = std::chrono::system_clock::now(); auto timestamp = std::chrono::time_point_cast\u0026lt;std::chrono::nanoseconds\u0026gt;(now).time_since_epoch().count(); return static_cast\u0026lt;int64_t\u0026gt;(timestamp); } 方便阅读的版本：年_月_日_时_分_秒\nstd::string getReadableTimestamp() { // 获取当前时间点 auto now = std::chrono::system_clock::now(); // 转换为 time_t 类型 std::time_t now_c = std::chrono::system_clock::to_time_t(now); // 将 time_t 类型转换为 tm 结构体 std::tm now_tm = *std::localtime(\u0026amp;now_c); // 使用 stringstream 生成格式化的时间字符串 std::stringstream ss; ss \u0026lt;\u0026lt; std::put_time(\u0026amp;now_tm, \u0026#34;%Y_%m_%d_%H_%M_%S\u0026#34;); return ss.str(); } ",
   "keywords": [
     
   ],

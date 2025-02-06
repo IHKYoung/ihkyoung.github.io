@@ -95,10 +95,7 @@
         }
 
     </style>
-</noscript>
-  
-
-<meta property="og:title" content="好记性不如烂笔头" />
+</noscript><meta property="og:title" content="好记性不如烂笔头" />
 <meta property="og:description" content="想到了就记下来，想写的就好好写，日进一步，亦有点滴欣喜～" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://ahaknow.com/categories/%E5%A5%BD%E8%AE%B0%E6%80%A7%E4%B8%8D%E5%A6%82%E7%83%82%E7%AC%94%E5%A4%B4/" />
@@ -205,7 +202,10 @@
     </h2>
   </header>
   <div class="entry-content">
-    <p>前人栽树，后人乘凉。 或者说，不造轮子要造车。 总之，就是有些东西，在互联网上已经有记录了，可以收集起来为己用！ Github添加Waka记录 可以...</p>
+    <p> 前人栽树，后人乘凉。 或者说，不造轮子要造车。
+总之，就是有些东西，在互联网上已经有记录了，可以收集起来为己用！
+Github添加Waka记录 可以参考以下两个文档，官方文档的说明更清晰一些，初学者指南可以用来对照自己有没有做对～
+...</p>
   </div>
   <footer class="entry-footer">
 
@@ -277,7 +277,11 @@
     </h2>
   </header>
   <div class="entry-content">
-    <p>一顿操作猛如虎，鬼使神差来了个git add . 并不想这样的，因为压根不是想要git管理的目录😂 怎么ctrl&#43;z一下呢？ 具体操作 在Git中，有两个常...</p>
+    <p> 一顿操作猛如虎，鬼使神差来了个git add .
+并不想这样的，因为压根不是想要git管理的目录😂
+怎么ctrl&#43;z一下呢？
+具体操作 在Git中，有两个常见的操作可以撤销误操作的 git add . ：取消暂存（unstage）和取消缓存（uncache）。这两个操作有些区别，下面将详细解释它们的区别和具体用法。
+...</p>
   </div>
   <footer class="entry-footer">
 
@@ -357,7 +361,8 @@
     </h2>
   </header>
   <div class="entry-content">
-    <p>一些实用的小工具 获取时间C&#43;&#43;片段 // Unix时间戳 int64_t getTimestamp() { auto now = std::chrono::system_clock::now(); auto timestamp = std::chrono::time_point_cast&lt;std::chrono::nanoseconds&gt;(now).time_since_epoch().count(); return static_cast&lt;int64_t&gt;(timestamp); } 方便阅读的版本：年_月_日_时_分_秒 std::string getReadableTimestamp() { // 获取当前时间点 auto...</p>
+    <p>一些实用的小工具 获取时间C&#43;&#43;片段 // Unix时间戳 int64_t getTimestamp() { auto now = std::chrono::system_clock::now(); auto timestamp = std::chrono::time_point_cast&lt;std::chrono::nanoseconds&gt;(now).time_since_epoch().count(); return static_cast&lt;int64_t&gt;(timestamp); } 方便阅读的版本：年_月_日_时_分_秒
+std::string getReadableTimestamp() { // 获取当前时间点 auto now = std::chrono::system_clock::now(); // 转换为 time_t 类型 std::time_t now_c = std::chrono::system_clock::to_time_t(now); // 将 time_t 类型转换为 tm 结构体 std::tm now_tm = *std::localtime(&amp;now_c); // 使用 stringstream 生成格式化的时间字符串 std::stringstream ss; ss &lt;&lt; std::put_time(&amp;now_tm, &#34;%Y_%m_%d_%H_%M_%S&#34;); return ss.str(); } </p>
   </div>
   <footer class="entry-footer">
 
@@ -429,7 +434,8 @@
     </h2>
   </header>
   <div class="entry-content">
-    <p>第一次接触Protobuf，遇到了系统版本与编译文件版本不统一的情况，以优先解决问题的考虑出发，考虑先把版本统一，验证代码是否可行，之后再来...</p>
+    <p> 第一次接触Protobuf，遇到了系统版本与编译文件版本不统一的情况，以优先解决问题的考虑出发，考虑先把版本统一，验证代码是否可行，之后再来研究版本更新的问题。
+...</p>
   </div>
   <footer class="entry-footer">
 
@@ -501,7 +507,9 @@
     </h2>
   </header>
   <div class="entry-content">
-    <p>以下记录安装的TensorRT环境安装的最简单，也是最正确的流程。 因为很多时候依赖装乱了，直接装TensorRT会出现一堆依赖不存在的问题，...</p>
+    <p> 以下记录安装的TensorRT环境安装的最简单，也是最正确的流程。
+因为很多时候依赖装乱了，直接装TensorRT会出现一堆依赖不存在的问题，因此需要按照顺序一步一步安装
+...</p>
   </div>
   <footer class="entry-footer">
 
@@ -581,7 +589,12 @@
     </h2>
   </header>
   <div class="entry-content">
-    <p>主打一个“懒”字！ 移动文件啊，重命名啥的，动手拖拖不行嘛？！ 不行！用键盘，用命令行！ 比如： 想要移动 ZYC01981 - 01.jpg，同时又想把 - 01 后缀给去掉...</p>
+    <p> 主打一个“懒”字！
+移动文件啊，重命名啥的，动手拖拖不行嘛？！
+不行！用键盘，用命令行！
+比如：
+想要移动 ZYC01981 - 01.jpg，同时又想把 - 01 后缀给去掉，怎么做？
+...</p>
   </div>
   <footer class="entry-footer">
 
@@ -661,7 +674,9 @@
     </h2>
   </header>
   <div class="entry-content">
-    <p>使用Git，在develop分支下创建一个新分支，然后在这个新分支上进行新功能开发。 git branch系列操作 1. 列出所有本地分支 git branch 2. 列出所有远...</p>
+    <p> 使用Git，在develop分支下创建一个新分支，然后在这个新分支上进行新功能开发。
+git branch系列操作 1. 列出所有本地分支 git branch 2. 列出所有远程分支 git branch -r 3. 列出所有本地和远程分支 git branch -a 4. 创建新分支 创建新分支但不切换到该分支：
+...</p>
   </div>
   <footer class="entry-footer">
 
@@ -741,7 +756,9 @@
     </h2>
   </header>
   <div class="entry-content">
-    <p>我想重命名一个文件（手动操作是不可能的，懒！） 将“清晰易懂的的线性代数，国立阳明交通大学周志成，国语版mit线性代数Gilbert Strang LA_1...</p>
+    <p> 我想重命名一个文件（手动操作是不可能的，懒！）
+将“清晰易懂的的线性代数，国立阳明交通大学周志成，国语版mit线性代数Gilbert Strang LA_1-3”改成“LA_1-3”
+...</p>
   </div>
   <footer class="entry-footer">
 

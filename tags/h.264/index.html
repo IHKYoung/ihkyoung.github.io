@@ -95,10 +95,7 @@
         }
 
     </style>
-</noscript>
-  
-
-<meta property="og:title" content="H.264" />
+</noscript><meta property="og:title" content="H.264" />
 <meta property="og:description" content="想到了就记下来，想写的就好好写，日进一步，亦有点滴欣喜～" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://ahaknow.com/tags/h.264/" />
@@ -205,7 +202,11 @@
     </h2>
   </header>
   <div class="entry-content">
-    <p>在上一篇打通了读取字节流文件后，能够得到每一帧的字节数据了，这一篇就来解决为这些数据赋予实际意义。 彩色图像采用H.264编码 -&gt; 那就需要按照H...</p>
+    <p> 在上一篇打通了读取字节流文件后，能够得到每一帧的字节数据了，这一篇就来解决为这些数据赋予实际意义。
+彩色图像采用H.264编码 -&gt; 那就需要按照H.264解码
+视差图像采用LZ4压缩 -&gt; 视差图保存的16位无符号整数，采用LZ4解压缩（开源）
+背景知识 LZ4 LZ4 是一个非常快速的压缩算法，提供了实时压缩速度和非常快的解压缩速度，由 Yann Collet（FaceBook大佬） 开发。它属于无损压缩算法，意味着压缩后的数据可以完全恢复到其原始形态。LZ4 主要设计用于非常高速的场景（解压速度可以达到数GB每秒），例如实时数据传输、日志数据处理等。
+...</p>
   </div>
   <footer class="entry-footer">
 

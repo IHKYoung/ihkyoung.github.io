@@ -46,7 +46,9 @@
 <meta name="robots" content="index, follow">
 <title>开发实战：解析二进制文件 | AhaKnow</title>
 <meta name="keywords" content="字节流">
-<meta name="description" content="需要解析相机的字节流文件（就是一个一个Byte组成的文件，不解析的话没有啥实际意义）。 解析需要按照一定的规则，比如：如何确定数据的头（Hea">
+<meta name="description" content="
+需要解析相机的字节流文件（就是一个一个Byte组成的文件，不解析的话没有啥实际意义）。
+解析需要按照一定的规则，比如：如何确定数据的头（Header），以及一个数据帧（一个数据包）的结构是什么样的，这个有点像网络包的定义，在头部定义了很多信息，这些信息能够让这个数据包按照规则解析出来后有具体的意义。">
 <meta name="author" content="CKYoung">
 <link rel="canonical" href="https://ahaknow.com/posts/know/dev-parse-binary-file/">
 <link crossorigin="anonymous" href="/assets/css/stylesheet.css" rel="preload stylesheet" as="style">
@@ -94,11 +96,10 @@
         }
 
     </style>
-</noscript>
-  
-
-<meta property="og:title" content="开发实战：解析二进制文件" />
-<meta property="og:description" content="需要解析相机的字节流文件（就是一个一个Byte组成的文件，不解析的话没有啥实际意义）。 解析需要按照一定的规则，比如：如何确定数据的头（Hea" />
+</noscript><meta property="og:title" content="开发实战：解析二进制文件" />
+<meta property="og:description" content="
+需要解析相机的字节流文件（就是一个一个Byte组成的文件，不解析的话没有啥实际意义）。
+解析需要按照一定的规则，比如：如何确定数据的头（Header），以及一个数据帧（一个数据包）的结构是什么样的，这个有点像网络包的定义，在头部定义了很多信息，这些信息能够让这个数据包按照规则解析出来后有具体的意义。" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://ahaknow.com/posts/know/dev-parse-binary-file/" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2024-04-17T16:34:35+08:00" />
@@ -106,7 +107,9 @@
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="开发实战：解析二进制文件"/>
-<meta name="twitter:description" content="需要解析相机的字节流文件（就是一个一个Byte组成的文件，不解析的话没有啥实际意义）。 解析需要按照一定的规则，比如：如何确定数据的头（Hea"/>
+<meta name="twitter:description" content="
+需要解析相机的字节流文件（就是一个一个Byte组成的文件，不解析的话没有啥实际意义）。
+解析需要按照一定的规则，比如：如何确定数据的头（Header），以及一个数据帧（一个数据包）的结构是什么样的，这个有点像网络包的定义，在头部定义了很多信息，这些信息能够让这个数据包按照规则解析出来后有具体的意义。"/>
 
 
 <script type="application/ld+json">
@@ -141,7 +144,7 @@
   "@type": "BlogPosting",
   "headline": "开发实战：解析二进制文件",
   "name": "开发实战：解析二进制文件",
-  "description": "需要解析相机的字节流文件（就是一个一个Byte组成的文件，不解析的话没有啥实际意义）。 解析需要按照一定的规则，比如：如何确定数据的头（Hea",
+  "description": " 需要解析相机的字节流文件（就是一个一个Byte组成的文件，不解析的话没有啥实际意义）。\n解析需要按照一定的规则，比如：如何确定数据的头（Header），以及一个数据帧（一个数据包）的结构是什么样的，这个有点像网络包的定义，在头部定义了很多信息，这些信息能够让这个数据包按照规则解析出来后有具体的意义。\n",
   "keywords": [
     "字节流"
   ],

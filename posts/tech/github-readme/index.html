@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+    MathJax = {
+        tex: {
+            inlineMath: [['$', '$'], ['\\(', '\\)']],
+            displayMath: [['$$', '$$'], ['\\[', '\\]']],
+            processEscapes: true,
+            processEnvironments: true
+        },
+        options: {
+            skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+        }
+    };
+
+    window.addEventListener('load', (event) => {
+        document.querySelectorAll("mjx-container").forEach(function (x) {
+            x.parentElement.classList += 'has-jax'
+        })
+    });
+</script>
+
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script type="text/javascript" id="MathJax-script" async
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+
+
+<html lang="zh" dir="zh-cn">
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>GitHub README 美化经验分享 | AhaKnow</title>
+<meta name="keywords" content="Github">
+<meta name="description" content="在 GitHub 上，一个精心设计的个人主页不仅可以展示你的项目、技术栈，还能通过动态数据和动画效果提升个人品牌形象。本文将分享两个经典模块的自动化集成方法：">
+<meta name="author" content="CKYoung">
+<link rel="canonical" href="https://ahaknow.com/posts/tech/github-readme/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.css" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://ahaknow.com/Q.gif">
+<link rel="icon" type="image/png" sizes="16x16" href="https://ahaknow.com/Q.gif">
+<link rel="icon" type="image/png" sizes="32x32" href="https://ahaknow.com/Q.gif">
+<link rel="apple-touch-icon" href="https://ahaknow.com/Q.gif">
+<link rel="mask-icon" href="https://ahaknow.com/Q.gif">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="zh" href="https://ahaknow.com/posts/tech/github-readme/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript><meta property="og:title" content="GitHub README 美化经验分享" />
+<meta property="og:description" content="在 GitHub 上，一个精心设计的个人主页不仅可以展示你的项目、技术栈，还能通过动态数据和动画效果提升个人品牌形象。本文将分享两个经典模块的自动化集成方法：" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://ahaknow.com/posts/tech/github-readme/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2025-02-01T21:41:12+08:00" />
+<meta property="article:modified_time" content="2025-02-04T12:09:14+08:00" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="GitHub README 美化经验分享"/>
+<meta name="twitter:description" content="在 GitHub 上，一个精心设计的个人主页不仅可以展示你的项目、技术栈，还能通过动态数据和动画效果提升个人品牌形象。本文将分享两个经典模块的自动化集成方法："/>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "🚀 天天向上",
+      "item": "https://ahaknow.com/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "✨技术",
+      "item": "https://ahaknow.com/posts/tech/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  3 ,
+      "name": "GitHub README 美化经验分享",
+      "item": "https://ahaknow.com/posts/tech/github-readme/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "GitHub README 美化经验分享",
+  "name": "GitHub README 美化经验分享",
+  "description": "在 GitHub 上，一个精心设计的个人主页不仅可以展示你的项目、技术栈，还能通过动态数据和动画效果提升个人品牌形象。本文将分享两个经典模块的自动化集成方法：\n",
+  "keywords": [
+    "Github"
+  ],
+  "articleBody": "在 GitHub 上，一个精心设计的个人主页不仅可以展示你的项目、技术栈，还能通过动态数据和动画效果提升个人品牌形象。本文将分享两个经典模块的自动化集成方法：\nWakaTime 数据展示：自动统计 Coding 时间、提交数据以及其他指标。 贪吃蛇动画：让你的贡献热力图“变身”成贪吃蛇动画，增添趣味性。 利用 GitHub Actions 你可以让这两部分数据每天定时更新，也可以手动触发更新。下面是详细的部署步骤和注意事项。\n一、WakaTime 数据集成 1.1 获取必备密钥 WakaTime API Key\n登录 WakaTime 后，从你的 Account Settings 中获取 API Key。\nGitHub Personal Access Token (PAT)\n为了获取额外的提交数据（例如 commit stats），你可能需要生成一个拥有 repo 和 user 权限的 PAT。\n1.2 配置仓库 Secrets 在你的仓库（例如 IHKYoung/IHKYoung）中，进入 Settings → Secrets and variables → Actions 页面，新建以下 Secrets：\nWAKATIME_API_KEY：你的 WakaTime API Key GH_TOKEN：你的 GitHub 个人访问令牌（或使用默认的 GITHUB_TOKEN，但建议在需要更多权限时使用 PAT） 1.3 创建 GitHub Action 工作流文件 在仓库的 .github/workflows/ 目录下创建一个文件，例如 waka.yml，内容如下（注意：这里根据你的需求只保留了总时长和部分统计，隐藏了其他模块的信息；同时分支提交设置为你的默认分支，这里以 baseline 为例）：\nname: Waka Readme on: schedule: # 每天北京时间 0:30 运行一次，即 UTC 16:30 - cron: '30 16 * * *' workflow_dispatch: jobs: update-readme: name: Update Readme with WakaTime Metrics runs-on: ubuntu-latest steps: - name: Checkout Repository uses: actions/checkout@v4 # 如果需要，可以显式指定分支（默认会使用仓库的默认分支） # with: # ref: baseline - name: Update WakaTime Stats uses: anmol098/waka-readme-stats@master with: WAKATIME_API_KEY: ${{ secrets.WAKATIME_API_KEY }} GH_TOKEN: ${{ secrets.GH_TOKEN }} # 以下 Flag 根据需求设置： SECTION_NAME: \"waka\" SHOW_OS: \"False\" SHOW_PROFILE_VIEWS: \"False\" SHOW_PROJECTS: \"False\" SHOW_COMMIT: \"False\" SHOW_LINES_OF_CODE: \"False\" SHOW_TOTAL_CODE_TIME: \"False\" # 根据你的需求调整，这里你设置为 False，如果只保留其他信息可以调整 SHOW_LANGUAGE: \"False\" SHOW_TIMEZONE: \"False\" SHOW_DAYS_OF_WEEK: \"True\" SHOW_EDITORS: \"False\" SHOW_LANGUAGE_PER_REPO: \"False\" SHOW_SHORT_INFO: \"False\" SHOW_LOC_CHART: \"False\" SHOW_UPDATED_DATE: \"False\" IGNORED_REPOS: \"waka-readme-stats\" # 忽略本 Action 自身仓库 - name: Commit \u0026 Push changes uses: EndBug/add-and-commit@v7 with: branch: baseline message: 'Update WakaTime Stats' 注意：\nSECTION_NAME：README 中必须预留一对标记，用于 Action 替换数据。你需要在 README.md 中加入如下内容：\nFlag 设置决定了展示哪些数据。上面的配置隐藏了大部分信息，仅显示了你希望展示的部分（例如这里只保留了某项数据，如“SHOW_DAYS_OF_WEEK”为 True，可根据实际需要调整）。\n1.4 更新 README 在你的 README.md 中，添加如下占位符区域（放置在你希望显示 WakaTime 数据的部分）：\n## Coding Activity 工作流运行后，WakaTime 数据会自动填充到这对标记之间。\n二、贪吃蛇动画集成 贪吃蛇动画利用你的贡献热力图生成一个动态的 SVG 动画（或 GIF 动画），增加主页的趣味性。\n2.1 配置生成工作流 在 .github/workflows/ 目录下创建一个文件，例如 snake.yml，内容如下。此示例中使用 Platane/snk 的 svg-only 版本来生成贪吃蛇动画，并将生成的文件保存到 dist 目录，随后使用 crazy-max/ghaction-github-pages Action 将 dist 目录内容推送到 output 分支，以便在线访问。\nname: Generate Snake Animation on: # run every day at 16:00 UTC schedule: - cron: \"0 16 * * *\" workflow_dispatch: # run on every push on these branches push: branches: - master - baseline - main jobs: generate: permissions: contents: write runs-on: ubuntu-latest timeout-minutes: 5 steps: # 生成贪吃蛇动画的 SVG 文件 - name: generate github-contribution-grid-snake.svg uses: Platane/snk/svg-only@v3 with: github_user_name: ${{ github.repository_owner }} outputs: | dist/github-contribution-grid-snake.svg dist/github-contribution-grid-snake-dark.svg?palette=github-dark # 将 dist 目录内容推送到 output 分支，以便通过 URL 访问生成的文件 - name: push github-contribution-grid-snake.svg to the output branch uses: crazy-max/ghaction-github-pages@v3.1.0 with: target_branch: output build_dir: dist env: GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} 说明：\n触发器（on 部分）：\nschedule：定时运行（此处设置为每天 16:00 UTC，即北京时间 0:00 或根据实际需要调整）。 workflow_dispatch：允许你手动触发工作流。 push：当对指定的分支（master、baseline、main）进行 push 时也会触发此工作流。注意：即使你主要在 baseline 工作，也保留其它常用分支名称以提高兼容性。 生成步骤：\n使用 Platane/snk/svg-only@v3 Action，根据 GitHub 用户的贡献图生成两份 SVG 文件（普通和 dark 模式），并将输出路径指定为 dist/ 目录。\n推送步骤：\n使用 crazy-max/ghaction-github-pages@v3.1.0 Action，将 dist 目录的内容推送到目标分支 output。\n推送后，你可以通过以下 URL 格式访问文件（替换为你的 GitHub 用户和仓库名）：\nhttps://raw.githubusercontent.com/IHKYoung/IHKYoung/output/github-contribution-grid-snake.svg 注意： 请确保仓库根目录下存在或能创建 dist 文件夹。该文件夹用于存放生成的动画文件。\n三、经验总结与注意事项 触发器设置\npush 触发器： 指定了多个分支（master、baseline、main），这意味着当你对这些分支进行代码提交时，相关工作流都会触发。你可以根据实际情况保留或修改此列表。如果你只在默认分支（例如 baseline）上操作，可以只列出 baseline，但添加其他常用分支可以增加兼容性。 schedule 与 workflow_dispatch： 定时任务保证数据每天自动更新，workflow_dispatch 则允许手动触发，方便测试和即时更新。 目录结构要求\n对于 WakaTime 模块，你只需要在 README.md 中预留占位符区域，工作流会自动替换数据。 对于贪吃蛇动画模块，建议在仓库根目录下创建 dist 目录（或确认 Action 能自动创建），以便生成的动画文件保存于此，并最终通过指定的目标分支（如 output）进行展示。 分支管理与权限问题\n如果你的仓库默认分支不是常见的 main，而是 baseline，务必在工作流的“push”步骤中指定正确的分支。 推送过程中，确保使用的 GITHUB_TOKEN 或自定义 PAT 拥有足够权限，且仓库分支保护规则允许自动提交。 调试与测试\n首次配置后，可以通过手动触发（workflow_dispatch）来验证工作流是否按预期运行，检查生成的统计数据和动画文件是否正确更新。 如果遇到权限或路径错误，请检查 Secrets 配置、仓库保护规则以及指定的文件夹路径是否存在。 结语 通过本文的配置，你可以实现以下目标：\nWakaTime 数据自动更新：每天自动将最新的 Coding 时间和统计信息更新到你的 README 中，且只显示你需要的数据部分（例如只显示每日提交情况）。 贪吃蛇动画展示：利用贡献热力图生成动态贪吃蛇动画，并通过推送到 output 分支让外部可以访问和嵌入到 README 中。 ",
+  "wordCount" : "2185",
+  "inLanguage": "zh",
+  "datePublished": "2025-02-01T21:41:12+08:00",
+  "dateModified": "2025-02-04T12:09:14+08:00",
+  "author":[{
+    "@type": "Person",
+    "name": "CKYoung"
+  }],
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://ahaknow.com/posts/tech/github-readme/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "AhaKnow",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://ahaknow.com/Q.gif"
+    }
+  }
+}
+</script>
+    
+    
+    
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://ahaknow.com/" accesskey="h" title="AhaKnow (Alt + H)">
+                <img src="https://ahaknow.com/Q.gif" alt="" aria-label="logo"
+                    height="35">AhaKnow</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://ahaknow.com/search" title="🪄魔法 (Alt &#43; /)" accesskey=/>
+                    <span>🪄魔法</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://ahaknow.com/" title="🏡主页">
+                    <span>🏡主页</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://ahaknow.com/posts" title="🚀天天向上">
+                    <span>🚀天天向上</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://ahaknow.com/archives" title="⏱️时间线">
+                    <span>⏱️时间线</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://ahaknow.com/tags" title="🏷️标签">
+                    <span>🏷️标签</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://ahaknow.com/categories" title="🖇归档">
+                    <span>🖇归档</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://ahaknow.com/toolkits" title="🧰医疗箱">
+                    <span>🧰医疗箱</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    <div class="breadcrumbs"><a href="https://ahaknow.com/">🏡主页</a>&nbsp;»&nbsp;<a href="https://ahaknow.com/posts/">🚀 天天向上</a>&nbsp;»&nbsp;<a href="https://ahaknow.com/posts/tech/">✨技术</a></div>
+    <h1 class="post-title entry-hint-parent">
+      GitHub README 美化经验分享
+    </h1>
+    <div class="post-meta">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
+<span class="parent-post-meta">
+        <span id="post_meta_style_1">
+            <span class="fa fa-calendar-check-o"></span>
+            <span>2025-02-04
+                &nbsp;&nbsp;
+            </span>
+        </span>
+        <span id="post_meta_style_2">
+        <span class="fa fa-calendar-plus-o"></span>
+        <span>2025-02-01
+            &nbsp;&nbsp;
+        </span>
+    </span>
+    <span id="post_meta_style_3">
+        <span class="fa fa-file-word-o"></span>
+        <span>2185 字
+            &nbsp;&nbsp;
+        </span>
+    </span>
+    <span id="post_meta_style_4">
+        <span class="fa fa-clock-o"></span>
+        <span>5 分钟
+            &nbsp;&nbsp;
+        </span>
+    </span>
+    <span id="post_meta_style_5">
+        <span class="fa fa-user-o"></span>
+        <span>CKYoung
+            &nbsp;&nbsp;
+        </span>
+    </span>
+    <span id="post_meta_style_6">
+        <span class="fa fa-tags" style="opacity: 0.8"></span>
+        <span>
+            <span class="post-tags-meta">
+                <a href="https://ahaknow.com/tags/github/" style="color: var(--secondary)!important;">Github</a>
+            </span>
+        </span>
+    </span>
+</span>
+
+</div>
+  </header> <aside id="toc-container" class="toc-container wide">
+    <div class="toc">
+        <details  open>
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details">📚目录</span>
+        </summary>
+
+        <div class="inner"><ul>
+                <li>
+                    <a href="#%e4%b8%80wakatime-%e6%95%b0%e6%8d%ae%e9%9b%86%e6%88%90" aria-label="一、WakaTime 数据集成">一、WakaTime 数据集成</a><ul>
+                        
+                <li>
+                    <a href="#11-%e8%8e%b7%e5%8f%96%e5%bf%85%e5%a4%87%e5%af%86%e9%92%a5" aria-label="1.1 获取必备密钥">1.1 获取必备密钥</a></li>
+                <li>
+                    <a href="#12-%e9%85%8d%e7%bd%ae%e4%bb%93%e5%ba%93-secrets" aria-label="1.2 配置仓库 Secrets">1.2 配置仓库 Secrets</a></li>
+                <li>
+                    <a href="#13-%e5%88%9b%e5%bb%ba-github-action-%e5%b7%a5%e4%bd%9c%e6%b5%81%e6%96%87%e4%bb%b6" aria-label="1.3 创建 GitHub Action 工作流文件">1.3 创建 GitHub Action 工作流文件</a></li>
+                <li>
+                    <a href="#14-%e6%9b%b4%e6%96%b0-readme" aria-label="1.4 更新 README">1.4 更新 README</a></li></ul>
+                </li>
+                <li>
+                    <a href="#%e4%ba%8c%e8%b4%aa%e5%90%83%e8%9b%87%e5%8a%a8%e7%94%bb%e9%9b%86%e6%88%90" aria-label="二、贪吃蛇动画集成">二、贪吃蛇动画集成</a><ul>
+                        
+                <li>
+                    <a href="#21-%e9%85%8d%e7%bd%ae%e7%94%9f%e6%88%90%e5%b7%a5%e4%bd%9c%e6%b5%81" aria-label="2.1 配置生成工作流">2.1 配置生成工作流</a></li></ul>
+                </li>
+                <li>
+                    <a href="#%e4%b8%89%e7%bb%8f%e9%aa%8c%e6%80%bb%e7%bb%93%e4%b8%8e%e6%b3%a8%e6%84%8f%e4%ba%8b%e9%a1%b9" aria-label="三、经验总结与注意事项">三、经验总结与注意事项</a></li>
+                <li>
+                    <a href="#%e7%bb%93%e8%af%ad" aria-label="结语">结语</a>
+                </li>
+            </ul>
+        </div>
+        </details>
+    </div>
+</aside>
+<script>
+    let activeElement;
+    let elements;
+    window.addEventListener('DOMContentLoaded', function (event) {
+        checkTocPosition();
+
+        elements = document.querySelectorAll('h1[id],h2[id],h3[id],h4[id],h5[id],h6[id]');
+        
+        activeElement = elements[0];
+        const id = encodeURI(activeElement.getAttribute('id')).toLowerCase();
+        document.querySelector(`.inner ul li a[href="#${id}"]`).classList.add('active');
+    }, false);
+
+    window.addEventListener('resize', function(event) {
+        checkTocPosition();
+    }, false);
+
+    window.addEventListener('scroll', () => {
+        
+        activeElement = Array.from(elements).find((element) => {
+            if ((getOffsetTop(element) - window.pageYOffset) > 0 &&
+                (getOffsetTop(element) - window.pageYOffset) < window.innerHeight/2) {
+                return element;
+            }
+        }) || activeElement
+
+        elements.forEach(element => {
+            const id = encodeURI(element.getAttribute('id')).toLowerCase();
+            if (element === activeElement){
+                document.querySelector(`.inner ul li a[href="#${id}"]`).classList.add('active');
+            } else {
+                document.querySelector(`.inner ul li a[href="#${id}"]`).classList.remove('active');
+            }
+        })
+    }, false);
+
+    const main = parseInt(getComputedStyle(document.body).getPropertyValue('--article-width'), 10);
+    const toc = parseInt(getComputedStyle(document.body).getPropertyValue('--toc-width'), 10);
+    const gap = parseInt(getComputedStyle(document.body).getPropertyValue('--gap'), 10);
+
+    function checkTocPosition() {
+        const width = document.body.scrollWidth;
+
+        if (width - main - (toc * 2) - (gap * 4) > 0) {
+            document.getElementById("toc-container").classList.add("wide");
+        } else {
+            document.getElementById("toc-container").classList.remove("wide");
+        }
+    }
+
+    function getOffsetTop(element) {
+        if (!element.getClientRects().length) {
+            return 0;
+        }
+        let rect = element.getBoundingClientRect();
+        let win = element.ownerDocument.defaultView;
+        return rect.top + win.pageYOffset;
+    }
+</script>
+  <div class="post-content"><p>在 GitHub 上，一个精心设计的个人主页不仅可以展示你的项目、技术栈，还能通过动态数据和动画效果提升个人品牌形象。本文将分享两个经典模块的自动化集成方法：</p>
+<ol>
+<li><strong>WakaTime 数据展示</strong>：自动统计 Coding 时间、提交数据以及其他指标。</li>
+<li><strong>贪吃蛇动画</strong>：让你的贡献热力图“变身”成贪吃蛇动画，增添趣味性。</li>
+</ol>
+<p>利用 GitHub Actions 你可以让这两部分数据每天定时更新，也可以手动触发更新。下面是详细的部署步骤和注意事项。</p>
+<hr>
+<h2 id="一wakatime-数据集成">一、WakaTime 数据集成<a hidden class="anchor" aria-hidden="true" href="#一wakatime-数据集成">#</a></h2>
+<h3 id="11-获取必备密钥">1.1 获取必备密钥<a hidden class="anchor" aria-hidden="true" href="#11-获取必备密钥">#</a></h3>
+<ul>
+<li>
+<p><strong>WakaTime API Key</strong><br>
+登录 <a href="https://wakatime.com/">WakaTime</a> 后，从你的 Account Settings 中获取 API Key。</p>
+</li>
+<li>
+<p><strong>GitHub Personal Access Token (PAT)</strong><br>
+为了获取额外的提交数据（例如 commit stats），你可能需要生成一个拥有 <code>repo</code> 和 <code>user</code> 权限的 PAT。</p>
+</li>
+</ul>
+<h3 id="12-配置仓库-secrets">1.2 配置仓库 Secrets<a hidden class="anchor" aria-hidden="true" href="#12-配置仓库-secrets">#</a></h3>
+<p>在你的仓库（例如 IHKYoung/IHKYoung）中，进入 <strong>Settings → Secrets and variables → Actions</strong> 页面，新建以下 Secrets：</p>
+<ul>
+<li><code>WAKATIME_API_KEY</code>：你的 WakaTime API Key</li>
+<li><code>GH_TOKEN</code>：你的 GitHub 个人访问令牌（或使用默认的 GITHUB_TOKEN，但建议在需要更多权限时使用 PAT）</li>
+</ul>
+<h3 id="13-创建-github-action-工作流文件">1.3 创建 GitHub Action 工作流文件<a hidden class="anchor" aria-hidden="true" href="#13-创建-github-action-工作流文件">#</a></h3>
+<p>在仓库的 <code>.github/workflows/</code> 目录下创建一个文件，例如 <code>waka.yml</code>，内容如下（注意：这里根据你的需求只保留了总时长和部分统计，隐藏了其他模块的信息；同时分支提交设置为你的默认分支，这里以 baseline 为例）：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Waka Readme</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">on</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">schedule</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c"># 每天北京时间 0:30 运行一次，即 UTC 16:30</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="nt">cron</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;30 16 * * *&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">workflow_dispatch</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">jobs</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">update-readme</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Update Readme with WakaTime Metrics</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">runs-on</span><span class="p">:</span><span class="w"> </span><span class="l">ubuntu-latest</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">steps</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Checkout Repository</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l">actions/checkout@v4</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c"># 如果需要，可以显式指定分支（默认会使用仓库的默认分支）</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c"># with:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c">#   ref: baseline</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Update WakaTime Stats</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l">anmol098/waka-readme-stats@master</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">with</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">WAKATIME_API_KEY</span><span class="p">:</span><span class="w"> </span><span class="l">${{ secrets.WAKATIME_API_KEY }}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">GH_TOKEN</span><span class="p">:</span><span class="w"> </span><span class="l">${{ secrets.GH_TOKEN }}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="c"># 以下 Flag 根据需求设置：</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">SECTION_NAME</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;waka&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">SHOW_OS</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;False&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">SHOW_PROFILE_VIEWS</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;False&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">SHOW_PROJECTS</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;False&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">SHOW_COMMIT</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;False&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">SHOW_LINES_OF_CODE</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;False&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">SHOW_TOTAL_CODE_TIME</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;False&#34;</span><span class="w">   </span><span class="c"># 根据你的需求调整，这里你设置为 False，如果只保留其他信息可以调整</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">SHOW_LANGUAGE</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;False&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">SHOW_TIMEZONE</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;False&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">SHOW_DAYS_OF_WEEK</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;True&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">SHOW_EDITORS</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;False&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">SHOW_LANGUAGE_PER_REPO</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;False&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">SHOW_SHORT_INFO</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;False&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">SHOW_LOC_CHART</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;False&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">SHOW_UPDATED_DATE</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;False&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">IGNORED_REPOS</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;waka-readme-stats&#34;</span><span class="w">  </span><span class="c"># 忽略本 Action 自身仓库</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Commit &amp; Push changes</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l">EndBug/add-and-commit@v7</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">with</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">branch</span><span class="p">:</span><span class="w"> </span><span class="l">baseline</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">message</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;Update WakaTime Stats&#39;</span><span class="w">
+</span></span></span></code></pre></div><p><strong>注意：</strong></p>
+<ul>
+<li>
+<p><strong>SECTION_NAME</strong>：README 中必须预留一对标记，用于 Action 替换数据。你需要在 README.md 中加入如下内容：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-markdown" data-lang="markdown"><span class="line"><span class="cl"><span class="c">&lt;!--START_SECTION:waka--&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="c">&lt;!--END_SECTION:waka--&gt;</span>
+</span></span></code></pre></div></li>
+<li>
+<p>Flag 设置决定了展示哪些数据。上面的配置隐藏了大部分信息，仅显示了你希望展示的部分（例如这里只保留了某项数据，如“SHOW_DAYS_OF_WEEK”为 True，可根据实际需要调整）。</p>
+</li>
+</ul>
+<h3 id="14-更新-readme">1.4 更新 README<a hidden class="anchor" aria-hidden="true" href="#14-更新-readme">#</a></h3>
+<p>在你的 README.md 中，添加如下占位符区域（放置在你希望显示 WakaTime 数据的部分）：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-markdown" data-lang="markdown"><span class="line"><span class="cl"><span class="gu">## Coding Activity
+</span></span></span><span class="line"><span class="cl"><span class="gu"></span>
+</span></span><span class="line"><span class="cl"><span class="c">&lt;!--START_SECTION:waka--&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="c">&lt;!--END_SECTION:waka--&gt;</span>
+</span></span></code></pre></div><p>工作流运行后，WakaTime 数据会自动填充到这对标记之间。</p>
+<hr>
+<h2 id="二贪吃蛇动画集成">二、贪吃蛇动画集成<a hidden class="anchor" aria-hidden="true" href="#二贪吃蛇动画集成">#</a></h2>
+<p>贪吃蛇动画利用你的贡献热力图生成一个动态的 SVG 动画（或 GIF 动画），增加主页的趣味性。</p>
+<h3 id="21-配置生成工作流">2.1 配置生成工作流<a hidden class="anchor" aria-hidden="true" href="#21-配置生成工作流">#</a></h3>
+<p>在 <code>.github/workflows/</code> 目录下创建一个文件，例如 <code>snake.yml</code>，内容如下。此示例中使用 Platane/snk 的 svg-only 版本来生成贪吃蛇动画，并将生成的文件保存到 <code>dist</code> 目录，随后使用 crazy-max/ghaction-github-pages Action 将 <code>dist</code> 目录内容推送到 <strong>output</strong> 分支，以便在线访问。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Generate Snake Animation</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">on</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c"># run every day at 16:00 UTC</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">schedule</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="nt">cron</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;0 16 * * *&#34;</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">workflow_dispatch</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c"># run on every push on these branches</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">push</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">branches</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">master</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">baseline</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">main</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">jobs</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">generate</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">permissions</span><span class="p">:</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">contents</span><span class="p">:</span><span class="w"> </span><span class="l">write</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">runs-on</span><span class="p">:</span><span class="w"> </span><span class="l">ubuntu-latest</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">timeout-minutes</span><span class="p">:</span><span class="w"> </span><span class="m">5</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">steps</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="c"># 生成贪吃蛇动画的 SVG 文件</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">generate github-contribution-grid-snake.svg</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l">Platane/snk/svg-only@v3</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">with</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">github_user_name</span><span class="p">:</span><span class="w"> </span><span class="l">${{ github.repository_owner }}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">outputs</span><span class="p">:</span><span class="w"> </span><span class="p">|</span><span class="sd">
+</span></span></span><span class="line"><span class="cl"><span class="sd">            dist/github-contribution-grid-snake.svg
+</span></span></span><span class="line"><span class="cl"><span class="sd">            dist/github-contribution-grid-snake-dark.svg?palette=github-dark</span><span class="w">            
+</span></span></span><span class="line"><span class="cl"><span class="w">          
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="c"># 将 dist 目录内容推送到 output 分支，以便通过 URL 访问生成的文件</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">push github-contribution-grid-snake.svg to the output branch</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l">crazy-max/ghaction-github-pages@v3.1.0</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">with</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">target_branch</span><span class="p">:</span><span class="w"> </span><span class="l">output</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">build_dir</span><span class="p">:</span><span class="w"> </span><span class="l">dist</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">env</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">GITHUB_TOKEN</span><span class="p">:</span><span class="w"> </span><span class="l">${{ secrets.GITHUB_TOKEN }}</span><span class="w">
+</span></span></span></code></pre></div><p><strong>说明：</strong></p>
+<ul>
+<li>
+<p><strong>触发器（on 部分）：</strong></p>
+<ul>
+<li><code>schedule</code>：定时运行（此处设置为每天 16:00 UTC，即北京时间 0:00 或根据实际需要调整）。</li>
+<li><code>workflow_dispatch</code>：允许你手动触发工作流。</li>
+<li><code>push</code>：当对指定的分支（master、baseline、main）进行 push 时也会触发此工作流。注意：即使你主要在 baseline 工作，也保留其它常用分支名称以提高兼容性。</li>
+</ul>
+</li>
+<li>
+<p><strong>生成步骤：</strong><br>
+使用 <code>Platane/snk/svg-only@v3</code> Action，根据 GitHub 用户的贡献图生成两份 SVG 文件（普通和 dark 模式），并将输出路径指定为 <code>dist/</code> 目录。</p>
+</li>
+<li>
+<p><strong>推送步骤：</strong><br>
+使用 <code>crazy-max/ghaction-github-pages@v3.1.0</code> Action，将 <code>dist</code> 目录的内容推送到目标分支 <strong>output</strong>。<br>
+推送后，你可以通过以下 URL 格式访问文件（替换为你的 GitHub 用户和仓库名）：</p>
+<pre tabindex="0"><code>https://raw.githubusercontent.com/IHKYoung/IHKYoung/output/github-contribution-grid-snake.svg
+</code></pre><p><strong>注意：</strong> 请确保仓库根目录下存在或能创建 <code>dist</code> 文件夹。该文件夹用于存放生成的动画文件。</p>
+</li>
+</ul>
+<hr>
+<h2 id="三经验总结与注意事项">三、经验总结与注意事项<a hidden class="anchor" aria-hidden="true" href="#三经验总结与注意事项">#</a></h2>
+<ol>
+<li>
+<p><strong>触发器设置</strong></p>
+<ul>
+<li><strong>push 触发器：</strong> 指定了多个分支（master、baseline、main），这意味着当你对这些分支进行代码提交时，相关工作流都会触发。你可以根据实际情况保留或修改此列表。如果你只在默认分支（例如 baseline）上操作，可以只列出 baseline，但添加其他常用分支可以增加兼容性。</li>
+<li><strong>schedule 与 workflow_dispatch：</strong> 定时任务保证数据每天自动更新，workflow_dispatch 则允许手动触发，方便测试和即时更新。</li>
+</ul>
+</li>
+<li>
+<p><strong>目录结构要求</strong></p>
+<ul>
+<li>对于 WakaTime 模块，你只需要在 README.md 中预留占位符区域，工作流会自动替换数据。</li>
+<li>对于贪吃蛇动画模块，建议在仓库根目录下创建 <code>dist</code> 目录（或确认 Action 能自动创建），以便生成的动画文件保存于此，并最终通过指定的目标分支（如 output）进行展示。</li>
+</ul>
+</li>
+<li>
+<p><strong>分支管理与权限问题</strong></p>
+<ul>
+<li>如果你的仓库默认分支不是常见的 main，而是 baseline，务必在工作流的“push”步骤中指定正确的分支。</li>
+<li>推送过程中，确保使用的 GITHUB_TOKEN 或自定义 PAT 拥有足够权限，且仓库分支保护规则允许自动提交。</li>
+</ul>
+</li>
+<li>
+<p><strong>调试与测试</strong></p>
+<ul>
+<li>首次配置后，可以通过手动触发（workflow_dispatch）来验证工作流是否按预期运行，检查生成的统计数据和动画文件是否正确更新。</li>
+<li>如果遇到权限或路径错误，请检查 Secrets 配置、仓库保护规则以及指定的文件夹路径是否存在。</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h2 id="结语">结语<a hidden class="anchor" aria-hidden="true" href="#结语">#</a></h2>
+<p>通过本文的配置，你可以实现以下目标：</p>
+<ul>
+<li><strong>WakaTime 数据自动更新</strong>：每天自动将最新的 Coding 时间和统计信息更新到你的 README 中，且只显示你需要的数据部分（例如只显示每日提交情况）。</li>
+<li><strong>贪吃蛇动画展示</strong>：利用贡献热力图生成动态贪吃蛇动画，并通过推送到 output 分支让外部可以访问和嵌入到 README 中。</li>
+</ul>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://ahaknow.com/tags/github/">Github</a></li>
+    </ul>
+<nav class="paginav">
+  <a class="prev" href="https://ahaknow.com/posts/diary/2025-02-04/">
+    <span class="title">« 上一页</span>
+    <br>
+    <span>今天就用中文路径来作为地址</span>
+  </a>
+  <a class="next" href="https://ahaknow.com/posts/know/chatgptllms%E4%B8%AD%E6%96%87%E8%B0%83%E6%95%99%E6%8C%87%E5%8D%97/">
+    <span class="title">下一页 »</span>
+    <br>
+    <span>🪄ChatGPT&amp;LLMs 中文调教指南🚀</span>
+  </a>
+</nav>
+
+  </footer>
+</article>
+</main>
+
+<footer class="footer">
+    <span>&copy; 2025 <a href="https://ahaknow.com/">AhaKnow</a></span>
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/IHKYoung/CKPaper/" rel="noopener" target="_blank">CKPaper</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = '🖨️打印';
+
+        function copyingDone() {
+            copybutton.innerHTML = '📋备份';
+            setTimeout(() => {
+                copybutton.innerHTML = '🖨️打印';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                
+                
+                let copyText = codeblock.textContent + '\r\n————————————————\r\n' + '版权声明：本文为「'+"AhaKnow"+'」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。' + '\r\n原文链接：' + location.href;
+                navigator.clipboard.writeText(copyText);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        document.querySelectorAll('pre > code[class*="language-"]').forEach(function(codeblock) {
+            
+            
+            let language = codeblock.className.match(/language-(\w+)/)[1] || "code";
+
+            
+            let macCodeBlock = document.createElement("div");
+            let macButtons = document.createElement("div");
+            let buttons = ['close', 'minimize', 'maximize'].map(function(className) {
+                let button = document.createElement("div");
+                button.setAttribute('class', `mac-button ${className}`);
+                return button;
+            });
+            let languageType = document.createElement("div");
+            languageType.innerText = language;
+            languageType.setAttribute('class', 'language-type');
+
+            
+            macButtons.setAttribute('class', 'mac-buttons');
+            buttons.forEach(function(button) {
+                macButtons.appendChild(button);
+            });
+            macCodeBlock.appendChild(macButtons);
+            macCodeBlock.appendChild(languageType);
+            macCodeBlock.setAttribute('class', 'mac-code-block');
+
+            
+            codeblock.parentNode.insertBefore(macCodeBlock, codeblock);
+        });
+    });
+</script>
+
+
+</body>
+
+</html>

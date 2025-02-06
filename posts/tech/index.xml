@@ -8,18 +8,28 @@
     <language>zh-cn</language>
     <atom:link href="https://ahaknow.com/posts/tech/index.xml" rel="self" type="application/rss+xml" />
     <item>
+      <title>GitHub README 美化经验分享</title>
+      <link>https://ahaknow.com/posts/tech/github-readme/</link>
+      <pubDate>Sat, 01 Feb 2025 21:41:12 +0800</pubDate>
+      <guid>https://ahaknow.com/posts/tech/github-readme/</guid>
+      <description>&lt;p&gt;在 GitHub 上，一个精心设计的个人主页不仅可以展示你的项目、技术栈，还能通过动态数据和动画效果提升个人品牌形象。本文将分享两个经典模块的自动化集成方法：&lt;/p&gt;</description>
+    </item>
+    <item>
       <title>macOS 环境下 Python 动态库缺失问题排查与解决方案</title>
-      <link>https://ahaknow.com/posts/tech/macos-%E7%8E%AF%E5%A2%83%E4%B8%8B-python-%E5%8A%A8%E6%80%81%E5%BA%93%E7%BC%BA%E5%A4%B1%E9%97%AE%E9%A2%98%E6%8E%92%E6%9F%A5%E4%B8%8E%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/</link>
+      <link>https://ahaknow.com/posts/tech/macos-lib-fix/</link>
       <pubDate>Sat, 01 Feb 2025 17:19:11 +0800</pubDate>
-      <guid>https://ahaknow.com/posts/tech/macos-%E7%8E%AF%E5%A2%83%E4%B8%8B-python-%E5%8A%A8%E6%80%81%E5%BA%93%E7%BC%BA%E5%A4%B1%E9%97%AE%E9%A2%98%E6%8E%92%E6%9F%A5%E4%B8%8E%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/</guid>
-      <description>在 macOS（特别是 M1/M2 芯片）使用 Python 时，可能会遇到 ImportError: Library not loaded 类错误。这通常是因为 Python 模块在加载动态库时找不到正确的 .dylib 文件。以下是一个系统化的排查与</description>
+      <guid>https://ahaknow.com/posts/tech/macos-lib-fix/</guid>
+      <description>&lt;p&gt;在 macOS（特别是 M1/M2 芯片）使用 Python 时，可能会遇到 &lt;strong&gt;ImportError: Library not loaded&lt;/strong&gt; 类错误。这通常是因为 Python 模块在加载动态库时找不到正确的 &lt;code&gt;.dylib&lt;/code&gt; 文件。以下是一个系统化的排查与解决方法，适用于 PyAudio、PortAudio 以及其他类似情况（如 OpenCV、TensorFlow 依赖的库）。&lt;/p&gt;</description>
     </item>
     <item>
       <title>顺手写了个Obsidian插件😄</title>
       <link>https://ahaknow.com/posts/tech/first-obsidian-plugin/</link>
       <pubDate>Tue, 10 Dec 2024 22:33:17 +0800</pubDate>
       <guid>https://ahaknow.com/posts/tech/first-obsidian-plugin/</guid>
-      <description>感觉自己很牛逼！！！ 为啥想到写这个插件呢？ 因为我想把Obsidian和Hugo结合起来，但是有两个小问题很麻烦，虽然很小，但用多了会很烦！会</description>
+      <description>&lt;p&gt;&lt;mark&gt;感觉自己很牛逼！！！&lt;/mark&gt;
+为啥想到写这个插件呢？
+因为我想把Obsidian和Hugo结合起来，但是有两个小问题很麻烦，虽然很小，但用多了会很烦！&lt;mark&gt;会写代码的一般都很懒&lt;/mark&gt;，所以绝对不会干出手动复制粘贴这种蠢事的。
+问题有两个，先解决其中一个：&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>

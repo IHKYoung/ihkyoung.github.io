@@ -46,7 +46,14 @@
 <meta name="robots" content="index, follow">
 <title>开发实战：解析H.264编码和LZ4压缩的相机图像 | AhaKnow</title>
 <meta name="keywords" content="H.264">
-<meta name="description" content="在上一篇打通了读取字节流文件后，能够得到每一帧的字节数据了，这一篇就来解决为这些数据赋予实际意义。 彩色图像采用H.264编码 -&gt; 那就需要按照H">
+<meta name="description" content="
+在上一篇打通了读取字节流文件后，能够得到每一帧的字节数据了，这一篇就来解决为这些数据赋予实际意义。
+彩色图像采用H.264编码 -&gt; 那就需要按照H.264解码
+视差图像采用LZ4压缩 -&gt; 视差图保存的16位无符号整数，采用LZ4解压缩（开源）
+
+背景知识
+LZ4
+LZ4 是一个非常快速的压缩算法，提供了实时压缩速度和非常快的解压缩速度，由 Yann Collet（FaceBook大佬） 开发。它属于无损压缩算法，意味着压缩后的数据可以完全恢复到其原始形态。LZ4 主要设计用于非常高速的场景（解压速度可以达到数GB每秒），例如实时数据传输、日志数据处理等。">
 <meta name="author" content="CKYoung">
 <link rel="canonical" href="https://ahaknow.com/posts/know/dev-decode-h.264-lz4-image-frames/">
 <link crossorigin="anonymous" href="/assets/css/stylesheet.css" rel="preload stylesheet" as="style">
@@ -94,11 +101,15 @@
         }
 
     </style>
-</noscript>
-  
+</noscript><meta property="og:title" content="开发实战：解析H.264编码和LZ4压缩的相机图像" />
+<meta property="og:description" content="
+在上一篇打通了读取字节流文件后，能够得到每一帧的字节数据了，这一篇就来解决为这些数据赋予实际意义。
+彩色图像采用H.264编码 -&gt; 那就需要按照H.264解码
+视差图像采用LZ4压缩 -&gt; 视差图保存的16位无符号整数，采用LZ4解压缩（开源）
 
-<meta property="og:title" content="开发实战：解析H.264编码和LZ4压缩的相机图像" />
-<meta property="og:description" content="在上一篇打通了读取字节流文件后，能够得到每一帧的字节数据了，这一篇就来解决为这些数据赋予实际意义。 彩色图像采用H.264编码 -&gt; 那就需要按照H" />
+背景知识
+LZ4
+LZ4 是一个非常快速的压缩算法，提供了实时压缩速度和非常快的解压缩速度，由 Yann Collet（FaceBook大佬） 开发。它属于无损压缩算法，意味着压缩后的数据可以完全恢复到其原始形态。LZ4 主要设计用于非常高速的场景（解压速度可以达到数GB每秒），例如实时数据传输、日志数据处理等。" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://ahaknow.com/posts/know/dev-decode-h.264-lz4-image-frames/" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2024-04-18T14:43:01+08:00" />
@@ -106,7 +117,14 @@
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="开发实战：解析H.264编码和LZ4压缩的相机图像"/>
-<meta name="twitter:description" content="在上一篇打通了读取字节流文件后，能够得到每一帧的字节数据了，这一篇就来解决为这些数据赋予实际意义。 彩色图像采用H.264编码 -&gt; 那就需要按照H"/>
+<meta name="twitter:description" content="
+在上一篇打通了读取字节流文件后，能够得到每一帧的字节数据了，这一篇就来解决为这些数据赋予实际意义。
+彩色图像采用H.264编码 -&gt; 那就需要按照H.264解码
+视差图像采用LZ4压缩 -&gt; 视差图保存的16位无符号整数，采用LZ4解压缩（开源）
+
+背景知识
+LZ4
+LZ4 是一个非常快速的压缩算法，提供了实时压缩速度和非常快的解压缩速度，由 Yann Collet（FaceBook大佬） 开发。它属于无损压缩算法，意味着压缩后的数据可以完全恢复到其原始形态。LZ4 主要设计用于非常高速的场景（解压速度可以达到数GB每秒），例如实时数据传输、日志数据处理等。"/>
 
 
 <script type="application/ld+json">
@@ -141,7 +159,7 @@
   "@type": "BlogPosting",
   "headline": "开发实战：解析H.264编码和LZ4压缩的相机图像",
   "name": "开发实战：解析H.264编码和LZ4压缩的相机图像",
-  "description": "在上一篇打通了读取字节流文件后，能够得到每一帧的字节数据了，这一篇就来解决为这些数据赋予实际意义。 彩色图像采用H.264编码 -\u0026gt; 那就需要按照H",
+  "description": " 在上一篇打通了读取字节流文件后，能够得到每一帧的字节数据了，这一篇就来解决为这些数据赋予实际意义。\n彩色图像采用H.264编码 -\u0026gt; 那就需要按照H.264解码\n视差图像采用LZ4压缩 -\u0026gt; 视差图保存的16位无符号整数，采用LZ4解压缩（开源）\n背景知识 LZ4 LZ4 是一个非常快速的压缩算法，提供了实时压缩速度和非常快的解压缩速度，由 Yann Collet（FaceBook大佬） 开发。它属于无损压缩算法，意味着压缩后的数据可以完全恢复到其原始形态。LZ4 主要设计用于非常高速的场景（解压速度可以达到数GB每秒），例如实时数据传输、日志数据处理等。\n",
   "keywords": [
     "H.264"
   ],

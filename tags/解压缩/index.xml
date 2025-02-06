@@ -13,7 +13,9 @@
       <link>https://ahaknow.com/posts/know/linux-tar-usage/</link>
       <pubDate>Sat, 27 Apr 2024 22:27:17 +0800</pubDate>
       <guid>https://ahaknow.com/posts/know/linux-tar-usage/</guid>
-      <description>tar 是一个广泛使用的 Unix/Linux 命令行工具，用于创建、维护、修改以及提取 tar 文件。 tar 文件通常是文件档案的集合，而 tar 本身是 Tape Archive 的缩写，起初是用来将数据备份到</description>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;&lt;code&gt;tar&lt;/code&gt; 是一个广泛使用的 Unix/Linux 命令行工具，用于创建、维护、修改以及提取 tar 文件。&lt;/p&gt;
+&lt;p&gt;tar 文件通常是文件档案的集合，而 &lt;code&gt;tar&lt;/code&gt; 本身是 Tape Archive 的缩写，起初是用来将数据备份到磁带上。下面将介绍 &lt;code&gt;tar&lt;/code&gt; 命令的基本用法，包括如何用它来压缩和解压缩文件，以及常见的压缩格式如 gz 的含义。&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>

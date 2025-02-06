@@ -13,7 +13,9 @@
       <link>https://ahaknow.com/posts/know/linux-cuda-kernel-conflict/</link>
       <pubDate>Mon, 03 Jun 2024 16:26:02 +0800</pubDate>
       <guid>https://ahaknow.com/posts/know/linux-cuda-kernel-conflict/</guid>
-      <description>遇到的问题是这样的： “莫名其妙，GPU驱动就没了，可能是因为update &amp;amp;&amp;amp; upgrade了一下？（ROS安装源的问题，更换到了国内之后好像没</description>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;遇到的问题是这样的：&lt;/p&gt;
+&lt;p&gt;“莫名其妙，GPU驱动就没了，可能是因为update &amp;amp;&amp;amp; upgrade了一下？（ROS安装源的问题，更换到了国内之后好像没有重新安装，还用了autoremove进行清理），总之就是GPU挂了。。。”&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>

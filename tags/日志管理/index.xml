@@ -13,7 +13,8 @@
       <link>https://ahaknow.com/posts/know/dev-spdlog-usage/</link>
       <pubDate>Tue, 23 Apr 2024 17:00:23 +0800</pubDate>
       <guid>https://ahaknow.com/posts/know/dev-spdlog-usage/</guid>
-      <description>此前写代码，习惯性 std::cout 和 std::cerr 这种直接可视化的打印，然后满屏密密麻麻的打印信息，而如果不需要了，就会在代码大段大段的注释，非常不美观，甚至可以说是</description>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;此前写代码，习惯性 &lt;code&gt;std::cout&lt;/code&gt; 和 &lt;code&gt;std::cerr&lt;/code&gt; 这种直接可视化的打印，然后满屏密密麻麻的打印信息，而如果不需要了，就会在代码大段大段的注释，非常不美观，甚至可以说是一堆堆💩。。。&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>
