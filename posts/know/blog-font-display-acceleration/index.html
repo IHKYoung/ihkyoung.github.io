@@ -332,103 +332,8 @@
 </span>
 
 </div>
-  </header> <aside id="toc-container" class="toc-container wide">
-    <div class="toc">
-        <details  open>
-        <summary accesskey="c" title="(Alt + C)">
-            <span class="details">📚目录</span>
-        </summary>
-
-        <div class="inner"><ul>
-                <li>
-                    <a href="#%e5%8e%8b%e7%bc%a9%e5%ad%97%e4%bd%93" aria-label="压缩字体">压缩字体</a><ul>
-                        
-                <li>
-                    <a href="#truetype-font-ttf" aria-label="TrueType Font (TTF)">TrueType Font (TTF)</a></li>
-                <li>
-                    <a href="#web-open-font-format-woff" aria-label="Web Open Font Format (WOFF)">Web Open Font Format (WOFF)</a></li></ul>
-                </li>
-                <li>
-                    <a href="#%e5%85%88%e6%98%be%e7%a4%ba%e5%90%8e%e5%8a%a0%e8%bd%bd" aria-label="先显示后加载">先显示后加载</a></li>
-                <li>
-                    <a href="#%e4%bd%bf%e7%94%a8jsdelivr%e5%ae%9e%e7%8e%b0cdn%e5%8a%a0%e9%80%9f" aria-label="使用jsDelivr实现CDN加速">使用jsDelivr实现CDN加速</a><ul>
-                        
-                <li>
-                    <a href="#%e6%ad%a5%e9%aa%a4-1-%e5%87%86%e5%a4%87%e5%ad%97%e4%bd%93%e6%96%87%e4%bb%b6" aria-label="步骤 1: 准备字体文件">步骤 1: 准备字体文件</a></li>
-                <li>
-                    <a href="#%e6%ad%a5%e9%aa%a4-2-%e4%b8%8a%e4%bc%a0%e5%ad%97%e4%bd%93%e6%96%87%e4%bb%b6%e5%88%b0github" aria-label="步骤 2: 上传字体文件到GitHub">步骤 2: 上传字体文件到GitHub</a></li>
-                <li>
-                    <a href="#%e6%ad%a5%e9%aa%a4-3-%e4%bd%bf%e7%94%a8jsdelivr" aria-label="步骤 3: 使用jsDelivr">步骤 3: 使用jsDelivr</a></li>
-                <li>
-                    <a href="#%e6%ad%a5%e9%aa%a4-4-%e5%9c%a8%e7%bd%91%e9%a1%b5%e4%b8%ad%e4%bd%bf%e7%94%a8%e5%ad%97%e4%bd%93" aria-label="步骤 4: 在网页中使用字体">步骤 4: 在网页中使用字体</a>
-                </li>
-            </ul>
-            </li>
-            </ul>
-        </div>
-        </details>
-    </div>
-</aside>
-<script>
-    let activeElement;
-    let elements;
-    window.addEventListener('DOMContentLoaded', function (event) {
-        checkTocPosition();
-
-        elements = document.querySelectorAll('h1[id],h2[id],h3[id],h4[id],h5[id],h6[id]');
-        
-        activeElement = elements[0];
-        const id = encodeURI(activeElement.getAttribute('id')).toLowerCase();
-        document.querySelector(`.inner ul li a[href="#${id}"]`).classList.add('active');
-    }, false);
-
-    window.addEventListener('resize', function(event) {
-        checkTocPosition();
-    }, false);
-
-    window.addEventListener('scroll', () => {
-        
-        activeElement = Array.from(elements).find((element) => {
-            if ((getOffsetTop(element) - window.pageYOffset) > 0 &&
-                (getOffsetTop(element) - window.pageYOffset) < window.innerHeight/2) {
-                return element;
-            }
-        }) || activeElement
-
-        elements.forEach(element => {
-            const id = encodeURI(element.getAttribute('id')).toLowerCase();
-            if (element === activeElement){
-                document.querySelector(`.inner ul li a[href="#${id}"]`).classList.add('active');
-            } else {
-                document.querySelector(`.inner ul li a[href="#${id}"]`).classList.remove('active');
-            }
-        })
-    }, false);
-
-    const main = parseInt(getComputedStyle(document.body).getPropertyValue('--article-width'), 10);
-    const toc = parseInt(getComputedStyle(document.body).getPropertyValue('--toc-width'), 10);
-    const gap = parseInt(getComputedStyle(document.body).getPropertyValue('--gap'), 10);
-
-    function checkTocPosition() {
-        const width = document.body.scrollWidth;
-
-        if (width - main - (toc * 2) - (gap * 4) > 0) {
-            document.getElementById("toc-container").classList.add("wide");
-        } else {
-            document.getElementById("toc-container").classList.remove("wide");
-        }
-    }
-
-    function getOffsetTop(element) {
-        if (!element.getClientRects().length) {
-            return 0;
-        }
-        let rect = element.getBoundingClientRect();
-        let win = element.ownerDocument.defaultView;
-        return rect.top + win.pageYOffset;
-    }
-</script>
-  <div class="post-content"><blockquote>
+  </header>
+  <div id="post-content"><blockquote>
 <p>博客里使用了自定义的字体，最开始直接采用ttf文件加载的方式，因为博客内容全部是静态存在Github上的，这种直接加载多少有点慢，所以想了一些策略。</p>
 <ul>
 <li>压缩字体</li>
@@ -544,6 +449,94 @@
 
   </footer>
 </article>
+
+<style>
+   
+  #check-button {
+      background-color: transparent;
+      border: none;
+      padding: 10px 20px;
+      font-size: 1.2em;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: transform 0.1s ease-in-out, box-shadow 0.2s;
+  }
+  #check-button:active {
+      transform: scale(0.9);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  }
+
+   
+  @keyframes shake {
+      0% { transform: translateX(0); }
+      25% { transform: translateX(-5px); }
+      50% { transform: translateX(5px); }
+      75% { transform: translateX(-5px); }
+      100% { transform: translateX(0); }
+  }
+  .shake {
+      animation: shake 0.3s ease-in-out;
+  }
+</style>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    let storedPassword = sessionStorage.getItem("blog_password_2422838a7308582c299bb9dfa9b461f5");
+
+    if (!storedPassword) {
+        document.getElementById("password-protection").style.display = "block";
+    } else {
+        unlockContent();
+    }
+  });
+
+  function checkPassword() {
+    let inputPassword = document.getElementById("post-password").value;
+    let correctHash = "c57a2f70945d45168d580c4bb81100f2"; 
+    let inputHash = CryptoJS.MD5(inputPassword).toString();  
+
+    let errorMsg = document.getElementById("error-msg");
+    let checkButton = document.getElementById("check-button");
+
+    
+    checkButton.style.transform = "scale(0.95)";
+    setTimeout(() => {
+        checkButton.style.transform = "scale(1)";
+    }, 100);
+
+    if (inputHash === correctHash) {
+      sessionStorage.setItem("blog_password_2422838a7308582c299bb9dfa9b461f5", inputHash);
+      unlockContent();
+    } else {
+        
+        errorMsg.style.display = "block";
+        errorMsg.classList.add("shake");
+        
+        
+        setTimeout(() => {
+            errorMsg.classList.remove("shake");
+        }, 300);
+    }
+  }
+
+  function unlockContent() {
+    document.getElementById("password-protection").style.display = "none";
+    let postContentDiv = document.getElementById("post-content");
+    postContentDiv.style.display = "block";
+
+    
+    postContentDiv.innerHTML = `\u003cblockquote\u003e\n\u003cp\u003e博客里使用了自定义的字体，最开始直接采用ttf文件加载的方式，因为博客内容全部是静态存在Github上的，这种直接加载多少有点慢，所以想了一些策略。\u003c\/p\u003e\n\u003cul\u003e\n\u003cli\u003e压缩字体\u003c\/li\u003e\n\u003cli\u003e先显示后加载\u003c\/li\u003e\n\u003cli\u003e使用CDN加速\u003c\/li\u003e\n\u003c\/ul\u003e\n\u003c\/blockquote\u003e\n\u003ch3 id=\u0022压缩字体\u0022\u003e压缩字体\u003c\/h3\u003e\n\u003ch4 id=\u0022truetype-font-ttf\u0022\u003eTrueType Font (TTF)\u003c\/h4\u003e\n\u003cp\u003e常见的字体文件格式，由Apple和Microsoft在上世纪80年代末共同开发。TTF使用二次贝塞尔曲线来描述字符形状，这种曲线可以精确地表示复杂形状，并且在放大时保持平滑。\u003c\/p\u003e\n\u003ch4 id=\u0022web-open-font-format-woff\u0022\u003eWeb Open Font Format (WOFF)\u003c\/h4\u003e\n\u003cp\u003eWOFF是专门为Web设计的字体格式，2009年成为W3C的推荐标准。WOFF是基于TTF和OpenType字体格式的，但提供了更好的压缩和额外的元数据支持。WOFF存在两个版本：WOFF 1.0和WOFF 2.0。WOFF 2.0使用了更高效的压缩算法，文件大小比WOFF 1.0更小。\u003c\/p\u003e\n\u003cp\u003eTTF是一种通用的字体格式，广泛用于各种操作系统和设备，提供了高质量的矢量字体展示。而WOFF是为Web设计的字体格式，它优化了文件大小和加载性能，特别适合在线使用。选择哪种格式取决于你的具体需求：如果你需要确保字体在各种环境中的广泛兼容性，TTF可能是更好的选择；如果你主要关注网页性能和加载速度，WOFF将是更优的选择。\u003c\/p\u003e\n\u003cp\u003e在MacOS上直接本地转换ttf字体。\u003c\/p\u003e\n\u003cp\u003e安装\u003ccode\u003ewoff2\u003c\/code\u003e工具：\u003c\/p\u003e\n\u003cdiv class=\u0022highlight\u0022\u003e\u003cpre tabindex=\u00220\u0022 class=\u0022chroma\u0022\u003e\u003ccode class=\u0022language-bash\u0022 data-lang=\u0022bash\u0022\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003ebrew install woff2\n\u003c\/span\u003e\u003c\/span\u003e\u003c\/code\u003e\u003c\/pre\u003e\u003c\/div\u003e\u003cp\u003e使用以下命令将TTF字体文件转换为WOFF2格式：\u003c\/p\u003e\n\u003cdiv class=\u0022highlight\u0022\u003e\u003cpre tabindex=\u00220\u0022 class=\u0022chroma\u0022\u003e\u003ccode class=\u0022language-bash\u0022 data-lang=\u0022bash\u0022\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003ewoff2_compress path\/to\/your\/font.ttf\n\u003c\/span\u003e\u003c\/span\u003e\u003c\/code\u003e\u003c\/pre\u003e\u003c\/div\u003e\u003cp\u003e这会生成一个与原始TTF文件同名，但扩展名为\u003ccode\u003e.woff2\u003c\/code\u003e的文件。例如，如果源文件名为\u003ccode\u003efont.ttf\u003c\/code\u003e，输出文件将会是\u003ccode\u003efont.woff2\u003c\/code\u003e。\u003c\/p\u003e\n\u003ch3 id=\u0022先显示后加载\u0022\u003e先显示后加载\u003c\/h3\u003e\n\u003cp\u003e\u003cstrong\u003e这里主要是CSS的工作：\u003c\/strong\u003e\u003c\/p\u003e\n\u003cp\u003e在CSS文件中使用\u003ccode\u003e@font-face\u003c\/code\u003e规则引入转换后的WOFF2字体文件，\u003cstrong\u003e并通过\u003ccode\u003efont-display: swap;\u003c\/code\u003e属性设置字体显示策略\u003c\/strong\u003e。这样做可以确保文本在字体文件下载完成之前使用回退字体显示，从而提升页面的可用性和性能。\u003c\/p\u003e\n\u003cdiv class=\u0022highlight\u0022\u003e\u003cpre tabindex=\u00220\u0022 class=\u0022chroma\u0022\u003e\u003ccode class=\u0022language-css\u0022 data-lang=\u0022css\u0022\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022p\u0022\u003e@\u003c\/span\u003e\u003cspan class=\u0022k\u0022\u003efont-face\u003c\/span\u003e \u003cspan class=\u0022p\u0022\u003e\u007b\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e  \u003cspan class=\u0022nt\u0022\u003efont-family\u003c\/span\u003e\u003cspan class=\u0022o\u0022\u003e:\u003c\/span\u003e \u003cspan class=\u0022s1\u0022\u003e\u0026#39;MyCustomFont\u0026#39;\u003c\/span\u003e\u003cspan class=\u0022o\u0022\u003e;\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e  \u003cspan class=\u0022nt\u0022\u003esrc\u003c\/span\u003e\u003cspan class=\u0022o\u0022\u003e:\u003c\/span\u003e \u003cspan class=\u0022nt\u0022\u003eurl\u003c\/span\u003e\u003cspan class=\u0022o\u0022\u003e(\u003c\/span\u003e\u003cspan class=\u0022s1\u0022\u003e\u0026#39;MyFont.woff2\u0026#39;\u003c\/span\u003e\u003cspan class=\u0022o\u0022\u003e)\u003c\/span\u003e \u003cspan class=\u0022nt\u0022\u003eformat\u003c\/span\u003e\u003cspan class=\u0022o\u0022\u003e(\u003c\/span\u003e\u003cspan class=\u0022s1\u0022\u003e\u0026#39;woff2\u0026#39;\u003c\/span\u003e\u003cspan class=\u0022o\u0022\u003e);\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e  \u003cspan class=\u0022nt\u0022\u003efont-display\u003c\/span\u003e\u003cspan class=\u0022o\u0022\u003e:\u003c\/span\u003e \u003cspan class=\u0022nt\u0022\u003eswap\u003c\/span\u003e\u003cspan class=\u0022o\u0022\u003e;\u003c\/span\u003e \u003cspan class=\u0022c\u0022\u003e\/* 使用回退字体直到自定义字体加载完毕 *\/\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022p\u0022\u003e\u007d\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003c\/code\u003e\u003c\/pre\u003e\u003c\/div\u003e\u003cp\u003e这里，\u003ccode\u003efont-display: swap;\u003c\/code\u003e指示浏览器在自定义字体加载期间使用回退字体，一旦自定义字体加载完毕立即切换。这有助于改善首次内容渲染时间（FCP）和最大内容绘制（LCP）等性能指标。\u003c\/p\u003e\n\u003cp\u003e也可以使用\u003ccode\u003eWeb Font Loader\u003c\/code\u003e，这里就是JavaScript的工作了：\u003c\/p\u003e\n\u003cp\u003e\u003ccode\u003eWeb Font Loader\u003c\/code\u003e允许添加事件回调和控制字体加载的行为，简单的使用方式如下（需要配合CSS中的@font-face）：\u003c\/p\u003e\n\u003cdiv class=\u0022highlight\u0022\u003e\u003cpre tabindex=\u00220\u0022 class=\u0022chroma\u0022\u003e\u003ccode class=\u0022language-html\u0022 data-lang=\u0022html\u0022\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022p\u0022\u003e\u0026lt;\u003c\/span\u003e\u003cspan class=\u0022nt\u0022\u003escript\u003c\/span\u003e \u003cspan class=\u0022na\u0022\u003esrc\u003c\/span\u003e\u003cspan class=\u0022o\u0022\u003e=\u003c\/span\u003e\u003cspan class=\u0022s\u0022\u003e\u0026#34;https:\/\/ajax.googleapis.com\/ajax\/libs\/webfont\/1.6.28\/webfont.js\u0026#34;\u003c\/span\u003e\u003cspan class=\u0022p\u0022\u003e\u0026gt;\u0026lt;\/\u003c\/span\u003e\u003cspan class=\u0022nt\u0022\u003escript\u003c\/span\u003e\u003cspan class=\u0022p\u0022\u003e\u0026gt;\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022p\u0022\u003e\u0026lt;\u003c\/span\u003e\u003cspan class=\u0022nt\u0022\u003escript\u003c\/span\u003e\u003cspan class=\u0022p\u0022\u003e\u0026gt;\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e  \u003cspan class=\u0022nx\u0022\u003eWebFont\u003c\/span\u003e\u003cspan class=\u0022p\u0022\u003e.\u003c\/span\u003e\u003cspan class=\u0022nx\u0022\u003eload\u003c\/span\u003e\u003cspan class=\u0022p\u0022\u003e(\u007b\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e    \u003cspan class=\u0022nx\u0022\u003ecustom\u003c\/span\u003e\u003cspan class=\u0022o\u0022\u003e:\u003c\/span\u003e \u003cspan class=\u0022p\u0022\u003e\u007b\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e      \u003cspan class=\u0022nx\u0022\u003efamilies\u003c\/span\u003e\u003cspan class=\u0022o\u0022\u003e:\u003c\/span\u003e \u003cspan class=\u0022p\u0022\u003e[\u003c\/span\u003e\u003cspan class=\u0022s1\u0022\u003e\u0026#39;MyCustomFont\u0026#39;\u003c\/span\u003e\u003cspan class=\u0022p\u0022\u003e],\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e      \u003cspan class=\u0022nx\u0022\u003eurls\u003c\/span\u003e\u003cspan class=\u0022o\u0022\u003e:\u003c\/span\u003e \u003cspan class=\u0022p\u0022\u003e[\u003c\/span\u003e\u003cspan class=\u0022s1\u0022\u003e\u0026#39;path\/to\/your\/css\/file.css\u0026#39;\u003c\/span\u003e\u003cspan class=\u0022p\u0022\u003e]\u003c\/span\u003e \u003cspan class=\u0022c1\u0022\u003e\/\/ CSS文件的路径（可以不特别设置）\n\u003c\/span\u003e\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022c1\u0022\u003e\u003c\/span\u003e    \u003cspan class=\u0022p\u0022\u003e\u007d\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e  \u003cspan class=\u0022p\u0022\u003e\u007d);\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022p\u0022\u003e\u0026lt;\/\u003c\/span\u003e\u003cspan class=\u0022nt\u0022\u003escript\u003c\/span\u003e\u003cspan class=\u0022p\u0022\u003e\u0026gt;\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003c\/code\u003e\u003c\/pre\u003e\u003c\/div\u003e\u003ch3 id=\u0022使用jsdelivr实现cdn加速\u0022\u003e使用jsDelivr实现CDN加速\u003c\/h3\u003e\n\u003cblockquote\u003e\n\u003cp\u003ejsDelivr 是一个免费的开源内容分发网络（CDN），它能够提供对GitHub、npm、WordPress插件等的直接加速服务。这是通过jsDelivr与这些平台的集成以及其在全球多个地点的服务器网络实现的。下面详细解释一下为什么和如何jsDelivr能够直接加速GitHub的内容。\u003c\/p\u003e\n\u003cp\u003e\u003cstrong\u003e1. 如何工作\u003c\/strong\u003e\u003c\/p\u003e\n\u003cp\u003ejsDelivr 是设计来优化项目文件的交付速度和可靠性的。它通过缓存和分发静态文件（如JavaScript库、CSS样式表和字体文件等）来实现这一点。当开发者将他们的代码托管在GitHub或npm上时，jsDelivr 可以直接链接到这些资源，并通过其全球分布的CDN网络提供这些资源。\u003c\/p\u003e\n\u003cp\u003e\u003cstrong\u003e2. 全球CDN网络\u003c\/strong\u003e\u003c\/p\u003e\n\u003cp\u003ejsDelivr 使用多个CDN提供商，包括Cloudflare、Fastly和Quantil。这意味着它不依赖于单一的CDN提供商，而是能够通过多个网络提供数据，从而确保在全球范围内的高可用性和速度。这种多CDN路由策略使得jsDelivr在处理大量请求、尤其是在流量高峰时，可以提供更加稳定和快速的服务。\u003c\/p\u003e\n\u003cp\u003e\u003cstrong\u003e3. GitHub和npm集成\u003c\/strong\u003e\u003c\/p\u003e\n\u003cp\u003ejsDelivr 对GitHub和npm有特别的支持。开发者只需通过简单的URL格式，就可以直接引用在GitHub仓库或npm包中的文件。jsDelivr会自动处理这些文件的CDN分发。\u003c\/p\u003e\n\u003cul\u003e\n\u003cli\u003e\u003cstrong\u003eGitHub\u003c\/strong\u003e：可以直接引用任何GitHub仓库中的文件，jsDelivr 会处理路径并通过其CDN提供这些文件。\u003c\/li\u003e\n\u003cli\u003e\u003cstrong\u003enpm\u003c\/strong\u003e：可以引用任何npm包中的文件，同样通过CDN加速分发。\u003c\/li\u003e\n\u003c\/ul\u003e\n\u003cp\u003e\u003cstrong\u003e4. 性能优化\u003c\/strong\u003e\u003c\/p\u003e\n\u003cp\u003ejsDelivr 不仅仅提供文件的CDN加速，还对文件进行了优化处理。例如，它可以自动压缩文件以减少文件大小，从而加快加载速度。此外，它还提供了一个可以合并多个文件的功能，减少了网页加载时的请求数量。\u003c\/p\u003e\n\u003cp\u003e\u003cstrong\u003e5. 易用性和无成本\u003c\/strong\u003e\u003c\/p\u003e\n\u003cp\u003ejsDelivr 是完全免费的服务，为开发者和网站提供了一个零成本的解决方案来优化其资源的分发。它的设置非常简单，只需要修改文件的URL即可开始使用，无需复杂的配置。\u003c\/p\u003e\n\u003c\/blockquote\u003e\n\u003cp\u003e通过GitHub和jsDelivr实现字体文件（如WOFF2格式）的CDN加速：\u003c\/p\u003e\n\u003ch4 id=\u0022步骤-1-准备字体文件\u0022\u003e步骤 1: 准备字体文件\u003c\/h4\u003e\n\u003cp\u003e首先，确保拥有字体文件的使用权，并且该字体文件已经是WOFF2格式。WOFF2是一种为网络优化的字体格式，具有良好的压缩率和快速的加载性能。\u003c\/p\u003e\n\u003ch4 id=\u0022步骤-2-上传字体文件到github\u0022\u003e步骤 2: 上传字体文件到GitHub\u003c\/h4\u003e\n\u003col\u003e\n\u003cli\u003e\n\u003cp\u003e创建一个新的GitHub仓库（如果还没有的话）。\u003c\/p\u003e\n\u003c\/li\u003e\n\u003cli\u003e\n\u003cp\u003e将WOFF2字体文件上传到这个仓库中。可以直接在GitHub网站上进行上传，或者使用Git命令行工具。\u003c\/p\u003e\n\u003cp\u003e例如，如果字体文件名为 \u003ccode\u003eexample.woff2\u003c\/code\u003e，可以在仓库的根目录或\u003cstrong\u003e任何\u003c\/strong\u003e一个子目录中放置这个文件。\u003c\/p\u003e\n\u003c\/li\u003e\n\u003c\/ol\u003e\n\u003ch4 id=\u0022步骤-3-使用jsdelivr\u0022\u003e步骤 3: 使用jsDelivr\u003c\/h4\u003e\n\u003cp\u003ejsDelivr是一个免费的开源CDN服务，它可以提供GitHub仓库中静态文件的CDN支持。\u003c\/p\u003e\n\u003col\u003e\n\u003cli\u003e\n\u003cp\u003e获取GitHub文件的URL路径。这通常是：\u003c\/p\u003e\n\u003cpre tabindex=\u00220\u0022\u003e\u003ccode\u003ehttps:\/\/github.com\/\u0026lt;username\u0026gt;\/\u0026lt;repository\u0026gt;\/blob\/main\/path\/to\/your\/font.woff2\n\u003c\/code\u003e\u003c\/pre\u003e\u003cp\u003e其中 \u003ccode\u003e\u0026lt;username\u0026gt;\u003c\/code\u003e 是你的GitHub用户名，\u003ccode\u003e\u0026lt;repository\u0026gt;\u003c\/code\u003e 是你的仓库名，\u003ccode\u003epath\/to\/your\/font.woff2\u003c\/code\u003e 是文件在仓库中的路径。\u003c\/p\u003e\n\u003c\/li\u003e\n\u003cli\u003e\n\u003cp\u003e将GitHub链接转换为jsDelivr链接。\u003cstrong\u003ejsDelivr为GitHub项目提供了一个特别的URL格式，用于CDN加速\u003c\/strong\u003e。将上述URL按以下格式改写：\u003c\/p\u003e\n\u003cpre tabindex=\u00220\u0022\u003e\u003ccode\u003ehttps:\/\/cdn.jsdelivr.net\/gh\/\u0026lt;username\u0026gt;\/\u0026lt;repository\u0026gt;\/path\/to\/your\/font.woff2\n\u003c\/code\u003e\u003c\/pre\u003e\u003c\/li\u003e\n\u003c\/ol\u003e\n\u003ch4 id=\u0022步骤-4-在网页中使用字体\u0022\u003e步骤 4: 在网页中使用字体\u003c\/h4\u003e\n\u003cp\u003e在HTML或CSS文件中，使用新的jsDelivr CDN链接来引用字体文件。例如，在CSS中，可以这样指定字体：\u003c\/p\u003e\n\u003cdiv class=\u0022highlight\u0022\u003e\u003cpre tabindex=\u00220\u0022 class=\u0022chroma\u0022\u003e\u003ccode class=\u0022language-css\u0022 data-lang=\u0022css\u0022\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022p\u0022\u003e@\u003c\/span\u003e\u003cspan class=\u0022k\u0022\u003efont-face\u003c\/span\u003e \u003cspan class=\u0022p\u0022\u003e\u007b\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e    \u003cspan class=\u0022nt\u0022\u003efont-family\u003c\/span\u003e\u003cspan class=\u0022o\u0022\u003e:\u003c\/span\u003e \u003cspan class=\u0022s1\u0022\u003e\u0026#39;MyCustomFont\u0026#39;\u003c\/span\u003e\u003cspan class=\u0022o\u0022\u003e;\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e    \u003cspan class=\u0022nt\u0022\u003esrc\u003c\/span\u003e\u003cspan class=\u0022o\u0022\u003e:\u003c\/span\u003e \u003cspan class=\u0022nt\u0022\u003eurl\u003c\/span\u003e\u003cspan class=\u0022o\u0022\u003e(\u003c\/span\u003e\u003cspan class=\u0022s1\u0022\u003e\u0026#39;https:\/\/cdn.jsdelivr.net\/gh\/username\/repository\/path\/to\/your\/font.woff2\u0026#39;\u003c\/span\u003e\u003cspan class=\u0022o\u0022\u003e)\u003c\/span\u003e \u003cspan class=\u0022nt\u0022\u003eformat\u003c\/span\u003e\u003cspan class=\u0022o\u0022\u003e(\u003c\/span\u003e\u003cspan class=\u0022s1\u0022\u003e\u0026#39;woff2\u0026#39;\u003c\/span\u003e\u003cspan class=\u0022o\u0022\u003e);\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e    \u003cspan class=\u0022nt\u0022\u003efont-weight\u003c\/span\u003e\u003cspan class=\u0022o\u0022\u003e:\u003c\/span\u003e \u003cspan class=\u0022nt\u0022\u003enormal\u003c\/span\u003e\u003cspan class=\u0022o\u0022\u003e;\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e    \u003cspan class=\u0022nt\u0022\u003efont-style\u003c\/span\u003e\u003cspan class=\u0022o\u0022\u003e:\u003c\/span\u003e \u003cspan class=\u0022nt\u0022\u003enormal\u003c\/span\u003e\u003cspan class=\u0022o\u0022\u003e;\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022p\u0022\u003e\u007d\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003c\/code\u003e\u003c\/pre\u003e\u003c\/div\u003e\u003cp\u003e这里，\u003ccode\u003efont-family\u003c\/code\u003e 是给字体起的名字，用于后续在CSS中引用。\u003c\/p\u003e\n`;
+  }
+
+  
+  window.addEventListener("beforeunload", function() {
+      sessionStorage.removeItem("blog_password_2422838a7308582c299bb9dfa9b461f5");
+  });
+  
+  </script>
 </main>
 
 <footer class="footer">

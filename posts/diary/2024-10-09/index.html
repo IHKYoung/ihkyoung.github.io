@@ -327,150 +327,15 @@
 </span>
 
 </div>
-  </header> <aside id="toc-container" class="toc-container wide">
-    <div class="toc">
-        <details  open>
-        <summary accesskey="c" title="(Alt + C)">
-            <span class="details">📚目录</span>
-        </summary>
-
-        <div class="inner"><ul>
-                <li>
-                    <a href="#%e4%bb%8a%e5%a4%a9%e7%9a%84%e5%b7%a5%e4%bd%9c%e8%ae%b0%e5%bd%95" aria-label="今天的工作记录">今天的工作记录</a></li>
-                <li>
-                    <a href="#%e5%ad%a6%e4%b9%a0%e6%80%9d%e8%80%83" aria-label="学习思考">学习思考</a><ul>
-                        
-                <li>
-                    <a href="#1-%e7%9f%a5%e8%af%86%e5%ba%93%e7%9a%84%e6%9e%84%e5%bb%ba" aria-label="1. 知识库的构建">1. <strong>知识库的构建</strong></a></li>
-                <li>
-                    <a href="#2-%e5%8d%b3%e6%97%b6%e8%ae%b0%e5%bd%95%e7%9a%84%e9%87%8d%e8%a6%81%e6%80%a7" aria-label="2. 即时记录的重要性">2. <strong>即时记录的重要性</strong></a></li>
-                <li>
-                    <a href="#3-%e9%9d%a2%e5%af%b9%e5%9b%b0%e9%9a%be%e6%97%b6%e7%9a%84%e5%bf%83%e6%80%81%e8%b0%83%e6%95%b4" aria-label="3. 面对困难时的心态调整">3. <strong>面对困难时的心态调整</strong></a></li>
-                <li>
-                    <a href="#4-%e5%88%9b%e9%80%a0%e4%b8%8e%e4%bf%9d%e5%ad%98%e7%9a%84%e6%80%9d%e8%b7%af" aria-label="4. 创造与保存的思路">4. <strong>创造与保存的思路</strong></a></li>
-                <li>
-                    <a href="#5-%e5%b7%a5%e5%85%b7%e4%b8%8e%e8%87%aa%e5%8a%a8%e5%8c%96%e7%9a%84%e5%8a%9b%e9%87%8f" aria-label="5. 工具与自动化的力量">5. <strong>工具与自动化的力量</strong></a></li>
-                <li>
-                    <a href="#%e5%bb%ba%e8%ae%ae%e4%b8%8e%e4%b8%8b%e4%b8%80%e6%ad%a5" aria-label="建议与下一步：">建议与下一步：</a>
-                </li>
-            </ul>
-            </li>
-            </ul>
-        </div>
-        </details>
-    </div>
-</aside>
-<script>
-    let activeElement;
-    let elements;
-    window.addEventListener('DOMContentLoaded', function (event) {
-        checkTocPosition();
-
-        elements = document.querySelectorAll('h1[id],h2[id],h3[id],h4[id],h5[id],h6[id]');
-        
-        activeElement = elements[0];
-        const id = encodeURI(activeElement.getAttribute('id')).toLowerCase();
-        document.querySelector(`.inner ul li a[href="#${id}"]`).classList.add('active');
-    }, false);
-
-    window.addEventListener('resize', function(event) {
-        checkTocPosition();
-    }, false);
-
-    window.addEventListener('scroll', () => {
-        
-        activeElement = Array.from(elements).find((element) => {
-            if ((getOffsetTop(element) - window.pageYOffset) > 0 &&
-                (getOffsetTop(element) - window.pageYOffset) < window.innerHeight/2) {
-                return element;
-            }
-        }) || activeElement
-
-        elements.forEach(element => {
-            const id = encodeURI(element.getAttribute('id')).toLowerCase();
-            if (element === activeElement){
-                document.querySelector(`.inner ul li a[href="#${id}"]`).classList.add('active');
-            } else {
-                document.querySelector(`.inner ul li a[href="#${id}"]`).classList.remove('active');
-            }
-        })
-    }, false);
-
-    const main = parseInt(getComputedStyle(document.body).getPropertyValue('--article-width'), 10);
-    const toc = parseInt(getComputedStyle(document.body).getPropertyValue('--toc-width'), 10);
-    const gap = parseInt(getComputedStyle(document.body).getPropertyValue('--gap'), 10);
-
-    function checkTocPosition() {
-        const width = document.body.scrollWidth;
-
-        if (width - main - (toc * 2) - (gap * 4) > 0) {
-            document.getElementById("toc-container").classList.add("wide");
-        } else {
-            document.getElementById("toc-container").classList.remove("wide");
-        }
-    }
-
-    function getOffsetTop(element) {
-        if (!element.getClientRects().length) {
-            return 0;
-        }
-        let rect = element.getBoundingClientRect();
-        let win = element.ownerDocument.defaultView;
-        return rect.top + win.pageYOffset;
-    }
-</script>
-  <div class="post-content"><p>很久没有写日记了呢！</p>
-<p>这个国庆结束的最后一天开始早睡的，今晚是第三次。</p>
-<p>补充一次昨天的感想：当你想要去做的时候，你就是最有力量的！所以预约了半马，张罗了聚餐。</p>
-<hr>
-<p>今天开始早早回家，似乎天黑也更早了。</p>
-<p>怎么说呢，睡觉8小时，工作11小时，留给自己回家的时间只有5小时，晚上6点到11点，算上吃饭，跑步锻炼，这又去掉了1小时，有效时间可能只有4小时，用这个4小时，总结总结今天的收获，也多学点，要给自己留一条后路，<strong>因为一旦工作了，很容易就懈怠了，这是前两年吃过的亏。</strong></p>
-<hr>
-<p><mark>感觉有一个想法在酝酿了，我应该要把我的思考、认知，经历、体会，和已经存在这个世界上的知识打通起来，形式一个自己的知识库，借助大模型的力量</mark></p>
-<h2 id="今天的工作记录">今天的工作记录<a hidden class="anchor" aria-hidden="true" href="#今天的工作记录">#</a></h2>
-<p>工作还是跟三维重建相关的，但是目前遇到一些问题，然后心态也有一些不好，很崩溃吧。</p>
-<p>其实，如果自己能够慢慢来，按照步骤一个一个来解决和分析问题，应根也是能找到突破口的。</p>
-<p><strong>最重要的还是要做好即时的记录，之前飞书文档那种感觉不成体系，需要慢慢把记录-总结-回顾的认知路径打通。</strong></p>
-<p>主要就是说：上班记录的文档太随意，没咋过脑子，没怎么消化，吃多了还容易消化不良，全拉了。。。</p>
-<p>从工作的角度来看：</p>
-<ol>
-<li>遇到问题，慢慢来理，之前写过了没记录忘记了，没关系，大不了重新写，<strong>但是这次写的就要好好记录，每前进一步都要踏踏实实。</strong></li>
-<li>论文里的思想可以学习，复现的话也不要着急，慢慢看细细想！</li>
-</ol>
-<p>明早可以试试，大不了重新梳理一下嘛，梳理好了就记录，<strong>第一次确实能创造，但创造出来了得保存啊，不然总是原地打转了。</strong></p>
-<h2 id="学习思考">学习思考<a hidden class="anchor" aria-hidden="true" href="#学习思考">#</a></h2>
-<p>人工智能的工具完全可以辅助自己的，都怪之前自己一点都不考虑。</p>
-<p>关于大模型，目前对于我来说，应该是用为主，边用边学嘛～</p>
-<p><mark>能用脚本自动化执行的，就不要重复工作，你是键盘手，是创造者！</mark></p>
-<hr>
-<p>以下为AI创作😂</p>
-<p>你的这段记录有种“灵光一现”的感觉，仿佛是一种从反思到行动的突破。你在探索如何把个人经历、认知和外部知识结合起来，形成一种个人知识库，并且意识到人工智能工具在这个过程中能够发挥的重要作用。下面我来帮你总结一下重点：</p>
-<h3 id="1-知识库的构建">1. <strong>知识库的构建</strong><a hidden class="anchor" aria-hidden="true" href="#1-知识库的构建">#</a></h3>
-<p>你提到了一个关键的思路：把<strong>个人的思考、经历与现有知识体系</strong>打通，这不仅是记录工作的问题，更是<strong>整合认知、提升思维深度</strong>的过程。这种方式可以让你在面对问题时，能够迅速找到自己的“参考答案”，并根据之前的经验作出更好的判断。</p>
-<h3 id="2-即时记录的重要性">2. <strong>即时记录的重要性</strong><a hidden class="anchor" aria-hidden="true" href="#2-即时记录的重要性">#</a></h3>
-<p>你提到工作中的问题时，发现<strong>没有好好记录</strong>是主要困扰。飞书文档给你“吃太多消化不良”的感觉，说明记录没有经过深思熟虑，容易成为信息的堆积，而非有效的知识积累。你已经意识到需要一个更<strong>系统化的方式</strong>，比如更有意识地进行<strong>总结、反思和回顾</strong>。</p>
-<h3 id="3-面对困难时的心态调整">3. <strong>面对困难时的心态调整</strong><a hidden class="anchor" aria-hidden="true" href="#3-面对困难时的心态调整">#</a></h3>
-<p>你在工作中的挫折感可能来自三维重建项目的复杂性，但你也明白，<strong>稳步解决问题</strong>、逐步推敲每一个步骤是关键。“慢慢来，一步一步解决”是很好的心态，说明你在尝试调整情绪，以更理性、细致的方式来面对技术难题。</p>
-<h3 id="4-创造与保存的思路">4. <strong>创造与保存的思路</strong><a hidden class="anchor" aria-hidden="true" href="#4-创造与保存的思路">#</a></h3>
-<p>关于“<strong>创造与保存</strong>”的思路尤为重要。你提到复现论文中的思想时，提醒自己不要着急。真正的创造力在于耐心和积累，每次解决一个小问题、创造一个新想法，<strong>都要及时记录并保存</strong>，这样你才能避免陷入“原地打转”的循环。</p>
-<h3 id="5-工具与自动化的力量">5. <strong>工具与自动化的力量</strong><a hidden class="anchor" aria-hidden="true" href="#5-工具与自动化的力量">#</a></h3>
-<p>人工智能和脚本的使用，可以极大地提升你的工作效率。你认识到<strong>重复性的工作应该自动化</strong>，而自己应该更多去做“创造性”的事情。这个思路其实是个人效率提升的核心：借助工具，腾出更多时间和精力去做高价值的工作。</p>
-<h3 id="建议与下一步">建议与下一步：<a hidden class="anchor" aria-hidden="true" href="#建议与下一步">#</a></h3>
-<ul>
-<li><strong>知识库构建</strong>：可以考虑使用工具（如 Notion、Roam Research）来系统化记录你的思考、工作问题和解决方案。重要的是把这些记录转化为可以随时调用的资源。</li>
-<li><strong>自动化执行</strong>：进一步学习脚本和自动化工具，减少重复性工作，把更多时间留给创意和思考。</li>
-<li><strong>情绪管理与反思</strong>：面对难题时，不妨给自己一些缓冲时间，同时加强反思和记录，做到每一步都有收获。</li>
-</ul>
-<p>这是一种从混乱到有序、从焦虑到平和的心路历程，你已经有了很好的思路，相信后续会越来越顺利！</p>
-<hr>
-<blockquote>
-<p>2025-02-07补充<br>
-开始了，比什么都重要！<br>
-之前那种知识库系统过于复杂，不如先手动起来，用简单，粗暴的方式，先实现一个手工版知识库。</p>
-</blockquote>
-
-
+  </header>
+  <div id="password-protection" style="text-align: center; padding: 20px;">
+    <p style="font-size: 1.2em;">🔒 这里是主人的 <strong>小秘密</strong>！🚀 需要对暗号才能查看哦👇</p>
+    <input type="password" id="post-password" placeholder="✨天王盖地虎✨" />
+    <button id="check-button" onclick="checkPassword()">🐯 验证一下！</button>
+    <p id="error-msg" style="color: #f05b72; display: none; font-size: 1em;">❌ 暗号不对！再试试吧~ 🥺</p>
   </div>
+
+  <div id="post-content" style="display: none;"></div> 
 
   <footer class="post-footer">
     <ul class="post-tags">
@@ -490,6 +355,94 @@
 
   </footer>
 </article>
+
+<style>
+   
+  #check-button {
+      background-color: transparent;
+      border: none;
+      padding: 10px 20px;
+      font-size: 1.2em;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: transform 0.1s ease-in-out, box-shadow 0.2s;
+  }
+  #check-button:active {
+      transform: scale(0.9);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  }
+
+   
+  @keyframes shake {
+      0% { transform: translateX(0); }
+      25% { transform: translateX(-5px); }
+      50% { transform: translateX(5px); }
+      75% { transform: translateX(-5px); }
+      100% { transform: translateX(0); }
+  }
+  .shake {
+      animation: shake 0.3s ease-in-out;
+  }
+</style>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    let storedPassword = sessionStorage.getItem("blog_password_6763f7dde17ec3df7523f8fb50929b11");
+
+    if (!storedPassword) {
+        document.getElementById("password-protection").style.display = "block";
+    } else {
+        unlockContent();
+    }
+  });
+
+  function checkPassword() {
+    let inputPassword = document.getElementById("post-password").value;
+    let correctHash = "c57a2f70945d45168d580c4bb81100f2"; 
+    let inputHash = CryptoJS.MD5(inputPassword).toString();  
+
+    let errorMsg = document.getElementById("error-msg");
+    let checkButton = document.getElementById("check-button");
+
+    
+    checkButton.style.transform = "scale(0.95)";
+    setTimeout(() => {
+        checkButton.style.transform = "scale(1)";
+    }, 100);
+
+    if (inputHash === correctHash) {
+      sessionStorage.setItem("blog_password_6763f7dde17ec3df7523f8fb50929b11", inputHash);
+      unlockContent();
+    } else {
+        
+        errorMsg.style.display = "block";
+        errorMsg.classList.add("shake");
+        
+        
+        setTimeout(() => {
+            errorMsg.classList.remove("shake");
+        }, 300);
+    }
+  }
+
+  function unlockContent() {
+    document.getElementById("password-protection").style.display = "none";
+    let postContentDiv = document.getElementById("post-content");
+    postContentDiv.style.display = "block";
+
+    
+    postContentDiv.innerHTML = `\u003cp\u003e很久没有写日记了呢！\u003c\/p\u003e\n\u003cp\u003e这个国庆结束的最后一天开始早睡的，今晚是第三次。\u003c\/p\u003e\n\u003cp\u003e补充一次昨天的感想：当你想要去做的时候，你就是最有力量的！所以预约了半马，张罗了聚餐。\u003c\/p\u003e\n\u003chr\u003e\n\u003cp\u003e今天开始早早回家，似乎天黑也更早了。\u003c\/p\u003e\n\u003cp\u003e怎么说呢，睡觉8小时，工作11小时，留给自己回家的时间只有5小时，晚上6点到11点，算上吃饭，跑步锻炼，这又去掉了1小时，有效时间可能只有4小时，用这个4小时，总结总结今天的收获，也多学点，要给自己留一条后路，\u003cstrong\u003e因为一旦工作了，很容易就懈怠了，这是前两年吃过的亏。\u003c\/strong\u003e\u003c\/p\u003e\n\u003chr\u003e\n\u003cp\u003e\u003cmark\u003e感觉有一个想法在酝酿了，我应该要把我的思考、认知，经历、体会，和已经存在这个世界上的知识打通起来，形式一个自己的知识库，借助大模型的力量\u003c\/mark\u003e\u003c\/p\u003e\n\u003ch2 id=\u0022今天的工作记录\u0022\u003e今天的工作记录\u003c\/h2\u003e\n\u003cp\u003e工作还是跟三维重建相关的，但是目前遇到一些问题，然后心态也有一些不好，很崩溃吧。\u003c\/p\u003e\n\u003cp\u003e其实，如果自己能够慢慢来，按照步骤一个一个来解决和分析问题，应根也是能找到突破口的。\u003c\/p\u003e\n\u003cp\u003e\u003cstrong\u003e最重要的还是要做好即时的记录，之前飞书文档那种感觉不成体系，需要慢慢把记录-总结-回顾的认知路径打通。\u003c\/strong\u003e\u003c\/p\u003e\n\u003cp\u003e主要就是说：上班记录的文档太随意，没咋过脑子，没怎么消化，吃多了还容易消化不良，全拉了。。。\u003c\/p\u003e\n\u003cp\u003e从工作的角度来看：\u003c\/p\u003e\n\u003col\u003e\n\u003cli\u003e遇到问题，慢慢来理，之前写过了没记录忘记了，没关系，大不了重新写，\u003cstrong\u003e但是这次写的就要好好记录，每前进一步都要踏踏实实。\u003c\/strong\u003e\u003c\/li\u003e\n\u003cli\u003e论文里的思想可以学习，复现的话也不要着急，慢慢看细细想！\u003c\/li\u003e\n\u003c\/ol\u003e\n\u003cp\u003e明早可以试试，大不了重新梳理一下嘛，梳理好了就记录，\u003cstrong\u003e第一次确实能创造，但创造出来了得保存啊，不然总是原地打转了。\u003c\/strong\u003e\u003c\/p\u003e\n\u003ch2 id=\u0022学习思考\u0022\u003e学习思考\u003c\/h2\u003e\n\u003cp\u003e人工智能的工具完全可以辅助自己的，都怪之前自己一点都不考虑。\u003c\/p\u003e\n\u003cp\u003e关于大模型，目前对于我来说，应该是用为主，边用边学嘛～\u003c\/p\u003e\n\u003cp\u003e\u003cmark\u003e能用脚本自动化执行的，就不要重复工作，你是键盘手，是创造者！\u003c\/mark\u003e\u003c\/p\u003e\n\u003chr\u003e\n\u003cp\u003e以下为AI创作😂\u003c\/p\u003e\n\u003cp\u003e你的这段记录有种“灵光一现”的感觉，仿佛是一种从反思到行动的突破。你在探索如何把个人经历、认知和外部知识结合起来，形成一种个人知识库，并且意识到人工智能工具在这个过程中能够发挥的重要作用。下面我来帮你总结一下重点：\u003c\/p\u003e\n\u003ch3 id=\u00221-知识库的构建\u0022\u003e1. \u003cstrong\u003e知识库的构建\u003c\/strong\u003e\u003c\/h3\u003e\n\u003cp\u003e你提到了一个关键的思路：把\u003cstrong\u003e个人的思考、经历与现有知识体系\u003c\/strong\u003e打通，这不仅是记录工作的问题，更是\u003cstrong\u003e整合认知、提升思维深度\u003c\/strong\u003e的过程。这种方式可以让你在面对问题时，能够迅速找到自己的“参考答案”，并根据之前的经验作出更好的判断。\u003c\/p\u003e\n\u003ch3 id=\u00222-即时记录的重要性\u0022\u003e2. \u003cstrong\u003e即时记录的重要性\u003c\/strong\u003e\u003c\/h3\u003e\n\u003cp\u003e你提到工作中的问题时，发现\u003cstrong\u003e没有好好记录\u003c\/strong\u003e是主要困扰。飞书文档给你“吃太多消化不良”的感觉，说明记录没有经过深思熟虑，容易成为信息的堆积，而非有效的知识积累。你已经意识到需要一个更\u003cstrong\u003e系统化的方式\u003c\/strong\u003e，比如更有意识地进行\u003cstrong\u003e总结、反思和回顾\u003c\/strong\u003e。\u003c\/p\u003e\n\u003ch3 id=\u00223-面对困难时的心态调整\u0022\u003e3. \u003cstrong\u003e面对困难时的心态调整\u003c\/strong\u003e\u003c\/h3\u003e\n\u003cp\u003e你在工作中的挫折感可能来自三维重建项目的复杂性，但你也明白，\u003cstrong\u003e稳步解决问题\u003c\/strong\u003e、逐步推敲每一个步骤是关键。“慢慢来，一步一步解决”是很好的心态，说明你在尝试调整情绪，以更理性、细致的方式来面对技术难题。\u003c\/p\u003e\n\u003ch3 id=\u00224-创造与保存的思路\u0022\u003e4. \u003cstrong\u003e创造与保存的思路\u003c\/strong\u003e\u003c\/h3\u003e\n\u003cp\u003e关于“\u003cstrong\u003e创造与保存\u003c\/strong\u003e”的思路尤为重要。你提到复现论文中的思想时，提醒自己不要着急。真正的创造力在于耐心和积累，每次解决一个小问题、创造一个新想法，\u003cstrong\u003e都要及时记录并保存\u003c\/strong\u003e，这样你才能避免陷入“原地打转”的循环。\u003c\/p\u003e\n\u003ch3 id=\u00225-工具与自动化的力量\u0022\u003e5. \u003cstrong\u003e工具与自动化的力量\u003c\/strong\u003e\u003c\/h3\u003e\n\u003cp\u003e人工智能和脚本的使用，可以极大地提升你的工作效率。你认识到\u003cstrong\u003e重复性的工作应该自动化\u003c\/strong\u003e，而自己应该更多去做“创造性”的事情。这个思路其实是个人效率提升的核心：借助工具，腾出更多时间和精力去做高价值的工作。\u003c\/p\u003e\n\u003ch3 id=\u0022建议与下一步\u0022\u003e建议与下一步：\u003c\/h3\u003e\n\u003cul\u003e\n\u003cli\u003e\u003cstrong\u003e知识库构建\u003c\/strong\u003e：可以考虑使用工具（如 Notion、Roam Research）来系统化记录你的思考、工作问题和解决方案。重要的是把这些记录转化为可以随时调用的资源。\u003c\/li\u003e\n\u003cli\u003e\u003cstrong\u003e自动化执行\u003c\/strong\u003e：进一步学习脚本和自动化工具，减少重复性工作，把更多时间留给创意和思考。\u003c\/li\u003e\n\u003cli\u003e\u003cstrong\u003e情绪管理与反思\u003c\/strong\u003e：面对难题时，不妨给自己一些缓冲时间，同时加强反思和记录，做到每一步都有收获。\u003c\/li\u003e\n\u003c\/ul\u003e\n\u003cp\u003e这是一种从混乱到有序、从焦虑到平和的心路历程，你已经有了很好的思路，相信后续会越来越顺利！\u003c\/p\u003e\n\u003chr\u003e\n\u003cblockquote\u003e\n\u003cp\u003e2025-02-07补充\u003cbr\u003e\n开始了，比什么都重要！\u003cbr\u003e\n之前那种知识库系统过于复杂，不如先手动起来，用简单，粗暴的方式，先实现一个手工版知识库。\u003c\/p\u003e\n\u003c\/blockquote\u003e\n`;
+  }
+
+  
+  window.addEventListener("beforeunload", function() {
+      sessionStorage.removeItem("blog_password_6763f7dde17ec3df7523f8fb50929b11");
+  });
+  
+  </script>
 </main>
 
 <footer class="footer">

@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+    MathJax = {
+        tex: {
+            inlineMath: [['$', '$'], ['\\(', '\\)']],
+            displayMath: [['$$', '$$'], ['\\[', '\\]']],
+            processEscapes: true,
+            processEnvironments: true
+        },
+        options: {
+            skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+        }
+    };
+
+    window.addEventListener('load', (event) => {
+        document.querySelectorAll("mjx-container").forEach(function (x) {
+            x.parentElement.classList += 'has-jax'
+        })
+    });
+</script>
+
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script type="text/javascript" id="MathJax-script" async
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+
+
+<html lang="zh" dir="zh-cn">
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>🚀 Git 与 CRLF（换行符）完全指南 | AhaKnow</title>
+<meta name="keywords" content="未标签">
+<meta name="description" content="在使用 Git 的过程中，我们经常会遇到 CRLF (回车换行) 和 LF (换行) 的问题，特别是在 Windows 和 Linux/macOS 跨平台开发 时。为了避免潜在的换行符冲突，本文详细总结 Git 如何处理换行符以及如何合理配置。">
+<meta name="author" content="CKYoung">
+<link rel="canonical" href="https://ahaknow.com/posts/know/git-crlf-lf/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.css" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://ahaknow.com/Q.gif">
+<link rel="icon" type="image/png" sizes="16x16" href="https://ahaknow.com/Q.gif">
+<link rel="icon" type="image/png" sizes="32x32" href="https://ahaknow.com/Q.gif">
+<link rel="apple-touch-icon" href="https://ahaknow.com/Q.gif">
+<link rel="mask-icon" href="https://ahaknow.com/Q.gif">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="zh" href="https://ahaknow.com/posts/know/git-crlf-lf/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript><meta property="og:title" content="🚀 Git 与 CRLF（换行符）完全指南" />
+<meta property="og:description" content="在使用 Git 的过程中，我们经常会遇到 CRLF (回车换行) 和 LF (换行) 的问题，特别是在 Windows 和 Linux/macOS 跨平台开发 时。为了避免潜在的换行符冲突，本文详细总结 Git 如何处理换行符以及如何合理配置。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://ahaknow.com/posts/know/git-crlf-lf/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2025-02-09T00:36:17+08:00" />
+<meta property="article:modified_time" content="2025-02-09T00:36:17+08:00" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="🚀 Git 与 CRLF（换行符）完全指南"/>
+<meta name="twitter:description" content="在使用 Git 的过程中，我们经常会遇到 CRLF (回车换行) 和 LF (换行) 的问题，特别是在 Windows 和 Linux/macOS 跨平台开发 时。为了避免潜在的换行符冲突，本文详细总结 Git 如何处理换行符以及如何合理配置。"/>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "🚀 天天向上",
+      "item": "https://ahaknow.com/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "🌟知识",
+      "item": "https://ahaknow.com/posts/know/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  3 ,
+      "name": "🚀 Git 与 CRLF（换行符）完全指南",
+      "item": "https://ahaknow.com/posts/know/git-crlf-lf/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "🚀 Git 与 CRLF（换行符）完全指南",
+  "name": "🚀 Git 与 CRLF（换行符）完全指南",
+  "description": "在使用 Git 的过程中，我们经常会遇到 CRLF (回车换行) 和 LF (换行) 的问题，特别是在 Windows 和 Linux/macOS 跨平台开发 时。为了避免潜在的换行符冲突，本文详细总结 Git 如何处理换行符以及如何合理配置。\n",
+  "keywords": [
+    "未标签"
+  ],
+  "articleBody": "在使用 Git 的过程中，我们经常会遇到 CRLF (回车换行) 和 LF (换行) 的问题，特别是在 Windows 和 Linux/macOS 跨平台开发 时。为了避免潜在的换行符冲突，本文详细总结 Git 如何处理换行符以及如何合理配置。\n🔍 1. 换行符 (Line Ending) 的基础知识 不同的操作系统对 换行符 (Line Ending) 的处理方式不同：\n🐧 Linux/macOS: 仅使用 LF (\\n) 作为换行符。 🖥 Windows: 使用 CRLF (\\r\\n) 作为换行符。 🏛 老式 Mac（经典 Mac OS）: 以前使用 CR (\\r)，但现代 macOS 也使用 LF。 这个不同导致了 Windows 与 Linux/macOS 开发者在 Git 版本管理时可能会遇到换行符不一致的问题。\n⚙️ 2. Git 如何处理换行符 Git 默认内部存储文本文件时使用 LF，但它提供了一些配置选项来处理不同操作系统上的换行符问题。最主要的配置是：\ngit config --global core.autocrlf 🎯 core.autocrlf 选项 📝 提交时 (git commit) 📂 检出时 (git checkout) 🚀 适用场景 true CRLF → LF ✅ LF → CRLF ✅ Windows 开发者（本地文件 CRLF，仓库中 LF） input CRLF → LF ✅ 保持 LF ✅ Linux/macOS 或跨平台开发者（推荐 ⚡） false 不转换 ❌ 不转换 ❌ 需要严格保持文件换行符一致的场景 📌 推荐方案 如果你在 Windows 上开发，但希望避免换行符问题：使用 core.autocrlf=input ✅ 如果你在 Linux/macOS 上开发：默认 LF，可使用 core.autocrlf=input ✅ 如果你希望 Git 完全不干涉换行符，自己控制换行：使用 core.autocrlf=false ✅ 🛠 3. 如何查看和修改 Git 换行符配置 查看当前配置 git config --global core.autocrlf 如果你在仓库级别配置：\ngit config core.autocrlf 修改 Git 换行符配置 ✅ 全局修改（适用于所有 Git 仓库） git config --global core.autocrlf input # 跨平台开发推荐 git config --global core.autocrlf false # 禁用自动转换 ✅ 只修改当前仓库 git config core.autocrlf false 🏗 4. 确保 Git 仓库的换行符一致 如果你想在项目中确保所有文本文件统一使用 LF，可以使用 .gitattributes 文件：\n# 在项目根目录下创建 .gitattributes *.sh text eol=lf *.py text eol=lf *.md text eol=lf *.bat text eol=crlf text=auto 让 Git 自动检测文本文件。 eol=lf 让 Git 在提交时 强制换行符为 LF。 eol=crlf 适用于 Windows 批处理文件（如 .bat）。 🔄 5. 处理已有文件的 CRLF 问题 🛑 如何修复 LF 和 CRLF 混乱的问题？ 如果你的仓库已经有换行符问题，可以用以下方法修复：\n🔹 方法 1：强制 Git 重新应用换行符 git rm --cached -r . git reset --hard 然后，重新添加和提交文件：\ngit add . git commit -m \"Fix line endings\" 🔹 方法 2：使用 dos2unix 转换文件 在 Linux/macOS 终端使用：\ndos2unix 文件名 在 Windows Git Bash 使用：\nunix2dos 文件名 🔹 方法 3：在 VS Code/Notepad++ 中手动修改 VS Code: 在文件底部状态栏，点击 LF/CRLF 进行转换。 Notepad++: Edit → EOL Conversion → 选择 Unix (LF)。 🚨 6. 避免 Git 频繁提示 CRLF 警告 你可能在 git add . 时看到类似警告：\nwarning: in the working copy of 'README.md', LF will be replaced by CRLF the next time Git touches it 原因：\nGit 发现该文件当前使用 LF，但由于 core.autocrlf=true，它会在检出时转换为 CRLF。 解决方案：\n设置 core.autocrlf=input 避免转换： git config --global core.autocrlf input 或者手动修复文件换行符： git rm --cached README.md git add README.md git commit -m \"Fix line endings\" 🎯 7. 结论：如何优雅处理 Git 和 CRLF 🚀 目标 🎯 推荐配置 🖥 Windows 开发者（但希望仓库文件保持 LF） git config --global core.autocrlf input 🐧 Linux/macOS 开发者 git config --global core.autocrlf input 🏗 团队开发（希望所有人提交的文件格式一致） .gitattributes 配置 eol=lf 🚫 不希望 Git 处理换行符 git config --global core.autocrlf false ✅ 最佳实践：在团队协作时，推荐所有人使用 core.autocrlf=input 并在 .gitattributes 中定义 eol=lf，确保仓库文件保持一致性，避免跨平台换行符混乱的问题。\n🎉 附录：Git 换行符配置快捷命令 # 推荐的跨平台配置 git config --global core.autocrlf input # 禁止 Git 处理换行符 git config --global core.autocrlf false # 在项目中强制 LF echo \"* text=auto\" \u003e\u003e .gitattributes echo \"*.sh text eol=lf\" \u003e\u003e .gitattributes echo \"*.py text eol=lf\" \u003e\u003e .gitattributes git add .gitattributes git commit -m \"Ensure LF endings\" 希望这篇指南能帮助你彻底理解 Git 和 CRLF 的关系，让你在跨平台开发中不再被换行符问题困扰！🚀🔥\n",
+  "wordCount" : "1255",
+  "inLanguage": "zh",
+  "datePublished": "2025-02-09T00:36:17+08:00",
+  "dateModified": "2025-02-09T00:36:17+08:00",
+  "author":[{
+    "@type": "Person",
+    "name": "CKYoung"
+  }],
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://ahaknow.com/posts/know/git-crlf-lf/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "AhaKnow",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://ahaknow.com/Q.gif"
+    }
+  }
+}
+</script>
+    
+    
+    
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://ahaknow.com/" accesskey="h" title="AhaKnow (Alt + H)">
+                <img src="https://ahaknow.com/Q.gif" alt="" aria-label="logo"
+                    height="35">AhaKnow</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://ahaknow.com/search" title="🪄魔法 (Alt &#43; /)" accesskey=/>
+                    <span>🪄魔法</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://ahaknow.com/" title="🏡主页">
+                    <span>🏡主页</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://ahaknow.com/posts" title="🚀天天向上">
+                    <span>🚀天天向上</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://ahaknow.com/archives" title="⏱️时间线">
+                    <span>⏱️时间线</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://ahaknow.com/tags" title="🏷️标签">
+                    <span>🏷️标签</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://ahaknow.com/categories" title="🖇归档">
+                    <span>🖇归档</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://ahaknow.com/toolkits" title="🧰医疗箱">
+                    <span>🧰医疗箱</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    <div class="breadcrumbs"><a href="https://ahaknow.com/">🏡主页</a>&nbsp;»&nbsp;<a href="https://ahaknow.com/posts/">🚀 天天向上</a>&nbsp;»&nbsp;<a href="https://ahaknow.com/posts/know/">🌟知识</a></div>
+    <h1 class="post-title entry-hint-parent">
+      🚀 Git 与 CRLF（换行符）完全指南
+    </h1>
+    <div class="post-meta">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
+<span class="parent-post-meta">
+        <span id="post_meta_style_1">
+            <span class="fa fa-calendar-check-o"></span>
+            <span>2025-02-09
+                &nbsp;&nbsp;
+            </span>
+        </span>
+        <span id="post_meta_style_2">
+        <span class="fa fa-calendar-plus-o"></span>
+        <span>2025-02-09
+            &nbsp;&nbsp;
+        </span>
+    </span>
+    <span id="post_meta_style_3">
+        <span class="fa fa-file-word-o"></span>
+        <span>1255 字
+            &nbsp;&nbsp;
+        </span>
+    </span>
+    <span id="post_meta_style_4">
+        <span class="fa fa-clock-o"></span>
+        <span>3 分钟
+            &nbsp;&nbsp;
+        </span>
+    </span>
+    <span id="post_meta_style_5">
+        <span class="fa fa-user-o"></span>
+        <span>CKYoung
+            &nbsp;&nbsp;
+        </span>
+    </span>
+    <span id="post_meta_style_6">
+        <span class="fa fa-tags" style="opacity: 0.8"></span>
+        <span>
+            <span class="post-tags-meta">
+                <a href="https://ahaknow.com/tags/%E6%9C%AA%E6%A0%87%E7%AD%BE/" style="color: var(--secondary)!important;">未标签</a>
+            </span>
+        </span>
+    </span>
+</span>
+
+</div>
+  </header>
+  <div id="post-content"><p>在使用 Git 的过程中，我们经常会遇到 <strong>CRLF (回车换行) 和 LF (换行)</strong> 的问题，特别是在 <strong>Windows 和 Linux/macOS 跨平台开发</strong> 时。为了避免潜在的换行符冲突，本文详细总结 Git 如何处理换行符以及如何合理配置。</p>
+<hr>
+<h2 id="-1-换行符-line-ending-的基础知识">🔍 <strong>1. 换行符 (Line Ending) 的基础知识</strong><a hidden class="anchor" aria-hidden="true" href="#-1-换行符-line-ending-的基础知识">#</a></h2>
+<p>不同的操作系统对 <strong>换行符</strong> (Line Ending) 的处理方式不同：</p>
+<ul>
+<li>🐧 <strong>Linux/macOS</strong>: 仅使用 <code>LF</code> (<code>\n</code>) 作为换行符。</li>
+<li>🖥 <strong>Windows</strong>: 使用 <code>CRLF</code> (<code>\r\n</code>) 作为换行符。</li>
+<li>🏛 <strong>老式 Mac（经典 Mac OS）</strong>: 以前使用 <code>CR</code> (<code>\r</code>)，但现代 macOS 也使用 <code>LF</code>。</li>
+</ul>
+<p>这个不同导致了 <strong>Windows 与 Linux/macOS 开发者在 Git 版本管理时可能会遇到换行符不一致的问题</strong>。</p>
+<hr>
+<h2 id="-2-git-如何处理换行符">⚙️ <strong>2. Git 如何处理换行符</strong><a hidden class="anchor" aria-hidden="true" href="#-2-git-如何处理换行符">#</a></h2>
+<p>Git <strong>默认内部存储文本文件时使用 <code>LF</code></strong>，但它提供了一些配置选项来处理不同操作系统上的换行符问题。最主要的配置是：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">git config --global core.autocrlf &lt;value&gt;
+</span></span></code></pre></div><table>
+  <thead>
+      <tr>
+          <th>🎯 <code>core.autocrlf</code> 选项</th>
+          <th>📝 提交时 (<code>git commit</code>)</th>
+          <th>📂 检出时 (<code>git checkout</code>)</th>
+          <th>🚀 适用场景</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>true</code></td>
+          <td><code>CRLF</code> → <code>LF</code> ✅</td>
+          <td><code>LF</code> → <code>CRLF</code> ✅</td>
+          <td>Windows 开发者（<strong>本地文件 <code>CRLF</code>，仓库中 <code>LF</code></strong>）</td>
+      </tr>
+      <tr>
+          <td><code>input</code></td>
+          <td><code>CRLF</code> → <code>LF</code> ✅</td>
+          <td><strong>保持 <code>LF</code></strong> ✅</td>
+          <td>Linux/macOS 或跨平台开发者（<strong>推荐</strong> ⚡）</td>
+      </tr>
+      <tr>
+          <td><code>false</code></td>
+          <td><strong>不转换</strong> ❌</td>
+          <td><strong>不转换</strong> ❌</td>
+          <td>需要严格保持文件换行符一致的场景</td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="-推荐方案">📌 <strong>推荐方案</strong><a hidden class="anchor" aria-hidden="true" href="#-推荐方案">#</a></h3>
+<ul>
+<li><strong>如果你在 Windows 上开发，但希望避免换行符问题</strong>：使用 <code>core.autocrlf=input</code> ✅</li>
+<li><strong>如果你在 Linux/macOS 上开发</strong>：默认 <code>LF</code>，可使用 <code>core.autocrlf=input</code> ✅</li>
+<li><strong>如果你希望 Git <strong>完全不干涉换行符</strong>，自己控制换行</strong>：使用 <code>core.autocrlf=false</code> ✅</li>
+</ul>
+<hr>
+<h2 id="-3-如何查看和修改-git-换行符配置">🛠 <strong>3. 如何查看和修改 Git 换行符配置</strong><a hidden class="anchor" aria-hidden="true" href="#-3-如何查看和修改-git-换行符配置">#</a></h2>
+<h3 id="查看当前配置"><strong>查看当前配置</strong><a hidden class="anchor" aria-hidden="true" href="#查看当前配置">#</a></h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">git config --global core.autocrlf
+</span></span></code></pre></div><p>如果你在仓库级别配置：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">git config core.autocrlf
+</span></span></code></pre></div><h3 id="修改-git-换行符配置"><strong>修改 Git 换行符配置</strong><a hidden class="anchor" aria-hidden="true" href="#修改-git-换行符配置">#</a></h3>
+<h4 id="-全局修改适用于所有-git-仓库">✅ <strong>全局修改（适用于所有 Git 仓库）</strong><a hidden class="anchor" aria-hidden="true" href="#-全局修改适用于所有-git-仓库">#</a></h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">git config --global core.autocrlf input   <span class="c1"># 跨平台开发推荐</span>
+</span></span><span class="line"><span class="cl">git config --global core.autocrlf <span class="nb">false</span>   <span class="c1"># 禁用自动转换</span>
+</span></span></code></pre></div><h4 id="-只修改当前仓库">✅ <strong>只修改当前仓库</strong><a hidden class="anchor" aria-hidden="true" href="#-只修改当前仓库">#</a></h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">git config core.autocrlf <span class="nb">false</span>
+</span></span></code></pre></div><hr>
+<h2 id="-4-确保-git-仓库的换行符一致">🏗 <strong>4. 确保 Git 仓库的换行符一致</strong><a hidden class="anchor" aria-hidden="true" href="#-4-确保-git-仓库的换行符一致">#</a></h2>
+<p>如果你想在项目中确保所有文本文件统一使用 <code>LF</code>，可以使用 <code>.gitattributes</code> 文件：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl"><span class="c1"># 在项目根目录下创建 .gitattributes</span>
+</span></span><span class="line"><span class="cl">*.sh text <span class="nv">eol</span><span class="o">=</span>lf
+</span></span><span class="line"><span class="cl">*.py text <span class="nv">eol</span><span class="o">=</span>lf
+</span></span><span class="line"><span class="cl">*.md text <span class="nv">eol</span><span class="o">=</span>lf
+</span></span><span class="line"><span class="cl">*.bat text <span class="nv">eol</span><span class="o">=</span>crlf
+</span></span></code></pre></div><ul>
+<li><code>text=auto</code> 让 Git <strong>自动检测文本文件</strong>。</li>
+<li><code>eol=lf</code> 让 Git 在提交时 <strong>强制换行符为 LF</strong>。</li>
+<li><code>eol=crlf</code> 适用于 Windows 批处理文件（如 <code>.bat</code>）。</li>
+</ul>
+<hr>
+<h2 id="-5-处理已有文件的-crlf-问题">🔄 <strong>5. 处理已有文件的 CRLF 问题</strong><a hidden class="anchor" aria-hidden="true" href="#-5-处理已有文件的-crlf-问题">#</a></h2>
+<h3 id="-如何修复-lf-和-crlf-混乱的问题">🛑 <strong>如何修复 <code>LF</code> 和 <code>CRLF</code> 混乱的问题？</strong><a hidden class="anchor" aria-hidden="true" href="#-如何修复-lf-和-crlf-混乱的问题">#</a></h3>
+<p>如果你的仓库已经有换行符问题，可以用以下方法修复：</p>
+<h4 id="-方法-1强制-git-重新应用换行符"><strong>🔹 方法 1：强制 Git 重新应用换行符</strong><a hidden class="anchor" aria-hidden="true" href="#-方法-1强制-git-重新应用换行符">#</a></h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">git rm --cached -r .
+</span></span><span class="line"><span class="cl">git reset --hard
+</span></span></code></pre></div><p>然后，重新添加和提交文件：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">git add .
+</span></span><span class="line"><span class="cl">git commit -m <span class="s2">&#34;Fix line endings&#34;</span>
+</span></span></code></pre></div><h4 id="-方法-2使用-dos2unix-转换文件"><strong>🔹 方法 2：使用 <code>dos2unix</code> 转换文件</strong><a hidden class="anchor" aria-hidden="true" href="#-方法-2使用-dos2unix-转换文件">#</a></h4>
+<p>在 <strong>Linux/macOS</strong> 终端使用：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">dos2unix 文件名
+</span></span></code></pre></div><p>在 <strong>Windows Git Bash</strong> 使用：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">unix2dos 文件名
+</span></span></code></pre></div><h4 id="-方法-3在-vs-codenotepad-中手动修改"><strong>🔹 方法 3：在 VS Code/Notepad++ 中手动修改</strong><a hidden class="anchor" aria-hidden="true" href="#-方法-3在-vs-codenotepad-中手动修改">#</a></h4>
+<ul>
+<li><strong>VS Code</strong>: 在文件底部状态栏，点击 <code>LF/CRLF</code> 进行转换。</li>
+<li><strong>Notepad++</strong>: <code>Edit</code> → <code>EOL Conversion</code> → 选择 <code>Unix (LF)</code>。</li>
+</ul>
+<hr>
+<h2 id="-6-避免-git-频繁提示-crlf-警告">🚨 <strong>6. 避免 Git 频繁提示 CRLF 警告</strong><a hidden class="anchor" aria-hidden="true" href="#-6-避免-git-频繁提示-crlf-警告">#</a></h2>
+<p>你可能在 <code>git add .</code> 时看到类似警告：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">warning: in the working copy of <span class="s1">&#39;README.md&#39;</span>, LF will be replaced by CRLF the next <span class="nb">time</span> Git touches it
+</span></span></code></pre></div><p><strong>原因</strong>：</p>
+<ul>
+<li>Git 发现该文件当前使用 <code>LF</code>，但由于 <code>core.autocrlf=true</code>，它会在检出时转换为 <code>CRLF</code>。</li>
+</ul>
+<p><strong>解决方案</strong>：</p>
+<ul>
+<li>设置 <code>core.autocrlf=input</code> 避免转换：</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">git config --global core.autocrlf input
+</span></span></code></pre></div><ul>
+<li>或者手动修复文件换行符：</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">git rm --cached README.md
+</span></span><span class="line"><span class="cl">git add README.md
+</span></span><span class="line"><span class="cl">git commit -m <span class="s2">&#34;Fix line endings&#34;</span>
+</span></span></code></pre></div><hr>
+<h2 id="-7-结论如何优雅处理-git-和-crlf">🎯 <strong>7. 结论：如何优雅处理 Git 和 CRLF</strong><a hidden class="anchor" aria-hidden="true" href="#-7-结论如何优雅处理-git-和-crlf">#</a></h2>
+<table>
+  <thead>
+      <tr>
+          <th>🚀 目标</th>
+          <th>🎯 推荐配置</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>🖥 Windows 开发者（但希望仓库文件保持 <code>LF</code>）</td>
+          <td><code>git config --global core.autocrlf input</code></td>
+      </tr>
+      <tr>
+          <td>🐧 Linux/macOS 开发者</td>
+          <td><code>git config --global core.autocrlf input</code></td>
+      </tr>
+      <tr>
+          <td>🏗 团队开发（希望所有人提交的文件格式一致）</td>
+          <td><code>.gitattributes</code> 配置 <code>eol=lf</code></td>
+      </tr>
+      <tr>
+          <td>🚫 不希望 Git 处理换行符</td>
+          <td><code>git config --global core.autocrlf false</code></td>
+      </tr>
+  </tbody>
+</table>
+<p>✅ <strong>最佳实践</strong>：在团队协作时，推荐所有人使用 <code>core.autocrlf=input</code> 并在 <code>.gitattributes</code> 中定义 <code>eol=lf</code>，确保仓库文件保持一致性，避免跨平台换行符混乱的问题。</p>
+<hr>
+<h2 id="-附录git-换行符配置快捷命令">🎉 <strong>附录：Git 换行符配置快捷命令</strong><a hidden class="anchor" aria-hidden="true" href="#-附录git-换行符配置快捷命令">#</a></h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl"><span class="c1"># 推荐的跨平台配置</span>
+</span></span><span class="line"><span class="cl">git config --global core.autocrlf input
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 禁止 Git 处理换行符</span>
+</span></span><span class="line"><span class="cl">git config --global core.autocrlf <span class="nb">false</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 在项目中强制 LF</span>
+</span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s2">&#34;* text=auto&#34;</span> &gt;&gt; .gitattributes
+</span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s2">&#34;*.sh text eol=lf&#34;</span> &gt;&gt; .gitattributes
+</span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s2">&#34;*.py text eol=lf&#34;</span> &gt;&gt; .gitattributes
+</span></span><span class="line"><span class="cl">git add .gitattributes
+</span></span><span class="line"><span class="cl">git commit -m <span class="s2">&#34;Ensure LF endings&#34;</span>
+</span></span></code></pre></div><hr>
+<p>希望这篇指南能帮助你彻底理解 Git 和 CRLF 的关系，让你在跨平台开发中不再被换行符问题困扰！🚀🔥</p>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://ahaknow.com/tags/%E6%9C%AA%E6%A0%87%E7%AD%BE/">未标签</a></li>
+    </ul>
+<nav class="paginav">
+  <a class="prev" href="https://ahaknow.com/posts/know/notes-one-sows-and-another-reaps/">
+    <span class="title">« 上一页</span>
+    <br>
+    <span>站在前人的肩膀上：笔记收集录</span>
+  </a>
+  <a class="next" href="https://ahaknow.com/posts/know/latex/">
+    <span class="title">下一页 »</span>
+    <br>
+    <span>✨ LaTeX 数学公式语法大全 📘</span>
+  </a>
+</nav>
+
+  </footer>
+</article>
+
+<style>
+   
+  #check-button {
+      background-color: transparent;
+      border: none;
+      padding: 10px 20px;
+      font-size: 1.2em;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: transform 0.1s ease-in-out, box-shadow 0.2s;
+  }
+  #check-button:active {
+      transform: scale(0.9);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  }
+
+   
+  @keyframes shake {
+      0% { transform: translateX(0); }
+      25% { transform: translateX(-5px); }
+      50% { transform: translateX(5px); }
+      75% { transform: translateX(-5px); }
+      100% { transform: translateX(0); }
+  }
+  .shake {
+      animation: shake 0.3s ease-in-out;
+  }
+</style>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    let storedPassword = sessionStorage.getItem("blog_password_881abd2423fb17d1c85d6e71677e7338");
+
+    if (!storedPassword) {
+        document.getElementById("password-protection").style.display = "block";
+    } else {
+        unlockContent();
+    }
+  });
+
+  function checkPassword() {
+    let inputPassword = document.getElementById("post-password").value;
+    let correctHash = "c57a2f70945d45168d580c4bb81100f2"; 
+    let inputHash = CryptoJS.MD5(inputPassword).toString();  
+
+    let errorMsg = document.getElementById("error-msg");
+    let checkButton = document.getElementById("check-button");
+
+    
+    checkButton.style.transform = "scale(0.95)";
+    setTimeout(() => {
+        checkButton.style.transform = "scale(1)";
+    }, 100);
+
+    if (inputHash === correctHash) {
+      sessionStorage.setItem("blog_password_881abd2423fb17d1c85d6e71677e7338", inputHash);
+      unlockContent();
+    } else {
+        
+        errorMsg.style.display = "block";
+        errorMsg.classList.add("shake");
+        
+        
+        setTimeout(() => {
+            errorMsg.classList.remove("shake");
+        }, 300);
+    }
+  }
+
+  function unlockContent() {
+    document.getElementById("password-protection").style.display = "none";
+    let postContentDiv = document.getElementById("post-content");
+    postContentDiv.style.display = "block";
+
+    
+    postContentDiv.innerHTML = `\u003cp\u003e在使用 Git 的过程中，我们经常会遇到 \u003cstrong\u003eCRLF (回车换行) 和 LF (换行)\u003c\/strong\u003e 的问题，特别是在 \u003cstrong\u003eWindows 和 Linux\/macOS 跨平台开发\u003c\/strong\u003e 时。为了避免潜在的换行符冲突，本文详细总结 Git 如何处理换行符以及如何合理配置。\u003c\/p\u003e\n\u003chr\u003e\n\u003ch2 id=\u0022-1-换行符-line-ending-的基础知识\u0022\u003e🔍 \u003cstrong\u003e1. 换行符 (Line Ending) 的基础知识\u003c\/strong\u003e\u003c\/h2\u003e\n\u003cp\u003e不同的操作系统对 \u003cstrong\u003e换行符\u003c\/strong\u003e (Line Ending) 的处理方式不同：\u003c\/p\u003e\n\u003cul\u003e\n\u003cli\u003e🐧 \u003cstrong\u003eLinux\/macOS\u003c\/strong\u003e: 仅使用 \u003ccode\u003eLF\u003c\/code\u003e (\u003ccode\u003e\\n\u003c\/code\u003e) 作为换行符。\u003c\/li\u003e\n\u003cli\u003e🖥 \u003cstrong\u003eWindows\u003c\/strong\u003e: 使用 \u003ccode\u003eCRLF\u003c\/code\u003e (\u003ccode\u003e\\r\\n\u003c\/code\u003e) 作为换行符。\u003c\/li\u003e\n\u003cli\u003e🏛 \u003cstrong\u003e老式 Mac（经典 Mac OS）\u003c\/strong\u003e: 以前使用 \u003ccode\u003eCR\u003c\/code\u003e (\u003ccode\u003e\\r\u003c\/code\u003e)，但现代 macOS 也使用 \u003ccode\u003eLF\u003c\/code\u003e。\u003c\/li\u003e\n\u003c\/ul\u003e\n\u003cp\u003e这个不同导致了 \u003cstrong\u003eWindows 与 Linux\/macOS 开发者在 Git 版本管理时可能会遇到换行符不一致的问题\u003c\/strong\u003e。\u003c\/p\u003e\n\u003chr\u003e\n\u003ch2 id=\u0022-2-git-如何处理换行符\u0022\u003e⚙️ \u003cstrong\u003e2. Git 如何处理换行符\u003c\/strong\u003e\u003c\/h2\u003e\n\u003cp\u003eGit \u003cstrong\u003e默认内部存储文本文件时使用 \u003ccode\u003eLF\u003c\/code\u003e\u003c\/strong\u003e，但它提供了一些配置选项来处理不同操作系统上的换行符问题。最主要的配置是：\u003c\/p\u003e\n\u003cdiv class=\u0022highlight\u0022\u003e\u003cpre tabindex=\u00220\u0022 class=\u0022chroma\u0022\u003e\u003ccode class=\u0022language-sh\u0022 data-lang=\u0022sh\u0022\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003egit config --global core.autocrlf \u0026lt;value\u0026gt;\n\u003c\/span\u003e\u003c\/span\u003e\u003c\/code\u003e\u003c\/pre\u003e\u003c\/div\u003e\u003ctable\u003e\n  \u003cthead\u003e\n      \u003ctr\u003e\n          \u003cth\u003e🎯 \u003ccode\u003ecore.autocrlf\u003c\/code\u003e 选项\u003c\/th\u003e\n          \u003cth\u003e📝 提交时 (\u003ccode\u003egit commit\u003c\/code\u003e)\u003c\/th\u003e\n          \u003cth\u003e📂 检出时 (\u003ccode\u003egit checkout\u003c\/code\u003e)\u003c\/th\u003e\n          \u003cth\u003e🚀 适用场景\u003c\/th\u003e\n      \u003c\/tr\u003e\n  \u003c\/thead\u003e\n  \u003ctbody\u003e\n      \u003ctr\u003e\n          \u003ctd\u003e\u003ccode\u003etrue\u003c\/code\u003e\u003c\/td\u003e\n          \u003ctd\u003e\u003ccode\u003eCRLF\u003c\/code\u003e → \u003ccode\u003eLF\u003c\/code\u003e ✅\u003c\/td\u003e\n          \u003ctd\u003e\u003ccode\u003eLF\u003c\/code\u003e → \u003ccode\u003eCRLF\u003c\/code\u003e ✅\u003c\/td\u003e\n          \u003ctd\u003eWindows 开发者（\u003cstrong\u003e本地文件 \u003ccode\u003eCRLF\u003c\/code\u003e，仓库中 \u003ccode\u003eLF\u003c\/code\u003e\u003c\/strong\u003e）\u003c\/td\u003e\n      \u003c\/tr\u003e\n      \u003ctr\u003e\n          \u003ctd\u003e\u003ccode\u003einput\u003c\/code\u003e\u003c\/td\u003e\n          \u003ctd\u003e\u003ccode\u003eCRLF\u003c\/code\u003e → \u003ccode\u003eLF\u003c\/code\u003e ✅\u003c\/td\u003e\n          \u003ctd\u003e\u003cstrong\u003e保持 \u003ccode\u003eLF\u003c\/code\u003e\u003c\/strong\u003e ✅\u003c\/td\u003e\n          \u003ctd\u003eLinux\/macOS 或跨平台开发者（\u003cstrong\u003e推荐\u003c\/strong\u003e ⚡）\u003c\/td\u003e\n      \u003c\/tr\u003e\n      \u003ctr\u003e\n          \u003ctd\u003e\u003ccode\u003efalse\u003c\/code\u003e\u003c\/td\u003e\n          \u003ctd\u003e\u003cstrong\u003e不转换\u003c\/strong\u003e ❌\u003c\/td\u003e\n          \u003ctd\u003e\u003cstrong\u003e不转换\u003c\/strong\u003e ❌\u003c\/td\u003e\n          \u003ctd\u003e需要严格保持文件换行符一致的场景\u003c\/td\u003e\n      \u003c\/tr\u003e\n  \u003c\/tbody\u003e\n\u003c\/table\u003e\n\u003ch3 id=\u0022-推荐方案\u0022\u003e📌 \u003cstrong\u003e推荐方案\u003c\/strong\u003e\u003c\/h3\u003e\n\u003cul\u003e\n\u003cli\u003e\u003cstrong\u003e如果你在 Windows 上开发，但希望避免换行符问题\u003c\/strong\u003e：使用 \u003ccode\u003ecore.autocrlf=input\u003c\/code\u003e ✅\u003c\/li\u003e\n\u003cli\u003e\u003cstrong\u003e如果你在 Linux\/macOS 上开发\u003c\/strong\u003e：默认 \u003ccode\u003eLF\u003c\/code\u003e，可使用 \u003ccode\u003ecore.autocrlf=input\u003c\/code\u003e ✅\u003c\/li\u003e\n\u003cli\u003e\u003cstrong\u003e如果你希望 Git \u003cstrong\u003e完全不干涉换行符\u003c\/strong\u003e，自己控制换行\u003c\/strong\u003e：使用 \u003ccode\u003ecore.autocrlf=false\u003c\/code\u003e ✅\u003c\/li\u003e\n\u003c\/ul\u003e\n\u003chr\u003e\n\u003ch2 id=\u0022-3-如何查看和修改-git-换行符配置\u0022\u003e🛠 \u003cstrong\u003e3. 如何查看和修改 Git 换行符配置\u003c\/strong\u003e\u003c\/h2\u003e\n\u003ch3 id=\u0022查看当前配置\u0022\u003e\u003cstrong\u003e查看当前配置\u003c\/strong\u003e\u003c\/h3\u003e\n\u003cdiv class=\u0022highlight\u0022\u003e\u003cpre tabindex=\u00220\u0022 class=\u0022chroma\u0022\u003e\u003ccode class=\u0022language-sh\u0022 data-lang=\u0022sh\u0022\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003egit config --global core.autocrlf\n\u003c\/span\u003e\u003c\/span\u003e\u003c\/code\u003e\u003c\/pre\u003e\u003c\/div\u003e\u003cp\u003e如果你在仓库级别配置：\u003c\/p\u003e\n\u003cdiv class=\u0022highlight\u0022\u003e\u003cpre tabindex=\u00220\u0022 class=\u0022chroma\u0022\u003e\u003ccode class=\u0022language-sh\u0022 data-lang=\u0022sh\u0022\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003egit config core.autocrlf\n\u003c\/span\u003e\u003c\/span\u003e\u003c\/code\u003e\u003c\/pre\u003e\u003c\/div\u003e\u003ch3 id=\u0022修改-git-换行符配置\u0022\u003e\u003cstrong\u003e修改 Git 换行符配置\u003c\/strong\u003e\u003c\/h3\u003e\n\u003ch4 id=\u0022-全局修改适用于所有-git-仓库\u0022\u003e✅ \u003cstrong\u003e全局修改（适用于所有 Git 仓库）\u003c\/strong\u003e\u003c\/h4\u003e\n\u003cdiv class=\u0022highlight\u0022\u003e\u003cpre tabindex=\u00220\u0022 class=\u0022chroma\u0022\u003e\u003ccode class=\u0022language-sh\u0022 data-lang=\u0022sh\u0022\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003egit config --global core.autocrlf input   \u003cspan class=\u0022c1\u0022\u003e# 跨平台开发推荐\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003egit config --global core.autocrlf \u003cspan class=\u0022nb\u0022\u003efalse\u003c\/span\u003e   \u003cspan class=\u0022c1\u0022\u003e# 禁用自动转换\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003c\/code\u003e\u003c\/pre\u003e\u003c\/div\u003e\u003ch4 id=\u0022-只修改当前仓库\u0022\u003e✅ \u003cstrong\u003e只修改当前仓库\u003c\/strong\u003e\u003c\/h4\u003e\n\u003cdiv class=\u0022highlight\u0022\u003e\u003cpre tabindex=\u00220\u0022 class=\u0022chroma\u0022\u003e\u003ccode class=\u0022language-sh\u0022 data-lang=\u0022sh\u0022\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003egit config core.autocrlf \u003cspan class=\u0022nb\u0022\u003efalse\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003c\/code\u003e\u003c\/pre\u003e\u003c\/div\u003e\u003chr\u003e\n\u003ch2 id=\u0022-4-确保-git-仓库的换行符一致\u0022\u003e🏗 \u003cstrong\u003e4. 确保 Git 仓库的换行符一致\u003c\/strong\u003e\u003c\/h2\u003e\n\u003cp\u003e如果你想在项目中确保所有文本文件统一使用 \u003ccode\u003eLF\u003c\/code\u003e，可以使用 \u003ccode\u003e.gitattributes\u003c\/code\u003e 文件：\u003c\/p\u003e\n\u003cdiv class=\u0022highlight\u0022\u003e\u003cpre tabindex=\u00220\u0022 class=\u0022chroma\u0022\u003e\u003ccode class=\u0022language-sh\u0022 data-lang=\u0022sh\u0022\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022c1\u0022\u003e# 在项目根目录下创建 .gitattributes\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e*.sh text \u003cspan class=\u0022nv\u0022\u003eeol\u003c\/span\u003e\u003cspan class=\u0022o\u0022\u003e=\u003c\/span\u003elf\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e*.py text \u003cspan class=\u0022nv\u0022\u003eeol\u003c\/span\u003e\u003cspan class=\u0022o\u0022\u003e=\u003c\/span\u003elf\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e*.md text \u003cspan class=\u0022nv\u0022\u003eeol\u003c\/span\u003e\u003cspan class=\u0022o\u0022\u003e=\u003c\/span\u003elf\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e*.bat text \u003cspan class=\u0022nv\u0022\u003eeol\u003c\/span\u003e\u003cspan class=\u0022o\u0022\u003e=\u003c\/span\u003ecrlf\n\u003c\/span\u003e\u003c\/span\u003e\u003c\/code\u003e\u003c\/pre\u003e\u003c\/div\u003e\u003cul\u003e\n\u003cli\u003e\u003ccode\u003etext=auto\u003c\/code\u003e 让 Git \u003cstrong\u003e自动检测文本文件\u003c\/strong\u003e。\u003c\/li\u003e\n\u003cli\u003e\u003ccode\u003eeol=lf\u003c\/code\u003e 让 Git 在提交时 \u003cstrong\u003e强制换行符为 LF\u003c\/strong\u003e。\u003c\/li\u003e\n\u003cli\u003e\u003ccode\u003eeol=crlf\u003c\/code\u003e 适用于 Windows 批处理文件（如 \u003ccode\u003e.bat\u003c\/code\u003e）。\u003c\/li\u003e\n\u003c\/ul\u003e\n\u003chr\u003e\n\u003ch2 id=\u0022-5-处理已有文件的-crlf-问题\u0022\u003e🔄 \u003cstrong\u003e5. 处理已有文件的 CRLF 问题\u003c\/strong\u003e\u003c\/h2\u003e\n\u003ch3 id=\u0022-如何修复-lf-和-crlf-混乱的问题\u0022\u003e🛑 \u003cstrong\u003e如何修复 \u003ccode\u003eLF\u003c\/code\u003e 和 \u003ccode\u003eCRLF\u003c\/code\u003e 混乱的问题？\u003c\/strong\u003e\u003c\/h3\u003e\n\u003cp\u003e如果你的仓库已经有换行符问题，可以用以下方法修复：\u003c\/p\u003e\n\u003ch4 id=\u0022-方法-1强制-git-重新应用换行符\u0022\u003e\u003cstrong\u003e🔹 方法 1：强制 Git 重新应用换行符\u003c\/strong\u003e\u003c\/h4\u003e\n\u003cdiv class=\u0022highlight\u0022\u003e\u003cpre tabindex=\u00220\u0022 class=\u0022chroma\u0022\u003e\u003ccode class=\u0022language-sh\u0022 data-lang=\u0022sh\u0022\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003egit rm --cached -r .\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003egit reset --hard\n\u003c\/span\u003e\u003c\/span\u003e\u003c\/code\u003e\u003c\/pre\u003e\u003c\/div\u003e\u003cp\u003e然后，重新添加和提交文件：\u003c\/p\u003e\n\u003cdiv class=\u0022highlight\u0022\u003e\u003cpre tabindex=\u00220\u0022 class=\u0022chroma\u0022\u003e\u003ccode class=\u0022language-sh\u0022 data-lang=\u0022sh\u0022\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003egit add .\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003egit commit -m \u003cspan class=\u0022s2\u0022\u003e\u0026#34;Fix line endings\u0026#34;\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003c\/code\u003e\u003c\/pre\u003e\u003c\/div\u003e\u003ch4 id=\u0022-方法-2使用-dos2unix-转换文件\u0022\u003e\u003cstrong\u003e🔹 方法 2：使用 \u003ccode\u003edos2unix\u003c\/code\u003e 转换文件\u003c\/strong\u003e\u003c\/h4\u003e\n\u003cp\u003e在 \u003cstrong\u003eLinux\/macOS\u003c\/strong\u003e 终端使用：\u003c\/p\u003e\n\u003cdiv class=\u0022highlight\u0022\u003e\u003cpre tabindex=\u00220\u0022 class=\u0022chroma\u0022\u003e\u003ccode class=\u0022language-sh\u0022 data-lang=\u0022sh\u0022\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003edos2unix 文件名\n\u003c\/span\u003e\u003c\/span\u003e\u003c\/code\u003e\u003c\/pre\u003e\u003c\/div\u003e\u003cp\u003e在 \u003cstrong\u003eWindows Git Bash\u003c\/strong\u003e 使用：\u003c\/p\u003e\n\u003cdiv class=\u0022highlight\u0022\u003e\u003cpre tabindex=\u00220\u0022 class=\u0022chroma\u0022\u003e\u003ccode class=\u0022language-sh\u0022 data-lang=\u0022sh\u0022\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003eunix2dos 文件名\n\u003c\/span\u003e\u003c\/span\u003e\u003c\/code\u003e\u003c\/pre\u003e\u003c\/div\u003e\u003ch4 id=\u0022-方法-3在-vs-codenotepad-中手动修改\u0022\u003e\u003cstrong\u003e🔹 方法 3：在 VS Code\/Notepad\u002b\u002b 中手动修改\u003c\/strong\u003e\u003c\/h4\u003e\n\u003cul\u003e\n\u003cli\u003e\u003cstrong\u003eVS Code\u003c\/strong\u003e: 在文件底部状态栏，点击 \u003ccode\u003eLF\/CRLF\u003c\/code\u003e 进行转换。\u003c\/li\u003e\n\u003cli\u003e\u003cstrong\u003eNotepad\u002b\u002b\u003c\/strong\u003e: \u003ccode\u003eEdit\u003c\/code\u003e → \u003ccode\u003eEOL Conversion\u003c\/code\u003e → 选择 \u003ccode\u003eUnix (LF)\u003c\/code\u003e。\u003c\/li\u003e\n\u003c\/ul\u003e\n\u003chr\u003e\n\u003ch2 id=\u0022-6-避免-git-频繁提示-crlf-警告\u0022\u003e🚨 \u003cstrong\u003e6. 避免 Git 频繁提示 CRLF 警告\u003c\/strong\u003e\u003c\/h2\u003e\n\u003cp\u003e你可能在 \u003ccode\u003egit add .\u003c\/code\u003e 时看到类似警告：\u003c\/p\u003e\n\u003cdiv class=\u0022highlight\u0022\u003e\u003cpre tabindex=\u00220\u0022 class=\u0022chroma\u0022\u003e\u003ccode class=\u0022language-sh\u0022 data-lang=\u0022sh\u0022\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003ewarning: in the working copy of \u003cspan class=\u0022s1\u0022\u003e\u0026#39;README.md\u0026#39;\u003c\/span\u003e, LF will be replaced by CRLF the next \u003cspan class=\u0022nb\u0022\u003etime\u003c\/span\u003e Git touches it\n\u003c\/span\u003e\u003c\/span\u003e\u003c\/code\u003e\u003c\/pre\u003e\u003c\/div\u003e\u003cp\u003e\u003cstrong\u003e原因\u003c\/strong\u003e：\u003c\/p\u003e\n\u003cul\u003e\n\u003cli\u003eGit 发现该文件当前使用 \u003ccode\u003eLF\u003c\/code\u003e，但由于 \u003ccode\u003ecore.autocrlf=true\u003c\/code\u003e，它会在检出时转换为 \u003ccode\u003eCRLF\u003c\/code\u003e。\u003c\/li\u003e\n\u003c\/ul\u003e\n\u003cp\u003e\u003cstrong\u003e解决方案\u003c\/strong\u003e：\u003c\/p\u003e\n\u003cul\u003e\n\u003cli\u003e设置 \u003ccode\u003ecore.autocrlf=input\u003c\/code\u003e 避免转换：\u003c\/li\u003e\n\u003c\/ul\u003e\n\u003cdiv class=\u0022highlight\u0022\u003e\u003cpre tabindex=\u00220\u0022 class=\u0022chroma\u0022\u003e\u003ccode class=\u0022language-sh\u0022 data-lang=\u0022sh\u0022\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003egit config --global core.autocrlf input\n\u003c\/span\u003e\u003c\/span\u003e\u003c\/code\u003e\u003c\/pre\u003e\u003c\/div\u003e\u003cul\u003e\n\u003cli\u003e或者手动修复文件换行符：\u003c\/li\u003e\n\u003c\/ul\u003e\n\u003cdiv class=\u0022highlight\u0022\u003e\u003cpre tabindex=\u00220\u0022 class=\u0022chroma\u0022\u003e\u003ccode class=\u0022language-sh\u0022 data-lang=\u0022sh\u0022\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003egit rm --cached README.md\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003egit add README.md\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003egit commit -m \u003cspan class=\u0022s2\u0022\u003e\u0026#34;Fix line endings\u0026#34;\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003c\/code\u003e\u003c\/pre\u003e\u003c\/div\u003e\u003chr\u003e\n\u003ch2 id=\u0022-7-结论如何优雅处理-git-和-crlf\u0022\u003e🎯 \u003cstrong\u003e7. 结论：如何优雅处理 Git 和 CRLF\u003c\/strong\u003e\u003c\/h2\u003e\n\u003ctable\u003e\n  \u003cthead\u003e\n      \u003ctr\u003e\n          \u003cth\u003e🚀 目标\u003c\/th\u003e\n          \u003cth\u003e🎯 推荐配置\u003c\/th\u003e\n      \u003c\/tr\u003e\n  \u003c\/thead\u003e\n  \u003ctbody\u003e\n      \u003ctr\u003e\n          \u003ctd\u003e🖥 Windows 开发者（但希望仓库文件保持 \u003ccode\u003eLF\u003c\/code\u003e）\u003c\/td\u003e\n          \u003ctd\u003e\u003ccode\u003egit config --global core.autocrlf input\u003c\/code\u003e\u003c\/td\u003e\n      \u003c\/tr\u003e\n      \u003ctr\u003e\n          \u003ctd\u003e🐧 Linux\/macOS 开发者\u003c\/td\u003e\n          \u003ctd\u003e\u003ccode\u003egit config --global core.autocrlf input\u003c\/code\u003e\u003c\/td\u003e\n      \u003c\/tr\u003e\n      \u003ctr\u003e\n          \u003ctd\u003e🏗 团队开发（希望所有人提交的文件格式一致）\u003c\/td\u003e\n          \u003ctd\u003e\u003ccode\u003e.gitattributes\u003c\/code\u003e 配置 \u003ccode\u003eeol=lf\u003c\/code\u003e\u003c\/td\u003e\n      \u003c\/tr\u003e\n      \u003ctr\u003e\n          \u003ctd\u003e🚫 不希望 Git 处理换行符\u003c\/td\u003e\n          \u003ctd\u003e\u003ccode\u003egit config --global core.autocrlf false\u003c\/code\u003e\u003c\/td\u003e\n      \u003c\/tr\u003e\n  \u003c\/tbody\u003e\n\u003c\/table\u003e\n\u003cp\u003e✅ \u003cstrong\u003e最佳实践\u003c\/strong\u003e：在团队协作时，推荐所有人使用 \u003ccode\u003ecore.autocrlf=input\u003c\/code\u003e 并在 \u003ccode\u003e.gitattributes\u003c\/code\u003e 中定义 \u003ccode\u003eeol=lf\u003c\/code\u003e，确保仓库文件保持一致性，避免跨平台换行符混乱的问题。\u003c\/p\u003e\n\u003chr\u003e\n\u003ch2 id=\u0022-附录git-换行符配置快捷命令\u0022\u003e🎉 \u003cstrong\u003e附录：Git 换行符配置快捷命令\u003c\/strong\u003e\u003c\/h2\u003e\n\u003cdiv class=\u0022highlight\u0022\u003e\u003cpre tabindex=\u00220\u0022 class=\u0022chroma\u0022\u003e\u003ccode class=\u0022language-sh\u0022 data-lang=\u0022sh\u0022\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022c1\u0022\u003e# 推荐的跨平台配置\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003egit config --global core.autocrlf input\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022c1\u0022\u003e# 禁止 Git 处理换行符\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003egit config --global core.autocrlf \u003cspan class=\u0022nb\u0022\u003efalse\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022c1\u0022\u003e# 在项目中强制 LF\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022nb\u0022\u003eecho\u003c\/span\u003e \u003cspan class=\u0022s2\u0022\u003e\u0026#34;* text=auto\u0026#34;\u003c\/span\u003e \u0026gt;\u0026gt; .gitattributes\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022nb\u0022\u003eecho\u003c\/span\u003e \u003cspan class=\u0022s2\u0022\u003e\u0026#34;*.sh text eol=lf\u0026#34;\u003c\/span\u003e \u0026gt;\u0026gt; .gitattributes\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022nb\u0022\u003eecho\u003c\/span\u003e \u003cspan class=\u0022s2\u0022\u003e\u0026#34;*.py text eol=lf\u0026#34;\u003c\/span\u003e \u0026gt;\u0026gt; .gitattributes\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003egit add .gitattributes\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003egit commit -m \u003cspan class=\u0022s2\u0022\u003e\u0026#34;Ensure LF endings\u0026#34;\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003c\/code\u003e\u003c\/pre\u003e\u003c\/div\u003e\u003chr\u003e\n\u003cp\u003e希望这篇指南能帮助你彻底理解 Git 和 CRLF 的关系，让你在跨平台开发中不再被换行符问题困扰！🚀🔥\u003c\/p\u003e\n`;
+  }
+
+  
+  window.addEventListener("beforeunload", function() {
+      sessionStorage.removeItem("blog_password_881abd2423fb17d1c85d6e71677e7338");
+  });
+  
+  </script>
+</main>
+
+<footer class="footer">
+    <span>&copy; 2025 <a href="https://ahaknow.com/">AhaKnow</a></span>
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/IHKYoung/CKPaper/" rel="noopener" target="_blank">CKPaper</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = '🖨️打印';
+
+        function copyingDone() {
+            copybutton.innerHTML = '📋备份';
+            setTimeout(() => {
+                copybutton.innerHTML = '🖨️打印';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                
+                
+                let copyText = codeblock.textContent + '\r\n————————————————\r\n' + '版权声明：本文为「'+"AhaKnow"+'」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。' + '\r\n原文链接：' + location.href;
+                navigator.clipboard.writeText(copyText);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        document.querySelectorAll('pre > code[class*="language-"]').forEach(function(codeblock) {
+            
+            
+            let language = codeblock.className.match(/language-(\w+)/)[1] || "code";
+
+            
+            let macCodeBlock = document.createElement("div");
+            let macButtons = document.createElement("div");
+            let buttons = ['close', 'minimize', 'maximize'].map(function(className) {
+                let button = document.createElement("div");
+                button.setAttribute('class', `mac-button ${className}`);
+                return button;
+            });
+            let languageType = document.createElement("div");
+            languageType.innerText = language;
+            languageType.setAttribute('class', 'language-type');
+
+            
+            macButtons.setAttribute('class', 'mac-buttons');
+            buttons.forEach(function(button) {
+                macButtons.appendChild(button);
+            });
+            macCodeBlock.appendChild(macButtons);
+            macCodeBlock.appendChild(languageType);
+            macCodeBlock.setAttribute('class', 'mac-code-block');
+
+            
+            codeblock.parentNode.insertBefore(macCodeBlock, codeblock);
+        });
+    });
+</script>
+
+
+</body>
+
+</html>

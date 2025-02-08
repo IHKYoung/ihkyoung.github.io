@@ -332,99 +332,8 @@
 </span>
 
 </div>
-  </header> <aside id="toc-container" class="toc-container wide">
-    <div class="toc">
-        <details  open>
-        <summary accesskey="c" title="(Alt + C)">
-            <span class="details">📚目录</span>
-        </summary>
-
-        <div class="inner"><ul>
-                <li>
-                    <a href="#%e5%85%88%e6%8a%8a%e9%97%ae%e9%a2%98%e8%a7%a3%e5%86%b3%e4%ba%86" aria-label="先把问题解决了">先把问题解决了</a><ul>
-                        
-                <li>
-                    <a href="#%e5%8f%a6%e4%b8%80%e7%a7%8d%e6%80%9d%e8%b7%af" aria-label="另一种思路">另一种思路</a><ul>
-                        
-                <li>
-                    <a href="#metric-%e7%9a%84%e5%90%ab%e4%b9%89%e5%92%8c%e4%bd%9c%e7%94%a8" aria-label="Metric 的含义和作用">Metric 的含义和作用</a></li>
-                <li>
-                    <a href="#metric-%e5%80%bc%e7%9a%84%e9%80%89%e6%8b%a9" aria-label="Metric 值的选择">Metric 值的选择</a></li></ul>
-                </li></ul>
-                </li>
-                <li>
-                    <a href="#%e8%87%aa%e5%8a%a8%e5%8c%96%e7%9a%84%e4%b8%80%e5%8a%b3%e6%b0%b8%e9%80%b8" aria-label="自动化的“一劳永逸”">自动化的“一劳永逸”</a><ul>
-                        
-                <li>
-                    <a href="#%e6%9c%8d%e5%8a%a1%e6%96%87%e4%bb%b6%e7%9a%84%e9%83%a8%e5%88%86%e8%a7%a3%e9%87%8a" aria-label="服务文件的部分解释">服务文件的部分解释</a>
-                </li>
-            </ul>
-            </li>
-            </ul>
-        </div>
-        </details>
-    </div>
-</aside>
-<script>
-    let activeElement;
-    let elements;
-    window.addEventListener('DOMContentLoaded', function (event) {
-        checkTocPosition();
-
-        elements = document.querySelectorAll('h1[id],h2[id],h3[id],h4[id],h5[id],h6[id]');
-        
-        activeElement = elements[0];
-        const id = encodeURI(activeElement.getAttribute('id')).toLowerCase();
-        document.querySelector(`.inner ul li a[href="#${id}"]`).classList.add('active');
-    }, false);
-
-    window.addEventListener('resize', function(event) {
-        checkTocPosition();
-    }, false);
-
-    window.addEventListener('scroll', () => {
-        
-        activeElement = Array.from(elements).find((element) => {
-            if ((getOffsetTop(element) - window.pageYOffset) > 0 &&
-                (getOffsetTop(element) - window.pageYOffset) < window.innerHeight/2) {
-                return element;
-            }
-        }) || activeElement
-
-        elements.forEach(element => {
-            const id = encodeURI(element.getAttribute('id')).toLowerCase();
-            if (element === activeElement){
-                document.querySelector(`.inner ul li a[href="#${id}"]`).classList.add('active');
-            } else {
-                document.querySelector(`.inner ul li a[href="#${id}"]`).classList.remove('active');
-            }
-        })
-    }, false);
-
-    const main = parseInt(getComputedStyle(document.body).getPropertyValue('--article-width'), 10);
-    const toc = parseInt(getComputedStyle(document.body).getPropertyValue('--toc-width'), 10);
-    const gap = parseInt(getComputedStyle(document.body).getPropertyValue('--gap'), 10);
-
-    function checkTocPosition() {
-        const width = document.body.scrollWidth;
-
-        if (width - main - (toc * 2) - (gap * 4) > 0) {
-            document.getElementById("toc-container").classList.add("wide");
-        } else {
-            document.getElementById("toc-container").classList.remove("wide");
-        }
-    }
-
-    function getOffsetTop(element) {
-        if (!element.getClientRects().length) {
-            return 0;
-        }
-        let rect = element.getBoundingClientRect();
-        let win = element.ownerDocument.defaultView;
-        return rect.top + win.pageYOffset;
-    }
-</script>
-  <div class="post-content"><blockquote>
+  </header>
+  <div id="post-content"><blockquote>
 <p><strong>问题描述：</strong></p>
 <p>Linux同时连接局域网，网段是172.27.0.x，以及连接网口的相机设备，网段是192.168.80.x。</p>
 <p>Linux启动后出现这种情况：</p>
@@ -579,6 +488,94 @@
 
   </footer>
 </article>
+
+<style>
+   
+  #check-button {
+      background-color: transparent;
+      border: none;
+      padding: 10px 20px;
+      font-size: 1.2em;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: transform 0.1s ease-in-out, box-shadow 0.2s;
+  }
+  #check-button:active {
+      transform: scale(0.9);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  }
+
+   
+  @keyframes shake {
+      0% { transform: translateX(0); }
+      25% { transform: translateX(-5px); }
+      50% { transform: translateX(5px); }
+      75% { transform: translateX(-5px); }
+      100% { transform: translateX(0); }
+  }
+  .shake {
+      animation: shake 0.3s ease-in-out;
+  }
+</style>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    let storedPassword = sessionStorage.getItem("blog_password_101291169da7173c7dfd45690cd8cc21");
+
+    if (!storedPassword) {
+        document.getElementById("password-protection").style.display = "block";
+    } else {
+        unlockContent();
+    }
+  });
+
+  function checkPassword() {
+    let inputPassword = document.getElementById("post-password").value;
+    let correctHash = "c57a2f70945d45168d580c4bb81100f2"; 
+    let inputHash = CryptoJS.MD5(inputPassword).toString();  
+
+    let errorMsg = document.getElementById("error-msg");
+    let checkButton = document.getElementById("check-button");
+
+    
+    checkButton.style.transform = "scale(0.95)";
+    setTimeout(() => {
+        checkButton.style.transform = "scale(1)";
+    }, 100);
+
+    if (inputHash === correctHash) {
+      sessionStorage.setItem("blog_password_101291169da7173c7dfd45690cd8cc21", inputHash);
+      unlockContent();
+    } else {
+        
+        errorMsg.style.display = "block";
+        errorMsg.classList.add("shake");
+        
+        
+        setTimeout(() => {
+            errorMsg.classList.remove("shake");
+        }, 300);
+    }
+  }
+
+  function unlockContent() {
+    document.getElementById("password-protection").style.display = "none";
+    let postContentDiv = document.getElementById("post-content");
+    postContentDiv.style.display = "block";
+
+    
+    postContentDiv.innerHTML = `\u003cblockquote\u003e\n\u003cp\u003e\u003cstrong\u003e问题描述：\u003c\/strong\u003e\u003c\/p\u003e\n\u003cp\u003eLinux同时连接局域网，网段是172.27.0.x，以及连接网口的相机设备，网段是192.168.80.x。\u003c\/p\u003e\n\u003cp\u003eLinux启动后出现这种情况：\u003c\/p\u003e\n\u003cul\u003e\n\u003cli\u003e可以连接相机，但无法上网\u003c\/li\u003e\n\u003cli\u003e将相机的网线拔掉后，就能够上网了\u003c\/li\u003e\n\u003c\/ul\u003e\n\u003cp\u003e简单的分析一下，应该是网络占用的问题。\u003c\/p\u003e\n\u003c\/blockquote\u003e\n\u003ch2 id=\u0022先把问题解决了\u0022\u003e先把问题解决了\u003c\/h2\u003e\n\u003cdiv class=\u0022highlight\u0022\u003e\u003cpre tabindex=\u00220\u0022 class=\u0022chroma\u0022\u003e\u003ccode class=\u0022language-bash\u0022 data-lang=\u0022bash\u0022\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003esudo apt-get install net-tools\n\u003c\/span\u003e\u003c\/span\u003e\u003c\/code\u003e\u003c\/pre\u003e\u003c\/div\u003e\u003cp\u003e\u003cstrong\u003e下面具体来分析\u003c\/strong\u003e\u003c\/p\u003e\n\u003cp\u003e通过\u003ccode\u003eroute -n\u003c\/code\u003e来查看路由表信息：\u003c\/p\u003e\n\u003cdiv class=\u0022highlight\u0022\u003e\u003cpre tabindex=\u00220\u0022 class=\u0022chroma\u0022\u003e\u003ccode class=\u0022language-bash\u0022 data-lang=\u0022bash\u0022\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e❯ route -n\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003eKernel IP routing table\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003eDestination     Gateway         Genmask         Flags Metric Ref    Use Iface\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e0.0.0.0         192.168.80.1    0.0.0.0         UG    \u003cspan class=\u0022m\u0022\u003e0\u003c\/span\u003e      \u003cspan class=\u0022m\u0022\u003e0\u003c\/span\u003e        \u003cspan class=\u0022m\u0022\u003e0\u003c\/span\u003e eno1\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e0.0.0.0         172.27.0.1      0.0.0.0         UG    \u003cspan class=\u0022m\u0022\u003e101\u003c\/span\u003e    \u003cspan class=\u0022m\u0022\u003e0\u003c\/span\u003e        \u003cspan class=\u0022m\u0022\u003e0\u003c\/span\u003e eno1\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e169.254.0.0     0.0.0.0         255.255.0.0     U     \u003cspan class=\u0022m\u0022\u003e1000\u003c\/span\u003e   \u003cspan class=\u0022m\u0022\u003e0\u003c\/span\u003e        \u003cspan class=\u0022m\u0022\u003e0\u003c\/span\u003e enx0826ae3c0c7b\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e172.17.0.0      0.0.0.0         255.255.0.0     U     \u003cspan class=\u0022m\u0022\u003e0\u003c\/span\u003e      \u003cspan class=\u0022m\u0022\u003e0\u003c\/span\u003e        \u003cspan class=\u0022m\u0022\u003e0\u003c\/span\u003e docker0\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e172.27.0.0      0.0.0.0         255.255.255.0   U     \u003cspan class=\u0022m\u0022\u003e101\u003c\/span\u003e    \u003cspan class=\u0022m\u0022\u003e0\u003c\/span\u003e        \u003cspan class=\u0022m\u0022\u003e0\u003c\/span\u003e eno1\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e192.168.80.0    0.0.0.0         255.255.255.0   U     \u003cspan class=\u0022m\u0022\u003e100\u003c\/span\u003e    \u003cspan class=\u0022m\u0022\u003e0\u003c\/span\u003e        \u003cspan class=\u0022m\u0022\u003e0\u003c\/span\u003e enx0826ae3c0c7b\n\u003c\/span\u003e\u003c\/span\u003e\u003c\/code\u003e\u003c\/pre\u003e\u003c\/div\u003e\u003cp\u003e可以看出来有两个设备，一个是\u003ccode\u003eeno1\u003c\/code\u003e，局域网网线，另一个是\u003ccode\u003eenx0826ae3c0c7b\u003c\/code\u003e，网口的相机。\u003c\/p\u003e\n\u003cp\u003e为啥会上不了网捏？\u003c\/p\u003e\n\u003cp\u003e\u003cstrong\u003e观察这个路由表的可以发现有一个重复的混乱项：\u003c\/strong\u003e\u003c\/p\u003e\n\u003cp\u003e\u003ccode\u003eDestination\u003c\/code\u003e 为 \u003ccode\u003e0.0.0.0\u003c\/code\u003e 但是 \u003ccode\u003eGateway\u003c\/code\u003e 却有两个，就是这里导致的，这时候的解决方法就是，先清除默认路由，然后再配置一个正确的默认路由。\u003c\/p\u003e\n\u003cp\u003e步骤1：清除错误的默认路由\u003c\/p\u003e\n\u003cp\u003e首先，删除所有默认路由：\u003c\/p\u003e\n\u003cdiv class=\u0022highlight\u0022\u003e\u003cpre tabindex=\u00220\u0022 class=\u0022chroma\u0022\u003e\u003ccode class=\u0022language-bash\u0022 data-lang=\u0022bash\u0022\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003esudo ip route del default\n\u003c\/span\u003e\u003c\/span\u003e\u003c\/code\u003e\u003c\/pre\u003e\u003c\/div\u003e\u003cp\u003e步骤2：添加正确的默认路由\u003c\/p\u003e\n\u003cp\u003e将默认路由设置为通过网关\u0060172.27.0.1，并指定合适的度量值：\u003c\/p\u003e\n\u003cdiv class=\u0022highlight\u0022\u003e\u003cpre tabindex=\u00220\u0022 class=\u0022chroma\u0022\u003e\u003ccode class=\u0022language-bash\u0022 data-lang=\u0022bash\u0022\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003esudo ip route add default via 172.27.0.1 dev eno1 metric \u003cspan class=\u0022m\u0022\u003e0\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003c\/code\u003e\u003c\/pre\u003e\u003c\/div\u003e\u003cp\u003e步骤3：验证路由表\u003c\/p\u003e\n\u003cp\u003e再次检查路由表，确保只有一个默认路由，并且其他路由按预期配置：\u003c\/p\u003e\n\u003cdiv class=\u0022highlight\u0022\u003e\u003cpre tabindex=\u00220\u0022 class=\u0022chroma\u0022\u003e\u003ccode class=\u0022language-bash\u0022 data-lang=\u0022bash\u0022\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003eroute -n\n\u003c\/span\u003e\u003c\/span\u003e\u003c\/code\u003e\u003c\/pre\u003e\u003c\/div\u003e\u003cp\u003e这个时候得到的应该就是正确的路由表了：\u003c\/p\u003e\n\u003cdiv class=\u0022highlight\u0022\u003e\u003cpre tabindex=\u00220\u0022 class=\u0022chroma\u0022\u003e\u003ccode class=\u0022language-bash\u0022 data-lang=\u0022bash\u0022\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e❯ route -n\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003eKernel IP routing table\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003eDestination     Gateway         Genmask         Flags Metric Ref    Use Iface\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e0.0.0.0         172.27.0.1      0.0.0.0         UG    \u003cspan class=\u0022m\u0022\u003e0\u003c\/span\u003e      \u003cspan class=\u0022m\u0022\u003e0\u003c\/span\u003e        \u003cspan class=\u0022m\u0022\u003e0\u003c\/span\u003e eno1\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e0.0.0.0         172.27.0.1      0.0.0.0         UG    \u003cspan class=\u0022m\u0022\u003e101\u003c\/span\u003e    \u003cspan class=\u0022m\u0022\u003e0\u003c\/span\u003e        \u003cspan class=\u0022m\u0022\u003e0\u003c\/span\u003e eno1\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e169.254.0.0     0.0.0.0         255.255.0.0     U     \u003cspan class=\u0022m\u0022\u003e1000\u003c\/span\u003e   \u003cspan class=\u0022m\u0022\u003e0\u003c\/span\u003e        \u003cspan class=\u0022m\u0022\u003e0\u003c\/span\u003e enx0826ae3c0c7b\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e172.17.0.0      0.0.0.0         255.255.0.0     U     \u003cspan class=\u0022m\u0022\u003e0\u003c\/span\u003e      \u003cspan class=\u0022m\u0022\u003e0\u003c\/span\u003e        \u003cspan class=\u0022m\u0022\u003e0\u003c\/span\u003e docker0\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e172.27.0.0      0.0.0.0         255.255.255.0   U     \u003cspan class=\u0022m\u0022\u003e101\u003c\/span\u003e    \u003cspan class=\u0022m\u0022\u003e0\u003c\/span\u003e        \u003cspan class=\u0022m\u0022\u003e0\u003c\/span\u003e eno1\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e192.168.80.0    0.0.0.0         255.255.255.0   U     \u003cspan class=\u0022m\u0022\u003e100\u003c\/span\u003e    \u003cspan class=\u0022m\u0022\u003e0\u003c\/span\u003e        \u003cspan class=\u0022m\u0022\u003e0\u003c\/span\u003e enx0826ae3c0c7b\n\u003c\/span\u003e\u003c\/span\u003e\u003c\/code\u003e\u003c\/pre\u003e\u003c\/div\u003e\u003ch3 id=\u0022另一种思路\u0022\u003e另一种思路\u003c\/h3\u003e\n\u003cp\u003e在路由表中，\u003ccode\u003emetric\u003c\/code\u003e值用于定义路由的优先级。当存在多条到达同一个目的地的路由时，\u003ccode\u003emetric\u003c\/code\u003e值较小的路由将被优先选择用于数据传输。因此，\u003ccode\u003emetric\u003c\/code\u003e是一种决定路径选择的方法，尤其在多个网络接口可用时这一点非常重要。\u003c\/p\u003e\n\u003ch4 id=\u0022metric-的含义和作用\u0022\u003eMetric 的含义和作用\u003c\/h4\u003e\n\u003cul\u003e\n\u003cli\u003e\u003cstrong\u003e含义\u003c\/strong\u003e：\u003ccode\u003emetric\u003c\/code\u003e值是一个数字，用于表示路由的优先级。数字越小，该路由的优先级越高。\u003c\/li\u003e\n\u003cli\u003e\u003cstrong\u003e作用\u003c\/strong\u003e：\n\u003cul\u003e\n\u003cli\u003e\u003cstrong\u003e选择最优路径\u003c\/strong\u003e：在多条路由可达同一目的地的情况下，路由器根据\u003ccode\u003emetric\u003c\/code\u003e值选择\u003ccode\u003emetric\u003c\/code\u003e最小的路由作为最佳路径。\u003c\/li\u003e\n\u003cli\u003e\u003cstrong\u003e负载均衡\u003c\/strong\u003e：在某些配置中，可以故意设置相同的\u003ccode\u003emetric\u003c\/code\u003e值给不同的路由，以实现负载均衡。\u003c\/li\u003e\n\u003cli\u003e\u003cstrong\u003e避免路由循环\u003c\/strong\u003e：适当的\u003ccode\u003emetric\u003c\/code\u003e值配置可以帮助避免路由循环，特别是在复杂的网络拓扑中。\u003c\/li\u003e\n\u003c\/ul\u003e\n\u003c\/li\u003e\n\u003c\/ul\u003e\n\u003ch4 id=\u0022metric-值的选择\u0022\u003eMetric 值的选择\u003c\/h4\u003e\n\u003cp\u003e比如，\u003ccode\u003emetric\u003c\/code\u003e值为0, 101, 100, 1000等，这些都是用来区分不同路由条目的相对优先级。例如：\u003c\/p\u003e\n\u003cul\u003e\n\u003cli\u003e\u003cstrong\u003eMetric 为 0\u003c\/strong\u003e：通常表示该路由具有最高的优先级，系统将优先通过这个路由发送数据。\u003c\/li\u003e\n\u003cli\u003e\u003cstrong\u003eMetric 为 101 或 100\u003c\/strong\u003e：这些值较高，表示路由的优先级较低。如果默认路由（metric 为 0 的路由）不可用，系统可能会考虑使用这些路由。\u003c\/li\u003e\n\u003cli\u003e\u003cstrong\u003eMetric 为 1000\u003c\/strong\u003e：更高的\u003ccode\u003emetric\u003c\/code\u003e值，通常用于备份路由，只有在其他较低\u003ccode\u003emetric\u003c\/code\u003e值的路由全都不可用时，才会被使用。\u003c\/li\u003e\n\u003c\/ul\u003e\n\u003cp\u003e\u003cmark\u003e因此上述的问题还可以通过更改路由的优先级来解决\u003c\/mark\u003e\u003c\/p\u003e\n\u003chr\u003e\n\u003cp\u003e\u003cmark\u003e现在问题解决了，但是解决了一时，解决不了一世，如果Linux主机重新启动，那么又会恢复为原来的设置，怎么办呢？\u003c\/mark\u003e\u003c\/p\u003e\n\u003cp\u003e\u003cstrong\u003e那就设置一个自动化的启动项！\u003c\/strong\u003e\u003c\/p\u003e\n\u003ch2 id=\u0022自动化的一劳永逸\u0022\u003e自动化的“一劳永逸”\u003c\/h2\u003e\n\u003cp\u003e创建一个自定义的\u003ccode\u003esystemd\u003c\/code\u003e服务，可以通过调整\u003ccode\u003esystemd\u003c\/code\u003e服务来确保在执行路由删除和添加操作之前，网络接口已经正确初始化。此外，还可以加入条件判断，只在默认路由存在时尝试删除它。\u003c\/p\u003e\n\u003col\u003e\n\u003cli\u003e\n\u003cp\u003e\u003cstrong\u003e修改 Systemd 服务文件\u003c\/strong\u003e：\n编辑之前创建的\u003ccode\u003esystemd\u003c\/code\u003e服务文件，添加条件判断和依赖关系，确保在执行路由操作前网络接口已准备好。\u003c\/p\u003e\n\u003cdiv class=\u0022highlight\u0022\u003e\u003cpre tabindex=\u00220\u0022 class=\u0022chroma\u0022\u003e\u003ccode class=\u0022language-bash\u0022 data-lang=\u0022bash\u0022\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003esudo vim \/etc\/systemd\/system\/setdefaultgateway.service\n\u003c\/span\u003e\u003c\/span\u003e\u003c\/code\u003e\u003c\/pre\u003e\u003c\/div\u003e\u003cp\u003e修改服务文件，加入网络在线的条件和执行命令前的检查：\u003c\/p\u003e\n\u003cdiv class=\u0022highlight\u0022\u003e\u003cpre tabindex=\u00220\u0022 class=\u0022chroma\u0022\u003e\u003ccode class=\u0022language-plaintext\u0022 data-lang=\u0022plaintext\u0022\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e[Unit]\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003eDescription=Set default gateway\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003eWants=network-online.target\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003eAfter=network-online.target\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e[Service]\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003eType=oneshot\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003eExecStartPre=\/bin\/sh -c \u0026#39;ip route | grep -q default \u0026amp;\u0026amp; ip route del default\u0026#39;\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003eExecStart=\/sbin\/ip route add default via 172.27.0.1 dev eno1 metric 0\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003eRemainAfterExit=yes\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e[Install]\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003eWantedBy=multi-user.target\n\u003c\/span\u003e\u003c\/span\u003e\u003c\/code\u003e\u003c\/pre\u003e\u003c\/div\u003e\u003cp\u003e这里\u003ccode\u003eExecStartPre\u003c\/code\u003e行用于检查是否存在默认路由，并且只有在存在的情况下才尝试删除它。这样可以避免因为尝试删除一个不存在的路由而导致服务失败。\u003c\/p\u003e\n\u003c\/li\u003e\n\u003cli\u003e\n\u003cp\u003e\u003cstrong\u003e重新加载和启动服务\u003c\/strong\u003e：\n加载新的配置并重新启动服务：\u003c\/p\u003e\n\u003cdiv class=\u0022highlight\u0022\u003e\u003cpre tabindex=\u00220\u0022 class=\u0022chroma\u0022\u003e\u003ccode class=\u0022language-bash\u0022 data-lang=\u0022bash\u0022\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003esudo systemctl daemon-reload\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003esudo systemctl restart setdefaultgateway\n\u003c\/span\u003e\u003c\/span\u003e\u003c\/code\u003e\u003c\/pre\u003e\u003c\/div\u003e\u003c\/li\u003e\n\u003cli\u003e\n\u003cp\u003e\u003cstrong\u003e检查服务状态\u003c\/strong\u003e：\n确保服务现在能够成功执行，不再报错：\u003c\/p\u003e\n\u003cdiv class=\u0022highlight\u0022\u003e\u003cpre tabindex=\u00220\u0022 class=\u0022chroma\u0022\u003e\u003ccode class=\u0022language-bash\u0022 data-lang=\u0022bash\u0022\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003esudo systemctl status setdefaultgateway\n\u003c\/span\u003e\u003c\/span\u003e\u003c\/code\u003e\u003c\/pre\u003e\u003c\/div\u003e\u003c\/li\u003e\n\u003c\/ol\u003e\n\u003cp\u003e通过确保在网络接口准备好后执行命令，并且只在默认路由存在时尝试删除它，能够避免服务启动时遇到的“RTNETLINK answers: No such process”错误。\u003c\/p\u003e\n\u003ch3 id=\u0022服务文件的部分解释\u0022\u003e服务文件的部分解释\u003c\/h3\u003e\n\u003col\u003e\n\u003cli\u003e\u003cstrong\u003e[Unit]部分\u003c\/strong\u003e：\n\u003cul\u003e\n\u003cli\u003e\u003ccode\u003eDescription\u003c\/code\u003e: 仅为此服务提供描述，说明其用途。\u003c\/li\u003e\n\u003cli\u003e\u003ccode\u003eWants\u003c\/code\u003e: 这一行指定了此服务想要的其他单位（unit）。\u003ccode\u003enetwork-online.target\u003c\/code\u003e是一个特殊的目标，代表网络配置已完全完成且互联网连接已建立。\u003c\/li\u003e\n\u003cli\u003e\u003ccode\u003eAfter\u003c\/code\u003e: 这一行确保了在\u003ccode\u003enetwork-online.target\u003c\/code\u003e之后才启动这个服务。也就是说，只有在网络确实可用之后，此服务才会运行其命令。\u003c\/li\u003e\n\u003c\/ul\u003e\n\u003c\/li\u003e\n\u003c\/ol\u003e\n\u003cp\u003e这两个设置（\u003ccode\u003eWants\u003c\/code\u003e和\u003ccode\u003eAfter\u003c\/code\u003e）确保了网络服务在尝试修改路由表之前已经完全启动和激活。这是非常重要的，因为如果在网络接口还没有激活的情况下尝试设置路由，可能会导致命令失败。\u003c\/p\u003e\n\u003col start=\u00222\u0022\u003e\n\u003cli\u003e\u003cstrong\u003e[Service]部分\u003c\/strong\u003e：\n\u003cul\u003e\n\u003cli\u003e\u003ccode\u003eType=oneshot\u003c\/code\u003e: 这意味着这个服务在启动时运行一次然后结束，不会持续运行。\u003c\/li\u003e\n\u003cli\u003e\u003ccode\u003eExecStartPre\u003c\/code\u003e: 这是在主命令（\u003ccode\u003eExecStart\u003c\/code\u003e）执行之前运行的命令。它的作用是检查当前路由表中是否存在默认路由：\n\u003cul\u003e\n\u003cli\u003e\u003ccode\u003e\/bin\/sh -c \u0027ip route | grep -q default \u0026amp;\u0026amp; ip route del default\u0027\u003c\/code\u003e：这条命令会首先查找是否存在默认路由，如果存在（\u003ccode\u003egrep -q default\u003c\/code\u003e 返回0），则执行删除默认路由的命令（\u003ccode\u003eip route del default\u003c\/code\u003e）。这里使用\u003ccode\u003egrep -q\u003c\/code\u003e是为了静默模式，只返回存在与否的状态码而不输出文本。\u003c\/li\u003e\n\u003c\/ul\u003e\n\u003c\/li\u003e\n\u003cli\u003e\u003ccode\u003eExecStart\u003c\/code\u003e: 这是服务的主命令，用于添加新的默认路由。如果前面的默认路由已被删除，这条命令会无障碍地设置新的默认路由。\u003c\/li\u003e\n\u003cli\u003e\u003ccode\u003eRemainAfterExit=yes\u003c\/code\u003e: 通常用于\u003ccode\u003eType=oneshot\u003c\/code\u003e的服务，指示即使服务的主进程已经结束，此服务的状态依旧被视为激活。\u003c\/li\u003e\n\u003c\/ul\u003e\n\u003c\/li\u003e\n\u003c\/ol\u003e\n\u003cp\u003e这种配置方式，特别是\u003ccode\u003eExecStartPre\u003c\/code\u003e命令的使用，是为了确保修改默认路由时不会因为旧的路由设置存在而出现冲突或错误。通过这样的安排，服务在执行任何操作之前确保了网络接口的可用性和清理了可能存在的冲突配置，从而使得默认网关的设置更加可靠和稳定。\u003c\/p\u003e\n`;
+  }
+
+  
+  window.addEventListener("beforeunload", function() {
+      sessionStorage.removeItem("blog_password_101291169da7173c7dfd45690cd8cc21");
+  });
+  
+  </script>
 </main>
 
 <footer class="footer">

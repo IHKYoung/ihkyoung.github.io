@@ -32,6 +32,13 @@
 &lt;p&gt;可以参考以下两个文档，官方文档的说明更清晰一些，初学者指南可以用来对照自己有没有做对～&lt;/p&gt;</description>
     </item>
     <item>
+      <title>🚀 Git 与 CRLF（换行符）完全指南</title>
+      <link>https://ahaknow.com/posts/know/git-crlf-lf/</link>
+      <pubDate>Sun, 09 Feb 2025 00:36:17 +0800</pubDate>
+      <guid>https://ahaknow.com/posts/know/git-crlf-lf/</guid>
+      <description>&lt;p&gt;在使用 Git 的过程中，我们经常会遇到 &lt;strong&gt;CRLF (回车换行) 和 LF (换行)&lt;/strong&gt; 的问题，特别是在 &lt;strong&gt;Windows 和 Linux/macOS 跨平台开发&lt;/strong&gt; 时。为了避免潜在的换行符冲突，本文详细总结 Git 如何处理换行符以及如何合理配置。&lt;/p&gt;</description>
+    </item>
+    <item>
       <title>✨ LaTeX 数学公式语法大全 📘</title>
       <link>https://ahaknow.com/posts/know/latex/</link>
       <pubDate>Sat, 08 Feb 2025 01:00:25 +0800</pubDate>
@@ -45,8 +52,7 @@
 &lt;h3 id=&#34;12-独立数学模式&#34;&gt;&lt;strong&gt;1.2. 独立数学模式&lt;/strong&gt;&lt;/h3&gt;
 &lt;p&gt;使数学公式独占一行：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-latex&#34; data-lang=&#34;latex&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;sb&#34;&gt;$$&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;E&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;mc^&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;$$&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;独立模式的数学公式，适用于单独一行的数学表达。
-$$E=mc^2$$&lt;/p&gt;</description>
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;独立模式的数学公式，适用于单独一行的数学表达。&lt;/p&gt;</description>
     </item>
     <item>
       <title>GitHub Pull Reques 时 Release 文件缺失问题解决方案 📦</title>

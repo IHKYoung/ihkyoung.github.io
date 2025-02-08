@@ -335,102 +335,8 @@
 </span>
 
 </div>
-  </header> <aside id="toc-container" class="toc-container wide">
-    <div class="toc">
-        <details  open>
-        <summary accesskey="c" title="(Alt + C)">
-            <span class="details">📚目录</span>
-        </summary>
-
-        <div class="inner"><ul>
-                <li>
-                    <a href="#%e7%9b%b4%e6%8e%a5%e4%b8%8a%e4%bb%a3%e7%a0%81" aria-label="🍲直接上代码">🍲直接上代码</a></li>
-                <li>
-                    <a href="#%e6%ad%a3%e5%88%99%e8%a1%a8%e8%be%be%e7%9a%84%e8%a7%a3%e9%87%8a" aria-label="正则表达的解释">正则表达的解释</a></li>
-                <li>
-                    <a href="#%e5%9f%ba%e6%9c%ac%e7%94%a8%e6%b3%95%e5%92%8c%e5%b8%b8%e7%94%a8%e5%85%83%e5%ad%97%e7%ac%a6" aria-label="🌟基本用法和常用元字符">🌟基本用法和常用元字符</a><ul>
-                        
-                <li>
-                    <a href="#1-%e5%ad%97%e7%ac%a6%e5%8c%b9%e9%85%8d" aria-label="1. 字符匹配">1. 字符匹配</a></li>
-                <li>
-                    <a href="#2-%e4%bd%8d%e7%bd%ae%e5%8c%b9%e9%85%8d" aria-label="2. 位置匹配">2. 位置匹配</a></li>
-                <li>
-                    <a href="#3-%e9%87%8f%e8%af%8d" aria-label="3. 量词">3. 量词</a></li>
-                <li>
-                    <a href="#4-%e5%ad%97%e7%ac%a6%e7%b1%bb" aria-label="4. 字符类">4. 字符类</a></li>
-                <li>
-                    <a href="#5-%e5%88%86%e7%bb%84%e5%92%8c%e5%bc%95%e7%94%a8" aria-label="5. 分组和引用">5. 分组和引用</a></li>
-                <li>
-                    <a href="#6-%e8%bd%ac%e4%b9%89" aria-label="6. 转义">6. 转义</a></li></ul>
-                </li>
-                <li>
-                    <a href="#%e6%ad%a3%e5%88%99%e8%a1%a8%e8%be%be%e5%bc%8f%e7%a4%ba%e4%be%8b%e5%8c%b9%e9%85%8d%e9%82%ae%e7%ae%b1" aria-label="正则表达式示例：匹配邮箱">正则表达式示例：匹配邮箱</a>
-                </li>
-            </ul>
-        </div>
-        </details>
-    </div>
-</aside>
-<script>
-    let activeElement;
-    let elements;
-    window.addEventListener('DOMContentLoaded', function (event) {
-        checkTocPosition();
-
-        elements = document.querySelectorAll('h1[id],h2[id],h3[id],h4[id],h5[id],h6[id]');
-        
-        activeElement = elements[0];
-        const id = encodeURI(activeElement.getAttribute('id')).toLowerCase();
-        document.querySelector(`.inner ul li a[href="#${id}"]`).classList.add('active');
-    }, false);
-
-    window.addEventListener('resize', function(event) {
-        checkTocPosition();
-    }, false);
-
-    window.addEventListener('scroll', () => {
-        
-        activeElement = Array.from(elements).find((element) => {
-            if ((getOffsetTop(element) - window.pageYOffset) > 0 &&
-                (getOffsetTop(element) - window.pageYOffset) < window.innerHeight/2) {
-                return element;
-            }
-        }) || activeElement
-
-        elements.forEach(element => {
-            const id = encodeURI(element.getAttribute('id')).toLowerCase();
-            if (element === activeElement){
-                document.querySelector(`.inner ul li a[href="#${id}"]`).classList.add('active');
-            } else {
-                document.querySelector(`.inner ul li a[href="#${id}"]`).classList.remove('active');
-            }
-        })
-    }, false);
-
-    const main = parseInt(getComputedStyle(document.body).getPropertyValue('--article-width'), 10);
-    const toc = parseInt(getComputedStyle(document.body).getPropertyValue('--toc-width'), 10);
-    const gap = parseInt(getComputedStyle(document.body).getPropertyValue('--gap'), 10);
-
-    function checkTocPosition() {
-        const width = document.body.scrollWidth;
-
-        if (width - main - (toc * 2) - (gap * 4) > 0) {
-            document.getElementById("toc-container").classList.add("wide");
-        } else {
-            document.getElementById("toc-container").classList.remove("wide");
-        }
-    }
-
-    function getOffsetTop(element) {
-        if (!element.getClientRects().length) {
-            return 0;
-        }
-        let rect = element.getBoundingClientRect();
-        let win = element.ownerDocument.defaultView;
-        return rect.top + win.pageYOffset;
-    }
-</script>
-  <div class="post-content"><blockquote>
+  </header>
+  <div id="post-content"><blockquote>
 <p>我想重命名一个文件（手动操作是不可能的，懒！）</p>
 <p>将“清晰易懂的的线性代数，国立阳明交通大学周志成，国语版mit线性代数Gilbert Strang LA_1-3”改成“LA_1-3”</p>
 <p>所以，就想到了正则匹配咯～</p>
@@ -584,6 +490,94 @@
 
   </footer>
 </article>
+
+<style>
+   
+  #check-button {
+      background-color: transparent;
+      border: none;
+      padding: 10px 20px;
+      font-size: 1.2em;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: transform 0.1s ease-in-out, box-shadow 0.2s;
+  }
+  #check-button:active {
+      transform: scale(0.9);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  }
+
+   
+  @keyframes shake {
+      0% { transform: translateX(0); }
+      25% { transform: translateX(-5px); }
+      50% { transform: translateX(5px); }
+      75% { transform: translateX(-5px); }
+      100% { transform: translateX(0); }
+  }
+  .shake {
+      animation: shake 0.3s ease-in-out;
+  }
+</style>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    let storedPassword = sessionStorage.getItem("blog_password_2c4c01dfd9ceb219b4eeefdf54ea3910");
+
+    if (!storedPassword) {
+        document.getElementById("password-protection").style.display = "block";
+    } else {
+        unlockContent();
+    }
+  });
+
+  function checkPassword() {
+    let inputPassword = document.getElementById("post-password").value;
+    let correctHash = "c57a2f70945d45168d580c4bb81100f2"; 
+    let inputHash = CryptoJS.MD5(inputPassword).toString();  
+
+    let errorMsg = document.getElementById("error-msg");
+    let checkButton = document.getElementById("check-button");
+
+    
+    checkButton.style.transform = "scale(0.95)";
+    setTimeout(() => {
+        checkButton.style.transform = "scale(1)";
+    }, 100);
+
+    if (inputHash === correctHash) {
+      sessionStorage.setItem("blog_password_2c4c01dfd9ceb219b4eeefdf54ea3910", inputHash);
+      unlockContent();
+    } else {
+        
+        errorMsg.style.display = "block";
+        errorMsg.classList.add("shake");
+        
+        
+        setTimeout(() => {
+            errorMsg.classList.remove("shake");
+        }, 300);
+    }
+  }
+
+  function unlockContent() {
+    document.getElementById("password-protection").style.display = "none";
+    let postContentDiv = document.getElementById("post-content");
+    postContentDiv.style.display = "block";
+
+    
+    postContentDiv.innerHTML = `\u003cblockquote\u003e\n\u003cp\u003e我想重命名一个文件（手动操作是不可能的，懒！）\u003c\/p\u003e\n\u003cp\u003e将“清晰易懂的的线性代数，国立阳明交通大学周志成，国语版mit线性代数Gilbert Strang LA_1-3”改成“LA_1-3”\u003c\/p\u003e\n\u003cp\u003e所以，就想到了正则匹配咯～\u003c\/p\u003e\n\u003c\/blockquote\u003e\n\u003ch3 id=\u0022直接上代码\u0022\u003e🍲直接上代码\u003c\/h3\u003e\n\u003cdiv class=\u0022highlight\u0022\u003e\u003cpre tabindex=\u00220\u0022 class=\u0022chroma\u0022\u003e\u003ccode class=\u0022language-python\u0022 data-lang=\u0022python\u0022\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022kn\u0022\u003eimport\u003c\/span\u003e \u003cspan class=\u0022nn\u0022\u003eos\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022kn\u0022\u003eimport\u003c\/span\u003e \u003cspan class=\u0022nn\u0022\u003ere\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022c1\u0022\u003e# 指定你想要处理文件的目录\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022n\u0022\u003edirectory\u003c\/span\u003e \u003cspan class=\u0022o\u0022\u003e=\u003c\/span\u003e \u003cspan class=\u0022s1\u0022\u003e\u0026#39;.\/\u0026#39;\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022c1\u0022\u003e# 正则表达式匹配模式\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022n\u0022\u003epattern\u003c\/span\u003e \u003cspan class=\u0022o\u0022\u003e=\u003c\/span\u003e \u003cspan class=\u0022n\u0022\u003ere\u003c\/span\u003e\u003cspan class=\u0022o\u0022\u003e.\u003c\/span\u003e\u003cspan class=\u0022n\u0022\u003ecompile\u003c\/span\u003e\u003cspan class=\u0022p\u0022\u003e(\u003c\/span\u003e\u003cspan class=\u0022sa\u0022\u003er\u003c\/span\u003e\u003cspan class=\u0022s1\u0022\u003e\u0026#39;LA[_\\-\\d\\w\\s]\u002b.*?\\.mp4\u0024\u0026#39;\u003c\/span\u003e\u003cspan class=\u0022p\u0022\u003e)\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022c1\u0022\u003e# 遍历指定目录下的所有文件\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022k\u0022\u003efor\u003c\/span\u003e \u003cspan class=\u0022n\u0022\u003efilename\u003c\/span\u003e \u003cspan class=\u0022ow\u0022\u003ein\u003c\/span\u003e \u003cspan class=\u0022n\u0022\u003eos\u003c\/span\u003e\u003cspan class=\u0022o\u0022\u003e.\u003c\/span\u003e\u003cspan class=\u0022n\u0022\u003elistdir\u003c\/span\u003e\u003cspan class=\u0022p\u0022\u003e(\u003c\/span\u003e\u003cspan class=\u0022n\u0022\u003edirectory\u003c\/span\u003e\u003cspan class=\u0022p\u0022\u003e):\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e    \u003cspan class=\u0022k\u0022\u003eif\u003c\/span\u003e \u003cspan class=\u0022n\u0022\u003efilename\u003c\/span\u003e\u003cspan class=\u0022o\u0022\u003e.\u003c\/span\u003e\u003cspan class=\u0022n\u0022\u003eendswith\u003c\/span\u003e\u003cspan class=\u0022p\u0022\u003e(\u003c\/span\u003e\u003cspan class=\u0022s2\u0022\u003e\u0026#34;.mp4\u0026#34;\u003c\/span\u003e\u003cspan class=\u0022p\u0022\u003e):\u003c\/span\u003e  \u003cspan class=\u0022c1\u0022\u003e# 只处理扩展名为.mp4的文件\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e        \u003cspan class=\u0022k\u0022\u003ematch\u003c\/span\u003e \u003cspan class=\u0022o\u0022\u003e=\u003c\/span\u003e \u003cspan class=\u0022n\u0022\u003epattern\u003c\/span\u003e\u003cspan class=\u0022o\u0022\u003e.\u003c\/span\u003e\u003cspan class=\u0022n\u0022\u003esearch\u003c\/span\u003e\u003cspan class=\u0022p\u0022\u003e(\u003c\/span\u003e\u003cspan class=\u0022n\u0022\u003efilename\u003c\/span\u003e\u003cspan class=\u0022p\u0022\u003e)\u003c\/span\u003e  \u003cspan class=\u0022c1\u0022\u003e# 在文件名中搜索匹配的部分\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e        \u003cspan class=\u0022k\u0022\u003eif\u003c\/span\u003e \u003cspan class=\u0022k\u0022\u003ematch\u003c\/span\u003e\u003cspan class=\u0022p\u0022\u003e:\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e            \u003cspan class=\u0022n\u0022\u003enew_filename\u003c\/span\u003e \u003cspan class=\u0022o\u0022\u003e=\u003c\/span\u003e \u003cspan class=\u0022k\u0022\u003ematch\u003c\/span\u003e\u003cspan class=\u0022o\u0022\u003e.\u003c\/span\u003e\u003cspan class=\u0022n\u0022\u003egroup\u003c\/span\u003e\u003cspan class=\u0022p\u0022\u003e()\u003c\/span\u003e  \u003cspan class=\u0022c1\u0022\u003e# 如果找到匹配，使用匹配的字符串作为新文件名\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e            \u003cspan class=\u0022n\u0022\u003eold_path\u003c\/span\u003e \u003cspan class=\u0022o\u0022\u003e=\u003c\/span\u003e \u003cspan class=\u0022n\u0022\u003eos\u003c\/span\u003e\u003cspan class=\u0022o\u0022\u003e.\u003c\/span\u003e\u003cspan class=\u0022n\u0022\u003epath\u003c\/span\u003e\u003cspan class=\u0022o\u0022\u003e.\u003c\/span\u003e\u003cspan class=\u0022n\u0022\u003ejoin\u003c\/span\u003e\u003cspan class=\u0022p\u0022\u003e(\u003c\/span\u003e\u003cspan class=\u0022n\u0022\u003edirectory\u003c\/span\u003e\u003cspan class=\u0022p\u0022\u003e,\u003c\/span\u003e \u003cspan class=\u0022n\u0022\u003efilename\u003c\/span\u003e\u003cspan class=\u0022p\u0022\u003e)\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e            \u003cspan class=\u0022n\u0022\u003enew_path\u003c\/span\u003e \u003cspan class=\u0022o\u0022\u003e=\u003c\/span\u003e \u003cspan class=\u0022n\u0022\u003eos\u003c\/span\u003e\u003cspan class=\u0022o\u0022\u003e.\u003c\/span\u003e\u003cspan class=\u0022n\u0022\u003epath\u003c\/span\u003e\u003cspan class=\u0022o\u0022\u003e.\u003c\/span\u003e\u003cspan class=\u0022n\u0022\u003ejoin\u003c\/span\u003e\u003cspan class=\u0022p\u0022\u003e(\u003c\/span\u003e\u003cspan class=\u0022n\u0022\u003edirectory\u003c\/span\u003e\u003cspan class=\u0022p\u0022\u003e,\u003c\/span\u003e \u003cspan class=\u0022n\u0022\u003enew_filename\u003c\/span\u003e\u003cspan class=\u0022p\u0022\u003e)\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e            \n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e            \u003cspan class=\u0022c1\u0022\u003e# 重命名文件\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e            \u003cspan class=\u0022c1\u0022\u003e# os.rename(old_path, new_path)\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e            \u003cspan class=\u0022nb\u0022\u003eprint\u003c\/span\u003e\u003cspan class=\u0022p\u0022\u003e(\u003c\/span\u003e\u003cspan class=\u0022sa\u0022\u003ef\u003c\/span\u003e\u003cspan class=\u0022s1\u0022\u003e\u0026#39;Renamed \u0026#34;\u003c\/span\u003e\u003cspan class=\u0022si\u0022\u003e\u007b\u003c\/span\u003e\u003cspan class=\u0022n\u0022\u003efilename\u003c\/span\u003e\u003cspan class=\u0022si\u0022\u003e\u007d\u003c\/span\u003e\u003cspan class=\u0022s1\u0022\u003e\u0026#34; to \u0026#34;\u003c\/span\u003e\u003cspan class=\u0022si\u0022\u003e\u007b\u003c\/span\u003e\u003cspan class=\u0022n\u0022\u003enew_filename\u003c\/span\u003e\u003cspan class=\u0022si\u0022\u003e\u007d\u003c\/span\u003e\u003cspan class=\u0022s1\u0022\u003e\u0026#34;\u0026#39;\u003c\/span\u003e\u003cspan class=\u0022p\u0022\u003e)\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003c\/code\u003e\u003c\/pre\u003e\u003c\/div\u003e\u003ch3 id=\u0022正则表达的解释\u0022\u003e正则表达的解释\u003c\/h3\u003e\n\u003cp\u003e正则表达式\u003ccode\u003er\u0027(LA[_\\-\\d\\s]\u002b[\\w\\s]*\\.mp4)\u0024\u0027\u003c\/code\u003e：\u003c\/p\u003e\n\u003cul\u003e\n\u003cli\u003e\n\u003cp\u003e\u003ccode\u003er\u0027\u0027\u003c\/code\u003e：在字符串前面加上\u003ccode\u003er\u003c\/code\u003e表示这是一个原始字符串，这样做可以确保字符串中的反斜杠不会被当作转义字符处理。在Python中编写正则表达式时，通常推荐这么做。\u003c\/p\u003e\n\u003c\/li\u003e\n\u003cli\u003e\n\u003cp\u003e\u003ccode\u003eLA[_\\-\\d\\w\\s]\u002b.*?\\.mp4\u0024\u003c\/code\u003e：这个表达式从左到右的意思是：\u003c\/p\u003e\n\u003cul\u003e\n\u003cli\u003e\n\u003cp\u003e\u003ccode\u003e(\u003c\/code\u003e和\u003ccode\u003e)\u003c\/code\u003e：捕获组，这意味着匹配到的这部分表达式会被作为一个整体处理，可以从匹配结果中单独提取出来。\u003c\/p\u003e\n\u003c\/li\u003e\n\u003cli\u003e\n\u003cp\u003e\u003ccode\u003eLA\u003c\/code\u003e：匹配字面量字符串\u0026quot;LA\u0026quot;。\u003c\/p\u003e\n\u003c\/li\u003e\n\u003cli\u003e\n\u003cp\u003e\u003ccode\u003e[_\\-\\d\\w\\s]\u002b\u003c\/code\u003e：这是一个字符集合，它可以匹配下划线\u003ccode\u003e_\u003c\/code\u003e、短横线\u003ccode\u003e-\u003c\/code\u003e、任何数字\u003ccode\u003e\\d\u003c\/code\u003e和任何空白字符\u003ccode\u003e\\s\u003c\/code\u003e。\u003ccode\u003e\u002b\u003c\/code\u003e表示前面的字符集合中的字符至少出现一次。\u003c\/p\u003e\n\u003cul\u003e\n\u003cli\u003e\n\u003cp\u003e\u003ccode\u003e_\u003c\/code\u003e：匹配下划线字符。\u003c\/p\u003e\n\u003c\/li\u003e\n\u003cli\u003e\n\u003cp\u003e\u003ccode\u003e\\-\u003c\/code\u003e：匹配短横线字符。在字符集中，短横线通常用来表示范围（如\u003ccode\u003ea-z\u003c\/code\u003e），所以当我们想要匹配短横线本身时，需要对它进行转义。\u003c\/p\u003e\n\u003c\/li\u003e\n\u003cli\u003e\n\u003cp\u003e\u003ccode\u003e\\d\u003c\/code\u003e：匹配任何数字字符。\u003c\/p\u003e\n\u003c\/li\u003e\n\u003cli\u003e\n\u003cp\u003e\u003ccode\u003e\\w\u003c\/code\u003e：匹配任何单词字符（包括字母、数字和下划线）。\u003c\/p\u003e\n\u003c\/li\u003e\n\u003cli\u003e\n\u003cp\u003e\u003ccode\u003e\\s\u003c\/code\u003e：匹配任何空白字符（包括空格、制表符、换行符等）。\u003c\/p\u003e\n\u003c\/li\u003e\n\u003c\/ul\u003e\n\u003c\/li\u003e\n\u003cli\u003e\n\u003cp\u003e\u003ccode\u003e.*?\u003c\/code\u003e：以非贪婪方式匹配零个或多个任意字符（除换行符外）。\u003c\/p\u003e\n\u003c\/li\u003e\n\u003cli\u003e\n\u003cp\u003e\u003ccode\u003e\\.mp4\u003c\/code\u003e：匹配字面量字符串\u0026quot;.mp4\u0026quot;。点\u003ccode\u003e.\u003c\/code\u003e在正则表达式中通常表示匹配任意字符，所以当我们想要匹配点字符本身时，需要对它进行转义\u003ccode\u003e\\.\u003c\/code\u003e。\u003c\/p\u003e\n\u003c\/li\u003e\n\u003cli\u003e\n\u003cp\u003e\u003ccode\u003e\u0024\u003c\/code\u003e：这表示行结束符，确保字符串以我们指定的模式结尾。\u003c\/p\u003e\n\u003c\/li\u003e\n\u003c\/ul\u003e\n\u003c\/li\u003e\n\u003c\/ul\u003e\n\u003cp\u003e这个正则表达式用于匹配以\u0026quot;LA\u0026quot;开头，后面跟随至少一个下划线、短横线、数字或字母数字字符，然后是任意数量的任意字符（\u003ccode\u003e.*?\u003c\/code\u003e表示非贪婪匹配），最后以\u0026quot;.mp4\u0026quot;结尾的字符串。\u003c\/p\u003e\n\u003cp\u003e\u003cmark\u003e主要是抛砖引玉，触类旁通，下次再遇到类似的，就可以自己修改啦\u003c\/mark\u003e\u003c\/p\u003e\n\u003chr\u003e\n\u003cp\u003e正则表达式（Regular Expression，简称Regex），其核心思想是\u003cstrong\u003e模式匹配\u003c\/strong\u003e，通过定义一个搜索模式来匹配字符串中的特定序列，这种模式可以用来进行字符串搜索、替换、分割等操作。\u003c\/p\u003e\n\u003ch3 id=\u0022基本用法和常用元字符\u0022\u003e🌟基本用法和常用元字符\u003c\/h3\u003e\n\u003ch4 id=\u00221-字符匹配\u0022\u003e1. 字符匹配\u003c\/h4\u003e\n\u003cul\u003e\n\u003cli\u003e\u003ccode\u003e.\u003c\/code\u003e：匹配任意单个字符，除了换行符。\u003c\/li\u003e\n\u003cli\u003e\u003ccode\u003e\\d\u003c\/code\u003e：匹配任意一个数字（0-9）。\u003c\/li\u003e\n\u003cli\u003e\u003ccode\u003e\\w\u003c\/code\u003e：匹配任意一个字母、数字或下划线。\u003c\/li\u003e\n\u003cli\u003e\u003ccode\u003e\\s\u003c\/code\u003e：匹配任意一个空白字符（空格、制表符等）。\u003c\/li\u003e\n\u003c\/ul\u003e\n\u003ch4 id=\u00222-位置匹配\u0022\u003e2. 位置匹配\u003c\/h4\u003e\n\u003cul\u003e\n\u003cli\u003e\u003ccode\u003e^\u003c\/code\u003e：匹配字符串的开始位置。\u003c\/li\u003e\n\u003cli\u003e\u003ccode\u003e\u0024\u003c\/code\u003e：匹配字符串的结束位置。\u003c\/li\u003e\n\u003c\/ul\u003e\n\u003ch4 id=\u00223-量词\u0022\u003e3. 量词\u003c\/h4\u003e\n\u003cul\u003e\n\u003cli\u003e\u003ccode\u003e*\u003c\/code\u003e：匹配前面的字符零次或多次。\u003c\/li\u003e\n\u003cli\u003e\u003ccode\u003e\u002b\u003c\/code\u003e：匹配前面的字符一次或多次。\u003c\/li\u003e\n\u003cli\u003e\u003ccode\u003e?\u003c\/code\u003e：匹配前面的字符零次或一次。\u003c\/li\u003e\n\u003cli\u003e\u003ccode\u003e\u007bn\u007d\u003c\/code\u003e：匹配前面的字符n次。\u003c\/li\u003e\n\u003cli\u003e\u003ccode\u003e\u007bn,\u007d\u003c\/code\u003e：匹配前面的字符至少n次。\u003c\/li\u003e\n\u003cli\u003e\u003ccode\u003e\u007bn,m\u007d\u003c\/code\u003e：匹配前面的字符至少n次，但不超过m次。\u003c\/li\u003e\n\u003c\/ul\u003e\n\u003ch4 id=\u00224-字符类\u0022\u003e4. 字符类\u003c\/h4\u003e\n\u003cul\u003e\n\u003cli\u003e\u003ccode\u003e[abc]\u003c\/code\u003e：匹配任意一个在括号内的字符（a、b或c）。\u003c\/li\u003e\n\u003cli\u003e\u003ccode\u003e[^abc]\u003c\/code\u003e：匹配任意一个不在括号内的字符。\u003c\/li\u003e\n\u003c\/ul\u003e\n\u003ch4 id=\u00225-分组和引用\u0022\u003e5. 分组和引用\u003c\/h4\u003e\n\u003cul\u003e\n\u003cli\u003e\u003ccode\u003e()\u003c\/code\u003e：将括号内的字符视为一个单独的分组。可以对整个组应用量词，也可以通过编号或名称引用组内的匹配。\u003c\/li\u003e\n\u003cli\u003e\u003ccode\u003e|\u003c\/code\u003e：逻辑“或”操作符，匹配左边或右边的表达式。\u003c\/li\u003e\n\u003c\/ul\u003e\n\u003ch4 id=\u00226-转义\u0022\u003e6. 转义\u003c\/h4\u003e\n\u003cul\u003e\n\u003cli\u003e\u003ccode\u003e\\\u003c\/code\u003e：转义特殊字符，使之成为字面量意义上的字符，如\u003ccode\u003e\\.\u003c\/code\u003e表示点字符本身，而不是任意字符的匹配。\u003c\/li\u003e\n\u003c\/ul\u003e\n\u003ch3 id=\u0022正则表达式示例匹配邮箱\u0022\u003e正则表达式示例：匹配邮箱\u003c\/h3\u003e\n\u003cp\u003e这是一种比较简单的写法：\u003c\/p\u003e\n\u003cpre tabindex=\u00220\u0022\u003e\u003ccode\u003e[a-zA-Z0-9._%\u002b-]\u002b@[a-zA-Z0-9.-]\u002b\\.[a-zA-Z]\u007b2,\u007d\n\u003c\/code\u003e\u003c\/pre\u003e\u003cul\u003e\n\u003cli\u003e\n\u003cp\u003e\u003ccode\u003e[a-zA-Z0-9._%\u002b-]\u002b\u003c\/code\u003e：这部分匹配电子邮件地址的本地部分，允许字母（无论大小写）、数字、点、下划线、百分号、加号和减号。它假设这些字符可以出现一次或多次。\u003c\/p\u003e\n\u003c\/li\u003e\n\u003cli\u003e\n\u003cp\u003e\u003ccode\u003e@\u003c\/code\u003e：匹配电子邮件地址中的\u0026quot;@\u0026ldquo;符号。\u003c\/p\u003e\n\u003c\/li\u003e\n\u003cli\u003e\n\u003cp\u003e\u003ccode\u003e[a-zA-Z0-9.-]\u002b\u003c\/code\u003e：这部分匹配电子邮件地址的域名部分，允许字母（无论大小写）、数字、点和减号。它假设这些字符可以出现一次或多次。\u003c\/p\u003e\n\u003c\/li\u003e\n\u003cli\u003e\n\u003cp\u003e\u003ccode\u003e\\.[a-zA-Z]\u007b2,\u007d\u003c\/code\u003e：匹配电子邮件地址中的顶级域名，开始于一个点，后面跟着至少两个字母（无论大小写）。这里假设所有的顶级域名至少有两个字符长。\u003c\/p\u003e\n\u003c\/li\u003e\n\u003c\/ul\u003e\n`;
+  }
+
+  
+  window.addEventListener("beforeunload", function() {
+      sessionStorage.removeItem("blog_password_2c4c01dfd9ceb219b4eeefdf54ea3910");
+  });
+  
+  </script>
 </main>
 
 <footer class="footer">

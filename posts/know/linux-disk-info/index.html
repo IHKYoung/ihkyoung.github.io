@@ -324,97 +324,8 @@
 </span>
 
 </div>
-  </header> <aside id="toc-container" class="toc-container wide">
-    <div class="toc">
-        <details  open>
-        <summary accesskey="c" title="(Alt + C)">
-            <span class="details">📚目录</span>
-        </summary>
-
-        <div class="inner"><ul>
-                <li>
-                    <a href="#1-smartctl-%e5%b7%a5%e5%85%b7" aria-label="1. smartctl 工具">1. <code>smartctl</code> 工具</a><ul>
-                        
-                <li>
-                    <a href="#%e5%ae%89%e8%a3%85-smartmontools" aria-label="安装 smartmontools">安装 <code>smartmontools</code></a></li>
-                <li>
-                    <a href="#%e4%bd%bf%e7%94%a8-smartctl-%e6%9f%a5%e7%9c%8b%e7%a1%ac%e7%9b%98%e4%bf%a1%e6%81%af" aria-label="使用 smartctl 查看硬盘信息">使用 <code>smartctl</code> 查看硬盘信息</a></li></ul>
-                </li>
-                <li>
-                    <a href="#2-nvme-cli-%e5%b7%a5%e5%85%b7" aria-label="2. nvme-cli 工具">2. <code>nvme-cli</code> 工具</a><ul>
-                        
-                <li>
-                    <a href="#%e5%ae%89%e8%a3%85-nvme-cli" aria-label="安装 nvme-cli">安装 <code>nvme-cli</code></a></li>
-                <li>
-                    <a href="#%e4%bd%bf%e7%94%a8-nvme-cli-%e6%9f%a5%e7%9c%8b%e7%a1%ac%e7%9b%98%e4%bf%a1%e6%81%af" aria-label="使用 nvme-cli 查看硬盘信息">使用 <code>nvme-cli</code> 查看硬盘信息</a>
-                </li>
-            </ul>
-            </li>
-            </ul>
-        </div>
-        </details>
-    </div>
-</aside>
-<script>
-    let activeElement;
-    let elements;
-    window.addEventListener('DOMContentLoaded', function (event) {
-        checkTocPosition();
-
-        elements = document.querySelectorAll('h1[id],h2[id],h3[id],h4[id],h5[id],h6[id]');
-        
-        activeElement = elements[0];
-        const id = encodeURI(activeElement.getAttribute('id')).toLowerCase();
-        document.querySelector(`.inner ul li a[href="#${id}"]`).classList.add('active');
-    }, false);
-
-    window.addEventListener('resize', function(event) {
-        checkTocPosition();
-    }, false);
-
-    window.addEventListener('scroll', () => {
-        
-        activeElement = Array.from(elements).find((element) => {
-            if ((getOffsetTop(element) - window.pageYOffset) > 0 &&
-                (getOffsetTop(element) - window.pageYOffset) < window.innerHeight/2) {
-                return element;
-            }
-        }) || activeElement
-
-        elements.forEach(element => {
-            const id = encodeURI(element.getAttribute('id')).toLowerCase();
-            if (element === activeElement){
-                document.querySelector(`.inner ul li a[href="#${id}"]`).classList.add('active');
-            } else {
-                document.querySelector(`.inner ul li a[href="#${id}"]`).classList.remove('active');
-            }
-        })
-    }, false);
-
-    const main = parseInt(getComputedStyle(document.body).getPropertyValue('--article-width'), 10);
-    const toc = parseInt(getComputedStyle(document.body).getPropertyValue('--toc-width'), 10);
-    const gap = parseInt(getComputedStyle(document.body).getPropertyValue('--gap'), 10);
-
-    function checkTocPosition() {
-        const width = document.body.scrollWidth;
-
-        if (width - main - (toc * 2) - (gap * 4) > 0) {
-            document.getElementById("toc-container").classList.add("wide");
-        } else {
-            document.getElementById("toc-container").classList.remove("wide");
-        }
-    }
-
-    function getOffsetTop(element) {
-        if (!element.getClientRects().length) {
-            return 0;
-        }
-        let rect = element.getBoundingClientRect();
-        let win = element.ownerDocument.defaultView;
-        return rect.top + win.pageYOffset;
-    }
-</script>
-  <div class="post-content"><blockquote>
+  </header>
+  <div id="post-content"><blockquote>
 <p>去年2023年，固态硬盘低谷的时候买了一个2T的，现在没啥用了，原本想着装移动版的MacOS系统的，但是看了看雷电3硬盘盒的读写速度，三星的比较稳定，这个雷克沙属实。。。拉垮。</p>
 <p>准备卖了，现在的价格是799，想着卖700可以的吧？<strong>结果最后被砍到600。。。</strong></p>
 <p>砍就砍了，结果还要我给他一个硬盘检测的信息，Windows上这种软件挺多，Linux？估计没有，但理论上讲，Linux获取这些信息会更直接，也更方便，什么硬盘的通电次数、通电时间，读写量啊，应该用命令行就能查看。</p>
@@ -544,6 +455,94 @@
 
   </footer>
 </article>
+
+<style>
+   
+  #check-button {
+      background-color: transparent;
+      border: none;
+      padding: 10px 20px;
+      font-size: 1.2em;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: transform 0.1s ease-in-out, box-shadow 0.2s;
+  }
+  #check-button:active {
+      transform: scale(0.9);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  }
+
+   
+  @keyframes shake {
+      0% { transform: translateX(0); }
+      25% { transform: translateX(-5px); }
+      50% { transform: translateX(5px); }
+      75% { transform: translateX(-5px); }
+      100% { transform: translateX(0); }
+  }
+  .shake {
+      animation: shake 0.3s ease-in-out;
+  }
+</style>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    let storedPassword = sessionStorage.getItem("blog_password_dfffa735a7c5d6e1652dd1f888823f81");
+
+    if (!storedPassword) {
+        document.getElementById("password-protection").style.display = "block";
+    } else {
+        unlockContent();
+    }
+  });
+
+  function checkPassword() {
+    let inputPassword = document.getElementById("post-password").value;
+    let correctHash = "c57a2f70945d45168d580c4bb81100f2"; 
+    let inputHash = CryptoJS.MD5(inputPassword).toString();  
+
+    let errorMsg = document.getElementById("error-msg");
+    let checkButton = document.getElementById("check-button");
+
+    
+    checkButton.style.transform = "scale(0.95)";
+    setTimeout(() => {
+        checkButton.style.transform = "scale(1)";
+    }, 100);
+
+    if (inputHash === correctHash) {
+      sessionStorage.setItem("blog_password_dfffa735a7c5d6e1652dd1f888823f81", inputHash);
+      unlockContent();
+    } else {
+        
+        errorMsg.style.display = "block";
+        errorMsg.classList.add("shake");
+        
+        
+        setTimeout(() => {
+            errorMsg.classList.remove("shake");
+        }, 300);
+    }
+  }
+
+  function unlockContent() {
+    document.getElementById("password-protection").style.display = "none";
+    let postContentDiv = document.getElementById("post-content");
+    postContentDiv.style.display = "block";
+
+    
+    postContentDiv.innerHTML = `\u003cblockquote\u003e\n\u003cp\u003e去年2023年，固态硬盘低谷的时候买了一个2T的，现在没啥用了，原本想着装移动版的MacOS系统的，但是看了看雷电3硬盘盒的读写速度，三星的比较稳定，这个雷克沙属实。。。拉垮。\u003c\/p\u003e\n\u003cp\u003e准备卖了，现在的价格是799，想着卖700可以的吧？\u003cstrong\u003e结果最后被砍到600。。。\u003c\/strong\u003e\u003c\/p\u003e\n\u003cp\u003e砍就砍了，结果还要我给他一个硬盘检测的信息，Windows上这种软件挺多，Linux？估计没有，但理论上讲，Linux获取这些信息会更直接，也更方便，什么硬盘的通电次数、通电时间，读写量啊，应该用命令行就能查看。\u003c\/p\u003e\n\u003c\/blockquote\u003e\n\u003cp\u003e在Linux系统下，有几种工具可以用来查看固态硬盘（SSD）的通电次数、通电时间，以及读写的数据量。以下是一些常用的工具和命令：\u003c\/p\u003e\n\u003ch3 id=\u00221-smartctl-工具\u0022\u003e1. \u003ccode\u003esmartctl\u003c\/code\u003e 工具\u003c\/h3\u003e\n\u003cp\u003e\u003ccode\u003esmartctl\u003c\/code\u003e 是 \u003ccode\u003esmartmontools\u003c\/code\u003e 软件包中的一个工具，用于监控和管理硬盘的SMART属性。可以使用它来查看SSD的详细信息。\u003c\/p\u003e\n\u003ch4 id=\u0022安装-smartmontools\u0022\u003e安装 \u003ccode\u003esmartmontools\u003c\/code\u003e\u003c\/h4\u003e\n\u003cp\u003e在Ubuntu或Debian系统上，使用以下命令安装 \u003ccode\u003esmartmontools\u003c\/code\u003e：\u003c\/p\u003e\n\u003cdiv class=\u0022highlight\u0022\u003e\u003cpre tabindex=\u00220\u0022 class=\u0022chroma\u0022\u003e\u003ccode class=\u0022language-sh\u0022 data-lang=\u0022sh\u0022\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003esudo apt-get update\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003esudo apt-get install smartmontools\n\u003c\/span\u003e\u003c\/span\u003e\u003c\/code\u003e\u003c\/pre\u003e\u003c\/div\u003e\u003ch4 id=\u0022使用-smartctl-查看硬盘信息\u0022\u003e使用 \u003ccode\u003esmartctl\u003c\/code\u003e 查看硬盘信息\u003c\/h4\u003e\n\u003col\u003e\n\u003cli\u003e\n\u003cp\u003e\u003cstrong\u003e查看基本信息\u003c\/strong\u003e：\u003c\/p\u003e\n\u003cdiv class=\u0022highlight\u0022\u003e\u003cpre tabindex=\u00220\u0022 class=\u0022chroma\u0022\u003e\u003ccode class=\u0022language-sh\u0022 data-lang=\u0022sh\u0022\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003esudo smartctl -a \/dev\/sdX\n\u003c\/span\u003e\u003c\/span\u003e\u003c\/code\u003e\u003c\/pre\u003e\u003c\/div\u003e\u003cp\u003e其中 \u003ccode\u003e\/dev\/sdX\u003c\/code\u003e 是你的硬盘设备名（例如 \u003ccode\u003e\/dev\/sda\u003c\/code\u003e）。\u003c\/p\u003e\n\u003c\/li\u003e\n\u003cli\u003e\n\u003cp\u003e\u003cstrong\u003e具体使用如下：\u003c\/strong\u003e\u003c\/p\u003e\n\u003cdiv class=\u0022highlight\u0022\u003e\u003cpre tabindex=\u00220\u0022 class=\u0022chroma\u0022\u003e\u003ccode class=\u0022language-sh\u0022 data-lang=\u0022sh\u0022\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003esudo smartctl  -a \/dev\/nvme0n1\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003esmartctl 7.1 2019-12-30 r5022 \u003cspan class=\u0022o\u0022\u003e[\u003c\/span\u003ex86_64-linux-5.15.0-84-generic\u003cspan class=\u0022o\u0022\u003e]\u003c\/span\u003e \u003cspan class=\u0022o\u0022\u003e(\u003c\/span\u003e\u003cspan class=\u0022nb\u0022\u003elocal\u003c\/span\u003e build\u003cspan class=\u0022o\u0022\u003e)\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003eCopyright \u003cspan class=\u0022o\u0022\u003e(\u003c\/span\u003eC\u003cspan class=\u0022o\u0022\u003e)\u003c\/span\u003e 2002-19, Bruce Allen, Christian Franke, www.smartmontools.org\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022o\u0022\u003e===\u003c\/span\u003e START OF INFORMATION \u003cspan class=\u0022nv\u0022\u003eSECTION\u003c\/span\u003e \u003cspan class=\u0022o\u0022\u003e===\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003eModel Number:                       KINGSTON SNVS1000G\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003eSerial Number:                      50026B7685D2DF4A\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003eFirmware Version:                   S8442105\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003ePCI Vendor\/Subsystem ID:            0x2646\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003eIEEE OUI Identifier:                0x0026b7\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003eController ID:                      \u003cspan class=\u0022m\u0022\u003e1\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003eNumber of Namespaces:               \u003cspan class=\u0022m\u0022\u003e1\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003eNamespace \u003cspan class=\u0022m\u0022\u003e1\u003c\/span\u003e Size\/Capacity:          1,000,204,886,016 \u003cspan class=\u0022o\u0022\u003e[\u003c\/span\u003e1.00 TB\u003cspan class=\u0022o\u0022\u003e]\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003eNamespace \u003cspan class=\u0022m\u0022\u003e1\u003c\/span\u003e Formatted LBA Size:     \u003cspan class=\u0022m\u0022\u003e512\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003eNamespace \u003cspan class=\u0022m\u0022\u003e1\u003c\/span\u003e IEEE EUI-64:            0026b7 685d2df4a5\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003eLocal Time is:                      Wed Jun  \u003cspan class=\u0022m\u0022\u003e5\u003c\/span\u003e 15:58:07 \u003cspan class=\u0022m\u0022\u003e2024\u003c\/span\u003e CST\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003eFirmware Updates \u003cspan class=\u0022o\u0022\u003e(\u003c\/span\u003e0x12\u003cspan class=\u0022o\u0022\u003e)\u003c\/span\u003e:            \u003cspan class=\u0022m\u0022\u003e1\u003c\/span\u003e Slot, no Reset required\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003eOptional Admin Commands \u003cspan class=\u0022o\u0022\u003e(\u003c\/span\u003e0x0016\u003cspan class=\u0022o\u0022\u003e)\u003c\/span\u003e:   Format Frmw_DL Self_Test\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003eOptional NVM Commands \u003cspan class=\u0022o\u0022\u003e(\u003c\/span\u003e0x005f\u003cspan class=\u0022o\u0022\u003e)\u003c\/span\u003e:     Comp Wr_Unc DS_Mngmt Wr_Zero Sav\/Sel_Feat Timestmp\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003eMaximum Data Transfer Size:         \u003cspan class=\u0022m\u0022\u003e64\u003c\/span\u003e Pages\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003eWarning  Comp. Temp. Threshold:     \u003cspan class=\u0022m\u0022\u003e85\u003c\/span\u003e Celsius\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003eCritical Comp. Temp. Threshold:     \u003cspan class=\u0022m\u0022\u003e90\u003c\/span\u003e Celsius\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003eSupported Power States\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003eSt Op     Max   Active     Idle   RL RT WL WT  Ent_Lat  Ex_Lat\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e \u003cspan class=\u0022m\u0022\u003e0\u003c\/span\u003e \u002b     6.00W       -        -    \u003cspan class=\u0022m\u0022\u003e0\u003c\/span\u003e  \u003cspan class=\u0022m\u0022\u003e0\u003c\/span\u003e  \u003cspan class=\u0022m\u0022\u003e0\u003c\/span\u003e  \u003cspan class=\u0022m\u0022\u003e0\u003c\/span\u003e        \u003cspan class=\u0022m\u0022\u003e0\u003c\/span\u003e       \u003cspan class=\u0022m\u0022\u003e0\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e \u003cspan class=\u0022m\u0022\u003e1\u003c\/span\u003e \u002b     3.00W       -        -    \u003cspan class=\u0022m\u0022\u003e1\u003c\/span\u003e  \u003cspan class=\u0022m\u0022\u003e1\u003c\/span\u003e  \u003cspan class=\u0022m\u0022\u003e1\u003c\/span\u003e  \u003cspan class=\u0022m\u0022\u003e1\u003c\/span\u003e        \u003cspan class=\u0022m\u0022\u003e0\u003c\/span\u003e       \u003cspan class=\u0022m\u0022\u003e0\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e \u003cspan class=\u0022m\u0022\u003e2\u003c\/span\u003e \u002b     1.50W       -        -    \u003cspan class=\u0022m\u0022\u003e2\u003c\/span\u003e  \u003cspan class=\u0022m\u0022\u003e2\u003c\/span\u003e  \u003cspan class=\u0022m\u0022\u003e2\u003c\/span\u003e  \u003cspan class=\u0022m\u0022\u003e2\u003c\/span\u003e        \u003cspan class=\u0022m\u0022\u003e0\u003c\/span\u003e       \u003cspan class=\u0022m\u0022\u003e0\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e \u003cspan class=\u0022m\u0022\u003e3\u003c\/span\u003e -   0.0250W       -        -    \u003cspan class=\u0022m\u0022\u003e3\u003c\/span\u003e  \u003cspan class=\u0022m\u0022\u003e3\u003c\/span\u003e  \u003cspan class=\u0022m\u0022\u003e3\u003c\/span\u003e  \u003cspan class=\u0022m\u0022\u003e3\u003c\/span\u003e     \u003cspan class=\u0022m\u0022\u003e8000\u003c\/span\u003e    \u003cspan class=\u0022m\u0022\u003e3000\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e \u003cspan class=\u0022m\u0022\u003e4\u003c\/span\u003e -   0.0040W       -        -    \u003cspan class=\u0022m\u0022\u003e4\u003c\/span\u003e  \u003cspan class=\u0022m\u0022\u003e4\u003c\/span\u003e  \u003cspan class=\u0022m\u0022\u003e4\u003c\/span\u003e  \u003cspan class=\u0022m\u0022\u003e4\u003c\/span\u003e    \u003cspan class=\u0022m\u0022\u003e25000\u003c\/span\u003e   \u003cspan class=\u0022m\u0022\u003e25000\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003eSupported LBA Sizes \u003cspan class=\u0022o\u0022\u003e(\u003c\/span\u003eNSID 0x1\u003cspan class=\u0022o\u0022\u003e)\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003eId Fmt  Data  Metadt  Rel_Perf\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e \u003cspan class=\u0022m\u0022\u003e0\u003c\/span\u003e \u002b     \u003cspan class=\u0022m\u0022\u003e512\u003c\/span\u003e       \u003cspan class=\u0022m\u0022\u003e0\u003c\/span\u003e         \u003cspan class=\u0022nv\u0022\u003e0\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022o\u0022\u003e===\u003c\/span\u003e START OF SMART DATA \u003cspan class=\u0022nv\u0022\u003eSECTION\u003c\/span\u003e \u003cspan class=\u0022o\u0022\u003e===\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003eSMART overall-health self-assessment \u003cspan class=\u0022nb\u0022\u003etest\u003c\/span\u003e result: PASSED\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003eSMART\/Health Information \u003cspan class=\u0022o\u0022\u003e(\u003c\/span\u003eNVMe Log 0x02\u003cspan class=\u0022o\u0022\u003e)\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003eCritical Warning:                   0x00\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003eTemperature:                        \u003cspan class=\u0022m\u0022\u003e54\u003c\/span\u003e Celsius\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003eAvailable Spare:                    100%\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003eAvailable Spare Threshold:          10%\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003ePercentage Used:                    0%\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003eData Units Read:                    4,596,860 \u003cspan class=\u0022o\u0022\u003e[\u003c\/span\u003e2.35 TB\u003cspan class=\u0022o\u0022\u003e]\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003eData Units Written:                 6,819,671 \u003cspan class=\u0022o\u0022\u003e[\u003c\/span\u003e3.49 TB\u003cspan class=\u0022o\u0022\u003e]\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003eHost Read Commands:                 40,326,724\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003eHost Write Commands:                85,231,477\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003eController Busy Time:               3,283\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003ePower Cycles:                       \u003cspan class=\u0022m\u0022\u003e130\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003ePower On Hours:                     5,507\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003eUnsafe Shutdowns:                   \u003cspan class=\u0022m\u0022\u003e100\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003eMedia and Data Integrity Errors:    \u003cspan class=\u0022m\u0022\u003e0\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003eError Information Log Entries:      \u003cspan class=\u0022m\u0022\u003e0\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003eWarning  Comp. Temperature Time:    \u003cspan class=\u0022m\u0022\u003e0\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003eCritical Comp. Temperature Time:    \u003cspan class=\u0022m\u0022\u003e0\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003eError Information \u003cspan class=\u0022o\u0022\u003e(\u003c\/span\u003eNVMe Log 0x01, max \u003cspan class=\u0022m\u0022\u003e64\u003c\/span\u003e entries\u003cspan class=\u0022o\u0022\u003e)\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003eNo Errors Logged\n\u003c\/span\u003e\u003c\/span\u003e\u003c\/code\u003e\u003c\/pre\u003e\u003c\/div\u003e\u003c\/li\u003e\n\u003c\/ol\u003e\n\u003ch3 id=\u00222-nvme-cli-工具\u0022\u003e2. \u003ccode\u003envme-cli\u003c\/code\u003e 工具\u003c\/h3\u003e\n\u003cp\u003e如果SSD是NVMe接口的，可以使用 \u003ccode\u003envme-cli\u003c\/code\u003e 工具来查看详细信息。\u003c\/p\u003e\n\u003ch4 id=\u0022安装-nvme-cli\u0022\u003e安装 \u003ccode\u003envme-cli\u003c\/code\u003e\u003c\/h4\u003e\n\u003cp\u003e在Ubuntu或Debian系统上，使用以下命令安装 \u003ccode\u003envme-cli\u003c\/code\u003e：\u003c\/p\u003e\n\u003cdiv class=\u0022highlight\u0022\u003e\u003cpre tabindex=\u00220\u0022 class=\u0022chroma\u0022\u003e\u003ccode class=\u0022language-sh\u0022 data-lang=\u0022sh\u0022\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003esudo apt-get update\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003esudo apt-get install nvme-cli\n\u003c\/span\u003e\u003c\/span\u003e\u003c\/code\u003e\u003c\/pre\u003e\u003c\/div\u003e\u003ch4 id=\u0022使用-nvme-cli-查看硬盘信息\u0022\u003e使用 \u003ccode\u003envme-cli\u003c\/code\u003e 查看硬盘信息\u003c\/h4\u003e\n\u003col\u003e\n\u003cli\u003e\n\u003cp\u003e\u003cstrong\u003e查看基本信息\u003c\/strong\u003e：\u003c\/p\u003e\n\u003cdiv class=\u0022highlight\u0022\u003e\u003cpre tabindex=\u00220\u0022 class=\u0022chroma\u0022\u003e\u003ccode class=\u0022language-sh\u0022 data-lang=\u0022sh\u0022\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003esudo nvme smart-log \/dev\/nvme0\n\u003c\/span\u003e\u003c\/span\u003e\u003c\/code\u003e\u003c\/pre\u003e\u003c\/div\u003e\u003cp\u003e其中 \u003ccode\u003e\/dev\/nvme0\u003c\/code\u003e 是NVMe设备名。\u003c\/p\u003e\n\u003c\/li\u003e\n\u003cli\u003e\n\u003cp\u003e\u003cstrong\u003e查看详细SMART属性\u003c\/strong\u003e：\u003c\/p\u003e\n\u003cdiv class=\u0022highlight\u0022\u003e\u003cpre tabindex=\u00220\u0022 class=\u0022chroma\u0022\u003e\u003ccode class=\u0022language-sh\u0022 data-lang=\u0022sh\u0022\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003esudo nvme smart-log \/dev\/nvme0 \u003cspan class=\u0022p\u0022\u003e|\u003c\/span\u003e grep -i \u003cspan class=\u0022s1\u0022\u003e\u0026#39;data_units_written\\|data_units_read\\|power_on_hours\\|power_cycles\u0026#39;\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003c\/code\u003e\u003c\/pre\u003e\u003c\/div\u003e\u003c\/li\u003e\n\u003cli\u003e\n\u003cp\u003e\u003cstrong\u003e具体使用效果：\u003c\/strong\u003e\u003c\/p\u003e\n\u003cdiv class=\u0022highlight\u0022\u003e\u003cpre tabindex=\u00220\u0022 class=\u0022chroma\u0022\u003e\u003ccode class=\u0022language-sh\u0022 data-lang=\u0022sh\u0022\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003esudo nvme smart-log \/dev\/nvme0 \u003cspan class=\u0022p\u0022\u003e|\u003c\/span\u003e grep -i \u003cspan class=\u0022s1\u0022\u003e\u0026#39;data_units_written\\|data_units_read\\|power_on_hours\\|power_cycles\u0026#39;\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003edata_units_read                     : 4,596,861\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003edata_units_written                  : 6,819,687\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003epower_cycles                        : \u003cspan class=\u0022m\u0022\u003e130\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003epower_on_hours                      : 5,508\n\u003c\/span\u003e\u003c\/span\u003e\u003c\/code\u003e\u003c\/pre\u003e\u003c\/div\u003e\u003c\/li\u003e\n\u003c\/ol\u003e\n`;
+  }
+
+  
+  window.addEventListener("beforeunload", function() {
+      sessionStorage.removeItem("blog_password_dfffa735a7c5d6e1652dd1f888823f81");
+  });
+  
+  </script>
 </main>
 
 <footer class="footer">

@@ -336,86 +336,8 @@ vscode用的久了，以此为例吧？（其实CLion体验更好，那未尝不
 </span>
 
 </div>
-  </header> <aside id="toc-container" class="toc-container wide">
-    <div class="toc">
-        <details  open>
-        <summary accesskey="c" title="(Alt + C)">
-            <span class="details">📚目录</span>
-        </summary>
-
-        <div class="inner"><ul>
-                <li>
-                    <a href="#%e5%9c%a8-vs-code-%e4%b8%ad%e8%87%aa%e5%8a%a8%e6%b7%bb%e5%8a%a0%e7%89%88%e6%9d%83%e4%bf%a1%e6%81%af" aria-label="在 VS Code 中自动添加版权信息">在 VS Code 中自动添加版权信息</a></li>
-                <li>
-                    <a href="#%e9%80%9a%e8%bf%87%e5%bf%ab%e6%8d%b7%e9%94%ae%e6%8f%92%e5%85%a5%e7%89%88%e6%9d%83%e4%bf%a1%e6%81%af" aria-label="通过快捷键插入版权信息">通过快捷键插入版权信息</a></li>
-                <li>
-                    <a href="#%e8%a1%a5%e5%85%85" aria-label="补充">补充</a>
-                </li>
-            </ul>
-        </div>
-        </details>
-    </div>
-</aside>
-<script>
-    let activeElement;
-    let elements;
-    window.addEventListener('DOMContentLoaded', function (event) {
-        checkTocPosition();
-
-        elements = document.querySelectorAll('h1[id],h2[id],h3[id],h4[id],h5[id],h6[id]');
-        
-        activeElement = elements[0];
-        const id = encodeURI(activeElement.getAttribute('id')).toLowerCase();
-        document.querySelector(`.inner ul li a[href="#${id}"]`).classList.add('active');
-    }, false);
-
-    window.addEventListener('resize', function(event) {
-        checkTocPosition();
-    }, false);
-
-    window.addEventListener('scroll', () => {
-        
-        activeElement = Array.from(elements).find((element) => {
-            if ((getOffsetTop(element) - window.pageYOffset) > 0 &&
-                (getOffsetTop(element) - window.pageYOffset) < window.innerHeight/2) {
-                return element;
-            }
-        }) || activeElement
-
-        elements.forEach(element => {
-            const id = encodeURI(element.getAttribute('id')).toLowerCase();
-            if (element === activeElement){
-                document.querySelector(`.inner ul li a[href="#${id}"]`).classList.add('active');
-            } else {
-                document.querySelector(`.inner ul li a[href="#${id}"]`).classList.remove('active');
-            }
-        })
-    }, false);
-
-    const main = parseInt(getComputedStyle(document.body).getPropertyValue('--article-width'), 10);
-    const toc = parseInt(getComputedStyle(document.body).getPropertyValue('--toc-width'), 10);
-    const gap = parseInt(getComputedStyle(document.body).getPropertyValue('--gap'), 10);
-
-    function checkTocPosition() {
-        const width = document.body.scrollWidth;
-
-        if (width - main - (toc * 2) - (gap * 4) > 0) {
-            document.getElementById("toc-container").classList.add("wide");
-        } else {
-            document.getElementById("toc-container").classList.remove("wide");
-        }
-    }
-
-    function getOffsetTop(element) {
-        if (!element.getClientRects().length) {
-            return 0;
-        }
-        let rect = element.getBoundingClientRect();
-        let win = element.ownerDocument.defaultView;
-        return rect.top + win.pageYOffset;
-    }
-</script>
-  <div class="post-content"><blockquote>
+  </header>
+  <div id="post-content"><blockquote>
 <p>关于代码💩山，已经不忍直视。。。</p>
 <p>只希望自己能够写出整洁、大方、有魅力（又美丽）的代码。</p>
 <p>所以呢，得给代码属个大名。</p>
@@ -524,6 +446,94 @@ vscode用的久了，以此为例吧？（其实CLion体验更好，那未尝不
 
   </footer>
 </article>
+
+<style>
+   
+  #check-button {
+      background-color: transparent;
+      border: none;
+      padding: 10px 20px;
+      font-size: 1.2em;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: transform 0.1s ease-in-out, box-shadow 0.2s;
+  }
+  #check-button:active {
+      transform: scale(0.9);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  }
+
+   
+  @keyframes shake {
+      0% { transform: translateX(0); }
+      25% { transform: translateX(-5px); }
+      50% { transform: translateX(5px); }
+      75% { transform: translateX(-5px); }
+      100% { transform: translateX(0); }
+  }
+  .shake {
+      animation: shake 0.3s ease-in-out;
+  }
+</style>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    let storedPassword = sessionStorage.getItem("blog_password_88c0a76ad7351c5893b534cb79ee52cf");
+
+    if (!storedPassword) {
+        document.getElementById("password-protection").style.display = "block";
+    } else {
+        unlockContent();
+    }
+  });
+
+  function checkPassword() {
+    let inputPassword = document.getElementById("post-password").value;
+    let correctHash = "c57a2f70945d45168d580c4bb81100f2"; 
+    let inputHash = CryptoJS.MD5(inputPassword).toString();  
+
+    let errorMsg = document.getElementById("error-msg");
+    let checkButton = document.getElementById("check-button");
+
+    
+    checkButton.style.transform = "scale(0.95)";
+    setTimeout(() => {
+        checkButton.style.transform = "scale(1)";
+    }, 100);
+
+    if (inputHash === correctHash) {
+      sessionStorage.setItem("blog_password_88c0a76ad7351c5893b534cb79ee52cf", inputHash);
+      unlockContent();
+    } else {
+        
+        errorMsg.style.display = "block";
+        errorMsg.classList.add("shake");
+        
+        
+        setTimeout(() => {
+            errorMsg.classList.remove("shake");
+        }, 300);
+    }
+  }
+
+  function unlockContent() {
+    document.getElementById("password-protection").style.display = "none";
+    let postContentDiv = document.getElementById("post-content");
+    postContentDiv.style.display = "block";
+
+    
+    postContentDiv.innerHTML = `\u003cblockquote\u003e\n\u003cp\u003e关于代码💩山，已经不忍直视。。。\u003c\/p\u003e\n\u003cp\u003e只希望自己能够写出整洁、大方、有魅力（又美丽）的代码。\u003c\/p\u003e\n\u003cp\u003e所以呢，得给代码属个大名。\u003c\/p\u003e\n\u003c\/blockquote\u003e\n\u003cp\u003evscode用的久了，以此为例吧？（其实CLion体验更好，那未尝不试试呢！）\u003c\/p\u003e\n\u003cp\u003e先vscode吧！\u003c\/p\u003e\n\u003ch3 id=\u0022在-vs-code-中自动添加版权信息\u0022\u003e在 VS Code 中自动添加版权信息\u003c\/h3\u003e\n\u003cp\u003e可以通过使用代码片段（Snippets）来自动插入版权信息：\u003c\/p\u003e\n\u003col\u003e\n\u003cli\u003e打开命令面板（\u003ccode\u003eCtrl\u002bShift\u002bP\u003c\/code\u003e 或 \u003ccode\u003eCmd\u002bShift\u002bP\u003c\/code\u003e）。\u003c\/li\u003e\n\u003cli\u003e输入 \u0026ldquo;Configure User Snippets\u0026rdquo; 并选择它。\u003c\/li\u003e\n\u003cli\u003e选择 \u003ccode\u003ecpp.json\u003c\/code\u003e（针对 C\u002b\u002b 文件）。\u003c\/li\u003e\n\u003cli\u003e输入以下内容：\u003c\/li\u003e\n\u003c\/ol\u003e\n\u003cdiv class=\u0022highlight\u0022\u003e\u003cpre tabindex=\u00220\u0022 class=\u0022chroma\u0022\u003e\u003ccode class=\u0022language-json\u0022 data-lang=\u0022json\u0022\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022p\u0022\u003e\u007b\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e    \u003cspan class=\u0022nt\u0022\u003e\u0026#34;Print Copyright Header\u0026#34;\u003c\/span\u003e\u003cspan class=\u0022p\u0022\u003e:\u003c\/span\u003e \u003cspan class=\u0022p\u0022\u003e\u007b\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e        \u003cspan class=\u0022nt\u0022\u003e\u0026#34;prefix\u0026#34;\u003c\/span\u003e\u003cspan class=\u0022p\u0022\u003e:\u003c\/span\u003e \u003cspan class=\u0022s2\u0022\u003e\u0026#34;copyright\u0026#34;\u003c\/span\u003e\u003cspan class=\u0022p\u0022\u003e,\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e        \u003cspan class=\u0022nt\u0022\u003e\u0026#34;body\u0026#34;\u003c\/span\u003e\u003cspan class=\u0022p\u0022\u003e:\u003c\/span\u003e \u003cspan class=\u0022p\u0022\u003e[\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e            \u003cspan class=\u0022s2\u0022\u003e\u0026#34;\/*\u0026#34;\u003c\/span\u003e\u003cspan class=\u0022p\u0022\u003e,\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e            \u003cspan class=\u0022s2\u0022\u003e\u0026#34; * Project: \u0024\u007b1:Your Project Name\u007d\u0026#34;\u003c\/span\u003e\u003cspan class=\u0022p\u0022\u003e,\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e            \u003cspan class=\u0022s2\u0022\u003e\u0026#34; * File: \u0024TM_FILENAME\u0026#34;\u003c\/span\u003e\u003cspan class=\u0022p\u0022\u003e,\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e            \u003cspan class=\u0022s2\u0022\u003e\u0026#34; * Version: \u0024\u007b2:1.0\u007d\u0026#34;\u003c\/span\u003e\u003cspan class=\u0022p\u0022\u003e,\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e            \u003cspan class=\u0022s2\u0022\u003e\u0026#34; *\u0026#34;\u003c\/span\u003e\u003cspan class=\u0022p\u0022\u003e,\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e            \u003cspan class=\u0022s2\u0022\u003e\u0026#34; * Author: \u0024\u007b3:Your Name\u007d\u0026#34;\u003c\/span\u003e\u003cspan class=\u0022p\u0022\u003e,\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e            \u003cspan class=\u0022s2\u0022\u003e\u0026#34; * Email: \u0024\u007b4:your.email@example.com\u007d\u0026#34;\u003c\/span\u003e\u003cspan class=\u0022p\u0022\u003e,\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e            \u003cspan class=\u0022s2\u0022\u003e\u0026#34; * Date: \u0024CURRENT_YEAR-\u0024CURRENT_MONTH-\u0024CURRENT_DATE\u0026#34;\u003c\/span\u003e\u003cspan class=\u0022p\u0022\u003e,\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e            \u003cspan class=\u0022s2\u0022\u003e\u0026#34; *\u0026#34;\u003c\/span\u003e\u003cspan class=\u0022p\u0022\u003e,\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e            \u003cspan class=\u0022s2\u0022\u003e\u0026#34; * Copyright (c) \u0024CURRENT_YEAR, [Your Company Name]\u0026#34;\u003c\/span\u003e\u003cspan class=\u0022p\u0022\u003e,\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e            \u003cspan class=\u0022s2\u0022\u003e\u0026#34; * All rights reserved.\u0026#34;\u003c\/span\u003e\u003cspan class=\u0022p\u0022\u003e,\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e            \u003cspan class=\u0022s2\u0022\u003e\u0026#34; *\u0026#34;\u003c\/span\u003e\u003cspan class=\u0022p\u0022\u003e,\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e            \u003cspan class=\u0022s2\u0022\u003e\u0026#34; * [Add additional license information here]\u0026#34;\u003c\/span\u003e\u003cspan class=\u0022p\u0022\u003e,\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e            \u003cspan class=\u0022s2\u0022\u003e\u0026#34; *\/\u0026#34;\u003c\/span\u003e\u003cspan class=\u0022p\u0022\u003e,\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e            \u003cspan class=\u0022s2\u0022\u003e\u0026#34;\u0026#34;\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e        \u003cspan class=\u0022p\u0022\u003e],\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e        \u003cspan class=\u0022nt\u0022\u003e\u0026#34;description\u0026#34;\u003c\/span\u003e\u003cspan class=\u0022p\u0022\u003e:\u003c\/span\u003e \u003cspan class=\u0022s2\u0022\u003e\u0026#34;Prints a detailed copyright header with additional information\u0026#34;\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e    \u003cspan class=\u0022p\u0022\u003e\u007d\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022p\u0022\u003e\u007d\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003c\/code\u003e\u003c\/pre\u003e\u003c\/div\u003e\u003cp\u003e其中，可以使用 \u003ccode\u003e\u0024\u007b1:default\u007d\u003c\/code\u003e 这样的语法来设置默认值，例如：\u003c\/p\u003e\n\u003cdiv class=\u0022highlight\u0022\u003e\u003cpre tabindex=\u00220\u0022 class=\u0022chroma\u0022\u003e\u003ccode class=\u0022language-json\u0022 data-lang=\u0022json\u0022\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022s2\u0022\u003e\u0026#34;Author: \u00243\u0026#34;\u003c\/span\u003e\u003cspan class=\u0022err\u0022\u003e:\u003c\/span\u003e \u003cspan class=\u0022s2\u0022\u003e\u0026#34;Author: \u0024\u007b3:Your Name\u007d\u0026#34;\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003c\/code\u003e\u003c\/pre\u003e\u003c\/div\u003e\u003ch3 id=\u0022通过快捷键插入版权信息\u0022\u003e通过快捷键插入版权信息\u003c\/h3\u003e\n\u003col\u003e\n\u003cli\u003e进入 \u003ccode\u003eCode\u003c\/code\u003e \u0026gt; \u003ccode\u003e首选项\u003c\/code\u003e \u0026gt; \u003ccode\u003e键盘快捷方式\u003c\/code\u003e。\u003c\/li\u003e\n\u003cli\u003e搜索 “Trigger Suggest” 或者 “触发建议”。\u003c\/li\u003e\n\u003cli\u003e查看当前绑定的快捷键或为其设置一个新的快捷键。\u003c\/li\u003e\n\u003c\/ol\u003e\n\u003cp\u003e\u003cstrong\u003e然后就可以使用 \u003ccode\u003eprefix\u003c\/code\u003e 字段的内容来自动加入版权信息来\u003c\/strong\u003e\u003c\/p\u003e\n\u003ch3 id=\u0022补充\u0022\u003e补充\u003c\/h3\u003e\n\u003cp\u003e\u003cmark\u003e这里是以C\u002b\u002b文件来说明，其他语言也是一样的逻辑，只需要注意按照各自的语法就好。\u003c\/mark\u003e\u003c\/p\u003e\n\u003cp\u003e比如：\u003c\/p\u003e\n\u003col\u003e\n\u003cli\u003e在编辑器中，点击 \u003ccode\u003e文件\u003c\/code\u003e \u0026gt; \u003ccode\u003e首选项\u003c\/code\u003e \u0026gt; \u003ccode\u003e用户片段\u003c\/code\u003e。\u003c\/li\u003e\n\u003cli\u003e选择 \u003ccode\u003eNew Global Snippets file...\u003c\/code\u003e 或者在工作区中选择 \u003ccode\u003eNew Snippets file for \u0027your-workspace-name\u0027...\u003c\/code\u003e。\u003c\/li\u003e\n\u003cli\u003e输入片段文件的名称，如 \u003ccode\u003edate.snippets\u003c\/code\u003e。\u003c\/li\u003e\n\u003c\/ol\u003e\n\u003cp\u003e\u003cstrong\u003eJavaScript 的 \u003ccode\u003edate.snippets\u003c\/code\u003e 文件:\u003c\/strong\u003e\u003c\/p\u003e\n\u003cdiv class=\u0022highlight\u0022\u003e\u003cpre tabindex=\u00220\u0022 class=\u0022chroma\u0022\u003e\u003ccode class=\u0022language-json\u0022 data-lang=\u0022json\u0022\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022p\u0022\u003e\u007b\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e  \u003cspan class=\u0022nt\u0022\u003e\u0026#34;Print Current Date\u0026#34;\u003c\/span\u003e\u003cspan class=\u0022p\u0022\u003e:\u003c\/span\u003e \u003cspan class=\u0022p\u0022\u003e\u007b\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e    \u003cspan class=\u0022nt\u0022\u003e\u0026#34;prefix\u0026#34;\u003c\/span\u003e\u003cspan class=\u0022p\u0022\u003e:\u003c\/span\u003e \u003cspan class=\u0022s2\u0022\u003e\u0026#34;date\u0026#34;\u003c\/span\u003e\u003cspan class=\u0022p\u0022\u003e,\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e    \u003cspan class=\u0022nt\u0022\u003e\u0026#34;body\u0026#34;\u003c\/span\u003e\u003cspan class=\u0022p\u0022\u003e:\u003c\/span\u003e \u003cspan class=\u0022p\u0022\u003e[\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e      \u003cspan class=\u0022s2\u0022\u003e\u0026#34;\/\/ Current Date: \u0024\u007bCURRENT_DATE\u007d\u0026#34;\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e    \u003cspan class=\u0022p\u0022\u003e],\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e    \u003cspan class=\u0022nt\u0022\u003e\u0026#34;description\u0026#34;\u003c\/span\u003e\u003cspan class=\u0022p\u0022\u003e:\u003c\/span\u003e \u003cspan class=\u0022s2\u0022\u003e\u0026#34;Prints the current date as a comment.\u0026#34;\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e  \u003cspan class=\u0022p\u0022\u003e\u007d\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022p\u0022\u003e\u007d\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003c\/code\u003e\u003c\/pre\u003e\u003c\/div\u003e\u003cp\u003e\u003cstrong\u003ePython 的 \u003ccode\u003edate.snippets\u003c\/code\u003e 文件:\u003c\/strong\u003e\u003c\/p\u003e\n\u003cdiv class=\u0022highlight\u0022\u003e\u003cpre tabindex=\u00220\u0022 class=\u0022chroma\u0022\u003e\u003ccode class=\u0022language-json\u0022 data-lang=\u0022json\u0022\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022p\u0022\u003e\u007b\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e  \u003cspan class=\u0022nt\u0022\u003e\u0026#34;Print Current Date\u0026#34;\u003c\/span\u003e\u003cspan class=\u0022p\u0022\u003e:\u003c\/span\u003e \u003cspan class=\u0022p\u0022\u003e\u007b\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e    \u003cspan class=\u0022nt\u0022\u003e\u0026#34;prefix\u0026#34;\u003c\/span\u003e\u003cspan class=\u0022p\u0022\u003e:\u003c\/span\u003e \u003cspan class=\u0022s2\u0022\u003e\u0026#34;date\u0026#34;\u003c\/span\u003e\u003cspan class=\u0022p\u0022\u003e,\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e    \u003cspan class=\u0022nt\u0022\u003e\u0026#34;body\u0026#34;\u003c\/span\u003e\u003cspan class=\u0022p\u0022\u003e:\u003c\/span\u003e \u003cspan class=\u0022p\u0022\u003e[\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e      \u003cspan class=\u0022s2\u0022\u003e\u0026#34;# Current Date: \u0024\u007bCURRENT_DATE\u007d\u0026#34;\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e    \u003cspan class=\u0022p\u0022\u003e],\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e    \u003cspan class=\u0022nt\u0022\u003e\u0026#34;description\u0026#34;\u003c\/span\u003e\u003cspan class=\u0022p\u0022\u003e:\u003c\/span\u003e \u003cspan class=\u0022s2\u0022\u003e\u0026#34;Prints the current date as a comment.\u0026#34;\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e  \u003cspan class=\u0022p\u0022\u003e\u007d\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022p\u0022\u003e\u007d\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003c\/code\u003e\u003c\/pre\u003e\u003c\/div\u003e\u003cp\u003e另外，有一些宏定义是可以直接使用：\u003c\/p\u003e\n\u003cul\u003e\n\u003cli\u003e\u003ccode\u003e\u0024\u007bCURRENT_DATE\u007d\u003c\/code\u003e：当前日期（格式：yyyy-mm-dd）。\u003c\/li\u003e\n\u003cli\u003e\u003ccode\u003e\u0024\u007bCURRENT_MONTH_NAME\u007d\u003c\/code\u003e：当前月份的全名（例如：January, February等）。\u003c\/li\u003e\n\u003cli\u003e\u003ccode\u003e\u0024\u007bCURRENT_MONTH_NAME_SHORT\u007d\u003c\/code\u003e：当前月份的缩写（例如：Jan, Feb等）。\u003c\/li\u003e\n\u003cli\u003e\u003ccode\u003e\u0024\u007bCURRENT_YEAR\u007d\u003c\/code\u003e：当前年份。\u003c\/li\u003e\n\u003cli\u003e\u003ccode\u003e\u0024\u007bCURRENT_HOUR\u007d\u003c\/code\u003e：当前小时（24小时制）。\u003c\/li\u003e\n\u003cli\u003e\u003ccode\u003e\u0024\u007bCURRENT_MINUTE\u007d\u003c\/code\u003e：当前分钟。\u003c\/li\u003e\n\u003cli\u003e\u003ccode\u003e\u0024\u007bCURRENT_SECOND\u007d\u003c\/code\u003e：当前秒数。\u003c\/li\u003e\n\u003cli\u003e\u003ccode\u003e\u0024\u007bCURRENT_DAY_NAME\u007d\u003c\/code\u003e：当前星期几的全名（例如：Monday, Tuesday等）。\u003c\/li\u003e\n\u003cli\u003e\u003ccode\u003e\u0024\u007bCURRENT_DAY_NAME_SHORT\u007d\u003c\/code\u003e：当前星期几的缩写（例如：Mon, Tue等）。\u003c\/li\u003e\n\u003c\/ul\u003e\n`;
+  }
+
+  
+  window.addEventListener("beforeunload", function() {
+      sessionStorage.removeItem("blog_password_88c0a76ad7351c5893b534cb79ee52cf");
+  });
+  
+  </script>
 </main>
 
 <footer class="footer">

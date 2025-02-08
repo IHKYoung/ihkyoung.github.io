@@ -344,8 +344,8 @@
 </span>
 
 </div>
-  </header> 
-  <div class="post-content"><blockquote>
+  </header>
+  <div id="post-content"><blockquote>
 <p>主打一个“懒”字！</p>
 <p>移动文件啊，重命名啥的，动手拖拖不行嘛？！</p>
 <p>不行！用键盘，用命令行！</p>
@@ -432,6 +432,94 @@
 
   </footer>
 </article>
+
+<style>
+   
+  #check-button {
+      background-color: transparent;
+      border: none;
+      padding: 10px 20px;
+      font-size: 1.2em;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: transform 0.1s ease-in-out, box-shadow 0.2s;
+  }
+  #check-button:active {
+      transform: scale(0.9);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  }
+
+   
+  @keyframes shake {
+      0% { transform: translateX(0); }
+      25% { transform: translateX(-5px); }
+      50% { transform: translateX(5px); }
+      75% { transform: translateX(-5px); }
+      100% { transform: translateX(0); }
+  }
+  .shake {
+      animation: shake 0.3s ease-in-out;
+  }
+</style>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    let storedPassword = sessionStorage.getItem("blog_password_15cb0f3da817010e70af0bd3bae6a1a3");
+
+    if (!storedPassword) {
+        document.getElementById("password-protection").style.display = "block";
+    } else {
+        unlockContent();
+    }
+  });
+
+  function checkPassword() {
+    let inputPassword = document.getElementById("post-password").value;
+    let correctHash = "c57a2f70945d45168d580c4bb81100f2"; 
+    let inputHash = CryptoJS.MD5(inputPassword).toString();  
+
+    let errorMsg = document.getElementById("error-msg");
+    let checkButton = document.getElementById("check-button");
+
+    
+    checkButton.style.transform = "scale(0.95)";
+    setTimeout(() => {
+        checkButton.style.transform = "scale(1)";
+    }, 100);
+
+    if (inputHash === correctHash) {
+      sessionStorage.setItem("blog_password_15cb0f3da817010e70af0bd3bae6a1a3", inputHash);
+      unlockContent();
+    } else {
+        
+        errorMsg.style.display = "block";
+        errorMsg.classList.add("shake");
+        
+        
+        setTimeout(() => {
+            errorMsg.classList.remove("shake");
+        }, 300);
+    }
+  }
+
+  function unlockContent() {
+    document.getElementById("password-protection").style.display = "none";
+    let postContentDiv = document.getElementById("post-content");
+    postContentDiv.style.display = "block";
+
+    
+    postContentDiv.innerHTML = `\u003cblockquote\u003e\n\u003cp\u003e主打一个“懒”字！\u003c\/p\u003e\n\u003cp\u003e移动文件啊，重命名啥的，动手拖拖不行嘛？！\u003c\/p\u003e\n\u003cp\u003e不行！用键盘，用命令行！\u003c\/p\u003e\n\u003cp\u003e比如：\u003c\/p\u003e\n\u003cp\u003e想要移动 \u003ccode\u003eZYC01981 - 01.jpg\u003c\/code\u003e，同时又想把 \u003ccode\u003e- 01\u003c\/code\u003e 后缀给去掉，怎么做？\u003c\/p\u003e\n\u003c\/blockquote\u003e\n\u003cp\u003e\u003cmark\u003e好记性不如烂笔头！\u003c\/mark\u003e\u003c\/p\u003e\n\u003cp\u003e\u003cmark\u003e很厉害？嗯！唯手熟尔～\u003c\/mark\u003e\u003c\/p\u003e\n\u003cp\u003e要匹配任何以 \u0026quot; - 01\u0026quot;、\u0026quot; - 02\u0026quot;、\u0026quot; - 03\u0026quot;、\u0026quot; - 12\u0026quot;、\u0026quot; - 13\u0026quot; 等等等等结尾的 \u003ccode\u003e.jpg\u003c\/code\u003e 文件，可以这样写：\u003c\/p\u003e\n\u003cdiv class=\u0022highlight\u0022\u003e\u003cpre tabindex=\u00220\u0022 class=\u0022chroma\u0022\u003e\u003ccode class=\u0022language-bash\u0022 data-lang=\u0022bash\u0022\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003efind . -type f -regex \u003cspan class=\u0022s1\u0022\u003e\u0026#39;.* - [0-9][0-9]\\.jpg\u0026#39;\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003c\/code\u003e\u003c\/pre\u003e\u003c\/div\u003e\u003cp\u003e这个正则表达式会匹配任何以两位数字结尾的 \u003ccode\u003e.jpg\u003c\/code\u003e 文件。如果需要限制特定的数字，则可以调整正则表达式的数字部分。例如，只匹配以 \u0026ldquo;01\u0026rdquo;、\u0026ldquo;02\u0026rdquo;、\u0026ldquo;03\u0026rdquo;、\u0026ldquo;12\u0026rdquo;、\u0026ldquo;13\u0026rdquo; 结尾的文件：\u003c\/p\u003e\n\u003cdiv class=\u0022highlight\u0022\u003e\u003cpre tabindex=\u00220\u0022 class=\u0022chroma\u0022\u003e\u003ccode class=\u0022language-bash\u0022 data-lang=\u0022bash\u0022\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003efind . -type f -regex \u003cspan class=\u0022s1\u0022\u003e\u0026#39;.* - \\(01\\|02\\|03\\|12\\|13\\)\\.jpg\u0026#39;\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003c\/code\u003e\u003c\/pre\u003e\u003c\/div\u003e\u003cp\u003e对于重命名操作，如果希望去掉文件名中的 \u0026quot; - 数字\u0026quot; 部分，可以使用以下命令（使用 \u003ccode\u003eecho\u003c\/code\u003e 只打印不执行）：\u003c\/p\u003e\n\u003cdiv class=\u0022highlight\u0022\u003e\u003cpre tabindex=\u00220\u0022 class=\u0022chroma\u0022\u003e\u003ccode class=\u0022language-bash\u0022 data-lang=\u0022bash\u0022\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003efind . -type f -regex \u003cspan class=\u0022s1\u0022\u003e\u0026#39;.* - [0-9][0-9]\\.jpg\u0026#39;\u003c\/span\u003e -exec bash -c \u003cspan class=\u0022s1\u0022\u003e\u0026#39;echo mv \u0026#34;\u00240\u0026#34; \u0026#34;\u0024\u007b0\/ - [0-9][0-9]\/\u007d\u0026#34;\u0026#39;\u003c\/span\u003e \u003cspan class=\u0022o\u0022\u003e\u007b\u007d\u003c\/span\u003e \u003cspan class=\u0022se\u0022\u003e\\;\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003c\/code\u003e\u003c\/pre\u003e\u003c\/div\u003e\u003cp\u003e如果想要移动它们，则可以：\u003c\/p\u003e\n\u003cdiv class=\u0022highlight\u0022\u003e\u003cpre tabindex=\u00220\u0022 class=\u0022chroma\u0022\u003e\u003ccode class=\u0022language-bash\u0022 data-lang=\u0022bash\u0022\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003efind . -type f -regex \u003cspan class=\u0022s1\u0022\u003e\u0026#39;.* - [0-9][0-9]\\.jpg\u0026#39;\u003c\/span\u003e -exec mv \u003cspan class=\u0022o\u0022\u003e\u007b\u007d\u003c\/span\u003e DestinationFolder\/ \u003cspan class=\u0022se\u0022\u003e\\;\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003c\/code\u003e\u003c\/pre\u003e\u003c\/div\u003e\u003cp\u003e\u003cstrong\u003e解释一下每个部分的作用\u003c\/strong\u003e\u003c\/p\u003e\n\u003col\u003e\n\u003cli\u003e\n\u003cp\u003e\u003cstrong\u003e\u003ccode\u003efind .\u003c\/code\u003e\u003c\/strong\u003e：\u003c\/p\u003e\n\u003cul\u003e\n\u003cli\u003e\u003ccode\u003efind\u003c\/code\u003e 用于在目录树中查找文件和目录。\u003c\/li\u003e\n\u003cli\u003e\u003ccode\u003e.\u003c\/code\u003e 指定从当前目录开始搜索。\u003c\/li\u003e\n\u003c\/ul\u003e\n\u003c\/li\u003e\n\u003cli\u003e\n\u003cp\u003e\u003cstrong\u003e\u003ccode\u003e-type f\u003c\/code\u003e\u003c\/strong\u003e：\u003c\/p\u003e\n\u003cul\u003e\n\u003cli\u003e这个选项限制 \u003ccode\u003efind\u003c\/code\u003e 命令只查找文件（不包括目录）。\u003c\/li\u003e\n\u003c\/ul\u003e\n\u003c\/li\u003e\n\u003cli\u003e\n\u003cp\u003e\u003cstrong\u003e\u003ccode\u003e-regex \u0027.* - [0-9][0-9]\\.jpg\u0027\u003c\/code\u003e\u003c\/strong\u003e：\u003c\/p\u003e\n\u003cul\u003e\n\u003cli\u003e\u003ccode\u003e-regex\u003c\/code\u003e 选项让 \u003ccode\u003efind\u003c\/code\u003e 使用完整的正则表达式来匹配文件路径。\u003c\/li\u003e\n\u003cli\u003e\u003ccode\u003e\u0027.* - [0-9][0-9]\\.jpg\u0027\u003c\/code\u003e 是一个正则表达式，用来匹配文件名中包含 \u0026quot; - 数字数字.jpg\u0026quot; 的文件。\u003c\/li\u003e\n\u003c\/ul\u003e\n\u003c\/li\u003e\n\u003cli\u003e\n\u003cp\u003e\u003cstrong\u003e\u003ccode\u003e-exec bash -c \u0027echo mv \u0026quot;\u00240\u0026quot; \u0026quot;\u0024\u007b0\/ - [0-9][0-9]\/\u007d\u0026quot;\u0027 \u007b\u007d \\;\u003c\/code\u003e\u003c\/strong\u003e：\u003c\/p\u003e\n\u003cul\u003e\n\u003cli\u003e\u003ccode\u003e-exec\u003c\/code\u003e 选项后跟一个命令，该命令对每个找到的文件执行。在此处，它调用 \u003ccode\u003ebash -c\u003c\/code\u003e，允许执行更复杂的 bash 命令。\u003c\/li\u003e\n\u003cli\u003e\u003ccode\u003e\u0027echo mv \u0026quot;\u00240\u0026quot; \u0026quot;\u0024\u007b0\/ - [0-9][0-9]\/\u007d\u0026quot;\u0027\u003c\/code\u003e 是一个 bash 命令。它使用 \u003ccode\u003eecho\u003c\/code\u003e 预览 \u003ccode\u003emv\u003c\/code\u003e 命令的效果，\u003cstrong\u003e而不实际执行文件移动\u003c\/strong\u003e。\n\u003cul\u003e\n\u003cli\u003e\u003ccode\u003e\u0026quot;\u00240\u0026quot;\u003c\/code\u003e 代表当前处理的文件名。\u003c\/li\u003e\n\u003cli\u003e\u003ccode\u003e\u0026quot;\u0024\u007b0\/ - [0-9][0-9]\/\u007d\u0026quot;\u003c\/code\u003e 是 bash 的参数替换，它在文件名中删除 \u0026quot; - 数字数字\u0026quot; 模式。\u003c\/li\u003e\n\u003c\/ul\u003e\n\u003c\/li\u003e\n\u003cli\u003e\u003ccode\u003e\u007b\u007d\u003c\/code\u003e 是 \u003ccode\u003efind\u003c\/code\u003e 命令用来代表当前找到的文件名。\u003c\/li\u003e\n\u003cli\u003e\u003ccode\u003e\\;\u003c\/code\u003e 表示 \u003ccode\u003e-exec\u003c\/code\u003e 执行的命令结束。\u003c\/li\u003e\n\u003c\/ul\u003e\n\u003c\/li\u003e\n\u003cli\u003e\n\u003cp\u003e\u003cstrong\u003e\u003ccode\u003e-exec mv \u007b\u007d DestinationFolder\/ \\;\u003c\/code\u003e\u003c\/strong\u003e：\u003c\/p\u003e\n\u003cul\u003e\n\u003cli\u003e这个命令也是 \u003ccode\u003e-exec\u003c\/code\u003e 用法的一个例子，用于将找到的文件移动到指定目录。\u003c\/li\u003e\n\u003cli\u003e\u003ccode\u003emv\u003c\/code\u003e 是移动（或重命名）文件的命令。\u003c\/li\u003e\n\u003cli\u003e\u003ccode\u003e\u007b\u007d\u003c\/code\u003e 代表当前处理的文件名。\u003c\/li\u003e\n\u003cli\u003e\u003ccode\u003eDestinationFolder\/\u003c\/code\u003e 是目标目录，所有找到的文件都会被移动到这个目录。\u003c\/li\u003e\n\u003cli\u003e\u003ccode\u003e\\;\u003c\/code\u003e 表示 \u003ccode\u003e-exec\u003c\/code\u003e 执行的命令结束。\u003c\/li\u003e\n\u003c\/ul\u003e\n\u003c\/li\u003e\n\u003c\/ol\u003e\n`;
+  }
+
+  
+  window.addEventListener("beforeunload", function() {
+      sessionStorage.removeItem("blog_password_15cb0f3da817010e70af0bd3bae6a1a3");
+  });
+  
+  </script>
 </main>
 
 <footer class="footer">
