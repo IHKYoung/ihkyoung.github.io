@@ -32,6 +32,39 @@
 &lt;p&gt;可以参考以下两个文档，官方文档的说明更清晰一些，初学者指南可以用来对照自己有没有做对～&lt;/p&gt;</description>
     </item>
     <item>
+      <title>✨ LaTeX 数学公式语法大全 📘</title>
+      <link>https://ahaknow.com/posts/know/latex/</link>
+      <pubDate>Sat, 08 Feb 2025 01:00:25 +0800</pubDate>
+      <guid>https://ahaknow.com/posts/know/latex/</guid>
+      <description>&lt;h1 id=&#34;-latex-语法&#34;&gt;📘 &lt;strong&gt;LaTeX 语法&lt;/strong&gt;&lt;/h1&gt;
+&lt;h2 id=&#34;-1-latex-数学模式&#34;&gt;&lt;strong&gt;📐 1. LaTeX 数学模式&lt;/strong&gt;&lt;/h2&gt;
+&lt;h3 id=&#34;11-行内数学模式&#34;&gt;&lt;strong&gt;1.1. 行内数学模式&lt;/strong&gt;&lt;/h3&gt;
+&lt;p&gt;在文本中插入数学公式：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-latex&#34; data-lang=&#34;latex&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;s&#34;&gt;$&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;E&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;mc^&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;$&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;$E=mc^2$ 行内模式的数学公式，适用于正文中的数学表达。&lt;/p&gt;
+&lt;h3 id=&#34;12-独立数学模式&#34;&gt;&lt;strong&gt;1.2. 独立数学模式&lt;/strong&gt;&lt;/h3&gt;
+&lt;p&gt;使数学公式独占一行：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-latex&#34; data-lang=&#34;latex&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;sb&#34;&gt;$$&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;E&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;mc^&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;$$&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;独立模式的数学公式，适用于单独一行的数学表达。
+$$E=mc^2$$&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>GitHub Pull Reques 时 Release 文件缺失问题解决方案 📦</title>
+      <link>https://ahaknow.com/posts/know/git-pull-request-release/</link>
+      <pubDate>Fri, 07 Feb 2025 23:39:05 +0800</pubDate>
+      <guid>https://ahaknow.com/posts/know/git-pull-request-release/</guid>
+      <description>&lt;h1 id=&#34;github-pull-reques-时-release-文件缺失问题解决方案-&#34;&gt;GitHub Pull Reques 时 Release 文件缺失问题解决方案 📦&lt;/h1&gt;
+&lt;h2 id=&#34;问题背景-&#34;&gt;&lt;strong&gt;问题背景 🤔&lt;/strong&gt;&lt;/h2&gt;
+&lt;p&gt;在提交 GitHub Pull Request 时，GitHub 提示最新的 Release 缺少 &lt;code&gt;main.js&lt;/code&gt; 和 &lt;code&gt;manifest.json&lt;/code&gt; 文件。尽管这些文件在代码中存在，但它们并没有作为 Release 附件上传到 GitHub。这个问题通常发生在用户没有手动将文件上传到 Release 页面。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>💡AI调教指令</title>
+      <link>https://ahaknow.com/posts/know/aha-prompts/</link>
+      <pubDate>Fri, 07 Feb 2025 21:45:07 +0800</pubDate>
+      <guid>https://ahaknow.com/posts/know/aha-prompts/</guid>
+      <description>&lt;h2 id=&#34;总结知识文档&#34;&gt;总结知识文档&lt;/h2&gt;</description>
+    </item>
+    <item>
       <title>🚀Git 自动 Push 脚本：跨平台 (Windows/macOS/Linux) 解决方案</title>
       <link>https://ahaknow.com/posts/know/git-%E8%87%AA%E5%8A%A8-push-%E8%84%9A%E6%9C%AC/</link>
       <pubDate>Thu, 06 Feb 2025 21:59:26 +0800</pubDate>
@@ -44,7 +77,7 @@
       <link>https://ahaknow.com/posts/know/-git-%E5%90%88%E5%B9%B6%E4%B8%8E-pull-%E8%BF%87%E7%A8%8B%E4%B8%AD%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98%E5%8F%8A%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/</link>
       <pubDate>Thu, 06 Feb 2025 21:01:54 +0800</pubDate>
       <guid>https://ahaknow.com/posts/know/-git-%E5%90%88%E5%B9%B6%E4%B8%8E-pull-%E8%BF%87%E7%A8%8B%E4%B8%AD%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98%E5%8F%8A%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/</guid>
-      <description>&lt;p&gt;在使用 Git 进行 &lt;code&gt;git pull&lt;/code&gt;、&lt;code&gt;git merge&lt;/code&gt; 等操作时，常常会遇到各种冲突和错误。这份文档总结了 &lt;strong&gt;Git 合并相关问题&lt;/strong&gt;，提供了&lt;strong&gt;案例分析、解决方案&lt;/strong&gt;，并附上清晰的注释，帮助你快速解决问题。💡&lt;/p&gt;</description>
+      <description>&lt;p&gt;%% 在使用 %% Git 进行 &lt;code&gt;git pull&lt;/code&gt;、&lt;code&gt;git merge&lt;/code&gt; 等操作时，常常会遇到各种冲突和错误。这份文档总结了 &lt;strong&gt;Git 合并相关问题&lt;/strong&gt;，提供了&lt;strong&gt;案例分析、解决方案&lt;/strong&gt;，并附上清晰的注释，帮助你快速解决问题。💡&lt;/p&gt;</description>
     </item>
     <item>
       <title>📝 Git 仓库自动更新脚本</title>
@@ -149,15 +182,6 @@
 &lt;p&gt;需要对Linux上的固态进行一个读写测试，我知道是可以 dd 方式直接测试的，但是 dd 只能顺序读写，无法随机读写，因此这里再提供另一种方法。&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;&lt;mark&gt;在 Linux 上使用 dd 工具可以直接测试硬盘的读写速度&lt;/mark&gt;&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>你好～ Merlin</title>
-      <link>https://ahaknow.com/posts/know/m.e.r.l.i.n./</link>
-      <pubDate>Thu, 23 May 2024 15:20:14 +0800</pubDate>
-      <guid>https://ahaknow.com/posts/know/m.e.r.l.i.n./</guid>
-      <description>&lt;p&gt;我是才知道：&lt;/p&gt;
-&lt;p&gt;贾维斯的全称，Just Another Rather Very Intelligent System（只是一个相当聪明的智能系统）；&lt;/p&gt;
-&lt;p&gt;伊迪斯的全称，Even dead,I&amp;rsquo;m the hero（即便我死了，我也是英雄）；&lt;/p&gt;</description>
     </item>
     <item>
       <title>开发实战：CMake实现可执行文件的安装与打包分发</title>

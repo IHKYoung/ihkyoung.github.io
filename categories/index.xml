@@ -8,10 +8,24 @@
     <language>zh-cn</language>
     <atom:link href="https://ahaknow.com/categories/index.xml" rel="self" type="application/rss+xml" />
     <item>
+      <title>知识控</title>
+      <link>https://ahaknow.com/categories/%E7%9F%A5%E8%AF%86%E6%8E%A7/</link>
+      <pubDate>Sat, 08 Feb 2025 01:00:25 +0800</pubDate>
+      <guid>https://ahaknow.com/categories/%E7%9F%A5%E8%AF%86%E6%8E%A7/</guid>
+      <description></description>
+    </item>
+    <item>
       <title>人工不智能</title>
       <link>https://ahaknow.com/categories/%E4%BA%BA%E5%B7%A5%E4%B8%8D%E6%99%BA%E8%83%BD/</link>
-      <pubDate>Thu, 06 Feb 2025 21:59:26 +0800</pubDate>
+      <pubDate>Fri, 07 Feb 2025 23:39:05 +0800</pubDate>
       <guid>https://ahaknow.com/categories/%E4%BA%BA%E5%B7%A5%E4%B8%8D%E6%99%BA%E8%83%BD/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>人工很智能</title>
+      <link>https://ahaknow.com/categories/%E4%BA%BA%E5%B7%A5%E5%BE%88%E6%99%BA%E8%83%BD/</link>
+      <pubDate>Fri, 07 Feb 2025 21:45:07 +0800</pubDate>
+      <guid>https://ahaknow.com/categories/%E4%BA%BA%E5%B7%A5%E5%BE%88%E6%99%BA%E8%83%BD/</guid>
       <description></description>
     </item>
     <item>
@@ -40,13 +54,6 @@
       <link>https://ahaknow.com/categories/%E8%BE%B9%E5%AD%A6%E8%BE%B9%E7%94%A8/</link>
       <pubDate>Tue, 10 Dec 2024 22:33:17 +0800</pubDate>
       <guid>https://ahaknow.com/categories/%E8%BE%B9%E5%AD%A6%E8%BE%B9%E7%94%A8/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>知识控</title>
-      <link>https://ahaknow.com/categories/%E7%9F%A5%E8%AF%86%E6%8E%A7/</link>
-      <pubDate>Wed, 04 Dec 2024 22:47:54 +0800</pubDate>
-      <guid>https://ahaknow.com/categories/%E7%9F%A5%E8%AF%86%E6%8E%A7/</guid>
       <description></description>
     </item>
     <item>
@@ -82,13 +89,6 @@
       <link>https://ahaknow.com/categories/%E8%BF%98%E5%BE%97%E6%98%AFc&#43;&#43;/</link>
       <pubDate>Wed, 29 May 2024 11:05:35 +0800</pubDate>
       <guid>https://ahaknow.com/categories/%E8%BF%98%E5%BE%97%E6%98%AFc&#43;&#43;/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>人工很智能</title>
-      <link>https://ahaknow.com/categories/%E4%BA%BA%E5%B7%A5%E5%BE%88%E6%99%BA%E8%83%BD/</link>
-      <pubDate>Thu, 23 May 2024 15:20:14 +0800</pubDate>
-      <guid>https://ahaknow.com/categories/%E4%BA%BA%E5%B7%A5%E5%BE%88%E6%99%BA%E8%83%BD/</guid>
       <description></description>
     </item>
     <item>

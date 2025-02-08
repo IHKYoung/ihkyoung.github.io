@@ -6,7 +6,7 @@
     <description>Recent content in 知识控 on AhaKnow</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Thu, 19 Dec 2024 23:17:12 +0800</lastBuildDate>
+    <lastBuildDate>Sat, 08 Feb 2025 01:00:25 +0800</lastBuildDate>
     <atom:link href="https://ahaknow.com/categories/%E7%9F%A5%E8%AF%86%E6%8E%A7/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>逐镜探维：置身三维重建而后生</title>
@@ -19,6 +19,23 @@
 &lt;/blockquote&gt;
 &lt;h2 id=&#34;引子&#34;&gt;引子&lt;/h2&gt;
 &lt;p&gt;如果现在我手里有一台相机，我呢在一片陌生的场景里，我能用这台相机去把周围的环境拍下来记录，可以尽可能地去拍没有限制，那么试想，这些一张张照片，能不能“组合”或者“还原”出我所见到的这个场景呢？这个场景要是立体的，三维的，生动活泼的，它允许我在这个“还原”出来的场景世界中去游览，观赏，就好像又回到了之前的那个真实场景中一样。能不能做到呢？&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>✨ LaTeX 数学公式语法大全 📘</title>
+      <link>https://ahaknow.com/posts/know/latex/</link>
+      <pubDate>Sat, 08 Feb 2025 01:00:25 +0800</pubDate>
+      <guid>https://ahaknow.com/posts/know/latex/</guid>
+      <description>&lt;h1 id=&#34;-latex-语法&#34;&gt;📘 &lt;strong&gt;LaTeX 语法&lt;/strong&gt;&lt;/h1&gt;
+&lt;h2 id=&#34;-1-latex-数学模式&#34;&gt;&lt;strong&gt;📐 1. LaTeX 数学模式&lt;/strong&gt;&lt;/h2&gt;
+&lt;h3 id=&#34;11-行内数学模式&#34;&gt;&lt;strong&gt;1.1. 行内数学模式&lt;/strong&gt;&lt;/h3&gt;
+&lt;p&gt;在文本中插入数学公式：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-latex&#34; data-lang=&#34;latex&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;s&#34;&gt;$&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;E&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;mc^&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;$&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;$E=mc^2$ 行内模式的数学公式，适用于正文中的数学表达。&lt;/p&gt;
+&lt;h3 id=&#34;12-独立数学模式&#34;&gt;&lt;strong&gt;1.2. 独立数学模式&lt;/strong&gt;&lt;/h3&gt;
+&lt;p&gt;使数学公式独占一行：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-latex&#34; data-lang=&#34;latex&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;sb&#34;&gt;$$&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;E&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;mc^&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;$$&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;独立模式的数学公式，适用于单独一行的数学表达。
+$$E=mc^2$$&lt;/p&gt;</description>
     </item>
     <item>
       <title>Aha Linear Algebra</title>

@@ -222,6 +222,162 @@
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2 class="entry-hint-parent">编程灵感时刻
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>一些实用的小工具 获取时间C&#43;&#43;片段 // Unix时间戳 int64_t getTimestamp() { auto now = std::chrono::system_clock::now(); auto timestamp = std::chrono::time_point_cast&lt;std::chrono::nanoseconds&gt;(now).time_since_epoch().count(); return static_cast&lt;int64_t&gt;(timestamp); } 方便阅读的版本：年_月_日_时_分_秒
+std::string getReadableTimestamp() { // 获取当前时间点 auto now = std::chrono::system_clock::now(); // 转换为 time_t 类型 std::time_t now_c = std::chrono::system_clock::to_time_t(now); // 将 time_t 类型转换为 tm 结构体 std::tm now_tm = *std::localtime(&amp;now_c); // 使用 stringstream 生成格式化的时间字符串 std::stringstream ss; ss &lt;&lt; std::put_time(&amp;now_tm, &#34;%Y_%m_%d_%H_%M_%S&#34;); return ss.str(); } </p>
+  </div>
+  <footer class="entry-footer">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
+<span class="parent-post-meta">
+        <span id="post_meta_style_1">
+            <span class="fa fa-calendar-check-o"></span>
+            <span>2024-09-11
+                &nbsp;&nbsp;
+            </span>
+        </span>
+        <span id="post_meta_style_2">
+        <span class="fa fa-calendar-plus-o"></span>
+        <span>2024-05-08
+            &nbsp;&nbsp;
+        </span>
+    </span>
+    <span id="post_meta_style_3">
+        <span class="fa fa-file-word-o"></span>
+        <span>124 字
+            &nbsp;&nbsp;
+        </span>
+    </span>
+    <span id="post_meta_style_4">
+        <span class="fa fa-clock-o"></span>
+        <span>1 分钟
+            &nbsp;&nbsp;
+        </span>
+    </span>
+    <span id="post_meta_style_5">
+        <span class="fa fa-user-o"></span>
+        <span>CKYoung
+            &nbsp;&nbsp;
+        </span>
+    </span>
+</span></footer>
+  <a class="entry-link" aria-label="post link to 编程灵感时刻" href="https://ahaknow.com/posts/know/coding-inspiration-moments/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">开发实战：为什么要将函数实现与头文件分离
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p> 在写C&#43;&#43;工程的时候，习惯性的是将头文件与其实现分开编写的。
+今天被问到了这个问题：
+“在写C&#43;&#43;代码的时候，将函数实现直接写在头文件里，会怎么样，有什么不好的地方？为什么要将函数的实现单独写在源文件”
+...</p>
+  </div>
+  <footer class="entry-footer">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
+<span class="parent-post-meta">
+        <span id="post_meta_style_1">
+            <span class="fa fa-calendar-check-o"></span>
+            <span>2024-09-11
+                &nbsp;&nbsp;
+            </span>
+        </span>
+        <span id="post_meta_style_2">
+        <span class="fa fa-calendar-plus-o"></span>
+        <span>2024-04-28
+            &nbsp;&nbsp;
+        </span>
+    </span>
+    <span id="post_meta_style_3">
+        <span class="fa fa-file-word-o"></span>
+        <span>2109 字
+            &nbsp;&nbsp;
+        </span>
+    </span>
+    <span id="post_meta_style_4">
+        <span class="fa fa-clock-o"></span>
+        <span>5 分钟
+            &nbsp;&nbsp;
+        </span>
+    </span>
+    <span id="post_meta_style_5">
+        <span class="fa fa-user-o"></span>
+        <span>CKYoung
+            &nbsp;&nbsp;
+        </span>
+    </span>
+    <span id="post_meta_style_6">
+        <span class="fa fa-tags" style="opacity: 0.8"></span>
+        <span>
+            <span class="post-tags-meta">
+                <a href="https://ahaknow.com/tags/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B/" style="color: var(--secondary)!important;">面向对象编程</a>
+            </span>
+        </span>
+    </span>
+</span></footer>
+  <a class="entry-link" aria-label="post link to 开发实战：为什么要将函数实现与头文件分离" href="https://ahaknow.com/posts/know/dev-header-source/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2 class="entry-hint-parent">Linux：打包压缩相关的基本使用
     </h2>
   </header>
@@ -844,164 +1000,6 @@ vscode用的久了，以此为例吧？（其实CLion体验更好，那未尝不
     </span>
 </span></footer>
   <a class="entry-link" aria-label="post link to 开发实战：给代码属上大名" href="https://ahaknow.com/posts/know/dev-auto-code-copyright/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">Shell：操作移动文件
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p> 主打一个“懒”字！
-移动文件啊，重命名啥的，动手拖拖不行嘛？！
-不行！用键盘，用命令行！
-比如：
-想要移动 ZYC01981 - 01.jpg，同时又想把 - 01 后缀给去掉，怎么做？
-...</p>
-  </div>
-  <footer class="entry-footer">
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
-<span class="parent-post-meta">
-        <span id="post_meta_style_1">
-            <span class="fa fa-calendar-check-o"></span>
-            <span>2024-09-11
-                &nbsp;&nbsp;
-            </span>
-        </span>
-        <span id="post_meta_style_2">
-        <span class="fa fa-calendar-plus-o"></span>
-        <span>2024-04-21
-            &nbsp;&nbsp;
-        </span>
-    </span>
-    <span id="post_meta_style_3">
-        <span class="fa fa-file-word-o"></span>
-        <span>876 字
-            &nbsp;&nbsp;
-        </span>
-    </span>
-    <span id="post_meta_style_4">
-        <span class="fa fa-clock-o"></span>
-        <span>2 分钟
-            &nbsp;&nbsp;
-        </span>
-    </span>
-    <span id="post_meta_style_5">
-        <span class="fa fa-user-o"></span>
-        <span>CKYoung
-            &nbsp;&nbsp;
-        </span>
-    </span>
-    <span id="post_meta_style_6">
-        <span class="fa fa-tags" style="opacity: 0.8"></span>
-        <span>
-            <span class="post-tags-meta">
-                <a href="https://ahaknow.com/tags/shell/" style="color: var(--secondary)!important;">Shell</a>
-            </span>
-        </span>
-    </span>
-</span></footer>
-  <a class="entry-link" aria-label="post link to Shell：操作移动文件" href="https://ahaknow.com/posts/know/note-shell-move-file/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">编程艺术：高质量编程指南C/C&#43;&#43;试题
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p> 本试题仅用于考查 C&#43;&#43;/C 程序员的基本编程技能。内容限于 C&#43;&#43;/C 常用语法，不涉及数据结构、算法以及深奥的语法。考试成绩能反映出考生的编程质量以及对 C&#43;&#43;/C 的理解程度，但不能反映考生的智力和软件开发能力。
-...</p>
-  </div>
-  <footer class="entry-footer">
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
-<span class="parent-post-meta">
-        <span id="post_meta_style_1">
-            <span class="fa fa-calendar-check-o"></span>
-            <span>2024-09-11
-                &nbsp;&nbsp;
-            </span>
-        </span>
-        <span id="post_meta_style_2">
-        <span class="fa fa-calendar-plus-o"></span>
-        <span>2024-04-20
-            &nbsp;&nbsp;
-        </span>
-    </span>
-    <span id="post_meta_style_3">
-        <span class="fa fa-file-word-o"></span>
-        <span>298 字
-            &nbsp;&nbsp;
-        </span>
-    </span>
-    <span id="post_meta_style_4">
-        <span class="fa fa-clock-o"></span>
-        <span>1 分钟
-            &nbsp;&nbsp;
-        </span>
-    </span>
-    <span id="post_meta_style_5">
-        <span class="fa fa-user-o"></span>
-        <span>CKYoung
-            &nbsp;&nbsp;
-        </span>
-    </span>
-</span></footer>
-  <a class="entry-link" aria-label="post link to 编程艺术：高质量编程指南C/C&#43;&#43;试题" href="https://ahaknow.com/posts/know/art-c-c&#43;&#43;-exam/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">
