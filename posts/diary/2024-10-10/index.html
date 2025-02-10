@@ -99,7 +99,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://ahaknow.com/posts/diary/2024-10-10/" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2024-10-10T22:00:50+08:00" />
-<meta property="article:modified_time" content="2024-12-19T23:17:12+08:00" />
+<meta property="article:modified_time" content="2025-02-10T22:07:01+08:00" />
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="今天用Obsidian写日记"/>
@@ -146,7 +146,7 @@
   "wordCount" : "638",
   "inLanguage": "zh",
   "datePublished": "2024-10-10T22:00:50+08:00",
-  "dateModified": "2024-12-19T23:17:12+08:00",
+  "dateModified": "2025-02-10T22:07:01+08:00",
   "author":[{
     "@type": "Person",
     "name": "CKYoung"
@@ -290,7 +290,7 @@
 <span class="parent-post-meta">
         <span id="post_meta_style_1">
             <span class="fa fa-calendar-check-o"></span>
-            <span>2024-12-19
+            <span>2025-02-10
                 &nbsp;&nbsp;
             </span>
         </span>
@@ -342,40 +342,40 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
   <script>
     document.addEventListener("DOMContentLoaded", function () {
-      let storedPassword = sessionStorage.getItem("blog_password_97e45b9712f76a28ef502b74da38f1d6");
+        let storedPassword = sessionStorage.getItem("blog_password_97e45b9712f76a28ef502b74da38f1d6");
 
-      if (!storedPassword) {
-          document.getElementById("password-protection").style.display = "block";
-      } else {
-          unlockContent();
-      }
+        if (!storedPassword) {
+            document.getElementById("password-protection").style.display = "block";
+        } else {
+            unlockContent();
+        }
     });
 
     function checkPassword() {
-      let inputPassword = document.getElementById("post-password").value;
-      let correctHash = "c57a2f70945d45168d580c4bb81100f2"; 
-      let inputHash = CryptoJS.MD5(inputPassword).toString();  
+        let inputPassword = document.getElementById("post-password").value;
+        let correctHash = "c57a2f70945d45168d580c4bb81100f2"; 
+        let inputHash = CryptoJS.MD5(inputPassword).toString();  
 
-      let errorMsg = document.getElementById("error-msg");
-      let checkButton = document.getElementById("check-button");
+        let errorMsg = document.getElementById("error-msg");
+        let checkButton = document.getElementById("check-button");
 
-      
-      checkButton.style.transform = "scale(0.95)";
-      setTimeout(() => {
-          checkButton.style.transform = "scale(1)";
-      }, 100);
+        
+        checkButton.style.transform = "scale(0.95)";
+        setTimeout(() => {
+            checkButton.style.transform = "scale(1)";
+        }, 100);
 
-      if (inputHash === correctHash) {
-        sessionStorage.setItem("blog_password_97e45b9712f76a28ef502b74da38f1d6", inputHash);
-        unlockContent();
-      } else {
-          
-          errorMsg.style.display = "block";
-          errorMsg.classList.add("shake");
-          setTimeout(() => {
-              errorMsg.classList.remove("shake");
-          }, 300);
-      }
+        if (inputHash === correctHash) {
+            sessionStorage.setItem("blog_password_97e45b9712f76a28ef502b74da38f1d6", inputHash);
+            unlockContent();
+        } else {
+            
+            errorMsg.style.display = "block";
+            errorMsg.classList.add("shake");
+            setTimeout(() => {
+                errorMsg.classList.remove("shake");
+            }, 300);
+        }
     }
 
     function unlockContent() {
@@ -519,7 +519,7 @@
         copybutton.innerHTML = '🖨️打印';
 
         function copyingDone() {
-            copybutton.innerHTML = '📋备份';
+            copybutton.innerHTML = '📋完成';
             setTimeout(() => {
                 copybutton.innerHTML = '🖨️打印';
             }, 2000);
