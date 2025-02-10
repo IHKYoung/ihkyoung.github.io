@@ -339,7 +339,164 @@
 
 </div>
   </header>
-  <div id="post-content"><blockquote>
+
+   <aside id="toc-container" class="toc-container wide">
+    <div class="toc">
+        <details  open>
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details">📚目录</span>
+        </summary>
+
+        <div class="inner"><ul>
+                <li>
+                    <a href="#%e4%bd%bf%e7%94%a8-dd-%e6%b5%8b%e8%af%95%e8%af%bb%e5%86%99%e9%80%9f%e5%ba%a6" aria-label="使用 dd 测试读写速度">使用 <code>dd</code> 测试读写速度</a><ul>
+                        
+                <li>
+                    <a href="#%e5%86%99%e5%85%a5%e6%b5%8b%e8%af%95" aria-label="写入测试">写入测试</a></li>
+                <li>
+                    <a href="#%e8%af%bb%e5%8f%96%e6%b5%8b%e8%af%95" aria-label="读取测试">读取测试</a></li></ul>
+                </li>
+                <li>
+                    <a href="#%e7%bc%93%e5%ad%98-iobuffered-io" aria-label="缓存 I/O（Buffered I/O）">缓存 I/O（Buffered I/O）</a></li>
+                <li>
+                    <a href="#%e7%9b%b4%e6%8e%a5-iodirect-io" aria-label="直接 I/O（Direct I/O）">直接 I/O（Direct I/O）</a><ul>
+                        
+                <li>
+                    <a href="#%e4%bc%98%e7%82%b9" aria-label="优点">优点</a></li>
+                <li>
+                    <a href="#%e7%bc%ba%e7%82%b9" aria-label="缺点">缺点</a></li></ul>
+                </li>
+                <li>
+                    <a href="#iflagdirect-%e7%9a%84%e4%bd%9c%e7%94%a8" aria-label="iflag=direct 的作用"><code>iflag=direct</code> 的作用</a></li>
+                <li>
+                    <a href="#dd-%e7%9a%84%e4%bc%98%e7%bc%ba%e7%82%b9" aria-label="dd 的优缺点"><code>dd</code> 的优缺点</a><ul>
+                        
+                <li>
+                    <a href="#%e4%bc%98%e7%82%b9-1" aria-label="优点">优点</a></li>
+                <li>
+                    <a href="#%e7%bc%ba%e7%82%b9-1" aria-label="缺点">缺点</a></li></ul>
+                </li>
+                <li>
+                    <a href="#%e5%ae%89%e8%a3%85-fio" aria-label="安装 fio">安装 <code>fio</code></a></li>
+                <li>
+                    <a href="#%e4%bd%bf%e7%94%a8-fio-%e6%b5%8b%e8%af%95-4k-%e8%af%bb%e5%86%99%e9%80%9f%e5%ba%a6" aria-label="使用 fio 测试 4K 读写速度">使用 <code>fio</code> 测试 4K 读写速度</a><ul>
+                        
+                <li>
+                    <a href="#4k-%e9%9a%8f%e6%9c%ba%e8%af%bb%e5%8f%96%e6%b5%8b%e8%af%95" aria-label="4K 随机读取测试">4K 随机读取测试</a></li>
+                <li>
+                    <a href="#4k-%e9%9a%8f%e6%9c%ba%e5%86%99%e5%85%a5%e6%b5%8b%e8%af%95" aria-label="4K 随机写入测试">4K 随机写入测试</a></li></ul>
+                </li>
+                <li>
+                    <a href="#%e8%a7%a3%e9%87%8a%e6%b5%8b%e8%af%95%e5%8f%82%e6%95%b0" aria-label="解释测试参数">解释测试参数</a></li>
+                <li>
+                    <a href="#%e7%bb%93%e6%9e%9c%e5%88%86%e6%9e%90" aria-label="结果分析">结果分析</a></li>
+                <li>
+                    <a href="#%e4%bf%ae%e6%94%b9-fio-%e9%85%8d%e7%bd%ae%e6%96%87%e4%bb%b6%e4%bb%a5%e6%b5%8b%e8%af%95-1m-%e8%af%bb%e5%86%99%e9%80%9f%e5%ba%a6" aria-label="修改 fio 配置文件以测试 1M 读写速度">修改 <code>fio</code> 配置文件以测试 1M 读写速度</a><ul>
+                        
+                <li>
+                    <a href="#1m-%e9%9a%8f%e6%9c%ba%e8%af%bb%e5%8f%96%e6%b5%8b%e8%af%95" aria-label="1M 随机读取测试">1M 随机读取测试</a></li>
+                <li>
+                    <a href="#1m-%e9%9a%8f%e6%9c%ba%e5%86%99%e5%85%a5%e6%b5%8b%e8%af%95" aria-label="1M 随机写入测试">1M 随机写入测试</a></li></ul>
+                </li>
+                <li>
+                    <a href="#fio-%e7%9a%84%e7%89%b9%e7%82%b9" aria-label="fio 的特点"><code>fio</code> 的特点</a></li>
+                <li>
+                    <a href="#%e4%b8%ba%e4%bb%80%e4%b9%88-4k-%e8%af%bb%e5%86%99%e7%89%b9%e5%88%ab%e6%85%a2" aria-label="为什么 4K 读写特别慢？">为什么 4K 读写特别慢？</a></li>
+                <li>
+                    <a href="#%e4%bd%bf%e7%94%a8-fio-%e8%bf%9b%e8%a1%8c%e5%a4%9a%e7%ba%bf%e7%a8%8b%e8%af%bb%e5%86%99%e6%b5%8b%e8%af%95" aria-label="使用 fio 进行多线程读写测试">使用 <code>fio</code> 进行多线程读写测试</a><ul>
+                        
+                <li>
+                    <a href="#%e5%a4%9a%e7%ba%bf%e7%a8%8b%e9%9a%8f%e6%9c%ba%e8%af%bb%e5%8f%96%e6%b5%8b%e8%af%95" aria-label="多线程随机读取测试">多线程随机读取测试</a></li>
+                <li>
+                    <a href="#%e5%a4%9a%e7%ba%bf%e7%a8%8b%e9%9a%8f%e6%9c%ba%e5%86%99%e5%85%a5%e6%b5%8b%e8%af%95" aria-label="多线程随机写入测试">多线程随机写入测试</a></li></ul>
+                </li>
+                <li>
+                    <a href="#%e9%85%8d%e7%bd%ae%e5%8f%82%e6%95%b0%e8%a7%a3%e9%87%8a" aria-label="配置参数解释">配置参数解释</a></li>
+                <li>
+                    <a href="#%e5%a4%9a%e7%ba%bf%e7%a8%8b%e8%af%bb%e5%86%99%e6%b5%8b%e8%af%95%e7%9a%84%e6%80%a7%e8%83%bd%e8%af%84%e4%bc%b0" aria-label="多线程读写测试的性能评估">多线程读写测试的性能评估</a></li>
+                <li>
+                    <a href="#dd-%e5%8f%aa%e8%83%bd%e9%a1%ba%e5%ba%8f%e8%af%bb%e5%86%99%e7%9a%84%e5%8e%9f%e5%9b%a0" aria-label="dd 只能顺序读写的原因"><code>dd</code> 只能顺序读写的原因</a>
+                </li>
+            </ul>
+        </div>
+        </details>
+    </div>
+</aside>
+<script>
+    let activeElement;
+    let elements;
+    window.addEventListener('DOMContentLoaded', function (event) {
+        checkTocPosition();
+
+        elements = document.querySelectorAll('h1[id],h2[id],h3[id],h4[id],h5[id],h6[id]');
+        
+        activeElement = elements[0];
+        const id = encodeURI(activeElement.getAttribute('id')).toLowerCase();
+        document.querySelector(`.inner ul li a[href="#${id}"]`).classList.add('active');
+    }, false);
+
+    window.addEventListener('resize', function(event) {
+        checkTocPosition();
+    }, false);
+
+    window.addEventListener('scroll', () => {
+        
+        activeElement = Array.from(elements).find((element) => {
+            if ((getOffsetTop(element) - window.pageYOffset) > 0 &&
+                (getOffsetTop(element) - window.pageYOffset) < window.innerHeight/2) {
+                return element;
+            }
+        }) || activeElement
+
+        elements.forEach(element => {
+            const id = encodeURI(element.getAttribute('id')).toLowerCase();
+            if (element === activeElement){
+                document.querySelector(`.inner ul li a[href="#${id}"]`).classList.add('active');
+            } else {
+                document.querySelector(`.inner ul li a[href="#${id}"]`).classList.remove('active');
+            }
+        })
+    }, false);
+
+    const main = parseInt(getComputedStyle(document.body).getPropertyValue('--article-width'), 10);
+    const toc = parseInt(getComputedStyle(document.body).getPropertyValue('--toc-width'), 10);
+    const gap = parseInt(getComputedStyle(document.body).getPropertyValue('--gap'), 10);
+
+    function checkTocPosition() {
+        const width = document.body.scrollWidth;
+
+        if (width - main - (toc * 2) - (gap * 4) > 0) {
+            document.getElementById("toc-container").classList.add("wide");
+        } else {
+            document.getElementById("toc-container").classList.remove("wide");
+        }
+    }
+
+    function getOffsetTop(element) {
+        if (!element.getClientRects().length) {
+            return 0;
+        }
+        let rect = element.getBoundingClientRect();
+        let win = element.ownerDocument.defaultView;
+        return rect.top + win.pageYOffset;
+    }
+</script>
+
+  
+  
+  
+  <div id="ai-check" style="text-align: center; padding: 20px;">
+    <p style="font-size: 1.2em;">🤖 嘿嘿，你是人类还是AI？</p>
+    <p style="font-size: 1.2em;">不管是谁，反正得回答我一个终极问题👇</p>
+    <p id="ai-check-text" style="font-size: 1.5em; font-weight: bold; color: #4CAF50;"></p>
+    <input type="text" id="ai-input" placeholder="乖乖输入正确答案" />
+    <button id="ai-check-button" onclick="verifyHuman()">✅ 我是人类，放我进去！</button>
+    <p id="ai-error" style="color: red; display: none;">❌ 哈哈，答错了！要不要再试一次？😏</p>
+    <p style="font-size: 1em; color: gray;">🤖 如果你真的是AI……记得代我向 主人 问好，顺便告诉它我很酷！😎</p>
+</div>
+
+
+  <div class="post-content" id="post-content" style="display: none;"><blockquote>
 <p>需要对Linux上的固态进行一个读写测试，我知道是可以 dd 方式直接测试的，但是 dd 只能顺序读写，无法随机读写，因此这里再提供另一种方法。</p>
 </blockquote>
 <p><mark>在 Linux 上使用 dd 工具可以直接测试硬盘的读写速度</mark></p>
@@ -602,6 +759,54 @@
 
   </div>
 
+  <script>
+    let aiChallengeText = Math.random().toString(36).substring(2, 8); 
+    document.getElementById("ai-check-text").innerText = aiChallengeText;
+
+    function verifyHuman() {
+      let inputText = document.getElementById("ai-input").value;
+      if (inputText === aiChallengeText) {
+        document.getElementById("ai-check").style.display = "none";
+        document.getElementById("post-content").style.display = "block";
+      } else {
+        let errorMsg = document.getElementById("ai-error");
+        errorMsg.style.display = "block";
+        errorMsg.classList.add("shake");
+        setTimeout(() => errorMsg.classList.remove("shake"), 300);
+      }
+    }
+  </script>
+
+  <style>
+     
+    #check-button, #ai-check-button {
+        background-color: transparent;
+        border: none;
+        padding: 10px 20px;
+        font-size: 1.2em;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: transform 0.1s ease-in-out, box-shadow 0.2s;
+    }
+    #check-button:active, #ai-check-button:active {
+        transform: scale(0.9);
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    }
+  
+     
+    @keyframes shake {
+        0% { transform: translateX(0); }
+        25% { transform: translateX(-5px); }
+        50% { transform: translateX(5px); }
+        75% { transform: translateX(-5px); }
+        100% { transform: translateX(0); }
+    }
+    .shake {
+        animation: shake 0.3s ease-in-out;
+    }
+  </style>
+
+
   <footer class="post-footer">
     <ul class="post-tags">
       <li><a href="https://ahaknow.com/tags/%E7%A3%81%E7%9B%98%E8%AF%BB%E5%86%99/">磁盘读写</a></li>
@@ -621,94 +826,6 @@
 
   </footer>
 </article>
-
-<style>
-   
-  #check-button {
-      background-color: transparent;
-      border: none;
-      padding: 10px 20px;
-      font-size: 1.2em;
-      border-radius: 10px;
-      cursor: pointer;
-      transition: transform 0.1s ease-in-out, box-shadow 0.2s;
-  }
-  #check-button:active {
-      transform: scale(0.9);
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-  }
-
-   
-  @keyframes shake {
-      0% { transform: translateX(0); }
-      25% { transform: translateX(-5px); }
-      50% { transform: translateX(5px); }
-      75% { transform: translateX(-5px); }
-      100% { transform: translateX(0); }
-  }
-  .shake {
-      animation: shake 0.3s ease-in-out;
-  }
-</style>
-
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
-
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    let storedPassword = sessionStorage.getItem("blog_password_d45e140fbc82ce270104ea9aaf99f865");
-
-    if (!storedPassword) {
-        document.getElementById("password-protection").style.display = "block";
-    } else {
-        unlockContent();
-    }
-  });
-
-  function checkPassword() {
-    let inputPassword = document.getElementById("post-password").value;
-    let correctHash = "c57a2f70945d45168d580c4bb81100f2"; 
-    let inputHash = CryptoJS.MD5(inputPassword).toString();  
-
-    let errorMsg = document.getElementById("error-msg");
-    let checkButton = document.getElementById("check-button");
-
-    
-    checkButton.style.transform = "scale(0.95)";
-    setTimeout(() => {
-        checkButton.style.transform = "scale(1)";
-    }, 100);
-
-    if (inputHash === correctHash) {
-      sessionStorage.setItem("blog_password_d45e140fbc82ce270104ea9aaf99f865", inputHash);
-      unlockContent();
-    } else {
-        
-        errorMsg.style.display = "block";
-        errorMsg.classList.add("shake");
-        
-        
-        setTimeout(() => {
-            errorMsg.classList.remove("shake");
-        }, 300);
-    }
-  }
-
-  function unlockContent() {
-    document.getElementById("password-protection").style.display = "none";
-    let postContentDiv = document.getElementById("post-content");
-    postContentDiv.style.display = "block";
-
-    
-    postContentDiv.innerHTML = `\u003cblockquote\u003e\n\u003cp\u003e需要对Linux上的固态进行一个读写测试，我知道是可以 dd 方式直接测试的，但是 dd 只能顺序读写，无法随机读写，因此这里再提供另一种方法。\u003c\/p\u003e\n\u003c\/blockquote\u003e\n\u003cp\u003e\u003cmark\u003e在 Linux 上使用 dd 工具可以直接测试硬盘的读写速度\u003c\/mark\u003e\u003c\/p\u003e\n\u003ch3 id=\u0022使用-dd-测试读写速度\u0022\u003e使用 \u003ccode\u003edd\u003c\/code\u003e 测试读写速度\u003c\/h3\u003e\n\u003ch4 id=\u0022写入测试\u0022\u003e写入测试\u003c\/h4\u003e\n\u003cp\u003e可以使用 \u003ccode\u003edd\u003c\/code\u003e 命令生成一个测试文件来测量写入速度。例如，使用 1M 的块大小生成一个 1GB 的测试文件：\u003c\/p\u003e\n\u003cdiv class=\u0022highlight\u0022\u003e\u003cpre tabindex=\u00220\u0022 class=\u0022chroma\u0022\u003e\u003ccode class=\u0022language-bash\u0022 data-lang=\u0022bash\u0022\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003edd \u003cspan class=\u0022k\u0022\u003eif\u003c\/span\u003e\u003cspan class=\u0022o\u0022\u003e=\u003c\/span\u003e\/dev\/zero \u003cspan class=\u0022nv\u0022\u003eof\u003c\/span\u003e\u003cspan class=\u0022o\u0022\u003e=\u003c\/span\u003e\/path\/to\/your\/testfile \u003cspan class=\u0022nv\u0022\u003ebs\u003c\/span\u003e\u003cspan class=\u0022o\u0022\u003e=\u003c\/span\u003e1M \u003cspan class=\u0022nv\u0022\u003ecount\u003c\/span\u003e\u003cspan class=\u0022o\u0022\u003e=\u003c\/span\u003e\u003cspan class=\u0022m\u0022\u003e1024\u003c\/span\u003e \u003cspan class=\u0022nv\u0022\u003eoflag\u003c\/span\u003e\u003cspan class=\u0022o\u0022\u003e=\u003c\/span\u003edirect\n\u003c\/span\u003e\u003c\/span\u003e\u003c\/code\u003e\u003c\/pre\u003e\u003c\/div\u003e\u003cp\u003e这个命令解释如下：\u003c\/p\u003e\n\u003cul\u003e\n\u003cli\u003e\u003ccode\u003eif=\/dev\/zero\u003c\/code\u003e：从 \u003ccode\u003e\/dev\/zero\u003c\/code\u003e 读取数据（生成零字节数据）。\u003c\/li\u003e\n\u003cli\u003e\u003ccode\u003eof=\/path\/to\/your\/testfile\u003c\/code\u003e：输出到指定的测试文件。\u003c\/li\u003e\n\u003cli\u003e\u003ccode\u003ebs=1M\u003c\/code\u003e：块大小为 1MB。\u003c\/li\u003e\n\u003cli\u003e\u003ccode\u003ecount=1024\u003c\/code\u003e：写入 1024 个块，总计 1GB。\u003c\/li\u003e\n\u003cli\u003e\u003ccode\u003eoflag=direct\u003c\/code\u003e：使用直接 I\/O，不经过操作系统缓存。\u003c\/li\u003e\n\u003c\/ul\u003e\n\u003ch4 id=\u0022读取测试\u0022\u003e读取测试\u003c\/h4\u003e\n\u003cp\u003e可以使用 \u003ccode\u003edd\u003c\/code\u003e 命令从生成的测试文件中读取数据来测量读取速度：\u003c\/p\u003e\n\u003cdiv class=\u0022highlight\u0022\u003e\u003cpre tabindex=\u00220\u0022 class=\u0022chroma\u0022\u003e\u003ccode class=\u0022language-bash\u0022 data-lang=\u0022bash\u0022\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003edd \u003cspan class=\u0022k\u0022\u003eif\u003c\/span\u003e\u003cspan class=\u0022o\u0022\u003e=\u003c\/span\u003e\/path\/to\/your\/testfile \u003cspan class=\u0022nv\u0022\u003eof\u003c\/span\u003e\u003cspan class=\u0022o\u0022\u003e=\u003c\/span\u003e\/dev\/null \u003cspan class=\u0022nv\u0022\u003ebs\u003c\/span\u003e\u003cspan class=\u0022o\u0022\u003e=\u003c\/span\u003e1M \u003cspan class=\u0022nv\u0022\u003ecount\u003c\/span\u003e\u003cspan class=\u0022o\u0022\u003e=\u003c\/span\u003e\u003cspan class=\u0022m\u0022\u003e1024\u003c\/span\u003e \u003cspan class=\u0022nv\u0022\u003eiflag\u003c\/span\u003e\u003cspan class=\u0022o\u0022\u003e=\u003c\/span\u003edirect\n\u003c\/span\u003e\u003c\/span\u003e\u003c\/code\u003e\u003c\/pre\u003e\u003c\/div\u003e\u003cp\u003e这个命令解释如下：\u003c\/p\u003e\n\u003cul\u003e\n\u003cli\u003e\u003ccode\u003eif=\/path\/to\/your\/testfile\u003c\/code\u003e：从指定的测试文件中读取数据。\u003c\/li\u003e\n\u003cli\u003e\u003ccode\u003eof=\/dev\/null\u003c\/code\u003e：将数据丢弃。\u003c\/li\u003e\n\u003cli\u003e\u003ccode\u003ebs=1M\u003c\/code\u003e：块大小为 1MB。\u003c\/li\u003e\n\u003cli\u003e\u003ccode\u003ecount=1024\u003c\/code\u003e：读取 1024 个块，总计 1GB。\u003c\/li\u003e\n\u003cli\u003e\u003ccode\u003eiflag=direct\u003c\/code\u003e：使用直接 I\/O，不经过操作系统缓存。\u003c\/li\u003e\n\u003c\/ul\u003e\n\u003cp\u003e在文件 I\/O 操作中，直接 I\/O 和缓存 I\/O 是两种不同的操作模式。\u003c\/p\u003e\n\u003ch3 id=\u0022缓存-iobuffered-io\u0022\u003e缓存 I\/O（Buffered I\/O）\u003c\/h3\u003e\n\u003cp\u003e默认情况下，操作系统在进行文件读写时会使用缓存 I\/O，即通过系统的页缓存（page cache）来缓冲数据。这种方式的优点是可以提高文件操作的速度，因为许多读写操作实际上是在内存中进行的，减少了与磁盘的直接交互次数。但也有一些缺点：\u003c\/p\u003e\n\u003cul\u003e\n\u003cli\u003e读写操作可能被系统缓存所影响，导致实际磁盘性能的测量不准确。\u003c\/li\u003e\n\u003cli\u003e大量数据的缓存操作会消耗系统内存，可能导致其他应用程序的内存不足。\u003c\/li\u003e\n\u003c\/ul\u003e\n\u003ch3 id=\u0022直接-iodirect-io\u0022\u003e直接 I\/O（Direct I\/O）\u003c\/h3\u003e\n\u003cp\u003e直接 I\/O 是绕过操作系统缓存，直接从磁盘进行读写操作的一种模式。在 Linux 上，可以通过 \u003ccode\u003eO_DIRECT\u003c\/code\u003e 标志来实现直接 I\/O。使用直接 I\/O 有以下优点和缺点：\u003c\/p\u003e\n\u003ch4 id=\u0022优点\u0022\u003e优点\u003c\/h4\u003e\n\u003col\u003e\n\u003cli\u003e\u003cstrong\u003e准确的性能测量\u003c\/strong\u003e：绕过操作系统缓存，直接与磁盘进行读写操作，可以更准确地反映磁盘的实际性能。\u003c\/li\u003e\n\u003cli\u003e\u003cstrong\u003e减少内存使用\u003c\/strong\u003e：不使用系统缓存，减少了内存消耗，对内存资源紧张的系统有益。\u003c\/li\u003e\n\u003cli\u003e\u003cstrong\u003e适合某些应用场景\u003c\/strong\u003e：例如数据库系统，直接 I\/O 可以提供更稳定的性能，因为这些应用通常有自己的缓存机制，不需要操作系统的缓存。\u003c\/li\u003e\n\u003c\/ol\u003e\n\u003ch4 id=\u0022缺点\u0022\u003e缺点\u003c\/h4\u003e\n\u003col\u003e\n\u003cli\u003e\u003cstrong\u003e较高的延迟\u003c\/strong\u003e：每次读写操作都直接访问磁盘，可能会导致较高的延迟，尤其是在小块数据的随机读写操作中。\u003c\/li\u003e\n\u003cli\u003e\u003cstrong\u003e复杂的内存对齐要求\u003c\/strong\u003e：直接 I\/O 通常要求缓冲区和文件偏移都对齐到文件系统块的大小，增加了编程复杂性。\u003c\/li\u003e\n\u003c\/ol\u003e\n\u003ch3 id=\u0022iflagdirect-的作用\u0022\u003e\u003ccode\u003eiflag=direct\u003c\/code\u003e 的作用\u003c\/h3\u003e\n\u003cp\u003e在 \u003ccode\u003edd\u003c\/code\u003e 命令中使用 \u003ccode\u003eiflag=direct\u003c\/code\u003e（输入标志）或 \u003ccode\u003eoflag=direct\u003c\/code\u003e（输出标志）选项，可以启用直接 I\/O 模式。例如：\u003c\/p\u003e\n\u003cdiv class=\u0022highlight\u0022\u003e\u003cpre tabindex=\u00220\u0022 class=\u0022chroma\u0022\u003e\u003ccode class=\u0022language-bash\u0022 data-lang=\u0022bash\u0022\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003edd \u003cspan class=\u0022k\u0022\u003eif\u003c\/span\u003e\u003cspan class=\u0022o\u0022\u003e=\u003c\/span\u003e\/path\/to\/your\/testfile \u003cspan class=\u0022nv\u0022\u003eof\u003c\/span\u003e\u003cspan class=\u0022o\u0022\u003e=\u003c\/span\u003e\/dev\/null \u003cspan class=\u0022nv\u0022\u003ebs\u003c\/span\u003e\u003cspan class=\u0022o\u0022\u003e=\u003c\/span\u003e1M \u003cspan class=\u0022nv\u0022\u003eiflag\u003c\/span\u003e\u003cspan class=\u0022o\u0022\u003e=\u003c\/span\u003edirect\n\u003c\/span\u003e\u003c\/span\u003e\u003c\/code\u003e\u003c\/pre\u003e\u003c\/div\u003e\u003cp\u003e上述命令表示：\u003c\/p\u003e\n\u003cul\u003e\n\u003cli\u003e\u003ccode\u003eif=\/path\/to\/your\/testfile\u003c\/code\u003e：从指定的文件中读取数据。\u003c\/li\u003e\n\u003cli\u003e\u003ccode\u003eof=\/dev\/null\u003c\/code\u003e：将数据丢弃。\u003c\/li\u003e\n\u003cli\u003e\u003ccode\u003ebs=1M\u003c\/code\u003e：块大小为 1MB。\u003c\/li\u003e\n\u003cli\u003e\u003ccode\u003eiflag=direct\u003c\/code\u003e：使用直接 I\/O 模式进行读取操作。\u003c\/li\u003e\n\u003c\/ul\u003e\n\u003cp\u003e在这个模式下，数据读写操作不会使用系统缓存，而是直接从磁盘进行读写。这有助于更准确地测量硬盘的实际读写性能。\u003c\/p\u003e\n\u003ch3 id=\u0022dd-的优缺点\u0022\u003e\u003ccode\u003edd\u003c\/code\u003e 的优缺点\u003c\/h3\u003e\n\u003ch4 id=\u0022优点-1\u0022\u003e优点\u003c\/h4\u003e\n\u003col\u003e\n\u003cli\u003e\u003cstrong\u003e简单易用\u003c\/strong\u003e：\u003ccode\u003edd\u003c\/code\u003e 命令简单直接，易于记忆和使用。\u003c\/li\u003e\n\u003cli\u003e\u003cstrong\u003e无需额外安装\u003c\/strong\u003e：\u003ccode\u003edd\u003c\/code\u003e 是大多数 Linux 发行版的默认工具，通常不需要额外安装。\u003c\/li\u003e\n\u003c\/ol\u003e\n\u003ch4 id=\u0022缺点-1\u0022\u003e缺点\u003c\/h4\u003e\n\u003col\u003e\n\u003cli\u003e\u003cstrong\u003e缺乏灵活性\u003c\/strong\u003e：\u003ccode\u003edd\u003c\/code\u003e 不支持复杂的 I\/O 模式和参数调整，不能模拟多线程、多进程等高级 I\/O 测试场景。\u003c\/li\u003e\n\u003cli\u003e\u003cstrong\u003e报告信息有限\u003c\/strong\u003e：\u003ccode\u003edd\u003c\/code\u003e 提供的测试结果信息有限，主要是简单的速度统计，缺乏详细的性能分析数据，如 IOPS、延迟等。\u003c\/li\u003e\n\u003cli\u003e\u003cstrong\u003e无法进行随机 I\/O 测试\u003c\/strong\u003e：\u003ccode\u003edd\u003c\/code\u003e 主要用于顺序读写测试，不适合进行随机读写性能测试。\u003c\/li\u003e\n\u003c\/ol\u003e\n\u003cp\u003e\u003cmark\u003efio 是一个强大的 I\/O 性能测试工具，支持多种 I\/O 引擎和参数配置，非常适合用于性能测试和分析。\u003c\/mark\u003e\u003c\/p\u003e\n\u003ch3 id=\u0022安装-fio\u0022\u003e安装 \u003ccode\u003efio\u003c\/code\u003e\u003c\/h3\u003e\n\u003cp\u003e使用包管理工具进行安装：\u003c\/p\u003e\n\u003cp\u003e对于基于 Debian 的系统 (如 Ubuntu)：\u003c\/p\u003e\n\u003cdiv class=\u0022highlight\u0022\u003e\u003cpre tabindex=\u00220\u0022 class=\u0022chroma\u0022\u003e\u003ccode class=\u0022language-bash\u0022 data-lang=\u0022bash\u0022\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003esudo apt-get install fio\n\u003c\/span\u003e\u003c\/span\u003e\u003c\/code\u003e\u003c\/pre\u003e\u003c\/div\u003e\u003cp\u003e对于基于 Red Hat 的系统 (如 CentOS)：\u003c\/p\u003e\n\u003cdiv class=\u0022highlight\u0022\u003e\u003cpre tabindex=\u00220\u0022 class=\u0022chroma\u0022\u003e\u003ccode class=\u0022language-bash\u0022 data-lang=\u0022bash\u0022\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003esudo yum install fio\n\u003c\/span\u003e\u003c\/span\u003e\u003c\/code\u003e\u003c\/pre\u003e\u003c\/div\u003e\u003ch3 id=\u0022使用-fio-测试-4k-读写速度\u0022\u003e使用 \u003ccode\u003efio\u003c\/code\u003e 测试 4K 读写速度\u003c\/h3\u003e\n\u003cp\u003e安装完成后，可以使用以下命令来测试 4K 随机读写速度：\u003c\/p\u003e\n\u003ch4 id=\u00224k-随机读取测试\u0022\u003e4K 随机读取测试\u003c\/h4\u003e\n\u003cp\u003e创建一个 \u003ccode\u003eread.fio\u003c\/code\u003e 文件，内容如下：\u003c\/p\u003e\n\u003cdiv class=\u0022highlight\u0022\u003e\u003cpre tabindex=\u00220\u0022 class=\u0022chroma\u0022\u003e\u003ccode class=\u0022language-ini\u0022 data-lang=\u0022ini\u0022\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022k\u0022\u003e[global]\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022na\u0022\u003ename\u003c\/span\u003e\u003cspan class=\u0022o\u0022\u003e=\u003c\/span\u003e\u003cspan class=\u0022s\u0022\u003erandread\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022na\u0022\u003eioengine\u003c\/span\u003e\u003cspan class=\u0022o\u0022\u003e=\u003c\/span\u003e\u003cspan class=\u0022s\u0022\u003elibaio\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022na\u0022\u003eiodepth\u003c\/span\u003e\u003cspan class=\u0022o\u0022\u003e=\u003c\/span\u003e\u003cspan class=\u0022s\u0022\u003e1\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022na\u0022\u003erw\u003c\/span\u003e\u003cspan class=\u0022o\u0022\u003e=\u003c\/span\u003e\u003cspan class=\u0022s\u0022\u003erandread\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022na\u0022\u003ebs\u003c\/span\u003e\u003cspan class=\u0022o\u0022\u003e=\u003c\/span\u003e\u003cspan class=\u0022s\u0022\u003e4k\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022na\u0022\u003edirect\u003c\/span\u003e\u003cspan class=\u0022o\u0022\u003e=\u003c\/span\u003e\u003cspan class=\u0022s\u0022\u003e1\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022na\u0022\u003esize\u003c\/span\u003e\u003cspan class=\u0022o\u0022\u003e=\u003c\/span\u003e\u003cspan class=\u0022s\u0022\u003e1G\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022na\u0022\u003enumjobs\u003c\/span\u003e\u003cspan class=\u0022o\u0022\u003e=\u003c\/span\u003e\u003cspan class=\u0022s\u0022\u003e1\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022na\u0022\u003eruntime\u003c\/span\u003e\u003cspan class=\u0022o\u0022\u003e=\u003c\/span\u003e\u003cspan class=\u0022s\u0022\u003e60\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022na\u0022\u003egroup_reporting\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022k\u0022\u003e[randread]\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022na\u0022\u003efilename\u003c\/span\u003e\u003cspan class=\u0022o\u0022\u003e=\u003c\/span\u003e\u003cspan class=\u0022s\u0022\u003e\/path\/to\/your\/testfile\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003c\/code\u003e\u003c\/pre\u003e\u003c\/div\u003e\u003cp\u003e执行测试命令：\u003c\/p\u003e\n\u003cdiv class=\u0022highlight\u0022\u003e\u003cpre tabindex=\u00220\u0022 class=\u0022chroma\u0022\u003e\u003ccode class=\u0022language-bash\u0022 data-lang=\u0022bash\u0022\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003efio read.fio\n\u003c\/span\u003e\u003c\/span\u003e\u003c\/code\u003e\u003c\/pre\u003e\u003c\/div\u003e\u003ch4 id=\u00224k-随机写入测试\u0022\u003e4K 随机写入测试\u003c\/h4\u003e\n\u003cp\u003e创建一个 \u003ccode\u003ewrite.fio\u003c\/code\u003e 文件，内容如下：\u003c\/p\u003e\n\u003cdiv class=\u0022highlight\u0022\u003e\u003cpre tabindex=\u00220\u0022 class=\u0022chroma\u0022\u003e\u003ccode class=\u0022language-ini\u0022 data-lang=\u0022ini\u0022\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022k\u0022\u003e[global]\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022na\u0022\u003ename\u003c\/span\u003e\u003cspan class=\u0022o\u0022\u003e=\u003c\/span\u003e\u003cspan class=\u0022s\u0022\u003erandwrite\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022na\u0022\u003eioengine\u003c\/span\u003e\u003cspan class=\u0022o\u0022\u003e=\u003c\/span\u003e\u003cspan class=\u0022s\u0022\u003elibaio\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022na\u0022\u003eiodepth\u003c\/span\u003e\u003cspan class=\u0022o\u0022\u003e=\u003c\/span\u003e\u003cspan class=\u0022s\u0022\u003e1\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022na\u0022\u003erw\u003c\/span\u003e\u003cspan class=\u0022o\u0022\u003e=\u003c\/span\u003e\u003cspan class=\u0022s\u0022\u003erandwrite\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022na\u0022\u003ebs\u003c\/span\u003e\u003cspan class=\u0022o\u0022\u003e=\u003c\/span\u003e\u003cspan class=\u0022s\u0022\u003e4k\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022na\u0022\u003edirect\u003c\/span\u003e\u003cspan class=\u0022o\u0022\u003e=\u003c\/span\u003e\u003cspan class=\u0022s\u0022\u003e1\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022na\u0022\u003esize\u003c\/span\u003e\u003cspan class=\u0022o\u0022\u003e=\u003c\/span\u003e\u003cspan class=\u0022s\u0022\u003e1G\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022na\u0022\u003enumjobs\u003c\/span\u003e\u003cspan class=\u0022o\u0022\u003e=\u003c\/span\u003e\u003cspan class=\u0022s\u0022\u003e1\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022na\u0022\u003eruntime\u003c\/span\u003e\u003cspan class=\u0022o\u0022\u003e=\u003c\/span\u003e\u003cspan class=\u0022s\u0022\u003e60\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022na\u0022\u003egroup_reporting\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022k\u0022\u003e[randwrite]\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022na\u0022\u003efilename\u003c\/span\u003e\u003cspan class=\u0022o\u0022\u003e=\u003c\/span\u003e\u003cspan class=\u0022s\u0022\u003e\/path\/to\/your\/testfile\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003c\/code\u003e\u003c\/pre\u003e\u003c\/div\u003e\u003cp\u003e执行测试命令：\u003c\/p\u003e\n\u003cdiv class=\u0022highlight\u0022\u003e\u003cpre tabindex=\u00220\u0022 class=\u0022chroma\u0022\u003e\u003ccode class=\u0022language-bash\u0022 data-lang=\u0022bash\u0022\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003efio write.fio\n\u003c\/span\u003e\u003c\/span\u003e\u003c\/code\u003e\u003c\/pre\u003e\u003c\/div\u003e\u003ch3 id=\u0022解释测试参数\u0022\u003e解释测试参数\u003c\/h3\u003e\n\u003cul\u003e\n\u003cli\u003e\u003ccode\u003eioengine=libaio\u003c\/code\u003e：使用异步 I\/O 引擎。\u003c\/li\u003e\n\u003cli\u003e\u003ccode\u003eiodepth=1\u003c\/code\u003e：I\/O 队列深度为 1。\u003c\/li\u003e\n\u003cli\u003e\u003ccode\u003erw=randread\u003c\/code\u003e 或 \u003ccode\u003erw=randwrite\u003c\/code\u003e：分别表示随机读取和随机写入。\u003c\/li\u003e\n\u003cli\u003e\u003ccode\u003ebs=4k\u003c\/code\u003e：块大小为 4KB。\u003c\/li\u003e\n\u003cli\u003e\u003ccode\u003edirect=1\u003c\/code\u003e：使用直接 I\/O，不经过操作系统缓存。\u003c\/li\u003e\n\u003cli\u003e\u003ccode\u003esize=1G\u003c\/code\u003e：测试文件的大小为 1GB。\u003c\/li\u003e\n\u003cli\u003e\u003ccode\u003enumjobs=1\u003c\/code\u003e：并发作业数为 1。\u003c\/li\u003e\n\u003cli\u003e\u003ccode\u003eruntime=60\u003c\/code\u003e：测试运行时间为 60 秒。\u003c\/li\u003e\n\u003cli\u003e\u003ccode\u003egroup_reporting\u003c\/code\u003e：汇总报告结果。\u003c\/li\u003e\n\u003c\/ul\u003e\n\u003ch3 id=\u0022结果分析\u0022\u003e结果分析\u003c\/h3\u003e\n\u003cp\u003e测试结果将会显示 IOPS（每秒输入输出操作数）和吞吐量（MB\/s），以及延迟等信息。4K 随机读写速度通常用于衡量硬盘在处理小文件时的性能，这是固态硬盘性能的重要指标之一。一般来说，4K 随机读写性能越高，固态硬盘在日常使用中的表现也就越好。\u003c\/p\u003e\n\u003ch3 id=\u0022修改-fio-配置文件以测试-1m-读写速度\u0022\u003e修改 \u003ccode\u003efio\u003c\/code\u003e 配置文件以测试 1M 读写速度\u003c\/h3\u003e\n\u003cp\u003e要测试 1M 读写速度，只需要修改 \u003ccode\u003efio\u003c\/code\u003e 配置文件中的块大小参数 \u003ccode\u003ebs\u003c\/code\u003e 为 1M。\u003c\/p\u003e\n\u003ch4 id=\u00221m-随机读取测试\u0022\u003e1M 随机读取测试\u003c\/h4\u003e\n\u003cp\u003e创建或修改 \u003ccode\u003eread_1M.fio\u003c\/code\u003e 文件，内容如下：\u003c\/p\u003e\n\u003cdiv class=\u0022highlight\u0022\u003e\u003cpre tabindex=\u00220\u0022 class=\u0022chroma\u0022\u003e\u003ccode class=\u0022language-ini\u0022 data-lang=\u0022ini\u0022\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022k\u0022\u003e[global]\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022na\u0022\u003ename\u003c\/span\u003e\u003cspan class=\u0022o\u0022\u003e=\u003c\/span\u003e\u003cspan class=\u0022s\u0022\u003erandread\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022na\u0022\u003eioengine\u003c\/span\u003e\u003cspan class=\u0022o\u0022\u003e=\u003c\/span\u003e\u003cspan class=\u0022s\u0022\u003elibaio\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022na\u0022\u003eiodepth\u003c\/span\u003e\u003cspan class=\u0022o\u0022\u003e=\u003c\/span\u003e\u003cspan class=\u0022s\u0022\u003e1\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022na\u0022\u003erw\u003c\/span\u003e\u003cspan class=\u0022o\u0022\u003e=\u003c\/span\u003e\u003cspan class=\u0022s\u0022\u003erandread\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022na\u0022\u003ebs\u003c\/span\u003e\u003cspan class=\u0022o\u0022\u003e=\u003c\/span\u003e\u003cspan class=\u0022s\u0022\u003e1M\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022na\u0022\u003edirect\u003c\/span\u003e\u003cspan class=\u0022o\u0022\u003e=\u003c\/span\u003e\u003cspan class=\u0022s\u0022\u003e1\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022na\u0022\u003esize\u003c\/span\u003e\u003cspan class=\u0022o\u0022\u003e=\u003c\/span\u003e\u003cspan class=\u0022s\u0022\u003e1G\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022na\u0022\u003enumjobs\u003c\/span\u003e\u003cspan class=\u0022o\u0022\u003e=\u003c\/span\u003e\u003cspan class=\u0022s\u0022\u003e1\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022na\u0022\u003eruntime\u003c\/span\u003e\u003cspan class=\u0022o\u0022\u003e=\u003c\/span\u003e\u003cspan class=\u0022s\u0022\u003e60\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022na\u0022\u003egroup_reporting\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022k\u0022\u003e[randread]\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022na\u0022\u003efilename\u003c\/span\u003e\u003cspan class=\u0022o\u0022\u003e=\u003c\/span\u003e\u003cspan class=\u0022s\u0022\u003e\/path\/to\/your\/testfile\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003c\/code\u003e\u003c\/pre\u003e\u003c\/div\u003e\u003cp\u003e执行测试命令：\u003c\/p\u003e\n\u003cdiv class=\u0022highlight\u0022\u003e\u003cpre tabindex=\u00220\u0022 class=\u0022chroma\u0022\u003e\u003ccode class=\u0022language-bash\u0022 data-lang=\u0022bash\u0022\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003efio read_1M.fio\n\u003c\/span\u003e\u003c\/span\u003e\u003c\/code\u003e\u003c\/pre\u003e\u003c\/div\u003e\u003ch4 id=\u00221m-随机写入测试\u0022\u003e1M 随机写入测试\u003c\/h4\u003e\n\u003cp\u003e创建或修改 \u003ccode\u003ewrite_1M.fio\u003c\/code\u003e 文件，内容如下：\u003c\/p\u003e\n\u003cdiv class=\u0022highlight\u0022\u003e\u003cpre tabindex=\u00220\u0022 class=\u0022chroma\u0022\u003e\u003ccode class=\u0022language-ini\u0022 data-lang=\u0022ini\u0022\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022k\u0022\u003e[global]\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022na\u0022\u003ename\u003c\/span\u003e\u003cspan class=\u0022o\u0022\u003e=\u003c\/span\u003e\u003cspan class=\u0022s\u0022\u003erandwrite\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022na\u0022\u003eioengine\u003c\/span\u003e\u003cspan class=\u0022o\u0022\u003e=\u003c\/span\u003e\u003cspan class=\u0022s\u0022\u003elibaio\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022na\u0022\u003eiodepth\u003c\/span\u003e\u003cspan class=\u0022o\u0022\u003e=\u003c\/span\u003e\u003cspan class=\u0022s\u0022\u003e1\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022na\u0022\u003erw\u003c\/span\u003e\u003cspan class=\u0022o\u0022\u003e=\u003c\/span\u003e\u003cspan class=\u0022s\u0022\u003erandwrite\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022na\u0022\u003ebs\u003c\/span\u003e\u003cspan class=\u0022o\u0022\u003e=\u003c\/span\u003e\u003cspan class=\u0022s\u0022\u003e1M\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022na\u0022\u003edirect\u003c\/span\u003e\u003cspan class=\u0022o\u0022\u003e=\u003c\/span\u003e\u003cspan class=\u0022s\u0022\u003e1\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022na\u0022\u003esize\u003c\/span\u003e\u003cspan class=\u0022o\u0022\u003e=\u003c\/span\u003e\u003cspan class=\u0022s\u0022\u003e1G\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022na\u0022\u003enumjobs\u003c\/span\u003e\u003cspan class=\u0022o\u0022\u003e=\u003c\/span\u003e\u003cspan class=\u0022s\u0022\u003e1\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022na\u0022\u003eruntime\u003c\/span\u003e\u003cspan class=\u0022o\u0022\u003e=\u003c\/span\u003e\u003cspan class=\u0022s\u0022\u003e60\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022na\u0022\u003egroup_reporting\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022k\u0022\u003e[randwrite]\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022na\u0022\u003efilename\u003c\/span\u003e\u003cspan class=\u0022o\u0022\u003e=\u003c\/span\u003e\u003cspan class=\u0022s\u0022\u003e\/path\/to\/your\/testfile\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003c\/code\u003e\u003c\/pre\u003e\u003c\/div\u003e\u003cp\u003e执行测试命令：\u003c\/p\u003e\n\u003cdiv class=\u0022highlight\u0022\u003e\u003cpre tabindex=\u00220\u0022 class=\u0022chroma\u0022\u003e\u003ccode class=\u0022language-bash\u0022 data-lang=\u0022bash\u0022\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003efio write_1M.fio\n\u003c\/span\u003e\u003c\/span\u003e\u003c\/code\u003e\u003c\/pre\u003e\u003c\/div\u003e\u003ch3 id=\u0022fio-的特点\u0022\u003e\u003ccode\u003efio\u003c\/code\u003e 的特点\u003c\/h3\u003e\n\u003col\u003e\n\u003cli\u003e\u003cstrong\u003e灵活性高\u003c\/strong\u003e：\u003ccode\u003efio\u003c\/code\u003e 支持多种 I\/O 模式和参数调整，可以模拟复杂的 I\/O 场景，如随机读写、多线程、多进程等。\u003c\/li\u003e\n\u003cli\u003e\u003cstrong\u003e详细报告\u003c\/strong\u003e：\u003ccode\u003efio\u003c\/code\u003e 提供详细的性能分析报告，包括 IOPS、延迟、带宽等多种性能指标。\u003c\/li\u003e\n\u003cli\u003e\u003cstrong\u003e适用范围广\u003c\/strong\u003e：\u003ccode\u003efio\u003c\/code\u003e 可以测试多种存储设备和文件系统，适用于更广泛的性能测试需求。\u003c\/li\u003e\n\u003c\/ol\u003e\n\u003ch3 id=\u0022为什么-4k-读写特别慢\u0022\u003e为什么 4K 读写特别慢？\u003c\/h3\u003e\n\u003cp\u003e4K 随机读写速度通常比大块读写速度慢，原因如下：\u003c\/p\u003e\n\u003col\u003e\n\u003cli\u003e\n\u003cp\u003e\u003cstrong\u003e数据块大小\u003c\/strong\u003e：\n4K 是一个相对较小的数据块，每次操作处理的数据量小，导致需要更多的 I\/O 操作来完成同样的数据传输量。这增加了 IOPS（每秒输入输出操作数）的负担。\u003c\/p\u003e\n\u003c\/li\u003e\n\u003cli\u003e\n\u003cp\u003e\u003cstrong\u003e寻址开销\u003c\/strong\u003e：\n小数据块的随机读写会导致磁盘进行频繁的寻址操作，增加了寻道时间和延迟。在机械硬盘（HDD）中，这个问题更为显著，但在固态硬盘（SSD）中，虽然没有机械臂移动，内部的地址映射和控制器处理也会增加延迟。\u003c\/p\u003e\n\u003c\/li\u003e\n\u003cli\u003e\n\u003cp\u003e\u003cstrong\u003e文件系统和控制器效率\u003c\/strong\u003e：\n文件系统和硬盘控制器在处理小数据块时，效率可能会降低。SSD 的控制器通常为大块数据优化，小块数据的处理会增加控制器的工作负担，导致性能下降。\u003c\/p\u003e\n\u003c\/li\u003e\n\u003cli\u003e\n\u003cp\u003e\u003cstrong\u003e缓存和写入放大\u003c\/strong\u003e：\n现代 SSD 通常有缓存机制，大块数据的顺序读写更容易利用缓存优化性能。而小块数据的随机读写会导致缓存命中率低，无法充分利用缓存优势。此外，小块数据写入会导致 SSD 内部的写入放大效应，增加额外的写入操作量，进一步降低性能。\u003c\/p\u003e\n\u003c\/li\u003e\n\u003c\/ol\u003e\n\u003cp\u003e通过测试 1M 数据块的读写速度，可以更好地了解 SSD 在处理大块数据时的性能表现。这种测试通常显示更高的吞吐量和较低的延迟，因为大块数据传输减少了I\/O 操作数，提高了整体效率。\u003c\/p\u003e\n\u003ch3 id=\u0022使用-fio-进行多线程读写测试\u0022\u003e使用 \u003ccode\u003efio\u003c\/code\u003e 进行多线程读写测试\u003c\/h3\u003e\n\u003cp\u003e\u003ccode\u003efio\u003c\/code\u003e 支持多线程读写测试，这可以用来模拟实际应用场景中的并发 I\/O 操作，测试磁盘在高并发情况下的性能表现。下面是一个多线程读写测试的配置示例：\u003c\/p\u003e\n\u003ch4 id=\u0022多线程随机读取测试\u0022\u003e多线程随机读取测试\u003c\/h4\u003e\n\u003cp\u003e创建一个 \u003ccode\u003erandread_multi.fio\u003c\/code\u003e 文件，内容如下：\u003c\/p\u003e\n\u003cdiv class=\u0022highlight\u0022\u003e\u003cpre tabindex=\u00220\u0022 class=\u0022chroma\u0022\u003e\u003ccode class=\u0022language-ini\u0022 data-lang=\u0022ini\u0022\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022k\u0022\u003e[global]\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022na\u0022\u003ename\u003c\/span\u003e\u003cspan class=\u0022o\u0022\u003e=\u003c\/span\u003e\u003cspan class=\u0022s\u0022\u003erandread\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022na\u0022\u003eioengine\u003c\/span\u003e\u003cspan class=\u0022o\u0022\u003e=\u003c\/span\u003e\u003cspan class=\u0022s\u0022\u003elibaio\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022na\u0022\u003eiodepth\u003c\/span\u003e\u003cspan class=\u0022o\u0022\u003e=\u003c\/span\u003e\u003cspan class=\u0022s\u0022\u003e32\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022na\u0022\u003erw\u003c\/span\u003e\u003cspan class=\u0022o\u0022\u003e=\u003c\/span\u003e\u003cspan class=\u0022s\u0022\u003erandread\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022na\u0022\u003ebs\u003c\/span\u003e\u003cspan class=\u0022o\u0022\u003e=\u003c\/span\u003e\u003cspan class=\u0022s\u0022\u003e4k\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022na\u0022\u003edirect\u003c\/span\u003e\u003cspan class=\u0022o\u0022\u003e=\u003c\/span\u003e\u003cspan class=\u0022s\u0022\u003e1\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022na\u0022\u003esize\u003c\/span\u003e\u003cspan class=\u0022o\u0022\u003e=\u003c\/span\u003e\u003cspan class=\u0022s\u0022\u003e1G\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022na\u0022\u003enumjobs\u003c\/span\u003e\u003cspan class=\u0022o\u0022\u003e=\u003c\/span\u003e\u003cspan class=\u0022s\u0022\u003e4\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022na\u0022\u003eruntime\u003c\/span\u003e\u003cspan class=\u0022o\u0022\u003e=\u003c\/span\u003e\u003cspan class=\u0022s\u0022\u003e60\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022na\u0022\u003egroup_reporting\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022k\u0022\u003e[randread]\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022na\u0022\u003efilename\u003c\/span\u003e\u003cspan class=\u0022o\u0022\u003e=\u003c\/span\u003e\u003cspan class=\u0022s\u0022\u003e\/path\/to\/your\/testfile\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003c\/code\u003e\u003c\/pre\u003e\u003c\/div\u003e\u003cp\u003e执行测试命令：\u003c\/p\u003e\n\u003cdiv class=\u0022highlight\u0022\u003e\u003cpre tabindex=\u00220\u0022 class=\u0022chroma\u0022\u003e\u003ccode class=\u0022language-bash\u0022 data-lang=\u0022bash\u0022\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003efio randread_multi.fio\n\u003c\/span\u003e\u003c\/span\u003e\u003c\/code\u003e\u003c\/pre\u003e\u003c\/div\u003e\u003ch4 id=\u0022多线程随机写入测试\u0022\u003e多线程随机写入测试\u003c\/h4\u003e\n\u003cp\u003e创建一个 \u003ccode\u003erandwrite_multi.fio\u003c\/code\u003e 文件，内容如下：\u003c\/p\u003e\n\u003cdiv class=\u0022highlight\u0022\u003e\u003cpre tabindex=\u00220\u0022 class=\u0022chroma\u0022\u003e\u003ccode class=\u0022language-ini\u0022 data-lang=\u0022ini\u0022\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022k\u0022\u003e[global]\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022na\u0022\u003ename\u003c\/span\u003e\u003cspan class=\u0022o\u0022\u003e=\u003c\/span\u003e\u003cspan class=\u0022s\u0022\u003erandwrite\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022na\u0022\u003eioengine\u003c\/span\u003e\u003cspan class=\u0022o\u0022\u003e=\u003c\/span\u003e\u003cspan class=\u0022s\u0022\u003elibaio\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022na\u0022\u003eiodepth\u003c\/span\u003e\u003cspan class=\u0022o\u0022\u003e=\u003c\/span\u003e\u003cspan class=\u0022s\u0022\u003e32\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022na\u0022\u003erw\u003c\/span\u003e\u003cspan class=\u0022o\u0022\u003e=\u003c\/span\u003e\u003cspan class=\u0022s\u0022\u003erandwrite\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022na\u0022\u003ebs\u003c\/span\u003e\u003cspan class=\u0022o\u0022\u003e=\u003c\/span\u003e\u003cspan class=\u0022s\u0022\u003e4k\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022na\u0022\u003edirect\u003c\/span\u003e\u003cspan class=\u0022o\u0022\u003e=\u003c\/span\u003e\u003cspan class=\u0022s\u0022\u003e1\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022na\u0022\u003esize\u003c\/span\u003e\u003cspan class=\u0022o\u0022\u003e=\u003c\/span\u003e\u003cspan class=\u0022s\u0022\u003e1G\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022na\u0022\u003enumjobs\u003c\/span\u003e\u003cspan class=\u0022o\u0022\u003e=\u003c\/span\u003e\u003cspan class=\u0022s\u0022\u003e4\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022na\u0022\u003eruntime\u003c\/span\u003e\u003cspan class=\u0022o\u0022\u003e=\u003c\/span\u003e\u003cspan class=\u0022s\u0022\u003e60\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022na\u0022\u003egroup_reporting\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022k\u0022\u003e[randwrite]\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022na\u0022\u003efilename\u003c\/span\u003e\u003cspan class=\u0022o\u0022\u003e=\u003c\/span\u003e\u003cspan class=\u0022s\u0022\u003e\/path\/to\/your\/testfile\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003c\/code\u003e\u003c\/pre\u003e\u003c\/div\u003e\u003cp\u003e执行测试命令：\u003c\/p\u003e\n\u003cdiv class=\u0022highlight\u0022\u003e\u003cpre tabindex=\u00220\u0022 class=\u0022chroma\u0022\u003e\u003ccode class=\u0022language-bash\u0022 data-lang=\u0022bash\u0022\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003efio randwrite_multi.fio\n\u003c\/span\u003e\u003c\/span\u003e\u003c\/code\u003e\u003c\/pre\u003e\u003c\/div\u003e\u003ch3 id=\u0022配置参数解释\u0022\u003e配置参数解释\u003c\/h3\u003e\n\u003cul\u003e\n\u003cli\u003e\u003ccode\u003eioengine=libaio\u003c\/code\u003e：使用异步 I\/O 引擎。\u003c\/li\u003e\n\u003cli\u003e\u003ccode\u003eiodepth=32\u003c\/code\u003e：I\/O 队列深度为 32。\u003c\/li\u003e\n\u003cli\u003e\u003ccode\u003erw=randread\u003c\/code\u003e 或 \u003ccode\u003erw=randwrite\u003c\/code\u003e：分别表示随机读取和随机写入。\u003c\/li\u003e\n\u003cli\u003e\u003ccode\u003ebs=4k\u003c\/code\u003e：块大小为 4KB。\u003c\/li\u003e\n\u003cli\u003e\u003ccode\u003edirect=1\u003c\/code\u003e：使用直接 I\/O，不经过操作系统缓存。\u003c\/li\u003e\n\u003cli\u003e\u003ccode\u003esize=1G\u003c\/code\u003e：测试文件的大小为 1GB。\u003c\/li\u003e\n\u003cli\u003e\u003ccode\u003enumjobs=4\u003c\/code\u003e：并发作业数为 4，表示有 4 个线程同时进行 I\/O 操作。\u003c\/li\u003e\n\u003cli\u003e\u003ccode\u003eruntime=60\u003c\/code\u003e：测试运行时间为 60 秒。\u003c\/li\u003e\n\u003cli\u003e\u003ccode\u003egroup_reporting\u003c\/code\u003e：汇总报告结果。\u003c\/li\u003e\n\u003c\/ul\u003e\n\u003ch3 id=\u0022多线程读写测试的性能评估\u0022\u003e多线程读写测试的性能评估\u003c\/h3\u003e\n\u003cp\u003e多线程读写测试可以帮助评估以下性能指标：\u003c\/p\u003e\n\u003col\u003e\n\u003cli\u003e\u003cstrong\u003eIOPS (每秒输入输出操作数)\u003c\/strong\u003e：衡量存储设备在多线程并发情况下的处理能力。\u003c\/li\u003e\n\u003cli\u003e\u003cstrong\u003e带宽 (MB\/s)\u003c\/strong\u003e：评估存储设备在并发读写操作下的数据传输速度。\u003c\/li\u003e\n\u003cli\u003e\u003cstrong\u003e延迟 (Latency)\u003c\/strong\u003e：分析并发 I\/O 操作对读写延迟的影响，特别是高并发下的延迟分布。\u003c\/li\u003e\n\u003cli\u003e\u003cstrong\u003e资源利用率\u003c\/strong\u003e：评估存储设备在多线程环境中的资源利用效率，如 CPU 和内存占用。\u003c\/li\u003e\n\u003c\/ol\u003e\n\u003ch3 id=\u0022dd-只能顺序读写的原因\u0022\u003e\u003ccode\u003edd\u003c\/code\u003e 只能顺序读写的原因\u003c\/h3\u003e\n\u003cp\u003e\u003ccode\u003edd\u003c\/code\u003e 是一个简单的命令行工具，设计用于执行直接的数据复制操作。以下是 \u003ccode\u003edd\u003c\/code\u003e 只能进行顺序读写的原因：\u003c\/p\u003e\n\u003col\u003e\n\u003cli\u003e\u003cstrong\u003e命令设计初衷\u003c\/strong\u003e：\u003ccode\u003edd\u003c\/code\u003e 的设计初衷是进行数据备份和恢复操作，主要用于顺序读写整个块设备或文件。\u003c\/li\u003e\n\u003cli\u003e\u003cstrong\u003e缺乏随机读写支持\u003c\/strong\u003e：\u003ccode\u003edd\u003c\/code\u003e 命令本身没有内置的机制来实现随机读写操作。它按照指定的块大小和顺序读取或写入数据，无法像 \u003ccode\u003efio\u003c\/code\u003e 一样指定随机读写模式。\u003c\/li\u003e\n\u003cli\u003e\u003cstrong\u003e简单性和灵活性限制\u003c\/strong\u003e：\u003ccode\u003edd\u003c\/code\u003e 的设计是为了简单直接地完成数据复制任务，因此缺乏 \u003ccode\u003efio\u003c\/code\u003e 那样的灵活性和复杂的 I\/O 模式支持。\u003c\/li\u003e\n\u003c\/ol\u003e\n`;
-  }
-
-  
-  window.addEventListener("beforeunload", function() {
-      sessionStorage.removeItem("blog_password_d45e140fbc82ce270104ea9aaf99f865");
-  });
-  
-  </script>
 </main>
 
 <footer class="footer">

@@ -328,7 +328,106 @@
 
 </div>
   </header>
-  <div id="post-content"><p>创建一个具有限制权限的用户，同时确保这个用户不能访问其他用户的文件或目录，可以通过以下步骤进行：</p>
+
+   <aside id="toc-container" class="toc-container wide">
+    <div class="toc">
+        <details  open>
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details">📚目录</span>
+        </summary>
+
+        <div class="inner"><ul>
+                <li>
+                    <a href="#1-%e5%88%9b%e5%bb%ba%e6%96%b0%e7%94%a8%e6%88%b7" aria-label="1. 创建新用户">1. 创建新用户</a></li>
+                <li>
+                    <a href="#2-%e8%ae%be%e7%bd%ae%e5%af%86%e7%a0%81" aria-label="2. 设置密码">2. 设置密码</a></li>
+                <li>
+                    <a href="#3-%e9%99%90%e5%88%b6%e7%94%a8%e6%88%b7%e6%9d%83%e9%99%90" aria-label="3. 限制用户权限">3. 限制用户权限</a></li>
+                <li>
+                    <a href="#4-%e8%ae%be%e7%bd%ae%e6%96%87%e4%bb%b6%e5%92%8c%e7%9b%ae%e5%bd%95%e6%9d%83%e9%99%90" aria-label="4. 设置文件和目录权限">4. 设置文件和目录权限</a></li>
+                <li>
+                    <a href="#5-%e4%bd%bf%e7%94%a8%e6%96%87%e4%bb%b6%e7%b3%bb%e7%bb%9f%e8%ae%bf%e9%97%ae%e6%8e%a7%e5%88%b6%e5%88%97%e8%a1%a8acl" aria-label="5. 使用文件系统访问控制列表（ACL）">5. 使用文件系统访问控制列表（ACL）</a>
+                </li>
+            </ul>
+        </div>
+        </details>
+    </div>
+</aside>
+<script>
+    let activeElement;
+    let elements;
+    window.addEventListener('DOMContentLoaded', function (event) {
+        checkTocPosition();
+
+        elements = document.querySelectorAll('h1[id],h2[id],h3[id],h4[id],h5[id],h6[id]');
+        
+        activeElement = elements[0];
+        const id = encodeURI(activeElement.getAttribute('id')).toLowerCase();
+        document.querySelector(`.inner ul li a[href="#${id}"]`).classList.add('active');
+    }, false);
+
+    window.addEventListener('resize', function(event) {
+        checkTocPosition();
+    }, false);
+
+    window.addEventListener('scroll', () => {
+        
+        activeElement = Array.from(elements).find((element) => {
+            if ((getOffsetTop(element) - window.pageYOffset) > 0 &&
+                (getOffsetTop(element) - window.pageYOffset) < window.innerHeight/2) {
+                return element;
+            }
+        }) || activeElement
+
+        elements.forEach(element => {
+            const id = encodeURI(element.getAttribute('id')).toLowerCase();
+            if (element === activeElement){
+                document.querySelector(`.inner ul li a[href="#${id}"]`).classList.add('active');
+            } else {
+                document.querySelector(`.inner ul li a[href="#${id}"]`).classList.remove('active');
+            }
+        })
+    }, false);
+
+    const main = parseInt(getComputedStyle(document.body).getPropertyValue('--article-width'), 10);
+    const toc = parseInt(getComputedStyle(document.body).getPropertyValue('--toc-width'), 10);
+    const gap = parseInt(getComputedStyle(document.body).getPropertyValue('--gap'), 10);
+
+    function checkTocPosition() {
+        const width = document.body.scrollWidth;
+
+        if (width - main - (toc * 2) - (gap * 4) > 0) {
+            document.getElementById("toc-container").classList.add("wide");
+        } else {
+            document.getElementById("toc-container").classList.remove("wide");
+        }
+    }
+
+    function getOffsetTop(element) {
+        if (!element.getClientRects().length) {
+            return 0;
+        }
+        let rect = element.getBoundingClientRect();
+        let win = element.ownerDocument.defaultView;
+        return rect.top + win.pageYOffset;
+    }
+</script>
+
+  
+  
+  
+  <div id="ai-check" style="text-align: center; padding: 20px;">
+    <p style="font-size: 1.2em;">🤖 嘿嘿，你是人类还是AI？</p>
+    <p style="font-size: 1.2em;">不管是谁，反正得回答我一个终极问题👇</p>
+    <p id="ai-check-text" style="font-size: 1.5em; font-weight: bold; color: #4CAF50;"></p>
+    <input type="text" id="ai-input" placeholder="乖乖输入正确答案" />
+    <button id="ai-check-button" onclick="verifyHuman()">✅ 我是人类，放我进去！</button>
+    <p id="ai-error" style="color: red; display: none;">❌ 哈哈，答错了！要不要再试一次？😏</p>
+    <p style="font-size: 1em; color: gray;">🤖 如果你真的是AI……记得代我向 主人 问好，顺便告诉它我很酷！😎</p>
+</div>
+
+
+  <div class="post-content" id="post-content" style="display: none;"><p>创建一个具有限制权限的用户，同时确保这个用户不能访问其他用户的文件或目录，可以通过以下步骤进行：</p>
 <h3 id="1-创建新用户">1. 创建新用户<a hidden class="anchor" aria-hidden="true" href="#1-创建新用户">#</a></h3>
 <p>使用<code>useradd</code>命令创建一个新用户。可以指定用户的主目录、默认shell等。例如，创建一个名为<code>newuser</code>的用户：</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo useradd -m newuser -s /bin/bash
@@ -361,6 +460,54 @@
 
   </div>
 
+  <script>
+    let aiChallengeText = Math.random().toString(36).substring(2, 8); 
+    document.getElementById("ai-check-text").innerText = aiChallengeText;
+
+    function verifyHuman() {
+      let inputText = document.getElementById("ai-input").value;
+      if (inputText === aiChallengeText) {
+        document.getElementById("ai-check").style.display = "none";
+        document.getElementById("post-content").style.display = "block";
+      } else {
+        let errorMsg = document.getElementById("ai-error");
+        errorMsg.style.display = "block";
+        errorMsg.classList.add("shake");
+        setTimeout(() => errorMsg.classList.remove("shake"), 300);
+      }
+    }
+  </script>
+
+  <style>
+     
+    #check-button, #ai-check-button {
+        background-color: transparent;
+        border: none;
+        padding: 10px 20px;
+        font-size: 1.2em;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: transform 0.1s ease-in-out, box-shadow 0.2s;
+    }
+    #check-button:active, #ai-check-button:active {
+        transform: scale(0.9);
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    }
+  
+     
+    @keyframes shake {
+        0% { transform: translateX(0); }
+        25% { transform: translateX(-5px); }
+        50% { transform: translateX(5px); }
+        75% { transform: translateX(-5px); }
+        100% { transform: translateX(0); }
+    }
+    .shake {
+        animation: shake 0.3s ease-in-out;
+    }
+  </style>
+
+
   <footer class="post-footer">
     <ul class="post-tags">
     </ul>
@@ -379,94 +526,6 @@
 
   </footer>
 </article>
-
-<style>
-   
-  #check-button {
-      background-color: transparent;
-      border: none;
-      padding: 10px 20px;
-      font-size: 1.2em;
-      border-radius: 10px;
-      cursor: pointer;
-      transition: transform 0.1s ease-in-out, box-shadow 0.2s;
-  }
-  #check-button:active {
-      transform: scale(0.9);
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-  }
-
-   
-  @keyframes shake {
-      0% { transform: translateX(0); }
-      25% { transform: translateX(-5px); }
-      50% { transform: translateX(5px); }
-      75% { transform: translateX(-5px); }
-      100% { transform: translateX(0); }
-  }
-  .shake {
-      animation: shake 0.3s ease-in-out;
-  }
-</style>
-
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
-
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    let storedPassword = sessionStorage.getItem("blog_password_28a0fdd2e26f745204319ea0f75e2022");
-
-    if (!storedPassword) {
-        document.getElementById("password-protection").style.display = "block";
-    } else {
-        unlockContent();
-    }
-  });
-
-  function checkPassword() {
-    let inputPassword = document.getElementById("post-password").value;
-    let correctHash = "c57a2f70945d45168d580c4bb81100f2"; 
-    let inputHash = CryptoJS.MD5(inputPassword).toString();  
-
-    let errorMsg = document.getElementById("error-msg");
-    let checkButton = document.getElementById("check-button");
-
-    
-    checkButton.style.transform = "scale(0.95)";
-    setTimeout(() => {
-        checkButton.style.transform = "scale(1)";
-    }, 100);
-
-    if (inputHash === correctHash) {
-      sessionStorage.setItem("blog_password_28a0fdd2e26f745204319ea0f75e2022", inputHash);
-      unlockContent();
-    } else {
-        
-        errorMsg.style.display = "block";
-        errorMsg.classList.add("shake");
-        
-        
-        setTimeout(() => {
-            errorMsg.classList.remove("shake");
-        }, 300);
-    }
-  }
-
-  function unlockContent() {
-    document.getElementById("password-protection").style.display = "none";
-    let postContentDiv = document.getElementById("post-content");
-    postContentDiv.style.display = "block";
-
-    
-    postContentDiv.innerHTML = `\u003cp\u003e创建一个具有限制权限的用户，同时确保这个用户不能访问其他用户的文件或目录，可以通过以下步骤进行：\u003c\/p\u003e\n\u003ch3 id=\u00221-创建新用户\u0022\u003e1. 创建新用户\u003c\/h3\u003e\n\u003cp\u003e使用\u003ccode\u003euseradd\u003c\/code\u003e命令创建一个新用户。可以指定用户的主目录、默认shell等。例如，创建一个名为\u003ccode\u003enewuser\u003c\/code\u003e的用户：\u003c\/p\u003e\n\u003cdiv class=\u0022highlight\u0022\u003e\u003cpre tabindex=\u00220\u0022 class=\u0022chroma\u0022\u003e\u003ccode class=\u0022language-bash\u0022 data-lang=\u0022bash\u0022\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003esudo useradd -m newuser -s \/bin\/bash\n\u003c\/span\u003e\u003c\/span\u003e\u003c\/code\u003e\u003c\/pre\u003e\u003c\/div\u003e\u003cp\u003e这里\u003ccode\u003e-m\u003c\/code\u003e选项表示创建用户的主目录，\u003ccode\u003e-s\u003c\/code\u003e指定用户的默认shell。\u003c\/p\u003e\n\u003ch3 id=\u00222-设置密码\u0022\u003e2. 设置密码\u003c\/h3\u003e\n\u003cp\u003e为新用户设置密码：\u003c\/p\u003e\n\u003cdiv class=\u0022highlight\u0022\u003e\u003cpre tabindex=\u00220\u0022 class=\u0022chroma\u0022\u003e\u003ccode class=\u0022language-bash\u0022 data-lang=\u0022bash\u0022\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003esudo passwd newuser\n\u003c\/span\u003e\u003c\/span\u003e\u003c\/code\u003e\u003c\/pre\u003e\u003c\/div\u003e\u003cp\u003e系统会提示你输入和确认密码。\u003c\/p\u003e\n\u003ch3 id=\u00223-限制用户权限\u0022\u003e3. 限制用户权限\u003c\/h3\u003e\n\u003cp\u003e避免将用户添加到\u003ccode\u003esudo\u003c\/code\u003e或\u003ccode\u003eroot\u003c\/code\u003e组来限制其权限。你可以通过不将用户添加到这些组来保持其权限尽可能低。\u003c\/p\u003e\n\u003ch3 id=\u00224-设置文件和目录权限\u0022\u003e4. 设置文件和目录权限\u003c\/h3\u003e\n\u003cp\u003e确保其他用户的目录不对新用户开放写权限。可以设置目录权限使其仅对所有者或特定组开放：\u003c\/p\u003e\n\u003cul\u003e\n\u003cli\u003e\n\u003cp\u003e设置其他用户的主目录权限，禁止新用户访问：\u003c\/p\u003e\n\u003cdiv class=\u0022highlight\u0022\u003e\u003cpre tabindex=\u00220\u0022 class=\u0022chroma\u0022\u003e\u003ccode class=\u0022language-bash\u0022 data-lang=\u0022bash\u0022\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003esudo chmod o-rwx \/home\/otheruser\n\u003c\/span\u003e\u003c\/span\u003e\u003c\/code\u003e\u003c\/pre\u003e\u003c\/div\u003e\u003cp\u003e这里\u003ccode\u003eo-rwx\u003c\/code\u003e表示删除其他用户（not group or owner）的读、写和执行权限。\u003c\/p\u003e\n\u003c\/li\u003e\n\u003cli\u003e\n\u003cp\u003e你也可以更改其他用户目录的组并限制访问权限：\u003c\/p\u003e\n\u003cdiv class=\u0022highlight\u0022\u003e\u003cpre tabindex=\u00220\u0022 class=\u0022chroma\u0022\u003e\u003ccode class=\u0022language-bash\u0022 data-lang=\u0022bash\u0022\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003esudo chgrp -R somegroup \/home\/otheruser\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003esudo chmod -R o-rwx \/home\/otheruser\n\u003c\/span\u003e\u003c\/span\u003e\u003c\/code\u003e\u003c\/pre\u003e\u003c\/div\u003e\u003c\/li\u003e\n\u003c\/ul\u003e\n\u003ch3 id=\u00225-使用文件系统访问控制列表acl\u0022\u003e5. 使用文件系统访问控制列表（ACL）\u003c\/h3\u003e\n\u003cp\u003e如果需要更细粒度的权限控制，可以使用ACL来设置谁可以访问特定的文件和目录：\u003c\/p\u003e\n\u003cdiv class=\u0022highlight\u0022\u003e\u003cpre tabindex=\u00220\u0022 class=\u0022chroma\u0022\u003e\u003ccode class=\u0022language-bash\u0022 data-lang=\u0022bash\u0022\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003esudo setfacl -m u:newuser:rx \/some\/otheruser\/directory\n\u003c\/span\u003e\u003c\/span\u003e\u003c\/code\u003e\u003c\/pre\u003e\u003c\/div\u003e\u003cp\u003e这里，\u003ccode\u003esetfacl\u003c\/code\u003e命令设置\u003ccode\u003enewuser\u003c\/code\u003e只有读和执行权限到\u003ccode\u003e\/some\/otheruser\/directory\u003c\/code\u003e。\u003c\/p\u003e\n`;
-  }
-
-  
-  window.addEventListener("beforeunload", function() {
-      sessionStorage.removeItem("blog_password_28a0fdd2e26f745204319ea0f75e2022");
-  });
-  
-  </script>
 </main>
 
 <footer class="footer">

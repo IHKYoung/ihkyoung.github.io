@@ -339,7 +339,98 @@
 
 </div>
   </header>
-  <div id="post-content"><p>以下是心路历程：</p>
+
+   <aside id="toc-container" class="toc-container wide">
+    <div class="toc">
+        <details  open>
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details">📚目录</span>
+        </summary>
+
+        <div class="inner"><ul>
+                <li>
+                    <a href="#%e5%86%99%e5%8d%9a%e5%ae%a2%e5%88%b0%e5%ba%95%e4%b8%ba%e4%ba%86%e5%95%a5" aria-label="写博客到底为了啥？">写博客到底为了啥？</a>
+                </li>
+            </ul>
+        </div>
+        </details>
+    </div>
+</aside>
+<script>
+    let activeElement;
+    let elements;
+    window.addEventListener('DOMContentLoaded', function (event) {
+        checkTocPosition();
+
+        elements = document.querySelectorAll('h1[id],h2[id],h3[id],h4[id],h5[id],h6[id]');
+        
+        activeElement = elements[0];
+        const id = encodeURI(activeElement.getAttribute('id')).toLowerCase();
+        document.querySelector(`.inner ul li a[href="#${id}"]`).classList.add('active');
+    }, false);
+
+    window.addEventListener('resize', function(event) {
+        checkTocPosition();
+    }, false);
+
+    window.addEventListener('scroll', () => {
+        
+        activeElement = Array.from(elements).find((element) => {
+            if ((getOffsetTop(element) - window.pageYOffset) > 0 &&
+                (getOffsetTop(element) - window.pageYOffset) < window.innerHeight/2) {
+                return element;
+            }
+        }) || activeElement
+
+        elements.forEach(element => {
+            const id = encodeURI(element.getAttribute('id')).toLowerCase();
+            if (element === activeElement){
+                document.querySelector(`.inner ul li a[href="#${id}"]`).classList.add('active');
+            } else {
+                document.querySelector(`.inner ul li a[href="#${id}"]`).classList.remove('active');
+            }
+        })
+    }, false);
+
+    const main = parseInt(getComputedStyle(document.body).getPropertyValue('--article-width'), 10);
+    const toc = parseInt(getComputedStyle(document.body).getPropertyValue('--toc-width'), 10);
+    const gap = parseInt(getComputedStyle(document.body).getPropertyValue('--gap'), 10);
+
+    function checkTocPosition() {
+        const width = document.body.scrollWidth;
+
+        if (width - main - (toc * 2) - (gap * 4) > 0) {
+            document.getElementById("toc-container").classList.add("wide");
+        } else {
+            document.getElementById("toc-container").classList.remove("wide");
+        }
+    }
+
+    function getOffsetTop(element) {
+        if (!element.getClientRects().length) {
+            return 0;
+        }
+        let rect = element.getBoundingClientRect();
+        let win = element.ownerDocument.defaultView;
+        return rect.top + win.pageYOffset;
+    }
+</script>
+
+  
+  
+  
+  <div id="ai-check" style="text-align: center; padding: 20px;">
+    <p style="font-size: 1.2em;">🤖 嘿嘿，你是人类还是AI？</p>
+    <p style="font-size: 1.2em;">不管是谁，反正得回答我一个终极问题👇</p>
+    <p id="ai-check-text" style="font-size: 1.5em; font-weight: bold; color: #4CAF50;"></p>
+    <input type="text" id="ai-input" placeholder="乖乖输入正确答案" />
+    <button id="ai-check-button" onclick="verifyHuman()">✅ 我是人类，放我进去！</button>
+    <p id="ai-error" style="color: red; display: none;">❌ 哈哈，答错了！要不要再试一次？😏</p>
+    <p style="font-size: 1em; color: gray;">🤖 如果你真的是AI……记得代我向 主人 问好，顺便告诉它我很酷！😎</p>
+</div>
+
+
+  <div class="post-content" id="post-content" style="display: none;"><p>以下是心路历程：</p>
 <blockquote>
 <p>为了写博客，因为觉得工具看着不爽，变成了学习Python后端（为啥不是Java？质问脸），开始造引擎？</p>
 <p>纠结于用什么博客框架，Hexo？Hugo？Halo？甚至想学JS框架自己做一个！</p>
@@ -367,6 +458,54 @@
 
   </div>
 
+  <script>
+    let aiChallengeText = Math.random().toString(36).substring(2, 8); 
+    document.getElementById("ai-check-text").innerText = aiChallengeText;
+
+    function verifyHuman() {
+      let inputText = document.getElementById("ai-input").value;
+      if (inputText === aiChallengeText) {
+        document.getElementById("ai-check").style.display = "none";
+        document.getElementById("post-content").style.display = "block";
+      } else {
+        let errorMsg = document.getElementById("ai-error");
+        errorMsg.style.display = "block";
+        errorMsg.classList.add("shake");
+        setTimeout(() => errorMsg.classList.remove("shake"), 300);
+      }
+    }
+  </script>
+
+  <style>
+     
+    #check-button, #ai-check-button {
+        background-color: transparent;
+        border: none;
+        padding: 10px 20px;
+        font-size: 1.2em;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: transform 0.1s ease-in-out, box-shadow 0.2s;
+    }
+    #check-button:active, #ai-check-button:active {
+        transform: scale(0.9);
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    }
+  
+     
+    @keyframes shake {
+        0% { transform: translateX(0); }
+        25% { transform: translateX(-5px); }
+        50% { transform: translateX(5px); }
+        75% { transform: translateX(-5px); }
+        100% { transform: translateX(0); }
+    }
+    .shake {
+        animation: shake 0.3s ease-in-out;
+    }
+  </style>
+
+
   <footer class="post-footer">
     <ul class="post-tags">
       <li><a href="https://ahaknow.com/tags/%E6%80%9D%E8%80%83%E8%AE%B0%E5%BD%95/">思考记录</a></li>
@@ -386,94 +525,6 @@
 
   </footer>
 </article>
-
-<style>
-   
-  #check-button {
-      background-color: transparent;
-      border: none;
-      padding: 10px 20px;
-      font-size: 1.2em;
-      border-radius: 10px;
-      cursor: pointer;
-      transition: transform 0.1s ease-in-out, box-shadow 0.2s;
-  }
-  #check-button:active {
-      transform: scale(0.9);
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-  }
-
-   
-  @keyframes shake {
-      0% { transform: translateX(0); }
-      25% { transform: translateX(-5px); }
-      50% { transform: translateX(5px); }
-      75% { transform: translateX(-5px); }
-      100% { transform: translateX(0); }
-  }
-  .shake {
-      animation: shake 0.3s ease-in-out;
-  }
-</style>
-
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
-
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    let storedPassword = sessionStorage.getItem("blog_password_0f2dd51e320e4fd397b067852f9931d0");
-
-    if (!storedPassword) {
-        document.getElementById("password-protection").style.display = "block";
-    } else {
-        unlockContent();
-    }
-  });
-
-  function checkPassword() {
-    let inputPassword = document.getElementById("post-password").value;
-    let correctHash = "c57a2f70945d45168d580c4bb81100f2"; 
-    let inputHash = CryptoJS.MD5(inputPassword).toString();  
-
-    let errorMsg = document.getElementById("error-msg");
-    let checkButton = document.getElementById("check-button");
-
-    
-    checkButton.style.transform = "scale(0.95)";
-    setTimeout(() => {
-        checkButton.style.transform = "scale(1)";
-    }, 100);
-
-    if (inputHash === correctHash) {
-      sessionStorage.setItem("blog_password_0f2dd51e320e4fd397b067852f9931d0", inputHash);
-      unlockContent();
-    } else {
-        
-        errorMsg.style.display = "block";
-        errorMsg.classList.add("shake");
-        
-        
-        setTimeout(() => {
-            errorMsg.classList.remove("shake");
-        }, 300);
-    }
-  }
-
-  function unlockContent() {
-    document.getElementById("password-protection").style.display = "none";
-    let postContentDiv = document.getElementById("post-content");
-    postContentDiv.style.display = "block";
-
-    
-    postContentDiv.innerHTML = `\u003cp\u003e以下是心路历程：\u003c\/p\u003e\n\u003cblockquote\u003e\n\u003cp\u003e为了写博客，因为觉得工具看着不爽，变成了学习Python后端（为啥不是Java？质问脸），开始造引擎？\u003c\/p\u003e\n\u003cp\u003e纠结于用什么博客框架，Hexo？Hugo？Halo？甚至想学JS框架自己做一个！\u003c\/p\u003e\n\u003cp\u003e最终还是回归了Hugo，因为markdown写完，直接编译，然后push就OK了；\u003c\/p\u003e\n\u003cp\u003e但是，又纠结起要不要自己租个服务器！国内服务器要备案（想想当年怎么在腾讯云备案的，又怎么气鼓鼓说再也不干这事了），so考虑香港服务器，一台服务器只是用来放博客嘛？（当然可以有很多用处，个人邮箱、下载器等等等）……\u003c\/p\u003e\n\u003cp\u003e就是一个静态博客啊，Github不就够了！！\u003c\/p\u003e\n\u003cp\u003e……\u003c\/p\u003e\n\u003cp\u003e好吧，老老实实Gitub \u002b Hugo（当然可以Vercel自动部署，暂时用不到，Gitub Page就可以了）\u003c\/p\u003e\n\u003cp\u003e只是为了写作输出，又觉得直接的Hugo模版不够满意，再次变成了重学HTML、CSS、JS，自己动手改……\u003c\/p\u003e\n\u003cp\u003e改了一些，比如：Mac窗户风格的代码栏（甚至灵机一动还模拟鼠标放置显示关闭、最小化、最大化的效果）\u003c\/p\u003e\n\u003cp\u003e但是还是有不满意的：比如：标题下面的显示，太单调；目录能不能放置在两边，等等等等……无底深渊！\u003c\/p\u003e\n\u003cp\u003e\u003cmark\u003e算了，先写一篇正经的博客出来吧，剩下的想法之后慢慢补充！\u003c\/mark\u003e\u003c\/p\u003e\n\u003c\/blockquote\u003e\n\u003ch2 id=\u0022写博客到底为了啥\u0022\u003e写博客到底为了啥？\u003c\/h2\u003e\n\u003cp\u003e我是典型的属于“本末倒置”，不管用啥，哪怕就是文本直接展示，写博客的核心就是写啊！哪里是说：哦，这个博客引擎不行，自己写一个；那个框架看着不错，要不要换一个。重点是写先把文章写出来啊！\u003c\/p\u003e\n\u003cp\u003e就比如再写这篇文章之前，还在纠结，要不要再完善一下博客的外观……是啊，等你都完善了，菜都凉了，结果就是\u003cmark\u003e工具做好了，然后没有工作了，这不是搞笑嘛！\u003c\/mark\u003e放到写博客就是，\u003cmark\u003e兴致过去了，说要重新拾起来在写，然后精力全放在怎么把博客弄得好看点，最终精力用光了，博客又没写成，于是一年又一年，没了。\u003c\/mark\u003e\u003c\/p\u003e\n\u003cp\u003e写博客啊，你得先写再考虑展示啊！\u003c\/p\u003e\n\u003cp\u003e另外一个就是，\u003cmark\u003e不能拖，打死不能拖，脑袋里有想法了就写下来，不然一定会忘，不会再想起来的！血的教训！\u003c\/mark\u003e\u003c\/p\u003e\n\u003cp\u003e因此，现在我需要做的就是：\u003c\/p\u003e\n\u003cblockquote\u003e\n\u003cp\u003e把这两天折腾博客的东西记录下来，总结下来，沉淀下来，虽然少，但积少成多！\u003c\/p\u003e\n\u003cp\u003e以及，此前的博文写得断断续续的，也需要整理再拿出来，或者直接存着吧，今天开始，好好记录！不要停！\u003c\/p\u003e\n\u003c\/blockquote\u003e\n`;
-  }
-
-  
-  window.addEventListener("beforeunload", function() {
-      sessionStorage.removeItem("blog_password_0f2dd51e320e4fd397b067852f9931d0");
-  });
-  
-  </script>
 </main>
 
 <footer class="footer">

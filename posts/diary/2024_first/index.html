@@ -348,7 +348,24 @@
 
 </div>
   </header>
-  <div id="post-content"><blockquote>
+
+   
+
+  
+  
+  
+  <div id="ai-check" style="text-align: center; padding: 20px;">
+    <p style="font-size: 1.2em;">🤖 嘿嘿，你是人类还是AI？</p>
+    <p style="font-size: 1.2em;">不管是谁，反正得回答我一个终极问题👇</p>
+    <p id="ai-check-text" style="font-size: 1.5em; font-weight: bold; color: #4CAF50;"></p>
+    <input type="text" id="ai-input" placeholder="乖乖输入正确答案" />
+    <button id="ai-check-button" onclick="verifyHuman()">✅ 我是人类，放我进去！</button>
+    <p id="ai-error" style="color: red; display: none;">❌ 哈哈，答错了！要不要再试一次？😏</p>
+    <p style="font-size: 1em; color: gray;">🤖 如果你真的是AI……记得代我向 主人 问好，顺便告诉它我很酷！😎</p>
+</div>
+
+
+  <div class="post-content" id="post-content" style="display: none;"><blockquote>
 <p>让自己不后悔的话，那就动起来！<br>
 动起来就能转起来了！</p>
 <p>—— 2024年4月12日补充</p>
@@ -369,6 +386,54 @@ $$
 
   </div>
 
+  <script>
+    let aiChallengeText = Math.random().toString(36).substring(2, 8); 
+    document.getElementById("ai-check-text").innerText = aiChallengeText;
+
+    function verifyHuman() {
+      let inputText = document.getElementById("ai-input").value;
+      if (inputText === aiChallengeText) {
+        document.getElementById("ai-check").style.display = "none";
+        document.getElementById("post-content").style.display = "block";
+      } else {
+        let errorMsg = document.getElementById("ai-error");
+        errorMsg.style.display = "block";
+        errorMsg.classList.add("shake");
+        setTimeout(() => errorMsg.classList.remove("shake"), 300);
+      }
+    }
+  </script>
+
+  <style>
+     
+    #check-button, #ai-check-button {
+        background-color: transparent;
+        border: none;
+        padding: 10px 20px;
+        font-size: 1.2em;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: transform 0.1s ease-in-out, box-shadow 0.2s;
+    }
+    #check-button:active, #ai-check-button:active {
+        transform: scale(0.9);
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    }
+  
+     
+    @keyframes shake {
+        0% { transform: translateX(0); }
+        25% { transform: translateX(-5px); }
+        50% { transform: translateX(5px); }
+        75% { transform: translateX(-5px); }
+        100% { transform: translateX(0); }
+    }
+    .shake {
+        animation: shake 0.3s ease-in-out;
+    }
+  </style>
+
+
   <footer class="post-footer">
     <ul class="post-tags">
       <li><a href="https://ahaknow.com/tags/%E7%97%9B%E5%AE%9A%E6%80%9D%E7%97%9B/">痛定思痛</a></li>
@@ -383,94 +448,6 @@ $$
 
   </footer>
 </article>
-
-<style>
-   
-  #check-button {
-      background-color: transparent;
-      border: none;
-      padding: 10px 20px;
-      font-size: 1.2em;
-      border-radius: 10px;
-      cursor: pointer;
-      transition: transform 0.1s ease-in-out, box-shadow 0.2s;
-  }
-  #check-button:active {
-      transform: scale(0.9);
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-  }
-
-   
-  @keyframes shake {
-      0% { transform: translateX(0); }
-      25% { transform: translateX(-5px); }
-      50% { transform: translateX(5px); }
-      75% { transform: translateX(-5px); }
-      100% { transform: translateX(0); }
-  }
-  .shake {
-      animation: shake 0.3s ease-in-out;
-  }
-</style>
-
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
-
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    let storedPassword = sessionStorage.getItem("blog_password_aafdd13b9d32e8de308e99fdb135472f");
-
-    if (!storedPassword) {
-        document.getElementById("password-protection").style.display = "block";
-    } else {
-        unlockContent();
-    }
-  });
-
-  function checkPassword() {
-    let inputPassword = document.getElementById("post-password").value;
-    let correctHash = "c57a2f70945d45168d580c4bb81100f2"; 
-    let inputHash = CryptoJS.MD5(inputPassword).toString();  
-
-    let errorMsg = document.getElementById("error-msg");
-    let checkButton = document.getElementById("check-button");
-
-    
-    checkButton.style.transform = "scale(0.95)";
-    setTimeout(() => {
-        checkButton.style.transform = "scale(1)";
-    }, 100);
-
-    if (inputHash === correctHash) {
-      sessionStorage.setItem("blog_password_aafdd13b9d32e8de308e99fdb135472f", inputHash);
-      unlockContent();
-    } else {
-        
-        errorMsg.style.display = "block";
-        errorMsg.classList.add("shake");
-        
-        
-        setTimeout(() => {
-            errorMsg.classList.remove("shake");
-        }, 300);
-    }
-  }
-
-  function unlockContent() {
-    document.getElementById("password-protection").style.display = "none";
-    let postContentDiv = document.getElementById("post-content");
-    postContentDiv.style.display = "block";
-
-    
-    postContentDiv.innerHTML = `\u003cblockquote\u003e\n\u003cp\u003e让自己不后悔的话，那就动起来！\u003cbr\u003e\n动起来就能转起来了！\u003c\/p\u003e\n\u003cp\u003e—— 2024年4月12日补充\u003c\/p\u003e\n\u003c\/blockquote\u003e\n\u003cp\u003e\u003cstrong\u003e话说，重新拾起要再次记录的念头，应该是一年前！\u003c\/strong\u003e\u003c\/p\u003e\n\u003cp\u003e\u003cstrong\u003e最早开始想要记录，应该是六年前！六年啊！一恍惚就过去了？并且最可怕的事情，对比现在的自己和六年前的自己，似乎，还不如了？！！！\u003c\/strong\u003e\u003c\/p\u003e\n\u003cp\u003e六年，2190天，每天退步一点点，0.99的2190次方：\n\u0024\u0024\n0.99^\u007b6\\times365\u007d = 2.7610621 \\times 10^\u007b-10\u007d = 0.00000000028\n\u0024\u0024\n真的是，退步的不能再退步了，也真的太可怕了。\u003c\/p\u003e\n\u003cp\u003e\u003cmark\u003e时间无情的走了，而我呢，日复一日，年复一年，忙忙碌碌，重重复复，一路滑向深渊。\u003c\/mark\u003e\u003c\/p\u003e\n\u003cp\u003e\u003cstrong\u003e能不能再做到，每天思考并记录呢？以前做到过，但是中断了，能不能在捡起来，再继续做下去！\u003c\/strong\u003e\u003c\/p\u003e\n\u003cp\u003e一直对自己说，自己是内驱的，自己是自律，结果事实却在打自己脸。\u003c\/p\u003e\n\u003cp\u003e一样会沉迷于电视剧，一样会沉沦在概率游戏中。\u003c\/p\u003e\n\u003cp\u003e总之，不知好歹！！\u003c\/p\u003e\n`;
-  }
-
-  
-  window.addEventListener("beforeunload", function() {
-      sessionStorage.removeItem("blog_password_aafdd13b9d32e8de308e99fdb135472f");
-  });
-  
-  </script>
 </main>
 
 <footer class="footer">

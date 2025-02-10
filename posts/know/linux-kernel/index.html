@@ -357,7 +357,24 @@ uname -r
 
 </div>
   </header>
-  <div id="post-content"><blockquote>
+
+   
+
+  
+  
+  
+  <div id="ai-check" style="text-align: center; padding: 20px;">
+    <p style="font-size: 1.2em;">🤖 嘿嘿，你是人类还是AI？</p>
+    <p style="font-size: 1.2em;">不管是谁，反正得回答我一个终极问题👇</p>
+    <p id="ai-check-text" style="font-size: 1.5em; font-weight: bold; color: #4CAF50;"></p>
+    <input type="text" id="ai-input" placeholder="乖乖输入正确答案" />
+    <button id="ai-check-button" onclick="verifyHuman()">✅ 我是人类，放我进去！</button>
+    <p id="ai-error" style="color: red; display: none;">❌ 哈哈，答错了！要不要再试一次？😏</p>
+    <p style="font-size: 1em; color: gray;">🤖 如果你真的是AI……记得代我向 主人 问好，顺便告诉它我很酷！😎</p>
+</div>
+
+
+  <div class="post-content" id="post-content" style="display: none;"><blockquote>
 <p>遇到了Linux新的内核启动卡死，老内核正常运行，索性就启动不了内核进行删除。</p>
 </blockquote>
 <h3 id="1-查看当前运行的内核">1. 查看当前运行的内核<a hidden class="anchor" aria-hidden="true" href="#1-查看当前运行的内核">#</a></h3>
@@ -397,6 +414,54 @@ uname -r
 
   </div>
 
+  <script>
+    let aiChallengeText = Math.random().toString(36).substring(2, 8); 
+    document.getElementById("ai-check-text").innerText = aiChallengeText;
+
+    function verifyHuman() {
+      let inputText = document.getElementById("ai-input").value;
+      if (inputText === aiChallengeText) {
+        document.getElementById("ai-check").style.display = "none";
+        document.getElementById("post-content").style.display = "block";
+      } else {
+        let errorMsg = document.getElementById("ai-error");
+        errorMsg.style.display = "block";
+        errorMsg.classList.add("shake");
+        setTimeout(() => errorMsg.classList.remove("shake"), 300);
+      }
+    }
+  </script>
+
+  <style>
+     
+    #check-button, #ai-check-button {
+        background-color: transparent;
+        border: none;
+        padding: 10px 20px;
+        font-size: 1.2em;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: transform 0.1s ease-in-out, box-shadow 0.2s;
+    }
+    #check-button:active, #ai-check-button:active {
+        transform: scale(0.9);
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    }
+  
+     
+    @keyframes shake {
+        0% { transform: translateX(0); }
+        25% { transform: translateX(-5px); }
+        50% { transform: translateX(5px); }
+        75% { transform: translateX(-5px); }
+        100% { transform: translateX(0); }
+    }
+    .shake {
+        animation: shake 0.3s ease-in-out;
+    }
+  </style>
+
+
   <footer class="post-footer">
     <ul class="post-tags">
       <li><a href="https://ahaknow.com/tags/grub/">Grub</a></li>
@@ -416,94 +481,6 @@ uname -r
 
   </footer>
 </article>
-
-<style>
-   
-  #check-button {
-      background-color: transparent;
-      border: none;
-      padding: 10px 20px;
-      font-size: 1.2em;
-      border-radius: 10px;
-      cursor: pointer;
-      transition: transform 0.1s ease-in-out, box-shadow 0.2s;
-  }
-  #check-button:active {
-      transform: scale(0.9);
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-  }
-
-   
-  @keyframes shake {
-      0% { transform: translateX(0); }
-      25% { transform: translateX(-5px); }
-      50% { transform: translateX(5px); }
-      75% { transform: translateX(-5px); }
-      100% { transform: translateX(0); }
-  }
-  .shake {
-      animation: shake 0.3s ease-in-out;
-  }
-</style>
-
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
-
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    let storedPassword = sessionStorage.getItem("blog_password_6435616c2734b90040801770aa90e651");
-
-    if (!storedPassword) {
-        document.getElementById("password-protection").style.display = "block";
-    } else {
-        unlockContent();
-    }
-  });
-
-  function checkPassword() {
-    let inputPassword = document.getElementById("post-password").value;
-    let correctHash = "c57a2f70945d45168d580c4bb81100f2"; 
-    let inputHash = CryptoJS.MD5(inputPassword).toString();  
-
-    let errorMsg = document.getElementById("error-msg");
-    let checkButton = document.getElementById("check-button");
-
-    
-    checkButton.style.transform = "scale(0.95)";
-    setTimeout(() => {
-        checkButton.style.transform = "scale(1)";
-    }, 100);
-
-    if (inputHash === correctHash) {
-      sessionStorage.setItem("blog_password_6435616c2734b90040801770aa90e651", inputHash);
-      unlockContent();
-    } else {
-        
-        errorMsg.style.display = "block";
-        errorMsg.classList.add("shake");
-        
-        
-        setTimeout(() => {
-            errorMsg.classList.remove("shake");
-        }, 300);
-    }
-  }
-
-  function unlockContent() {
-    document.getElementById("password-protection").style.display = "none";
-    let postContentDiv = document.getElementById("post-content");
-    postContentDiv.style.display = "block";
-
-    
-    postContentDiv.innerHTML = `\u003cblockquote\u003e\n\u003cp\u003e遇到了Linux新的内核启动卡死，老内核正常运行，索性就启动不了内核进行删除。\u003c\/p\u003e\n\u003c\/blockquote\u003e\n\u003ch3 id=\u00221-查看当前运行的内核\u0022\u003e1. 查看当前运行的内核\u003c\/h3\u003e\n\u003cp\u003e在终端运行以下命令：\u003c\/p\u003e\n\u003cdiv class=\u0022highlight\u0022\u003e\u003cpre tabindex=\u00220\u0022 class=\u0022chroma\u0022\u003e\u003ccode class=\u0022language-bash\u0022 data-lang=\u0022bash\u0022\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003euname -r\n\u003c\/span\u003e\u003c\/span\u003e\u003c\/code\u003e\u003c\/pre\u003e\u003c\/div\u003e\u003cp\u003e会得到下面这样的信息：\u003c\/p\u003e\n\u003cdiv class=\u0022highlight\u0022\u003e\u003cpre tabindex=\u00220\u0022 class=\u0022chroma\u0022\u003e\u003ccode class=\u0022language-bash\u0022 data-lang=\u0022bash\u0022\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e5.15.0-97-generic\n\u003c\/span\u003e\u003c\/span\u003e\u003c\/code\u003e\u003c\/pre\u003e\u003c\/div\u003e\u003ch3 id=\u00222-列出所有安装的内核\u0022\u003e2. 列出所有安装的内核\u003c\/h3\u003e\n\u003cp\u003e列出所有已安装的内核：\u003c\/p\u003e\n\u003cdiv class=\u0022highlight\u0022\u003e\u003cpre tabindex=\u00220\u0022 class=\u0022chroma\u0022\u003e\u003ccode class=\u0022language-bash\u0022 data-lang=\u0022bash\u0022\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003edpkg --list \u003cspan class=\u0022p\u0022\u003e|\u003c\/span\u003e grep linux-image\n\u003c\/span\u003e\u003c\/span\u003e\u003c\/code\u003e\u003c\/pre\u003e\u003c\/div\u003e\u003cp\u003e这个命令将显示所有已安装的Linux内核包，如下所示：\u003c\/p\u003e\n\u003cdiv class=\u0022highlight\u0022\u003e\u003cpre tabindex=\u00220\u0022 class=\u0022chroma\u0022\u003e\u003ccode class=\u0022language-bash\u0022 data-lang=\u0022bash\u0022\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003erc  linux-image-5.15.0-100-generic                5.15.0-100.110~20.04.1                      amd64        Signed kernel image generic\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003erc  linux-image-5.15.0-101-generic                5.15.0-101.111~20.04.1                      amd64        Signed kernel image generic\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003erc  linux-image-5.15.0-102-generic                5.15.0-102.112~20.04.1                      amd64        Signed kernel image generic\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003eii  linux-image-5.15.0-105-generic                5.15.0-105.115~20.04.1                      amd64        Signed kernel image generic\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003erc  linux-image-5.15.0-67-generic                 5.15.0-67.74~20.04.1                        amd64        Signed kernel image generic\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003erc  linux-image-5.15.0-84-generic                 5.15.0-84.93~20.04.1                        amd64        Signed kernel image generic\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003erc  linux-image-5.15.0-86-generic                 5.15.0-86.96~20.04.1                        amd64        Signed kernel image generic\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003erc  linux-image-5.15.0-87-generic                 5.15.0-87.97~20.04.1                        amd64        Signed kernel image generic\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003erc  linux-image-5.15.0-88-generic                 5.15.0-88.98~20.04.1                        amd64        Signed kernel image generic\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003erc  linux-image-5.15.0-89-generic                 5.15.0-89.99~20.04.1                        amd64        Signed kernel image generic\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003erc  linux-image-5.15.0-91-generic                 5.15.0-91.101~20.04.1                       amd64        Signed kernel image generic\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003erc  linux-image-5.15.0-92-generic                 5.15.0-92.102~20.04.1                       amd64        Signed kernel image generic\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003erc  linux-image-5.15.0-94-generic                 5.15.0-94.104~20.04.1                       amd64        Signed kernel image generic\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003eii  linux-image-5.15.0-97-generic                 5.15.0-97.107~20.04.1                       amd64        Signed kernel image generic\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003eii  linux-image-generic-hwe-20.04                 5.15.0.105.115~20.04.1                      amd64        Generic Linux kernel image\n\u003c\/span\u003e\u003c\/span\u003e\u003c\/code\u003e\u003c\/pre\u003e\u003c\/div\u003e\u003ch3 id=\u00223-删除内核\u0022\u003e3. 删除内核\u003c\/h3\u003e\n\u003cp\u003e使用\u003ccode\u003eapt-get\u003c\/code\u003e或\u003ccode\u003eapt\u003c\/code\u003e命令删除不需要的内核。比如 \u003ccode\u003elinux-image-5.15.0-105-generic\u003c\/code\u003e的内核，可以使用：\u003c\/p\u003e\n\u003cdiv class=\u0022highlight\u0022\u003e\u003cpre tabindex=\u00220\u0022 class=\u0022chroma\u0022\u003e\u003ccode class=\u0022language-bash\u0022 data-lang=\u0022bash\u0022\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003esudo apt-get purge linux-image-5.15.0-105-generic\n\u003c\/span\u003e\u003c\/span\u003e\u003c\/code\u003e\u003c\/pre\u003e\u003c\/div\u003e\u003ch3 id=\u00224-更新引导加载器\u0022\u003e4. 更新引导加载器\u003c\/h3\u003e\n\u003cp\u003e完成内核的删除后，更新GRUB配置以确保启动加载器的菜单被更新：\u003c\/p\u003e\n\u003cdiv class=\u0022highlight\u0022\u003e\u003cpre tabindex=\u00220\u0022 class=\u0022chroma\u0022\u003e\u003ccode class=\u0022language-bash\u0022 data-lang=\u0022bash\u0022\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003esudo update-grub\n\u003c\/span\u003e\u003c\/span\u003e\u003c\/code\u003e\u003c\/pre\u003e\u003c\/div\u003e\u003ch3 id=\u00225-重启系统\u0022\u003e5. 重启系统\u003c\/h3\u003e\n\u003cp\u003e最后，重启系统以确认更改：\u003c\/p\u003e\n\u003cdiv class=\u0022highlight\u0022\u003e\u003cpre tabindex=\u00220\u0022 class=\u0022chroma\u0022\u003e\u003ccode class=\u0022language-bash\u0022 data-lang=\u0022bash\u0022\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003esudo reboot\n\u003c\/span\u003e\u003c\/span\u003e\u003c\/code\u003e\u003c\/pre\u003e\u003c\/div\u003e`;
-  }
-
-  
-  window.addEventListener("beforeunload", function() {
-      sessionStorage.removeItem("blog_password_6435616c2734b90040801770aa90e651");
-  });
-  
-  </script>
 </main>
 
 <footer class="footer">

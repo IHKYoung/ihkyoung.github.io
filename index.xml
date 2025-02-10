@@ -6,7 +6,7 @@
     <description>Recent content on AhaKnow</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Sun, 09 Feb 2025 00:36:17 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 09 Feb 2025 01:49:17 +0800</lastBuildDate>
     <atom:link href="https://ahaknow.com/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>逐镜探维：置身三维重建而后生</title>
@@ -31,6 +31,14 @@
 &lt;/blockquote&gt;
 &lt;h3 id=&#34;github添加waka记录&#34;&gt;Github添加Waka记录&lt;/h3&gt;
 &lt;p&gt;可以参考以下两个文档，官方文档的说明更清晰一些，初学者指南可以用来对照自己有没有做对～&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>🔐 Hugo 文章密码保护最佳实践</title>
+      <link>https://ahaknow.com/posts/know/hugo-password/</link>
+      <pubDate>Sun, 09 Feb 2025 01:49:17 +0800</pubDate>
+      <guid>https://ahaknow.com/posts/know/hugo-password/</guid>
+      <description>&lt;h2 id=&#34;-1-背景&#34;&gt;&lt;strong&gt;📖 1. 背景&lt;/strong&gt;&lt;/h2&gt;
+&lt;p&gt;Hugo 是一款流行的静态网站生成器，但它&lt;strong&gt;不支持原生的密码保护功能&lt;/strong&gt;。如果你希望某些文章仅限特定用户访问，可以使用 JavaScript 和 MD5 哈希验证来实现&lt;strong&gt;前端密码保护&lt;/strong&gt;。&lt;/p&gt;</description>
     </item>
     <item>
       <title>🚀 Git 与 CRLF（换行符）完全指南</title>

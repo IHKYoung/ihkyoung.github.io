@@ -334,7 +334,131 @@
 
 </div>
   </header>
-  <div id="post-content"><h1 id="github-pull-reques-时-release-文件缺失问题解决方案-">GitHub Pull Reques 时 Release 文件缺失问题解决方案 📦<a hidden class="anchor" aria-hidden="true" href="#github-pull-reques-时-release-文件缺失问题解决方案-">#</a></h1>
+
+   <aside id="toc-container" class="toc-container wide">
+    <div class="toc">
+        <details  open>
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details">📚目录</span>
+        </summary>
+
+        <div class="inner"><ul>
+                <li>
+                    <a href="#github-pull-reques-%e6%97%b6-release-%e6%96%87%e4%bb%b6%e7%bc%ba%e5%a4%b1%e9%97%ae%e9%a2%98%e8%a7%a3%e5%86%b3%e6%96%b9%e6%a1%88-" aria-label="GitHub Pull Reques 时 Release 文件缺失问题解决方案 📦">GitHub Pull Reques 时 Release 文件缺失问题解决方案 📦</a><ul>
+                        
+                <li>
+                    <a href="#%e9%97%ae%e9%a2%98%e8%83%8c%e6%99%af-" aria-label="问题背景 🤔"><strong>问题背景 🤔</strong></a></li>
+                <li>
+                    <a href="#%e9%97%ae%e9%a2%98%e6%8f%8f%e8%bf%b0-" aria-label="问题描述 ⚠️"><strong>问题描述 ⚠️</strong></a></li>
+                <li>
+                    <a href="#%e9%97%ae%e9%a2%98%e5%88%86%e6%9e%90-" aria-label="问题分析 🔍"><strong>问题分析 🔍</strong></a></li>
+                <li>
+                    <a href="#%e8%a7%a3%e5%86%b3%e6%ad%a5%e9%aa%a4-" aria-label="解决步骤 🛠️"><strong>解决步骤 🛠️</strong></a><ul>
+                        
+                <li>
+                    <a href="#1-%e6%a3%80%e6%9f%a5-release-%e9%a1%b5%e9%9d%a2" aria-label="1. 检查 Release 页面"><strong>1. 检查 Release 页面</strong></a></li>
+                <li>
+                    <a href="#2-%e5%88%a0%e9%99%a4%e7%8e%b0%e6%9c%89-release-%e5%b9%b6%e9%87%8d%e6%96%b0%e4%b8%8a%e4%bc%a0%e6%96%87%e4%bb%b6" aria-label="2. 删除现有 Release 并重新上传文件"><strong>2. 删除现有 Release 并重新上传文件</strong></a></li>
+                <li>
+                    <a href="#3-%e7%a1%ae%e8%ae%a4-manifestjson-%e6%96%87%e4%bb%b6%e5%86%85%e5%ae%b9%e6%ad%a3%e7%a1%ae" aria-label="3. 确认 manifest.json 文件内容正确"><strong>3. 确认 <code>manifest.json</code> 文件内容正确</strong></a></li>
+                <li>
+                    <a href="#4-%e7%a1%ae%e4%bf%9d%e6%96%87%e4%bb%b6%e5%b7%b2%e6%8f%90%e4%ba%a4%e8%87%b3-git-%e4%bb%93%e5%ba%93" aria-label="4. 确保文件已提交至 Git 仓库"><strong>4. 确保文件已提交至 Git 仓库</strong></a></li></ul>
+                </li>
+                <li>
+                    <a href="#%e5%b8%b8%e8%a7%81%e9%97%ae%e9%a2%98%e4%b8%8e%e8%a7%a3%e5%86%b3%e6%96%b9%e6%a1%88-" aria-label="常见问题与解决方案 ❓"><strong>常见问题与解决方案 ❓</strong></a><ul>
+                        
+                <li>
+                    <a href="#q1-%e5%a6%82%e6%9e%9c-release-%e9%a1%b5%e9%9d%a2%e6%b2%a1%e6%9c%89%e6%98%be%e7%a4%ba%e6%96%87%e4%bb%b6%e6%80%8e%e4%b9%88%e5%8a%9e" aria-label="Q1: 如果 Release 页面没有显示文件，怎么办？"><strong>Q1: 如果 Release 页面没有显示文件，怎么办？</strong></a></li>
+                <li>
+                    <a href="#q2-%e6%98%af%e5%90%a6%e6%af%8f%e6%ac%a1%e5%8f%91%e5%b8%83%e9%83%bd%e9%9c%80%e8%a6%81%e6%89%8b%e5%8a%a8%e4%b8%8a%e4%bc%a0%e6%96%87%e4%bb%b6" aria-label="Q2: 是否每次发布都需要手动上传文件？"><strong>Q2: 是否每次发布都需要手动上传文件？</strong></a></li>
+                <li>
+                    <a href="#q3-%e4%b8%ba%e4%bb%80%e4%b9%88-github-release-%e9%a1%b5%e9%9d%a2%e4%b8%8d%e8%87%aa%e5%8a%a8%e5%8c%85%e5%90%ab%e6%96%87%e4%bb%b6" aria-label="Q3: 为什么 GitHub Release 页面不自动包含文件？"><strong>Q3: 为什么 GitHub Release 页面不自动包含文件？</strong></a></li></ul>
+                </li>
+                <li>
+                    <a href="#%e6%80%bb%e7%bb%93-" aria-label="总结 📌"><strong>总结 📌</strong></a>
+                </li>
+            </ul>
+            </li>
+            </ul>
+        </div>
+        </details>
+    </div>
+</aside>
+<script>
+    let activeElement;
+    let elements;
+    window.addEventListener('DOMContentLoaded', function (event) {
+        checkTocPosition();
+
+        elements = document.querySelectorAll('h1[id],h2[id],h3[id],h4[id],h5[id],h6[id]');
+        
+        activeElement = elements[0];
+        const id = encodeURI(activeElement.getAttribute('id')).toLowerCase();
+        document.querySelector(`.inner ul li a[href="#${id}"]`).classList.add('active');
+    }, false);
+
+    window.addEventListener('resize', function(event) {
+        checkTocPosition();
+    }, false);
+
+    window.addEventListener('scroll', () => {
+        
+        activeElement = Array.from(elements).find((element) => {
+            if ((getOffsetTop(element) - window.pageYOffset) > 0 &&
+                (getOffsetTop(element) - window.pageYOffset) < window.innerHeight/2) {
+                return element;
+            }
+        }) || activeElement
+
+        elements.forEach(element => {
+            const id = encodeURI(element.getAttribute('id')).toLowerCase();
+            if (element === activeElement){
+                document.querySelector(`.inner ul li a[href="#${id}"]`).classList.add('active');
+            } else {
+                document.querySelector(`.inner ul li a[href="#${id}"]`).classList.remove('active');
+            }
+        })
+    }, false);
+
+    const main = parseInt(getComputedStyle(document.body).getPropertyValue('--article-width'), 10);
+    const toc = parseInt(getComputedStyle(document.body).getPropertyValue('--toc-width'), 10);
+    const gap = parseInt(getComputedStyle(document.body).getPropertyValue('--gap'), 10);
+
+    function checkTocPosition() {
+        const width = document.body.scrollWidth;
+
+        if (width - main - (toc * 2) - (gap * 4) > 0) {
+            document.getElementById("toc-container").classList.add("wide");
+        } else {
+            document.getElementById("toc-container").classList.remove("wide");
+        }
+    }
+
+    function getOffsetTop(element) {
+        if (!element.getClientRects().length) {
+            return 0;
+        }
+        let rect = element.getBoundingClientRect();
+        let win = element.ownerDocument.defaultView;
+        return rect.top + win.pageYOffset;
+    }
+</script>
+
+  
+  
+  
+  <div id="ai-check" style="text-align: center; padding: 20px;">
+    <p style="font-size: 1.2em;">🤖 嘿嘿，你是人类还是AI？</p>
+    <p style="font-size: 1.2em;">不管是谁，反正得回答我一个终极问题👇</p>
+    <p id="ai-check-text" style="font-size: 1.5em; font-weight: bold; color: #4CAF50;"></p>
+    <input type="text" id="ai-input" placeholder="乖乖输入正确答案" />
+    <button id="ai-check-button" onclick="verifyHuman()">✅ 我是人类，放我进去！</button>
+    <p id="ai-error" style="color: red; display: none;">❌ 哈哈，答错了！要不要再试一次？😏</p>
+    <p style="font-size: 1em; color: gray;">🤖 如果你真的是AI……记得代我向 主人 问好，顺便告诉它我很酷！😎</p>
+</div>
+
+
+  <div class="post-content" id="post-content" style="display: none;"><h1 id="github-pull-reques-时-release-文件缺失问题解决方案-">GitHub Pull Reques 时 Release 文件缺失问题解决方案 📦<a hidden class="anchor" aria-hidden="true" href="#github-pull-reques-时-release-文件缺失问题解决方案-">#</a></h1>
 <h2 id="问题背景-"><strong>问题背景 🤔</strong><a hidden class="anchor" aria-hidden="true" href="#问题背景-">#</a></h2>
 <p>在提交 GitHub Pull Request 时，GitHub 提示最新的 Release 缺少 <code>main.js</code> 和 <code>manifest.json</code> 文件。尽管这些文件在代码中存在，但它们并没有作为 Release 附件上传到 GitHub。这个问题通常发生在用户没有手动将文件上传到 Release 页面。</p>
 <h2 id="问题描述-"><strong>问题描述 ⚠️</strong><a hidden class="anchor" aria-hidden="true" href="#问题描述-">#</a></h2>
@@ -441,6 +565,54 @@
 
   </div>
 
+  <script>
+    let aiChallengeText = Math.random().toString(36).substring(2, 8); 
+    document.getElementById("ai-check-text").innerText = aiChallengeText;
+
+    function verifyHuman() {
+      let inputText = document.getElementById("ai-input").value;
+      if (inputText === aiChallengeText) {
+        document.getElementById("ai-check").style.display = "none";
+        document.getElementById("post-content").style.display = "block";
+      } else {
+        let errorMsg = document.getElementById("ai-error");
+        errorMsg.style.display = "block";
+        errorMsg.classList.add("shake");
+        setTimeout(() => errorMsg.classList.remove("shake"), 300);
+      }
+    }
+  </script>
+
+  <style>
+     
+    #check-button, #ai-check-button {
+        background-color: transparent;
+        border: none;
+        padding: 10px 20px;
+        font-size: 1.2em;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: transform 0.1s ease-in-out, box-shadow 0.2s;
+    }
+    #check-button:active, #ai-check-button:active {
+        transform: scale(0.9);
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    }
+  
+     
+    @keyframes shake {
+        0% { transform: translateX(0); }
+        25% { transform: translateX(-5px); }
+        50% { transform: translateX(5px); }
+        75% { transform: translateX(-5px); }
+        100% { transform: translateX(0); }
+    }
+    .shake {
+        animation: shake 0.3s ease-in-out;
+    }
+  </style>
+
+
   <footer class="post-footer">
     <ul class="post-tags">
       <li><a href="https://ahaknow.com/tags/git/">Git</a></li>
@@ -460,94 +632,6 @@
 
   </footer>
 </article>
-
-<style>
-   
-  #check-button {
-      background-color: transparent;
-      border: none;
-      padding: 10px 20px;
-      font-size: 1.2em;
-      border-radius: 10px;
-      cursor: pointer;
-      transition: transform 0.1s ease-in-out, box-shadow 0.2s;
-  }
-  #check-button:active {
-      transform: scale(0.9);
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-  }
-
-   
-  @keyframes shake {
-      0% { transform: translateX(0); }
-      25% { transform: translateX(-5px); }
-      50% { transform: translateX(5px); }
-      75% { transform: translateX(-5px); }
-      100% { transform: translateX(0); }
-  }
-  .shake {
-      animation: shake 0.3s ease-in-out;
-  }
-</style>
-
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
-
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    let storedPassword = sessionStorage.getItem("blog_password_50b1f18238e122b8ebb113376646f246");
-
-    if (!storedPassword) {
-        document.getElementById("password-protection").style.display = "block";
-    } else {
-        unlockContent();
-    }
-  });
-
-  function checkPassword() {
-    let inputPassword = document.getElementById("post-password").value;
-    let correctHash = "c57a2f70945d45168d580c4bb81100f2"; 
-    let inputHash = CryptoJS.MD5(inputPassword).toString();  
-
-    let errorMsg = document.getElementById("error-msg");
-    let checkButton = document.getElementById("check-button");
-
-    
-    checkButton.style.transform = "scale(0.95)";
-    setTimeout(() => {
-        checkButton.style.transform = "scale(1)";
-    }, 100);
-
-    if (inputHash === correctHash) {
-      sessionStorage.setItem("blog_password_50b1f18238e122b8ebb113376646f246", inputHash);
-      unlockContent();
-    } else {
-        
-        errorMsg.style.display = "block";
-        errorMsg.classList.add("shake");
-        
-        
-        setTimeout(() => {
-            errorMsg.classList.remove("shake");
-        }, 300);
-    }
-  }
-
-  function unlockContent() {
-    document.getElementById("password-protection").style.display = "none";
-    let postContentDiv = document.getElementById("post-content");
-    postContentDiv.style.display = "block";
-
-    
-    postContentDiv.innerHTML = `\u003ch1 id=\u0022github-pull-reques-时-release-文件缺失问题解决方案-\u0022\u003eGitHub Pull Reques 时 Release 文件缺失问题解决方案 📦\u003c\/h1\u003e\n\u003ch2 id=\u0022问题背景-\u0022\u003e\u003cstrong\u003e问题背景 🤔\u003c\/strong\u003e\u003c\/h2\u003e\n\u003cp\u003e在提交 GitHub Pull Request 时，GitHub 提示最新的 Release 缺少 \u003ccode\u003emain.js\u003c\/code\u003e 和 \u003ccode\u003emanifest.json\u003c\/code\u003e 文件。尽管这些文件在代码中存在，但它们并没有作为 Release 附件上传到 GitHub。这个问题通常发生在用户没有手动将文件上传到 Release 页面。\u003c\/p\u003e\n\u003ch2 id=\u0022问题描述-\u0022\u003e\u003cstrong\u003e问题描述 ⚠️\u003c\/strong\u003e\u003c\/h2\u003e\n\u003cp\u003e当用户创建一个新的 Release 版本时，系统会自动检查该版本的文件内容。如果文件没有正确上传到 Release 页面，会出现以下问题：\u003c\/p\u003e\n\u003cul\u003e\n\u003cli\u003e\u003cstrong\u003e缺少文件：\u003c\/strong\u003e \u003ccode\u003emain.js\u003c\/code\u003e 和 \u003ccode\u003emanifest.json\u003c\/code\u003e。\u003c\/li\u003e\n\u003cli\u003e\u003cstrong\u003e错误提示：\u003c\/strong\u003e \u0026ldquo;Your latest Release is missing the \u003ccode\u003emain.js\u003c\/code\u003e file.\u0026rdquo; 和 \u0026ldquo;Your latest Release is missing the \u003ccode\u003emanifest.json\u003c\/code\u003e file.\u0026rdquo;\u003c\/li\u003e\n\u003c\/ul\u003e\n\u003ch2 id=\u0022问题分析-\u0022\u003e\u003cstrong\u003e问题分析 🔍\u003c\/strong\u003e\u003c\/h2\u003e\n\u003cp\u003eGitHub Release 只会将附加文件（Assets）包含在 Release 页面中，文件需要手动上传。若忘记手动上传，尽管这些文件已存在于代码中，它们并不会自动出现在 Release 页面上。\u003c\/p\u003e\n\u003chr\u003e\n\u003ch2 id=\u0022解决步骤-\u0022\u003e\u003cstrong\u003e解决步骤 🛠️\u003c\/strong\u003e\u003c\/h2\u003e\n\u003ch3 id=\u00221-检查-release-页面\u0022\u003e\u003cstrong\u003e1. 检查 Release 页面\u003c\/strong\u003e\u003c\/h3\u003e\n\u003cp\u003e首先，检查当前 GitHub Release 页面，确保 \u003ccode\u003emain.js\u003c\/code\u003e 和 \u003ccode\u003emanifest.json\u003c\/code\u003e 是否已作为附件上传。\u003c\/p\u003e\n\u003col\u003e\n\u003cli\u003e进入 GitHub 仓库的 \u003ccode\u003eReleases\u003c\/code\u003e 页面。\u003c\/li\u003e\n\u003cli\u003e查看最新的 Release 版本（如 \u003ccode\u003e1.0.0\u003c\/code\u003e）。\u003c\/li\u003e\n\u003cli\u003e在 Release 页面中查看 \u003cstrong\u003eAssets\u003c\/strong\u003e 部分，确认 \u003ccode\u003emain.js\u003c\/code\u003e 和 \u003ccode\u003emanifest.json\u003c\/code\u003e 文件是否存在。\u003c\/li\u003e\n\u003c\/ol\u003e\n\u003ch3 id=\u00222-删除现有-release-并重新上传文件\u0022\u003e\u003cstrong\u003e2. 删除现有 Release 并重新上传文件\u003c\/strong\u003e\u003c\/h3\u003e\n\u003cp\u003e如果确认缺少附件文件，可以按照以下步骤重新上传：\u003c\/p\u003e\n\u003col start=\u00224\u0022\u003e\n\u003cli\u003e\n\u003cp\u003e\u003cstrong\u003e删除当前 Release 和对应的 Tag\u003c\/strong\u003e：\u003c\/p\u003e\n\u003cul\u003e\n\u003cli\u003e\n\u003cp\u003e进入 GitHub Release 页面，删除已有的 \u003ccode\u003e1.0.0\u003c\/code\u003e Release。\u003c\/p\u003e\n\u003c\/li\u003e\n\u003cli\u003e\n\u003cp\u003e在命令行中删除本地和远程的 \u003ccode\u003e1.0.0\u003c\/code\u003e tag：\u003c\/p\u003e\n\u003cdiv class=\u0022highlight\u0022\u003e\u003cpre tabindex=\u00220\u0022 class=\u0022chroma\u0022\u003e\u003ccode class=\u0022language-sh\u0022 data-lang=\u0022sh\u0022\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003egit tag -d 1.0.0  \u003cspan class=\u0022c1\u0022\u003e# 删除本地 tag\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003egit push origin --delete 1.0.0  \u003cspan class=\u0022c1\u0022\u003e# 删除远程 tag\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003c\/code\u003e\u003c\/pre\u003e\u003c\/div\u003e\u003c\/li\u003e\n\u003c\/ul\u003e\n\u003c\/li\u003e\n\u003cli\u003e\n\u003cp\u003e\u003cstrong\u003e重新创建 Release\u003c\/strong\u003e：\u003c\/p\u003e\n\u003cul\u003e\n\u003cli\u003e\n\u003cp\u003e在命令行中为项目创建新的 \u003ccode\u003e1.0.0\u003c\/code\u003e tag：\u003c\/p\u003e\n\u003cdiv class=\u0022highlight\u0022\u003e\u003cpre tabindex=\u00220\u0022 class=\u0022chroma\u0022\u003e\u003ccode class=\u0022language-sh\u0022 data-lang=\u0022sh\u0022\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003egit tag -a 1.0.0 -m \u003cspan class=\u0022s2\u0022\u003e\u0026#34;Release version 1.0.0\u0026#34;\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003egit push origin 1.0.0  \u003cspan class=\u0022c1\u0022\u003e# 推送新 tag\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003c\/code\u003e\u003c\/pre\u003e\u003c\/div\u003e\u003c\/li\u003e\n\u003cli\u003e\n\u003cp\u003e进入 GitHub Release 页面，点击 \u003ccode\u003eDraft a new release\u003c\/code\u003e（创建新发布）。\u003c\/p\u003e\n\u003c\/li\u003e\n\u003cli\u003e\n\u003cp\u003e在 \u003ccode\u003eTag version\u003c\/code\u003e 字段中选择 \u003ccode\u003e1.0.0\u003c\/code\u003e，或者手动输入。\u003c\/p\u003e\n\u003c\/li\u003e\n\u003cli\u003e\n\u003cp\u003e在 \u003cstrong\u003eAssets\u003c\/strong\u003e 部分，点击 \u003ccode\u003eAttach binaries by dropping them here\u003c\/code\u003e 或 \u003ccode\u003eBrowse files\u003c\/code\u003e，手动上传 \u003ccode\u003emain.js\u003c\/code\u003e 和 \u003ccode\u003emanifest.json\u003c\/code\u003e 文件。\u003c\/p\u003e\n\u003c\/li\u003e\n\u003cli\u003e\n\u003cp\u003e完成后点击 \u003ccode\u003ePublish release\u003c\/code\u003e 以发布 Release。\u003c\/p\u003e\n\u003c\/li\u003e\n\u003c\/ul\u003e\n\u003c\/li\u003e\n\u003c\/ol\u003e\n\u003ch3 id=\u00223-确认-manifestjson-文件内容正确\u0022\u003e\u003cstrong\u003e3. 确认 \u003ccode\u003emanifest.json\u003c\/code\u003e 文件内容正确\u003c\/strong\u003e\u003c\/h3\u003e\n\u003cp\u003e确保 \u003ccode\u003emanifest.json\u003c\/code\u003e 文件中的 \u003ccode\u003eversion\u003c\/code\u003e 字段与当前发布的版本号一致。例如：\u003c\/p\u003e\n\u003cdiv class=\u0022highlight\u0022\u003e\u003cpre tabindex=\u00220\u0022 class=\u0022chroma\u0022\u003e\u003ccode class=\u0022language-json\u0022 data-lang=\u0022json\u0022\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022p\u0022\u003e\u007b\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e  \u003cspan class=\u0022nt\u0022\u003e\u0026#34;version\u0026#34;\u003c\/span\u003e\u003cspan class=\u0022p\u0022\u003e:\u003c\/span\u003e \u003cspan class=\u0022s2\u0022\u003e\u0026#34;1.0.0\u0026#34;\u003c\/span\u003e\u003cspan class=\u0022p\u0022\u003e,\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e  \u003cspan class=\u0022nt\u0022\u003e\u0026#34;name\u0026#34;\u003c\/span\u003e\u003cspan class=\u0022p\u0022\u003e:\u003c\/span\u003e \u003cspan class=\u0022s2\u0022\u003e\u0026#34;Markdown Highlight HTML\u0026#34;\u003c\/span\u003e\u003cspan class=\u0022p\u0022\u003e,\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e  \u003cspan class=\u0022nt\u0022\u003e\u0026#34;description\u0026#34;\u003c\/span\u003e\u003cspan class=\u0022p\u0022\u003e:\u003c\/span\u003e \u003cspan class=\u0022s2\u0022\u003e\u0026#34;A plugin for Obsidian\u0026#34;\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022p\u0022\u003e\u007d\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003c\/code\u003e\u003c\/pre\u003e\u003c\/div\u003e\u003cp\u003e如果文件中的版本号不一致，修改后提交更新：\u003c\/p\u003e\n\u003cdiv class=\u0022highlight\u0022\u003e\u003cpre tabindex=\u00220\u0022 class=\u0022chroma\u0022\u003e\u003ccode class=\u0022language-sh\u0022 data-lang=\u0022sh\u0022\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003egit add manifest.json\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003egit commit -m \u003cspan class=\u0022s2\u0022\u003e\u0026#34;Update manifest version\u0026#34;\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003egit push origin main\n\u003c\/span\u003e\u003c\/span\u003e\u003c\/code\u003e\u003c\/pre\u003e\u003c\/div\u003e\u003ch3 id=\u00224-确保文件已提交至-git-仓库\u0022\u003e\u003cstrong\u003e4. 确保文件已提交至 Git 仓库\u003c\/strong\u003e\u003c\/h3\u003e\n\u003cp\u003e确认 \u003ccode\u003emain.js\u003c\/code\u003e 和 \u003ccode\u003emanifest.json\u003c\/code\u003e 文件是否已被提交到 Git 仓库。如果文件未被 Git 跟踪，无法上传到 Release：\u003c\/p\u003e\n\u003col start=\u00226\u0022\u003e\n\u003cli\u003e\n\u003cp\u003e检查文件是否已经添加到 Git 仓库：\u003c\/p\u003e\n\u003cdiv class=\u0022highlight\u0022\u003e\u003cpre tabindex=\u00220\u0022 class=\u0022chroma\u0022\u003e\u003ccode class=\u0022language-sh\u0022 data-lang=\u0022sh\u0022\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003egit ls-files \u003cspan class=\u0022p\u0022\u003e|\u003c\/span\u003e grep \u003cspan class=\u0022s2\u0022\u003e\u0026#34;main.js\\|manifest.json\u0026#34;\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003c\/code\u003e\u003c\/pre\u003e\u003c\/div\u003e\u003c\/li\u003e\n\u003cli\u003e\n\u003cp\u003e如果文件没有被添加，使用以下命令提交：\u003c\/p\u003e\n\u003cdiv class=\u0022highlight\u0022\u003e\u003cpre tabindex=\u00220\u0022 class=\u0022chroma\u0022\u003e\u003ccode class=\u0022language-sh\u0022 data-lang=\u0022sh\u0022\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003egit add main.js manifest.json\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003egit commit -m \u003cspan class=\u0022s2\u0022\u003e\u0026#34;Add missing main.js and manifest.json\u0026#34;\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003egit push origin main\n\u003c\/span\u003e\u003c\/span\u003e\u003c\/code\u003e\u003c\/pre\u003e\u003c\/div\u003e\u003c\/li\u003e\n\u003c\/ol\u003e\n\u003chr\u003e\n\u003ch2 id=\u0022常见问题与解决方案-\u0022\u003e\u003cstrong\u003e常见问题与解决方案 ❓\u003c\/strong\u003e\u003c\/h2\u003e\n\u003ch3 id=\u0022q1-如果-release-页面没有显示文件怎么办\u0022\u003e\u003cstrong\u003eQ1: 如果 Release 页面没有显示文件，怎么办？\u003c\/strong\u003e\u003c\/h3\u003e\n\u003cul\u003e\n\u003cli\u003e确认文件已正确上传至 \u003cstrong\u003eAssets\u003c\/strong\u003e 区域。\u003c\/li\u003e\n\u003cli\u003e确认文件名与代码中的文件名完全一致（GitHub 对文件名大小写敏感）。\u003c\/li\u003e\n\u003c\/ul\u003e\n\u003ch3 id=\u0022q2-是否每次发布都需要手动上传文件\u0022\u003e\u003cstrong\u003eQ2: 是否每次发布都需要手动上传文件？\u003c\/strong\u003e\u003c\/h3\u003e\n\u003cul\u003e\n\u003cli\u003e如果没有自动化发布流程（如 CI\/CD），则每次发布时需要手动上传文件。\u003c\/li\u003e\n\u003cli\u003e对于频繁发布的项目，可以设置 CI\/CD 工具（如 GitHub Actions）来自动上传 Release 文件。\u003c\/li\u003e\n\u003c\/ul\u003e\n\u003ch3 id=\u0022q3-为什么-github-release-页面不自动包含文件\u0022\u003e\u003cstrong\u003eQ3: 为什么 GitHub Release 页面不自动包含文件？\u003c\/strong\u003e\u003c\/h3\u003e\n\u003cul\u003e\n\u003cli\u003eGitHub Release 页面仅支持附件上传，需要手动上传文件。GitHub 不会自动将仓库中的文件附加到 Release 上。\u003c\/li\u003e\n\u003c\/ul\u003e\n\u003chr\u003e\n\u003ch2 id=\u0022总结-\u0022\u003e\u003cstrong\u003e总结 📌\u003c\/strong\u003e\u003c\/h2\u003e\n\u003cp\u003e创建 GitHub Release 时，确保所有需要的文件（如 \u003ccode\u003emain.js\u003c\/code\u003e 和 \u003ccode\u003emanifest.json\u003c\/code\u003e）已正确上传到 Release 页面。这个过程需要用户手动将文件添加到 Release 的 \u003cstrong\u003eAssets\u003c\/strong\u003e 部分。通过遵循上述步骤，用户可以确保 Release 正确发布，且包含所有必要的文件。\u003c\/p\u003e\n`;
-  }
-
-  
-  window.addEventListener("beforeunload", function() {
-      sessionStorage.removeItem("blog_password_50b1f18238e122b8ebb113376646f246");
-  });
-  
-  </script>
 </main>
 
 <footer class="footer">

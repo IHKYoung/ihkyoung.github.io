@@ -322,6 +322,12 @@
 
 </div>
   </header>
+
+   
+
+  
+  
+  
   <div id="password-protection" style="text-align: center; padding: 20px;">
     <p style="font-size: 1.2em;">🔒 这里是主人的 <strong>小秘密</strong>！🚀 需要对暗号才能查看哦👇</p>
     <input type="password" id="post-password" placeholder="✨天王盖地虎✨" />
@@ -329,7 +335,92 @@
     <p id="error-msg" style="color: #f05b72; display: none; font-size: 1em;">❌ 暗号不对！再试试吧~ 🥺</p>
   </div>
 
-  <div id="post-content" style="display: none;"></div> 
+  
+  <div id="post-content" style="display: none;"></div>
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      let storedPassword = sessionStorage.getItem("blog_password_db6efe080becc03179f37a4ffed00894");
+
+      if (!storedPassword) {
+          document.getElementById("password-protection").style.display = "block";
+      } else {
+          unlockContent();
+      }
+    });
+
+    function checkPassword() {
+      let inputPassword = document.getElementById("post-password").value;
+      let correctHash = "c57a2f70945d45168d580c4bb81100f2"; 
+      let inputHash = CryptoJS.MD5(inputPassword).toString();  
+
+      let errorMsg = document.getElementById("error-msg");
+      let checkButton = document.getElementById("check-button");
+
+      
+      checkButton.style.transform = "scale(0.95)";
+      setTimeout(() => {
+          checkButton.style.transform = "scale(1)";
+      }, 100);
+
+      if (inputHash === correctHash) {
+        sessionStorage.setItem("blog_password_db6efe080becc03179f37a4ffed00894", inputHash);
+        unlockContent();
+      } else {
+          
+          errorMsg.style.display = "block";
+          errorMsg.classList.add("shake");
+          setTimeout(() => {
+              errorMsg.classList.remove("shake");
+          }, 300);
+      }
+    }
+
+    function unlockContent() {
+      document.getElementById("password-protection").style.display = "none";
+      let postContentDiv = document.getElementById("post-content");
+      postContentDiv.style.display = "block";
+      
+      postContentDiv.innerHTML = `\u003cp\u003e又是时隔两个月？上一次用\u003cstrong\u003eObsidian\u003c\/strong\u003e开启了博客写作的新视角，这一篇：[[2024-10-10]]（使用Obsidian反向链接），这一次，就是玩转Obsidian，实现的外脑知识管理库！\u003c\/p\u003e\n\u003cblockquote\u003e\n\u003cp\u003e2025年2月7日补充：\u003cbr\u003e\n开始用了才能慢慢用好，不可能一蹴而就的！\u003c\/p\u003e\n\u003c\/blockquote\u003e\n`;
+    }
+
+    
+    window.addEventListener("beforeunload", function() {
+        sessionStorage.removeItem("blog_password_db6efe080becc03179f37a4ffed00894");
+    });
+  </script>
+
+  <style>
+     
+    #check-button, #ai-check-button {
+        background-color: transparent;
+        border: none;
+        padding: 10px 20px;
+        font-size: 1.2em;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: transform 0.1s ease-in-out, box-shadow 0.2s;
+    }
+    #check-button:active, #ai-check-button:active {
+        transform: scale(0.9);
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    }
+  
+     
+    @keyframes shake {
+        0% { transform: translateX(0); }
+        25% { transform: translateX(-5px); }
+        50% { transform: translateX(5px); }
+        75% { transform: translateX(-5px); }
+        100% { transform: translateX(0); }
+    }
+    .shake {
+        animation: shake 0.3s ease-in-out;
+    }
+  </style>
+
 
   <footer class="post-footer">
     <ul class="post-tags">
@@ -349,94 +440,6 @@
 
   </footer>
 </article>
-
-<style>
-   
-  #check-button {
-      background-color: transparent;
-      border: none;
-      padding: 10px 20px;
-      font-size: 1.2em;
-      border-radius: 10px;
-      cursor: pointer;
-      transition: transform 0.1s ease-in-out, box-shadow 0.2s;
-  }
-  #check-button:active {
-      transform: scale(0.9);
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-  }
-
-   
-  @keyframes shake {
-      0% { transform: translateX(0); }
-      25% { transform: translateX(-5px); }
-      50% { transform: translateX(5px); }
-      75% { transform: translateX(-5px); }
-      100% { transform: translateX(0); }
-  }
-  .shake {
-      animation: shake 0.3s ease-in-out;
-  }
-</style>
-
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
-
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    let storedPassword = sessionStorage.getItem("blog_password_db6efe080becc03179f37a4ffed00894");
-
-    if (!storedPassword) {
-        document.getElementById("password-protection").style.display = "block";
-    } else {
-        unlockContent();
-    }
-  });
-
-  function checkPassword() {
-    let inputPassword = document.getElementById("post-password").value;
-    let correctHash = "c57a2f70945d45168d580c4bb81100f2"; 
-    let inputHash = CryptoJS.MD5(inputPassword).toString();  
-
-    let errorMsg = document.getElementById("error-msg");
-    let checkButton = document.getElementById("check-button");
-
-    
-    checkButton.style.transform = "scale(0.95)";
-    setTimeout(() => {
-        checkButton.style.transform = "scale(1)";
-    }, 100);
-
-    if (inputHash === correctHash) {
-      sessionStorage.setItem("blog_password_db6efe080becc03179f37a4ffed00894", inputHash);
-      unlockContent();
-    } else {
-        
-        errorMsg.style.display = "block";
-        errorMsg.classList.add("shake");
-        
-        
-        setTimeout(() => {
-            errorMsg.classList.remove("shake");
-        }, 300);
-    }
-  }
-
-  function unlockContent() {
-    document.getElementById("password-protection").style.display = "none";
-    let postContentDiv = document.getElementById("post-content");
-    postContentDiv.style.display = "block";
-
-    
-    postContentDiv.innerHTML = `\u003cp\u003e又是时隔两个月？上一次用\u003cstrong\u003eObsidian\u003c\/strong\u003e开启了博客写作的新视角，这一篇：[[2024-10-10]]（使用Obsidian反向链接），这一次，就是玩转Obsidian，实现的外脑知识管理库！\u003c\/p\u003e\n\u003cblockquote\u003e\n\u003cp\u003e2025年2月7日补充：\u003cbr\u003e\n开始用了才能慢慢用好，不可能一蹴而就的！\u003c\/p\u003e\n\u003c\/blockquote\u003e\n`;
-  }
-
-  
-  window.addEventListener("beforeunload", function() {
-      sessionStorage.removeItem("blog_password_db6efe080becc03179f37a4ffed00894");
-  });
-  
-  </script>
 </main>
 
 <footer class="footer">

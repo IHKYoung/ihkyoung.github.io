@@ -6,8 +6,16 @@
     <description>Recent content in 未标签 on AhaKnow</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Sun, 09 Feb 2025 00:36:17 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 09 Feb 2025 01:49:17 +0800</lastBuildDate>
     <atom:link href="https://ahaknow.com/tags/%E6%9C%AA%E6%A0%87%E7%AD%BE/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>🔐 Hugo 文章密码保护最佳实践</title>
+      <link>https://ahaknow.com/posts/know/hugo-password/</link>
+      <pubDate>Sun, 09 Feb 2025 01:49:17 +0800</pubDate>
+      <guid>https://ahaknow.com/posts/know/hugo-password/</guid>
+      <description>&lt;h2 id=&#34;-1-背景&#34;&gt;&lt;strong&gt;📖 1. 背景&lt;/strong&gt;&lt;/h2&gt;
+&lt;p&gt;Hugo 是一款流行的静态网站生成器，但它&lt;strong&gt;不支持原生的密码保护功能&lt;/strong&gt;。如果你希望某些文章仅限特定用户访问，可以使用 JavaScript 和 MD5 哈希验证来实现&lt;strong&gt;前端密码保护&lt;/strong&gt;。&lt;/p&gt;</description>
+    </item>
     <item>
       <title>🚀 Git 与 CRLF（换行符）完全指南</title>
       <link>https://ahaknow.com/posts/know/git-crlf-lf/</link>

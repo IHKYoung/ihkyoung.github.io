@@ -48,7 +48,7 @@
 <meta name="keywords" content="Scoop">
 <meta name="description" content="1. Scoop 简介 ✨
 Scoop 是 Windows 下的一个轻量级包管理器，其核心理念是“把命令行工具装进用户目录”，避免对系统全局进行修改。它与 apt（Debian/Ubuntu 等发行版的包管理器）有相似的用户体验，但在 Windows 环境中更为灵活、简单，并且免去了管理员权限的烦恼。">
-<meta name="author" content="CKYoung">
+<meta name="author" content="Clarke, Merlin">
 <link rel="canonical" href="https://ahaknow.com/posts/know/scoop%E5%8C%85%E7%AE%A1%E7%90%86/">
 <link crossorigin="anonymous" href="/assets/css/stylesheet.css" rel="preload stylesheet" as="style">
 <link rel="icon" href="https://ahaknow.com/Q.gif">
@@ -152,7 +152,10 @@ Scoop 是 Windows 下的一个轻量级包管理器，其核心理念是“把�
   "dateModified": "2025-02-04T13:09:08+08:00",
   "author":[{
     "@type": "Person",
-    "name": "CKYoung"
+    "name": "Clarke"
+  }, {
+    "@type": "Person",
+    "name": "Merlin"
   }],
   "mainEntityOfPage": {
     "@type": "WebPage",
@@ -315,7 +318,7 @@ Scoop 是 Windows 下的一个轻量级包管理器，其核心理念是“把�
     </span>
     <span id="post_meta_style_5">
         <span class="fa fa-user-o"></span>
-        <span>CKYoung
+        <span>Clarke, Merlin
             &nbsp;&nbsp;
         </span>
     </span>
@@ -331,7 +334,126 @@ Scoop 是 Windows 下的一个轻量级包管理器，其核心理念是“把�
 
 </div>
   </header>
-  <div id="post-content"><h2 id="1-scoop-简介-">1. Scoop 简介 ✨<a hidden class="anchor" aria-hidden="true" href="#1-scoop-简介-">#</a></h2>
+
+   <aside id="toc-container" class="toc-container wide">
+    <div class="toc">
+        <details  open>
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details">📚目录</span>
+        </summary>
+
+        <div class="inner"><ul>
+                <li>
+                    <a href="#1-scoop-%e7%ae%80%e4%bb%8b-" aria-label="1. Scoop 简介 ✨">1. Scoop 简介 ✨</a></li>
+                <li>
+                    <a href="#2-%e5%ae%89%e8%a3%85-scoop-" aria-label="2. 安装 Scoop 🚀">2. 安装 Scoop 🚀</a><ul>
+                        
+                <li>
+                    <a href="#%e5%89%8d%e6%8f%90%e6%9d%a1%e4%bb%b6" aria-label="前提条件">前提条件</a></li>
+                <li>
+                    <a href="#%e5%ae%89%e8%a3%85%e5%91%bd%e4%bb%a4" aria-label="安装命令">安装命令</a></li></ul>
+                </li>
+                <li>
+                    <a href="#3-scoop-%e5%9f%ba%e6%9c%ac%e6%93%8d%e4%bd%9c-" aria-label="3. Scoop 基本操作 🔧">3. Scoop 基本操作 🔧</a><ul>
+                        
+                <li>
+                    <a href="#31-%e6%90%9c%e7%b4%a2%e5%8c%85-" aria-label="3.1 搜索包 🔍">3.1 搜索包 🔍</a></li>
+                <li>
+                    <a href="#32-%e5%ae%89%e8%a3%85%e5%8c%85-" aria-label="3.2 安装包 📦">3.2 安装包 📦</a></li>
+                <li>
+                    <a href="#33-%e6%9b%b4%e6%96%b0%e5%8c%85-" aria-label="3.3 更新包 ⬆️">3.3 更新包 ⬆️</a></li>
+                <li>
+                    <a href="#34-%e5%8d%b8%e8%bd%bd%e5%8c%85-" aria-label="3.4 卸载包 🗑️">3.4 卸载包 🗑️</a></li>
+                <li>
+                    <a href="#35-%e6%9f%a5%e7%9c%8b%e5%b7%b2%e5%ae%89%e8%a3%85%e7%9a%84%e8%bd%af%e4%bb%b6%e5%8c%85-" aria-label="3.5 查看已安装的软件包 📋">3.5 查看已安装的软件包 📋</a></li></ul>
+                </li>
+                <li>
+                    <a href="#4-scoop-%e4%b8%8e-chocolateychoco%e7%9a%84%e6%af%94%e8%be%83-" aria-label="4. Scoop 与 Chocolatey（Choco）的比较 ⚖️">4. Scoop 与 Chocolatey（Choco）的比较 ⚖️</a></li>
+                <li>
+                    <a href="#5-%e4%b8%8e-apt-%e7%9a%84%e5%af%b9%e6%af%94%e7%9b%b8%e4%bc%bc%e4%b8%8e%e5%b7%ae%e5%bc%82-" aria-label="5. 与 apt 的对比：相似与差异 🆚">5. 与 apt 的对比：相似与差异 🆚</a></li>
+                <li>
+                    <a href="#6-%e7%bb%93%e8%af%ad-" aria-label="6. 结语 🎉">6. 结语 🎉</a>
+                </li>
+            </ul>
+        </div>
+        </details>
+    </div>
+</aside>
+<script>
+    let activeElement;
+    let elements;
+    window.addEventListener('DOMContentLoaded', function (event) {
+        checkTocPosition();
+
+        elements = document.querySelectorAll('h1[id],h2[id],h3[id],h4[id],h5[id],h6[id]');
+        
+        activeElement = elements[0];
+        const id = encodeURI(activeElement.getAttribute('id')).toLowerCase();
+        document.querySelector(`.inner ul li a[href="#${id}"]`).classList.add('active');
+    }, false);
+
+    window.addEventListener('resize', function(event) {
+        checkTocPosition();
+    }, false);
+
+    window.addEventListener('scroll', () => {
+        
+        activeElement = Array.from(elements).find((element) => {
+            if ((getOffsetTop(element) - window.pageYOffset) > 0 &&
+                (getOffsetTop(element) - window.pageYOffset) < window.innerHeight/2) {
+                return element;
+            }
+        }) || activeElement
+
+        elements.forEach(element => {
+            const id = encodeURI(element.getAttribute('id')).toLowerCase();
+            if (element === activeElement){
+                document.querySelector(`.inner ul li a[href="#${id}"]`).classList.add('active');
+            } else {
+                document.querySelector(`.inner ul li a[href="#${id}"]`).classList.remove('active');
+            }
+        })
+    }, false);
+
+    const main = parseInt(getComputedStyle(document.body).getPropertyValue('--article-width'), 10);
+    const toc = parseInt(getComputedStyle(document.body).getPropertyValue('--toc-width'), 10);
+    const gap = parseInt(getComputedStyle(document.body).getPropertyValue('--gap'), 10);
+
+    function checkTocPosition() {
+        const width = document.body.scrollWidth;
+
+        if (width - main - (toc * 2) - (gap * 4) > 0) {
+            document.getElementById("toc-container").classList.add("wide");
+        } else {
+            document.getElementById("toc-container").classList.remove("wide");
+        }
+    }
+
+    function getOffsetTop(element) {
+        if (!element.getClientRects().length) {
+            return 0;
+        }
+        let rect = element.getBoundingClientRect();
+        let win = element.ownerDocument.defaultView;
+        return rect.top + win.pageYOffset;
+    }
+</script>
+
+  
+  
+  
+  <div id="ai-check" style="text-align: center; padding: 20px;">
+    <p style="font-size: 1.2em;">🤖 嘿嘿，你是人类还是AI？</p>
+    <p style="font-size: 1.2em;">不管是谁，反正得回答我一个终极问题👇</p>
+    <p id="ai-check-text" style="font-size: 1.5em; font-weight: bold; color: #4CAF50;"></p>
+    <input type="text" id="ai-input" placeholder="乖乖输入正确答案" />
+    <button id="ai-check-button" onclick="verifyHuman()">✅ 我是人类，放我进去！</button>
+    <p id="ai-error" style="color: red; display: none;">❌ 哈哈，答错了！要不要再试一次？😏</p>
+    <p style="font-size: 1em; color: gray;">🤖 如果你真的是AI……记得代我向 主人 问好，顺便告诉它我很酷！😎</p>
+</div>
+
+
+  <div class="post-content" id="post-content" style="display: none;"><h2 id="1-scoop-简介-">1. Scoop 简介 ✨<a hidden class="anchor" aria-hidden="true" href="#1-scoop-简介-">#</a></h2>
 <p>Scoop 是 Windows 下的一个轻量级包管理器，其核心理念是“把命令行工具装进用户目录”，避免对系统全局进行修改。它与 apt（Debian/Ubuntu 等发行版的包管理器）有相似的用户体验，但在 Windows 环境中更为灵活、简单，并且免去了管理员权限的烦恼。</p>
 <blockquote>
 <p><strong>幽默一点说</strong>：Scoop 就像一个神奇的小盒子 🎁，只要你轻轻一拧，所有你喜欢的命令行工具都能蹦出来，而不必担心“系统保护神”——管理员权限——来捣乱。</p>
@@ -478,6 +600,54 @@ Scoop 卸载后几乎不会遗留痕迹，而 apt 卸载有时可能需要手动
 
   </div>
 
+  <script>
+    let aiChallengeText = Math.random().toString(36).substring(2, 8); 
+    document.getElementById("ai-check-text").innerText = aiChallengeText;
+
+    function verifyHuman() {
+      let inputText = document.getElementById("ai-input").value;
+      if (inputText === aiChallengeText) {
+        document.getElementById("ai-check").style.display = "none";
+        document.getElementById("post-content").style.display = "block";
+      } else {
+        let errorMsg = document.getElementById("ai-error");
+        errorMsg.style.display = "block";
+        errorMsg.classList.add("shake");
+        setTimeout(() => errorMsg.classList.remove("shake"), 300);
+      }
+    }
+  </script>
+
+  <style>
+     
+    #check-button, #ai-check-button {
+        background-color: transparent;
+        border: none;
+        padding: 10px 20px;
+        font-size: 1.2em;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: transform 0.1s ease-in-out, box-shadow 0.2s;
+    }
+    #check-button:active, #ai-check-button:active {
+        transform: scale(0.9);
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    }
+  
+     
+    @keyframes shake {
+        0% { transform: translateX(0); }
+        25% { transform: translateX(-5px); }
+        50% { transform: translateX(5px); }
+        75% { transform: translateX(-5px); }
+        100% { transform: translateX(0); }
+    }
+    .shake {
+        animation: shake 0.3s ease-in-out;
+    }
+  </style>
+
+
   <footer class="post-footer">
     <ul class="post-tags">
       <li><a href="https://ahaknow.com/tags/scoop/">Scoop</a></li>
@@ -497,94 +667,6 @@ Scoop 卸载后几乎不会遗留痕迹，而 apt 卸载有时可能需要手动
 
   </footer>
 </article>
-
-<style>
-   
-  #check-button {
-      background-color: transparent;
-      border: none;
-      padding: 10px 20px;
-      font-size: 1.2em;
-      border-radius: 10px;
-      cursor: pointer;
-      transition: transform 0.1s ease-in-out, box-shadow 0.2s;
-  }
-  #check-button:active {
-      transform: scale(0.9);
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-  }
-
-   
-  @keyframes shake {
-      0% { transform: translateX(0); }
-      25% { transform: translateX(-5px); }
-      50% { transform: translateX(5px); }
-      75% { transform: translateX(-5px); }
-      100% { transform: translateX(0); }
-  }
-  .shake {
-      animation: shake 0.3s ease-in-out;
-  }
-</style>
-
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
-
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    let storedPassword = sessionStorage.getItem("blog_password_a341020ab9a5b2678a07dc819f021128");
-
-    if (!storedPassword) {
-        document.getElementById("password-protection").style.display = "block";
-    } else {
-        unlockContent();
-    }
-  });
-
-  function checkPassword() {
-    let inputPassword = document.getElementById("post-password").value;
-    let correctHash = "c57a2f70945d45168d580c4bb81100f2"; 
-    let inputHash = CryptoJS.MD5(inputPassword).toString();  
-
-    let errorMsg = document.getElementById("error-msg");
-    let checkButton = document.getElementById("check-button");
-
-    
-    checkButton.style.transform = "scale(0.95)";
-    setTimeout(() => {
-        checkButton.style.transform = "scale(1)";
-    }, 100);
-
-    if (inputHash === correctHash) {
-      sessionStorage.setItem("blog_password_a341020ab9a5b2678a07dc819f021128", inputHash);
-      unlockContent();
-    } else {
-        
-        errorMsg.style.display = "block";
-        errorMsg.classList.add("shake");
-        
-        
-        setTimeout(() => {
-            errorMsg.classList.remove("shake");
-        }, 300);
-    }
-  }
-
-  function unlockContent() {
-    document.getElementById("password-protection").style.display = "none";
-    let postContentDiv = document.getElementById("post-content");
-    postContentDiv.style.display = "block";
-
-    
-    postContentDiv.innerHTML = `\u003ch2 id=\u00221-scoop-简介-\u0022\u003e1. Scoop 简介 ✨\u003c\/h2\u003e\n\u003cp\u003eScoop 是 Windows 下的一个轻量级包管理器，其核心理念是“把命令行工具装进用户目录”，避免对系统全局进行修改。它与 apt（Debian\/Ubuntu 等发行版的包管理器）有相似的用户体验，但在 Windows 环境中更为灵活、简单，并且免去了管理员权限的烦恼。\u003c\/p\u003e\n\u003cblockquote\u003e\n\u003cp\u003e\u003cstrong\u003e幽默一点说\u003c\/strong\u003e：Scoop 就像一个神奇的小盒子 🎁，只要你轻轻一拧，所有你喜欢的命令行工具都能蹦出来，而不必担心“系统保护神”——管理员权限——来捣乱。\u003c\/p\u003e\n\u003c\/blockquote\u003e\n\u003chr\u003e\n\u003ch2 id=\u00222-安装-scoop-\u0022\u003e2. 安装 Scoop 🚀\u003c\/h2\u003e\n\u003ch3 id=\u0022前提条件\u0022\u003e前提条件\u003c\/h3\u003e\n\u003cul\u003e\n\u003cli\u003e\n\u003cp\u003e\u003cstrong\u003ePowerShell 版本\u003c\/strong\u003e：建议使用 PowerShell 5 或更新版本。\u003c\/p\u003e\n\u003c\/li\u003e\n\u003cli\u003e\n\u003cp\u003e\u003cstrong\u003eExecution Policy\u003c\/strong\u003e：需要允许脚本执行。打开 PowerShell（非管理员也行）并执行：\u003c\/p\u003e\n\u003cdiv class=\u0022highlight\u0022\u003e\u003cpre tabindex=\u00220\u0022 class=\u0022chroma\u0022\u003e\u003ccode class=\u0022language-powershell\u0022 data-lang=\u0022powershell\u0022\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022nb\u0022\u003eSet-ExecutionPolicy\u003c\/span\u003e \u003cspan class=\u0022n\u0022\u003eRemoteSigned\u003c\/span\u003e \u003cspan class=\u0022n\u0022\u003e-Scope\u003c\/span\u003e \u003cspan class=\u0022n\u0022\u003eCurrentUser\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003c\/code\u003e\u003c\/pre\u003e\u003c\/div\u003e\u003cp\u003e这样就能让 PowerShell 运行下载的脚本啦！👍\u003c\/p\u003e\n\u003c\/li\u003e\n\u003c\/ul\u003e\n\u003ch3 id=\u0022安装命令\u0022\u003e安装命令\u003c\/h3\u003e\n\u003cp\u003e在 PowerShell 中直接运行以下命令：\u003c\/p\u003e\n\u003cdiv class=\u0022highlight\u0022\u003e\u003cpre tabindex=\u00220\u0022 class=\u0022chroma\u0022\u003e\u003ccode class=\u0022language-powershell\u0022 data-lang=\u0022powershell\u0022\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022nb\u0022\u003eiwr \u003c\/span\u003e\u003cspan class=\u0022n\u0022\u003e-useb\u003c\/span\u003e \u003cspan class=\u0022n\u0022\u003eget\u003c\/span\u003e\u003cspan class=\u0022p\u0022\u003e.\u003c\/span\u003e\u003cspan class=\u0022py\u0022\u003escoop\u003c\/span\u003e\u003cspan class=\u0022p\u0022\u003e.\u003c\/span\u003e\u003cspan class=\u0022py\u0022\u003esh\u003c\/span\u003e \u003cspan class=\u0022p\u0022\u003e|\u003c\/span\u003e \u003cspan class=\u0022nb\u0022\u003eiex\n\u003c\/span\u003e\u003c\/span\u003e\u003c\/span\u003e\u003c\/code\u003e\u003c\/pre\u003e\u003c\/div\u003e\u003cp\u003e这行命令的意思是：使用 \u003ccode\u003eInvoke-WebRequest\u003c\/code\u003e 从 Scoop 的官方网站下载安装脚本，并立即执行。简单、直接，就像一键启动魔法🪄！\u003c\/p\u003e\n\u003chr\u003e\n\u003ch2 id=\u00223-scoop-基本操作-\u0022\u003e3. Scoop 基本操作 🔧\u003c\/h2\u003e\n\u003ch3 id=\u002231-搜索包-\u0022\u003e3.1 搜索包 🔍\u003c\/h3\u003e\n\u003cp\u003e与 apt 类似，Scoop 提供了便捷的搜索功能。你可以使用：\u003c\/p\u003e\n\u003cdiv class=\u0022highlight\u0022\u003e\u003cpre tabindex=\u00220\u0022 class=\u0022chroma\u0022\u003e\u003ccode class=\u0022language-powershell\u0022 data-lang=\u0022powershell\u0022\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022n\u0022\u003escoop\u003c\/span\u003e \u003cspan class=\u0022n\u0022\u003esearch\u003c\/span\u003e \u003cspan class=\u0022p\u0022\u003e\u0026lt;\u003c\/span\u003e\u003cspan class=\u0022n\u0022\u003e关键词\u003c\/span\u003e\u003cspan class=\u0022p\u0022\u003e\u0026gt;\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003c\/code\u003e\u003c\/pre\u003e\u003c\/div\u003e\u003cp\u003e例如：\u003c\/p\u003e\n\u003cdiv class=\u0022highlight\u0022\u003e\u003cpre tabindex=\u00220\u0022 class=\u0022chroma\u0022\u003e\u003ccode class=\u0022language-powershell\u0022 data-lang=\u0022powershell\u0022\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022n\u0022\u003escoop\u003c\/span\u003e \u003cspan class=\u0022n\u0022\u003esearch\u003c\/span\u003e \u003cspan class=\u0022n\u0022\u003eruby\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003c\/code\u003e\u003c\/pre\u003e\u003c\/div\u003e\u003cp\u003e它会列出所有包含 “ruby” 的软件包。相比 apt 的 \u003ccode\u003eapt search\u003c\/code\u003e，Scoop 的搜索结果通常更精简、直观。😊\u003c\/p\u003e\n\u003ch3 id=\u002232-安装包-\u0022\u003e3.2 安装包 📦\u003c\/h3\u003e\n\u003cp\u003e安装软件包非常简单，只需执行：\u003c\/p\u003e\n\u003cdiv class=\u0022highlight\u0022\u003e\u003cpre tabindex=\u00220\u0022 class=\u0022chroma\u0022\u003e\u003ccode class=\u0022language-powershell\u0022 data-lang=\u0022powershell\u0022\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022n\u0022\u003escoop\u003c\/span\u003e \u003cspan class=\u0022n\u0022\u003einstall\u003c\/span\u003e \u003cspan class=\u0022p\u0022\u003e\u0026lt;\u003c\/span\u003e\u003cspan class=\u0022n\u0022\u003e软件包名\u003c\/span\u003e\u003cspan class=\u0022p\u0022\u003e\u0026gt;\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003c\/code\u003e\u003c\/pre\u003e\u003c\/div\u003e\u003cp\u003e例如安装 Git：\u003c\/p\u003e\n\u003cdiv class=\u0022highlight\u0022\u003e\u003cpre tabindex=\u00220\u0022 class=\u0022chroma\u0022\u003e\u003ccode class=\u0022language-powershell\u0022 data-lang=\u0022powershell\u0022\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022n\u0022\u003escoop\u003c\/span\u003e \u003cspan class=\u0022n\u0022\u003einstall\u003c\/span\u003e \u003cspan class=\u0022n\u0022\u003egit\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003c\/code\u003e\u003c\/pre\u003e\u003c\/div\u003e\u003cp\u003e这与 apt 的 \u003ccode\u003esudo apt install git\u003c\/code\u003e 类似，但完全省去了管理员权限的麻烦——真是懒人福音！🛋️\u003c\/p\u003e\n\u003ch3 id=\u002233-更新包-\u0022\u003e3.3 更新包 ⬆️\u003c\/h3\u003e\n\u003cul\u003e\n\u003cli\u003e\n\u003cp\u003e更新单个包：\u003c\/p\u003e\n\u003cdiv class=\u0022highlight\u0022\u003e\u003cpre tabindex=\u00220\u0022 class=\u0022chroma\u0022\u003e\u003ccode class=\u0022language-powershell\u0022 data-lang=\u0022powershell\u0022\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022n\u0022\u003escoop\u003c\/span\u003e \u003cspan class=\u0022n\u0022\u003eupdate\u003c\/span\u003e \u003cspan class=\u0022p\u0022\u003e\u0026lt;\u003c\/span\u003e\u003cspan class=\u0022n\u0022\u003e软件包名\u003c\/span\u003e\u003cspan class=\u0022p\u0022\u003e\u0026gt;\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003c\/code\u003e\u003c\/pre\u003e\u003c\/div\u003e\u003c\/li\u003e\n\u003cli\u003e\n\u003cp\u003e更新所有已安装的包：\u003c\/p\u003e\n\u003cdiv class=\u0022highlight\u0022\u003e\u003cpre tabindex=\u00220\u0022 class=\u0022chroma\u0022\u003e\u003ccode class=\u0022language-powershell\u0022 data-lang=\u0022powershell\u0022\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022n\u0022\u003escoop\u003c\/span\u003e \u003cspan class=\u0022n\u0022\u003eupdate\u003c\/span\u003e \u003cspan class=\u0022p\u0022\u003e*\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003c\/code\u003e\u003c\/pre\u003e\u003c\/div\u003e\u003c\/li\u003e\n\u003c\/ul\u003e\n\u003cp\u003e相比于 apt 的 \u003ccode\u003esudo apt update \u0026amp;\u0026amp; sudo apt upgrade\u003c\/code\u003e，Scoop 的更新过程更加直接，无需额外确认，也没有那层繁琐的索引下载。💨\u003c\/p\u003e\n\u003ch3 id=\u002234-卸载包-\u0022\u003e3.4 卸载包 🗑️\u003c\/h3\u003e\n\u003cp\u003e卸载软件包同样简单：\u003c\/p\u003e\n\u003cdiv class=\u0022highlight\u0022\u003e\u003cpre tabindex=\u00220\u0022 class=\u0022chroma\u0022\u003e\u003ccode class=\u0022language-powershell\u0022 data-lang=\u0022powershell\u0022\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022n\u0022\u003escoop\u003c\/span\u003e \u003cspan class=\u0022n\u0022\u003euninstall\u003c\/span\u003e \u003cspan class=\u0022p\u0022\u003e\u0026lt;\u003c\/span\u003e\u003cspan class=\u0022n\u0022\u003e软件包名\u003c\/span\u003e\u003cspan class=\u0022p\u0022\u003e\u0026gt;\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003c\/code\u003e\u003c\/pre\u003e\u003c\/div\u003e\u003cp\u003e这个命令就像 apt 的 \u003ccode\u003esudo apt remove \u0026lt;软件包名\u0026gt;\u003c\/code\u003e 一样直观，但 Scoop 卸载后不会残留任何系统垃圾，保持环境干净整洁。🌱\u003c\/p\u003e\n\u003ch3 id=\u002235-查看已安装的软件包-\u0022\u003e3.5 查看已安装的软件包 📋\u003c\/h3\u003e\n\u003cp\u003e使用：\u003c\/p\u003e\n\u003cdiv class=\u0022highlight\u0022\u003e\u003cpre tabindex=\u00220\u0022 class=\u0022chroma\u0022\u003e\u003ccode class=\u0022language-powershell\u0022 data-lang=\u0022powershell\u0022\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022n\u0022\u003escoop\u003c\/span\u003e \u003cspan class=\u0022n\u0022\u003elist\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003c\/code\u003e\u003c\/pre\u003e\u003c\/div\u003e\u003cp\u003e它会列出所有通过 Scoop 安装的软件包，方便你随时检查系统状态。🔎\u003c\/p\u003e\n\u003chr\u003e\n\u003ch2 id=\u00224-scoop-与-chocolateychoco的比较-\u0022\u003e4. Scoop 与 Chocolatey（Choco）的比较 ⚖️\u003c\/h2\u003e\n\u003cp\u003e虽然两者都是 Windows 下的包管理器，但 Scoop 在以下几个方面具有明显优势：\u003c\/p\u003e\n\u003col\u003e\n\u003cli\u003e\n\u003cp\u003e\u003cstrong\u003e安装路径\u003c\/strong\u003e\u003c\/p\u003e\n\u003cul\u003e\n\u003cli\u003e\u003cstrong\u003eScoop\u003c\/strong\u003e：默认安装在用户目录（如 \u003ccode\u003eC:\\Users\\用户名\\scoop\u003c\/code\u003e），无需管理员权限。\u003c\/li\u003e\n\u003cli\u003e\u003cstrong\u003eChoco\u003c\/strong\u003e：默认安装在系统目录（如 \u003ccode\u003eC:\\ProgramData\\chocolatey\u003c\/code\u003e），通常需要管理员权限。\u003c\/li\u003e\n\u003c\/ul\u003e\n\u003cblockquote\u003e\n\u003cp\u003e\u003cstrong\u003e幽默备注\u003c\/strong\u003e：Scoop 就像是你的私人工具箱 🧰，不用担心“系统警卫”随时来敲门检查。\u003c\/p\u003e\n\u003c\/blockquote\u003e\n\u003c\/li\u003e\n\u003cli\u003e\n\u003cp\u003e\u003cstrong\u003e配置与管理\u003c\/strong\u003e\u003c\/p\u003e\n\u003cul\u003e\n\u003cli\u003e\u003cstrong\u003eScoop\u003c\/strong\u003e：采用简单的 JSON 配置文件管理仓库（称为 bucket），操作简单，易于自定义。\u003c\/li\u003e\n\u003cli\u003e\u003cstrong\u003eChoco\u003c\/strong\u003e：拥有更丰富的功能，但配置相对繁琐，初学者上手时可能会觉得“眼花缭乱”。\u003c\/li\u003e\n\u003c\/ul\u003e\n\u003cblockquote\u003e\n\u003cp\u003e\u003cstrong\u003e幽默备注\u003c\/strong\u003e：如果你觉得配置文件比追剧还复杂，那选择 Scoop 就对了，简单得就像剥橘子皮 🍊。\u003c\/p\u003e\n\u003c\/blockquote\u003e\n\u003c\/li\u003e\n\u003cli\u003e\n\u003cp\u003e\u003cstrong\u003e包的内容\u003c\/strong\u003e\u003c\/p\u003e\n\u003cul\u003e\n\u003cli\u003e\u003cstrong\u003eScoop\u003c\/strong\u003e：专注于命令行工具和开发者常用的软件包，更轻量、更专注。\u003c\/li\u003e\n\u003cli\u003e\u003cstrong\u003eChoco\u003c\/strong\u003e：除了命令行工具，还涵盖了许多 GUI 软件，有时会显得臃肿。\u003c\/li\u003e\n\u003c\/ul\u003e\n\u003cblockquote\u003e\n\u003cp\u003e\u003cstrong\u003e幽默备注\u003c\/strong\u003e：Scoop 就像只吃精华部分，而 Choco 则是大杂烩，看你是更喜欢精致料理还是丰盛大餐 🍽️。\u003c\/p\u003e\n\u003c\/blockquote\u003e\n\u003c\/li\u003e\n\u003cli\u003e\n\u003cp\u003e\u003cstrong\u003e安全性与隔离性\u003c\/strong\u003e\u003c\/p\u003e\n\u003cul\u003e\n\u003cli\u003e\u003cstrong\u003eScoop\u003c\/strong\u003e：由于所有软件都安装在用户目录，万一某个包出问题，不会影响系统的其他部分。\u003c\/li\u003e\n\u003cli\u003e\u003cstrong\u003eChoco\u003c\/strong\u003e：安装在系统目录下，某些操作可能需要更高权限，稍有不慎可能影响系统稳定性。\u003c\/li\u003e\n\u003c\/ul\u003e\n\u003cblockquote\u003e\n\u003cp\u003e\u003cstrong\u003e幽默备注\u003c\/strong\u003e：用 Scoop 就像在自家后院耕种 🌻，不怕影响邻居；用 Choco 则有点像在市中心种花，稍不注意可能连环麻烦 🚧。\u003c\/p\u003e\n\u003c\/blockquote\u003e\n\u003c\/li\u003e\n\u003c\/ol\u003e\n\u003chr\u003e\n\u003ch2 id=\u00225-与-apt-的对比相似与差异-\u0022\u003e5. 与 apt 的对比：相似与差异 🆚\u003c\/h2\u003e\n\u003cul\u003e\n\u003cli\u003e\n\u003cp\u003e\u003cstrong\u003e搜索包\u003c\/strong\u003e\u003c\/p\u003e\n\u003cul\u003e\n\u003cli\u003e\u003cstrong\u003eapt\u003c\/strong\u003e：\u003ccode\u003eapt search \u0026lt;包名\u0026gt;\u003c\/code\u003e\u003c\/li\u003e\n\u003cli\u003e\u003cstrong\u003eScoop\u003c\/strong\u003e：\u003ccode\u003escoop search \u0026lt;包名\u0026gt;\u003c\/code\u003e\u003cbr\u003e\n两者操作类似，关键在于索引更新和源的选择。apt 有预先维护的仓库，而 Scoop 通过 buckets 提供包信息，更新速度更快但包的数量可能少些。\u003c\/li\u003e\n\u003c\/ul\u003e\n\u003c\/li\u003e\n\u003cli\u003e\n\u003cp\u003e\u003cstrong\u003e安装包\u003c\/strong\u003e\u003c\/p\u003e\n\u003cul\u003e\n\u003cli\u003e\u003cstrong\u003eapt\u003c\/strong\u003e：\u003ccode\u003esudo apt install \u0026lt;包名\u0026gt;\u003c\/code\u003e\u003c\/li\u003e\n\u003cli\u003e\u003cstrong\u003eScoop\u003c\/strong\u003e：\u003ccode\u003escoop install \u0026lt;包名\u0026gt;\u003c\/code\u003e\u003cbr\u003e\n不同之处在于，apt 需要管理员权限，而 Scoop 安装到用户目录，不影响系统全局。🔐\u003c\/li\u003e\n\u003c\/ul\u003e\n\u003c\/li\u003e\n\u003cli\u003e\n\u003cp\u003e\u003cstrong\u003e更新系统\u003c\/strong\u003e\u003c\/p\u003e\n\u003cul\u003e\n\u003cli\u003e\u003cstrong\u003eapt\u003c\/strong\u003e：\u003ccode\u003esudo apt update \u0026amp;\u0026amp; sudo apt upgrade\u003c\/code\u003e\u003c\/li\u003e\n\u003cli\u003e\u003cstrong\u003eScoop\u003c\/strong\u003e：\u003ccode\u003escoop update *\u003c\/code\u003e\u003cbr\u003e\n更新机制更为简单直接，不需要手动刷新索引。🔄\u003c\/li\u003e\n\u003c\/ul\u003e\n\u003c\/li\u003e\n\u003cli\u003e\n\u003cp\u003e\u003cstrong\u003e卸载包\u003c\/strong\u003e\u003c\/p\u003e\n\u003cul\u003e\n\u003cli\u003e\u003cstrong\u003eapt\u003c\/strong\u003e：\u003ccode\u003esudo apt remove \u0026lt;包名\u0026gt;\u003c\/code\u003e\u003c\/li\u003e\n\u003cli\u003e\u003cstrong\u003eScoop\u003c\/strong\u003e：\u003ccode\u003escoop uninstall \u0026lt;包名\u0026gt;\u003c\/code\u003e\u003cbr\u003e\nScoop 卸载后几乎不会遗留痕迹，而 apt 卸载有时可能需要手动清理依赖包。🧹\u003c\/li\u003e\n\u003c\/ul\u003e\n\u003c\/li\u003e\n\u003c\/ul\u003e\n\u003chr\u003e\n\u003ch2 id=\u00226-结语-\u0022\u003e6. 结语 🎉\u003c\/h2\u003e\n\u003cp\u003eScoop 为 Windows 用户带来了一个简单、轻量、便捷的包管理方案，特别适合开发者和命令行爱好者。它既具备 apt 那样熟悉的操作风格，又避免了 Windows 系统固有的权限困扰；同时，相较于 Chocolatey 的庞大体系，Scoop 更加专注于开发工具，操作上也更符合“只做一件事，并做好”的哲学。\u003c\/p\u003e\n\u003cblockquote\u003e\n\u003cp\u003e\u003cstrong\u003e幽默收尾\u003c\/strong\u003e：无论你是命令行的忠实粉丝，还是对“点击式安装”厌倦已久，Scoop 都能带给你一种“科技小清新”🍃的愉悦体验，让你在 Windows 上也能体会到 Linux 那种自由、轻盈的包管理乐趣！😎\u003c\/p\u003e\n\u003c\/blockquote\u003e\n`;
-  }
-
-  
-  window.addEventListener("beforeunload", function() {
-      sessionStorage.removeItem("blog_password_a341020ab9a5b2678a07dc819f021128");
-  });
-  
-  </script>
 </main>
 
 <footer class="footer">

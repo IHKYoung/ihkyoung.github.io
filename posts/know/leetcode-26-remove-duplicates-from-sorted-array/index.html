@@ -348,7 +348,24 @@ Custom Judge:"/>
 
 </div>
   </header>
-  <div id="post-content"><p>Given an integer array <code>nums</code> sorted in <strong>non-decreasing order</strong>, remove the duplicates <a href="https://en.wikipedia.org/wiki/In-place_algorithm"><strong>in-place</strong></a> such that each unique element appears only <strong>once</strong>. The <strong>relative order</strong> of the elements should be kept the <strong>same</strong>. Then return <em>the number of unique elements in</em> <code>nums</code>.</p>
+
+   
+
+  
+  
+  
+  <div id="ai-check" style="text-align: center; padding: 20px;">
+    <p style="font-size: 1.2em;">🤖 嘿嘿，你是人类还是AI？</p>
+    <p style="font-size: 1.2em;">不管是谁，反正得回答我一个终极问题👇</p>
+    <p id="ai-check-text" style="font-size: 1.5em; font-weight: bold; color: #4CAF50;"></p>
+    <input type="text" id="ai-input" placeholder="乖乖输入正确答案" />
+    <button id="ai-check-button" onclick="verifyHuman()">✅ 我是人类，放我进去！</button>
+    <p id="ai-error" style="color: red; display: none;">❌ 哈哈，答错了！要不要再试一次？😏</p>
+    <p style="font-size: 1em; color: gray;">🤖 如果你真的是AI……记得代我向 主人 问好，顺便告诉它我很酷！😎</p>
+</div>
+
+
+  <div class="post-content" id="post-content" style="display: none;"><p>Given an integer array <code>nums</code> sorted in <strong>non-decreasing order</strong>, remove the duplicates <a href="https://en.wikipedia.org/wiki/In-place_algorithm"><strong>in-place</strong></a> such that each unique element appears only <strong>once</strong>. The <strong>relative order</strong> of the elements should be kept the <strong>same</strong>. Then return <em>the number of unique elements in</em> <code>nums</code>.</p>
 <p>Consider the number of unique elements of <code>nums</code> to be <code>k</code>, to get accepted, you need to do the following things:</p>
 <ul>
 <li>Change the array <code>nums</code> such that the first <code>k</code> elements of <code>nums</code> contain the unique elements in the order they were present in <code>nums</code> initially. The remaining elements of <code>nums</code> are not important as well as the size of <code>nums</code>.</li>
@@ -465,6 +482,54 @@ for (int i = 0; i &lt; k; i++) {
 
   </div>
 
+  <script>
+    let aiChallengeText = Math.random().toString(36).substring(2, 8); 
+    document.getElementById("ai-check-text").innerText = aiChallengeText;
+
+    function verifyHuman() {
+      let inputText = document.getElementById("ai-input").value;
+      if (inputText === aiChallengeText) {
+        document.getElementById("ai-check").style.display = "none";
+        document.getElementById("post-content").style.display = "block";
+      } else {
+        let errorMsg = document.getElementById("ai-error");
+        errorMsg.style.display = "block";
+        errorMsg.classList.add("shake");
+        setTimeout(() => errorMsg.classList.remove("shake"), 300);
+      }
+    }
+  </script>
+
+  <style>
+     
+    #check-button, #ai-check-button {
+        background-color: transparent;
+        border: none;
+        padding: 10px 20px;
+        font-size: 1.2em;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: transform 0.1s ease-in-out, box-shadow 0.2s;
+    }
+    #check-button:active, #ai-check-button:active {
+        transform: scale(0.9);
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    }
+  
+     
+    @keyframes shake {
+        0% { transform: translateX(0); }
+        25% { transform: translateX(-5px); }
+        50% { transform: translateX(5px); }
+        75% { transform: translateX(-5px); }
+        100% { transform: translateX(0); }
+    }
+    .shake {
+        animation: shake 0.3s ease-in-out;
+    }
+  </style>
+
+
   <footer class="post-footer">
     <ul class="post-tags">
       <li><a href="https://ahaknow.com/tags/%E5%8F%8C%E6%8C%87%E9%92%88/">双指针</a></li>
@@ -484,94 +549,6 @@ for (int i = 0; i &lt; k; i++) {
 
   </footer>
 </article>
-
-<style>
-   
-  #check-button {
-      background-color: transparent;
-      border: none;
-      padding: 10px 20px;
-      font-size: 1.2em;
-      border-radius: 10px;
-      cursor: pointer;
-      transition: transform 0.1s ease-in-out, box-shadow 0.2s;
-  }
-  #check-button:active {
-      transform: scale(0.9);
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-  }
-
-   
-  @keyframes shake {
-      0% { transform: translateX(0); }
-      25% { transform: translateX(-5px); }
-      50% { transform: translateX(5px); }
-      75% { transform: translateX(-5px); }
-      100% { transform: translateX(0); }
-  }
-  .shake {
-      animation: shake 0.3s ease-in-out;
-  }
-</style>
-
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
-
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    let storedPassword = sessionStorage.getItem("blog_password_c152c9677ed89d32c839c2bb44fab441");
-
-    if (!storedPassword) {
-        document.getElementById("password-protection").style.display = "block";
-    } else {
-        unlockContent();
-    }
-  });
-
-  function checkPassword() {
-    let inputPassword = document.getElementById("post-password").value;
-    let correctHash = "c57a2f70945d45168d580c4bb81100f2"; 
-    let inputHash = CryptoJS.MD5(inputPassword).toString();  
-
-    let errorMsg = document.getElementById("error-msg");
-    let checkButton = document.getElementById("check-button");
-
-    
-    checkButton.style.transform = "scale(0.95)";
-    setTimeout(() => {
-        checkButton.style.transform = "scale(1)";
-    }, 100);
-
-    if (inputHash === correctHash) {
-      sessionStorage.setItem("blog_password_c152c9677ed89d32c839c2bb44fab441", inputHash);
-      unlockContent();
-    } else {
-        
-        errorMsg.style.display = "block";
-        errorMsg.classList.add("shake");
-        
-        
-        setTimeout(() => {
-            errorMsg.classList.remove("shake");
-        }, 300);
-    }
-  }
-
-  function unlockContent() {
-    document.getElementById("password-protection").style.display = "none";
-    let postContentDiv = document.getElementById("post-content");
-    postContentDiv.style.display = "block";
-
-    
-    postContentDiv.innerHTML = `\u003cp\u003eGiven an integer array \u003ccode\u003enums\u003c\/code\u003e sorted in \u003cstrong\u003enon-decreasing order\u003c\/strong\u003e, remove the duplicates \u003ca href=\u0022https:\/\/en.wikipedia.org\/wiki\/In-place_algorithm\u0022\u003e\u003cstrong\u003ein-place\u003c\/strong\u003e\u003c\/a\u003e such that each unique element appears only \u003cstrong\u003eonce\u003c\/strong\u003e. The \u003cstrong\u003erelative order\u003c\/strong\u003e of the elements should be kept the \u003cstrong\u003esame\u003c\/strong\u003e. Then return \u003cem\u003ethe number of unique elements in\u003c\/em\u003e \u003ccode\u003enums\u003c\/code\u003e.\u003c\/p\u003e\n\u003cp\u003eConsider the number of unique elements of \u003ccode\u003enums\u003c\/code\u003e to be \u003ccode\u003ek\u003c\/code\u003e, to get accepted, you need to do the following things:\u003c\/p\u003e\n\u003cul\u003e\n\u003cli\u003eChange the array \u003ccode\u003enums\u003c\/code\u003e such that the first \u003ccode\u003ek\u003c\/code\u003e elements of \u003ccode\u003enums\u003c\/code\u003e contain the unique elements in the order they were present in \u003ccode\u003enums\u003c\/code\u003e initially. The remaining elements of \u003ccode\u003enums\u003c\/code\u003e are not important as well as the size of \u003ccode\u003enums\u003c\/code\u003e.\u003c\/li\u003e\n\u003cli\u003eReturn \u003ccode\u003ek\u003c\/code\u003e.\u003c\/li\u003e\n\u003c\/ul\u003e\n\u003cp\u003e\u003cstrong\u003eCustom Judge:\u003c\/strong\u003e\u003c\/p\u003e\n\u003cp\u003eThe judge will test your solution with the following code:\u003c\/p\u003e\n\u003cpre tabindex=\u00220\u0022\u003e\u003ccode\u003eint[] nums = [...]; \/\/ Input array\r\nint[] expectedNums = [...]; \/\/ The expected answer with correct length\r\n\r\nint k = removeDuplicates(nums); \/\/ Calls your implementation\r\n\r\nassert k == expectedNums.length;\r\nfor (int i = 0; i \u0026lt; k; i\u002b\u002b) \u007b\r\n    assert nums[i] == expectedNums[i];\r\n\u007d\n\u003c\/code\u003e\u003c\/pre\u003e\u003cp\u003eIf all assertions pass, then your solution will be \u003cstrong\u003eaccepted\u003c\/strong\u003e.\u003c\/p\u003e\n\u003cp\u003e\u003cstrong\u003eExample 1:\u003c\/strong\u003e\u003c\/p\u003e\n\u003cpre tabindex=\u00220\u0022\u003e\u003ccode\u003eInput: nums = [1,1,2]\r\nOutput: 2, nums = [1,2,_]\r\nExplanation: Your function should return k = 2, with the first two elements of nums being 1 and 2 respectively.\r\nIt does not matter what you leave beyond the returned k (hence they are underscores).\n\u003c\/code\u003e\u003c\/pre\u003e\u003cp\u003e\u003cstrong\u003eExample 2:\u003c\/strong\u003e\u003c\/p\u003e\n\u003cpre tabindex=\u00220\u0022\u003e\u003ccode\u003eInput: nums = [0,0,1,1,1,2,2,3,3,4]\r\nOutput: 5, nums = [0,1,2,3,4,_,_,_,_,_]\r\nExplanation: Your function should return k = 5, with the first five elements of nums being 0, 1, 2, 3, and 4 respectively.\r\nIt does not matter what you leave beyond the returned k (hence they are underscores).\n\u003c\/code\u003e\u003c\/pre\u003e\u003cp\u003e\u003cstrong\u003eConstraints:\u003c\/strong\u003e\u003c\/p\u003e\n\u003cul\u003e\n\u003cli\u003e\u003ccode\u003e1 \u0026lt;= nums.length \u0026lt;= 3 * 104\u003c\/code\u003e\u003c\/li\u003e\n\u003cli\u003e\u003ccode\u003e-100 \u0026lt;= nums[i] \u0026lt;= 100\u003c\/code\u003e\u003c\/li\u003e\n\u003cli\u003e\u003ccode\u003enums\u003c\/code\u003e is sorted in \u003cstrong\u003enon-decreasing\u003c\/strong\u003e order.\u003c\/li\u003e\n\u003c\/ul\u003e\n\u003cp\u003e给你一个 \u003cstrong\u003e非严格递增排列\u003c\/strong\u003e 的数组 \u003ccode\u003enums\u003c\/code\u003e ，请你 \u003cstrong\u003e\u003ca href=\u0022https:\/\/en.wikipedia.org\/wiki\/In-place_algorithm\u0022\u003e原地\u003c\/a\u003e\u003c\/strong\u003e 删除重复出现的元素，使每个元素 \u003cstrong\u003e只出现一次\u003c\/strong\u003e ，返回删除后数组的新长度。元素的 \u003cstrong\u003e相对顺序\u003c\/strong\u003e 应该保持 \u003cstrong\u003e一致\u003c\/strong\u003e 。然后返回 \u003ccode\u003enums\u003c\/code\u003e 中唯一元素的个数。\u003c\/p\u003e\n\u003cp\u003e考虑 \u003ccode\u003enums\u003c\/code\u003e 的唯一元素的数量为 \u003ccode\u003ek\u003c\/code\u003e ，你需要做以下事情确保你的题解可以被通过：\u003c\/p\u003e\n\u003cul\u003e\n\u003cli\u003e更改数组 \u003ccode\u003enums\u003c\/code\u003e ，使 \u003ccode\u003enums\u003c\/code\u003e 的前 \u003ccode\u003ek\u003c\/code\u003e 个元素包含唯一元素，并按照它们最初在 \u003ccode\u003enums\u003c\/code\u003e 中出现的顺序排列。\u003ccode\u003enums\u003c\/code\u003e 的其余元素与 \u003ccode\u003enums\u003c\/code\u003e 的大小不重要。\u003c\/li\u003e\n\u003cli\u003e返回 \u003ccode\u003ek\u003c\/code\u003e 。\u003c\/li\u003e\n\u003c\/ul\u003e\n\u003cp\u003e\u003cstrong\u003e判题标准:\u003c\/strong\u003e\u003c\/p\u003e\n\u003cp\u003e系统会用下面的代码来测试你的题解:\u003c\/p\u003e\n\u003cpre tabindex=\u00220\u0022\u003e\u003ccode\u003eint[] nums = [...]; \/\/ 输入数组\r\nint[] expectedNums = [...]; \/\/ 长度正确的期望答案\r\n\r\nint k = removeDuplicates(nums); \/\/ 调用\r\n\r\nassert k == expectedNums.length;\r\nfor (int i = 0; i \u0026lt; k; i\u002b\u002b) \u007b\r\n    assert nums[i] == expectedNums[i];\r\n\u007d\n\u003c\/code\u003e\u003c\/pre\u003e\u003cp\u003e如果所有断言都通过，那么您的题解将被 \u003cstrong\u003e通过\u003c\/strong\u003e。\u003c\/p\u003e\n\u003cp\u003e\u003cstrong\u003e示例 1：\u003c\/strong\u003e\u003c\/p\u003e\n\u003cpre tabindex=\u00220\u0022\u003e\u003ccode\u003e输入：nums = [1,1,2]\r\n输出：2, nums = [1,2,_]\r\n解释：函数应该返回新的长度 2 ，并且原数组 nums 的前两个元素被修改为 1, 2 。不需要考虑数组中超出新长度后面的元素。\n\u003c\/code\u003e\u003c\/pre\u003e\u003cp\u003e\u003cstrong\u003e示例 2：\u003c\/strong\u003e\u003c\/p\u003e\n\u003cpre tabindex=\u00220\u0022\u003e\u003ccode\u003e输入：nums = [0,0,1,1,1,2,2,3,3,4]\r\n输出：5, nums = [0,1,2,3,4]\r\n解释：函数应该返回新的长度 5 ， 并且原数组 nums 的前五个元素被修改为 0, 1, 2, 3, 4 。不需要考虑数组中超出新长度后面的元素。\n\u003c\/code\u003e\u003c\/pre\u003e\u003cp\u003e\u003cstrong\u003e提示：\u003c\/strong\u003e\u003c\/p\u003e\n\u003cul\u003e\n\u003cli\u003e\u003ccode\u003e1 \u0026lt;= nums.length \u0026lt;= 3 * 104\u003c\/code\u003e\u003c\/li\u003e\n\u003cli\u003e\u003ccode\u003e-104 \u0026lt;= nums[i] \u0026lt;= 104\u003c\/code\u003e\u003c\/li\u003e\n\u003cli\u003e\u003ccode\u003enums\u003c\/code\u003e 已按 \u003cstrong\u003e非严格递增\u003c\/strong\u003e 排列\u003c\/li\u003e\n\u003c\/ul\u003e\n\u003cblockquote\u003e\n\u003cp\u003e“\u003cstrong\u003e非严格递增\u003c\/strong\u003e”的意思是指：序列已经按照从小到大排序了，只不过有些元素重复了，所以是非严格递增；\u003c\/p\u003e\n\u003cp\u003e有序数列的问题，还是用双指针，只不过指针的用处稍微不同。\u003c\/p\u003e\n\u003cp\u003e快指针用来判断前后元素是否相同，慢指针用来按照需求保留。\u003c\/p\u003e\n\u003c\/blockquote\u003e\n\u003ch3 id=\u0022上菜\u0022\u003e🥬上菜\u003c\/h3\u003e\n\u003cp\u003e这个问题可以使用类似于\u003ca href=\u0022https:\/\/ahaknow.com\/posts\/know\/leetcode-27-remove-element\/\u0022\u003eLeetCode26\u003c\/a\u003e的解决方案，即使用双指针法。这次也是使用快慢指针，但是有一点不同：当快指针指向的元素与慢指针指向的元素相同时，只移动快指针，以跳过重复的元素；当快慢指针指向的元素不同，将快指针的元素复制到慢指针的下一个位置，然后同时移动快慢指针。\u003c\/p\u003e\n\u003cp\u003e这样处理后，数组的前 \u003ccode\u003ek\u003c\/code\u003e 个元素就是唯一的元素，并且保持了它们最初的相对顺序，其中 \u003ccode\u003ek\u003c\/code\u003e 是返回的数组长度。\u003c\/p\u003e\n\u003cp\u003e下面是具体步骤：\u003c\/p\u003e\n\u003col\u003e\n\u003cli\u003e如果数组的长度 \u003ccode\u003en\u003c\/code\u003e 小于等于1，则直接返回 \u003ccode\u003en\u003c\/code\u003e（因为没有重复元素需要删除）。\u003c\/li\u003e\n\u003cli\u003e初始化两个指针 \u003ccode\u003eslow = 1\u003c\/code\u003e 和 \u003ccode\u003efast = 1\u003c\/code\u003e。\u003c\/li\u003e\n\u003cli\u003e当 \u003ccode\u003efast\u003c\/code\u003e 小于数组长度时，比较 \u003ccode\u003enums[fast]\u003c\/code\u003e 和 \u003ccode\u003enums[fast - 1]\u003c\/code\u003e：\n\u003cul\u003e\n\u003cli\u003e如果 \u003ccode\u003enums[fast]\u003c\/code\u003e 不等于 \u003ccode\u003enums[fast - 1]\u003c\/code\u003e，说明遇到了一个新的元素，就将 \u003ccode\u003enums[fast]\u003c\/code\u003e 的值复制到 \u003ccode\u003enums[slow]\u003c\/code\u003e，然后 \u003ccode\u003eslow\u003c\/code\u003e 增加1。\u003c\/li\u003e\n\u003cli\u003e否则，快指针 \u003ccode\u003efast\u003c\/code\u003e 继续前进，直到找到一个不同的元素。\u003c\/li\u003e\n\u003c\/ul\u003e\n\u003c\/li\u003e\n\u003cli\u003e当数组遍历完成后，\u003ccode\u003eslow\u003c\/code\u003e 指针的位置就是新数组的长度。\u003c\/li\u003e\n\u003c\/ol\u003e\n\u003cp\u003e下面是用C\u002b\u002b实现的代码示例：\u003c\/p\u003e\n\u003cdiv class=\u0022highlight\u0022\u003e\u003cpre tabindex=\u00220\u0022 class=\u0022chroma\u0022\u003e\u003ccode class=\u0022language-cpp\u0022 data-lang=\u0022cpp\u0022\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022c1\u0022\u003e\/\/ 26. Remove Duplicates from Sorted Array\n\u003c\/span\u003e\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022c1\u0022\u003e\u003c\/span\u003e\u003cspan class=\u0022cp\u0022\u003e#include\u003c\/span\u003e \u003cspan class=\u0022cpf\u0022\u003e\u0026lt;iostream\u0026gt;\u003c\/span\u003e\u003cspan class=\u0022cp\u0022\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022cp\u0022\u003e#include\u003c\/span\u003e \u003cspan class=\u0022cpf\u0022\u003e\u0026lt;vector\u0026gt;\u003c\/span\u003e\u003cspan class=\u0022cp\u0022\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022cp\u0022\u003e\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022k\u0022\u003eusing\u003c\/span\u003e \u003cspan class=\u0022k\u0022\u003enamespace\u003c\/span\u003e \u003cspan class=\u0022n\u0022\u003estd\u003c\/span\u003e\u003cspan class=\u0022p\u0022\u003e;\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022k\u0022\u003eclass\u003c\/span\u003e \u003cspan class=\u0022nc\u0022\u003eSolution\u003c\/span\u003e \u003cspan class=\u0022p\u0022\u003e\u007b\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022k\u0022\u003epublic\u003c\/span\u003e\u003cspan class=\u0022o\u0022\u003e:\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e    \u003cspan class=\u0022kt\u0022\u003eint\u003c\/span\u003e \u003cspan class=\u0022n\u0022\u003eremoveDuplicates\u003c\/span\u003e\u003cspan class=\u0022p\u0022\u003e(\u003c\/span\u003e\u003cspan class=\u0022n\u0022\u003evector\u003c\/span\u003e\u003cspan class=\u0022o\u0022\u003e\u0026lt;\u003c\/span\u003e\u003cspan class=\u0022kt\u0022\u003eint\u003c\/span\u003e\u003cspan class=\u0022o\u0022\u003e\u0026gt;\u0026amp;\u003c\/span\u003e \u003cspan class=\u0022n\u0022\u003enums\u003c\/span\u003e\u003cspan class=\u0022p\u0022\u003e)\u003c\/span\u003e \u003cspan class=\u0022p\u0022\u003e\u007b\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e        \u003cspan class=\u0022k\u0022\u003eif\u003c\/span\u003e \u003cspan class=\u0022p\u0022\u003e(\u003c\/span\u003e\u003cspan class=\u0022n\u0022\u003enums\u003c\/span\u003e\u003cspan class=\u0022p\u0022\u003e.\u003c\/span\u003e\u003cspan class=\u0022n\u0022\u003esize\u003c\/span\u003e\u003cspan class=\u0022p\u0022\u003e()\u003c\/span\u003e \u003cspan class=\u0022o\u0022\u003e\u0026lt;=\u003c\/span\u003e \u003cspan class=\u0022mi\u0022\u003e1\u003c\/span\u003e\u003cspan class=\u0022p\u0022\u003e)\u003c\/span\u003e \u003cspan class=\u0022k\u0022\u003ereturn\u003c\/span\u003e \u003cspan class=\u0022n\u0022\u003enums\u003c\/span\u003e\u003cspan class=\u0022p\u0022\u003e.\u003c\/span\u003e\u003cspan class=\u0022n\u0022\u003esize\u003c\/span\u003e\u003cspan class=\u0022p\u0022\u003e();\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e        \u003cspan class=\u0022kt\u0022\u003eint\u003c\/span\u003e \u003cspan class=\u0022n\u0022\u003eslow\u003c\/span\u003e \u003cspan class=\u0022o\u0022\u003e=\u003c\/span\u003e \u003cspan class=\u0022mi\u0022\u003e1\u003c\/span\u003e\u003cspan class=\u0022p\u0022\u003e;\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e        \u003cspan class=\u0022k\u0022\u003efor\u003c\/span\u003e \u003cspan class=\u0022p\u0022\u003e(\u003c\/span\u003e\u003cspan class=\u0022kt\u0022\u003eint\u003c\/span\u003e \u003cspan class=\u0022n\u0022\u003efast\u003c\/span\u003e \u003cspan class=\u0022o\u0022\u003e=\u003c\/span\u003e \u003cspan class=\u0022mi\u0022\u003e1\u003c\/span\u003e\u003cspan class=\u0022p\u0022\u003e;\u003c\/span\u003e \u003cspan class=\u0022n\u0022\u003efast\u003c\/span\u003e \u003cspan class=\u0022o\u0022\u003e\u0026lt;\u003c\/span\u003e \u003cspan class=\u0022n\u0022\u003enums\u003c\/span\u003e\u003cspan class=\u0022p\u0022\u003e.\u003c\/span\u003e\u003cspan class=\u0022n\u0022\u003esize\u003c\/span\u003e\u003cspan class=\u0022p\u0022\u003e();\u003c\/span\u003e \u003cspan class=\u0022n\u0022\u003efast\u003c\/span\u003e\u003cspan class=\u0022o\u0022\u003e\u002b\u002b\u003c\/span\u003e\u003cspan class=\u0022p\u0022\u003e)\u003c\/span\u003e \u003cspan class=\u0022p\u0022\u003e\u007b\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e            \u003cspan class=\u0022k\u0022\u003eif\u003c\/span\u003e \u003cspan class=\u0022p\u0022\u003e(\u003c\/span\u003e\u003cspan class=\u0022n\u0022\u003enums\u003c\/span\u003e\u003cspan class=\u0022p\u0022\u003e[\u003c\/span\u003e\u003cspan class=\u0022n\u0022\u003efast\u003c\/span\u003e \u003cspan class=\u0022o\u0022\u003e-\u003c\/span\u003e \u003cspan class=\u0022mi\u0022\u003e1\u003c\/span\u003e\u003cspan class=\u0022p\u0022\u003e]\u003c\/span\u003e \u003cspan class=\u0022o\u0022\u003e!=\u003c\/span\u003e \u003cspan class=\u0022n\u0022\u003enums\u003c\/span\u003e\u003cspan class=\u0022p\u0022\u003e[\u003c\/span\u003e\u003cspan class=\u0022n\u0022\u003efast\u003c\/span\u003e\u003cspan class=\u0022p\u0022\u003e])\u003c\/span\u003e \u003cspan class=\u0022p\u0022\u003e\u007b\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e                \u003cspan class=\u0022n\u0022\u003enums\u003c\/span\u003e\u003cspan class=\u0022p\u0022\u003e[\u003c\/span\u003e\u003cspan class=\u0022n\u0022\u003eslow\u003c\/span\u003e\u003cspan class=\u0022o\u0022\u003e\u002b\u002b\u003c\/span\u003e\u003cspan class=\u0022p\u0022\u003e]\u003c\/span\u003e \u003cspan class=\u0022o\u0022\u003e=\u003c\/span\u003e \u003cspan class=\u0022n\u0022\u003enums\u003c\/span\u003e\u003cspan class=\u0022p\u0022\u003e[\u003c\/span\u003e\u003cspan class=\u0022n\u0022\u003efast\u003c\/span\u003e\u003cspan class=\u0022p\u0022\u003e];\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e            \u003cspan class=\u0022p\u0022\u003e\u007d\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e        \u003cspan class=\u0022p\u0022\u003e\u007d\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e        \u003cspan class=\u0022k\u0022\u003ereturn\u003c\/span\u003e \u003cspan class=\u0022n\u0022\u003eslow\u003c\/span\u003e\u003cspan class=\u0022p\u0022\u003e;\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e        \n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e    \u003cspan class=\u0022p\u0022\u003e\u007d\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022p\u0022\u003e\u007d;\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022c1\u0022\u003e\/\/ 这道题也可以直接使用vector的earse()和unique()\n\u003c\/span\u003e\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022c1\u0022\u003e\/\/ nums.erase(unique(nums.begin(), nums.end()), nums.end());\n\u003c\/span\u003e\u003c\/span\u003e\u003c\/span\u003e\u003c\/code\u003e\u003c\/pre\u003e\u003c\/div\u003e\u003cp\u003e这段代码通过双指针法高效地实现了原地删除数组中的重复项，且只使用了 O(1) 的额外空间。由于 \u003ccode\u003enums\u003c\/code\u003e 是非严格递增排列的，可以确保所有的重复项都是连续出现的，这让问题变得更加简单。\u003c\/p\u003e\n`;
-  }
-
-  
-  window.addEventListener("beforeunload", function() {
-      sessionStorage.removeItem("blog_password_c152c9677ed89d32c839c2bb44fab441");
-  });
-  
-  </script>
 </main>
 
 <footer class="footer">

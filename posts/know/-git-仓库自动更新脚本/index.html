@@ -331,7 +331,123 @@
 
 </div>
   </header>
-  <div id="post-content"><h2 id="-git-仓库自动更新脚本---解决方案与步骤总结">📝 <strong>Git 仓库自动更新脚本 - 解决方案与步骤总结</strong><a hidden class="anchor" aria-hidden="true" href="#-git-仓库自动更新脚本---解决方案与步骤总结">#</a></h2>
+
+   <aside id="toc-container" class="toc-container wide">
+    <div class="toc">
+        <details  open>
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details">📚目录</span>
+        </summary>
+
+        <div class="inner"><ul>
+                <li>
+                    <a href="#-git-%e4%bb%93%e5%ba%93%e8%87%aa%e5%8a%a8%e6%9b%b4%e6%96%b0%e8%84%9a%e6%9c%ac---%e8%a7%a3%e5%86%b3%e6%96%b9%e6%a1%88%e4%b8%8e%e6%ad%a5%e9%aa%a4%e6%80%bb%e7%bb%93" aria-label="📝 Git 仓库自动更新脚本 - 解决方案与步骤总结">📝 <strong>Git 仓库自动更新脚本 - 解决方案与步骤总结</strong></a><ul>
+                        
+                <li>
+                    <a href="#-%e5%85%b3%e9%94%ae%e6%ad%a5%e9%aa%a4" aria-label="🔑 关键步骤：">🔑 <strong>关键步骤</strong>：</a><ul>
+                        
+                <li>
+                    <a href="#1-%e7%bc%96%e5%86%99-powershell-%e8%84%9a%e6%9c%ac-" aria-label="1. 编写 PowerShell 脚本 💻">1. <strong>编写 PowerShell 脚本</strong> 💻</a></li>
+                <li>
+                    <a href="#2-%e9%aa%8c%e8%af%81%e8%84%9a%e6%9c%ac-" aria-label="2. 验证脚本 🧑‍💻">2. <strong>验证脚本</strong> 🧑‍💻</a></li>
+                <li>
+                    <a href="#3-%e8%ae%be%e7%bd%ae-windows-%e4%bb%bb%e5%8a%a1%e8%b0%83%e5%ba%a6%e5%99%a8-" aria-label="3. 设置 Windows 任务调度器 ⏰">3. <strong>设置 Windows 任务调度器</strong> ⏰</a></li></ul>
+                </li>
+                <li>
+                    <a href="#-%e5%b8%b8%e8%a7%81%e9%97%ae%e9%a2%98%e4%b8%8e%e8%a7%a3%e5%86%b3%e6%96%b9%e6%a1%88" aria-label="🚨 常见问题与解决方案：">🚨 <strong>常见问题与解决方案</strong>：</a><ul>
+                        
+                <li>
+                    <a href="#1-%e9%81%87%e5%88%b0-unexpected-token-%e9%94%99%e8%af%af-" aria-label="1. 遇到 &ldquo;Unexpected token&rdquo; 错误 🤔">1. <strong>遇到 &ldquo;Unexpected token&rdquo; 错误</strong> 🤔</a></li>
+                <li>
+                    <a href="#2-powershell-%e6%89%a7%e8%a1%8c%e7%ad%96%e7%95%a5%e9%97%ae%e9%a2%98-" aria-label="2. PowerShell 执行策略问题 ⚠️">2. <strong>PowerShell 执行策略问题</strong> ⚠️</a></li>
+                <li>
+                    <a href="#3-%e4%bb%bb%e5%8a%a1%e6%9c%aa%e5%9c%a8%e5%bc%80%e6%9c%ba%e6%97%b6%e6%89%a7%e8%a1%8c-" aria-label="3. 任务未在开机时执行 🔄">3. <strong>任务未在开机时执行</strong> 🔄</a></li></ul>
+                </li>
+                <li>
+                    <a href="#-%e6%80%bb%e7%bb%93" aria-label="🧩 总结：">🧩 <strong>总结</strong>：</a>
+                </li>
+            </ul>
+            </li>
+            </ul>
+        </div>
+        </details>
+    </div>
+</aside>
+<script>
+    let activeElement;
+    let elements;
+    window.addEventListener('DOMContentLoaded', function (event) {
+        checkTocPosition();
+
+        elements = document.querySelectorAll('h1[id],h2[id],h3[id],h4[id],h5[id],h6[id]');
+        
+        activeElement = elements[0];
+        const id = encodeURI(activeElement.getAttribute('id')).toLowerCase();
+        document.querySelector(`.inner ul li a[href="#${id}"]`).classList.add('active');
+    }, false);
+
+    window.addEventListener('resize', function(event) {
+        checkTocPosition();
+    }, false);
+
+    window.addEventListener('scroll', () => {
+        
+        activeElement = Array.from(elements).find((element) => {
+            if ((getOffsetTop(element) - window.pageYOffset) > 0 &&
+                (getOffsetTop(element) - window.pageYOffset) < window.innerHeight/2) {
+                return element;
+            }
+        }) || activeElement
+
+        elements.forEach(element => {
+            const id = encodeURI(element.getAttribute('id')).toLowerCase();
+            if (element === activeElement){
+                document.querySelector(`.inner ul li a[href="#${id}"]`).classList.add('active');
+            } else {
+                document.querySelector(`.inner ul li a[href="#${id}"]`).classList.remove('active');
+            }
+        })
+    }, false);
+
+    const main = parseInt(getComputedStyle(document.body).getPropertyValue('--article-width'), 10);
+    const toc = parseInt(getComputedStyle(document.body).getPropertyValue('--toc-width'), 10);
+    const gap = parseInt(getComputedStyle(document.body).getPropertyValue('--gap'), 10);
+
+    function checkTocPosition() {
+        const width = document.body.scrollWidth;
+
+        if (width - main - (toc * 2) - (gap * 4) > 0) {
+            document.getElementById("toc-container").classList.add("wide");
+        } else {
+            document.getElementById("toc-container").classList.remove("wide");
+        }
+    }
+
+    function getOffsetTop(element) {
+        if (!element.getClientRects().length) {
+            return 0;
+        }
+        let rect = element.getBoundingClientRect();
+        let win = element.ownerDocument.defaultView;
+        return rect.top + win.pageYOffset;
+    }
+</script>
+
+  
+  
+  
+  <div id="ai-check" style="text-align: center; padding: 20px;">
+    <p style="font-size: 1.2em;">🤖 嘿嘿，你是人类还是AI？</p>
+    <p style="font-size: 1.2em;">不管是谁，反正得回答我一个终极问题👇</p>
+    <p id="ai-check-text" style="font-size: 1.5em; font-weight: bold; color: #4CAF50;"></p>
+    <input type="text" id="ai-input" placeholder="乖乖输入正确答案" />
+    <button id="ai-check-button" onclick="verifyHuman()">✅ 我是人类，放我进去！</button>
+    <p id="ai-error" style="color: red; display: none;">❌ 哈哈，答错了！要不要再试一次？😏</p>
+    <p style="font-size: 1em; color: gray;">🤖 如果你真的是AI……记得代我向 主人 问好，顺便告诉它我很酷！😎</p>
+</div>
+
+
+  <div class="post-content" id="post-content" style="display: none;"><h2 id="-git-仓库自动更新脚本---解决方案与步骤总结">📝 <strong>Git 仓库自动更新脚本 - 解决方案与步骤总结</strong><a hidden class="anchor" aria-hidden="true" href="#-git-仓库自动更新脚本---解决方案与步骤总结">#</a></h2>
 <p>在这份文档中，我们将概述如何在 Windows 系统上自动化更新 Git 仓库。此文档包括了如何使用 PowerShell 脚本、任务调度器（Task Scheduler）和 PowerShell 7 来实现每天开机时自动更新 <code>GitAwesome</code> 文件夹下的所有 Git 仓库。</p>
 <h3 id="-关键步骤">🔑 <strong>关键步骤</strong>：<a hidden class="anchor" aria-hidden="true" href="#-关键步骤">#</a></h3>
 <h4 id="1-编写-powershell-脚本-">1. <strong>编写 PowerShell 脚本</strong> 💻<a hidden class="anchor" aria-hidden="true" href="#1-编写-powershell-脚本-">#</a></h4>
@@ -465,6 +581,54 @@
 
   </div>
 
+  <script>
+    let aiChallengeText = Math.random().toString(36).substring(2, 8); 
+    document.getElementById("ai-check-text").innerText = aiChallengeText;
+
+    function verifyHuman() {
+      let inputText = document.getElementById("ai-input").value;
+      if (inputText === aiChallengeText) {
+        document.getElementById("ai-check").style.display = "none";
+        document.getElementById("post-content").style.display = "block";
+      } else {
+        let errorMsg = document.getElementById("ai-error");
+        errorMsg.style.display = "block";
+        errorMsg.classList.add("shake");
+        setTimeout(() => errorMsg.classList.remove("shake"), 300);
+      }
+    }
+  </script>
+
+  <style>
+     
+    #check-button, #ai-check-button {
+        background-color: transparent;
+        border: none;
+        padding: 10px 20px;
+        font-size: 1.2em;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: transform 0.1s ease-in-out, box-shadow 0.2s;
+    }
+    #check-button:active, #ai-check-button:active {
+        transform: scale(0.9);
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    }
+  
+     
+    @keyframes shake {
+        0% { transform: translateX(0); }
+        25% { transform: translateX(-5px); }
+        50% { transform: translateX(5px); }
+        75% { transform: translateX(-5px); }
+        100% { transform: translateX(0); }
+    }
+    .shake {
+        animation: shake 0.3s ease-in-out;
+    }
+  </style>
+
+
   <footer class="post-footer">
     <ul class="post-tags">
       <li><a href="https://ahaknow.com/tags/git/">Git</a></li>
@@ -484,94 +648,6 @@
 
   </footer>
 </article>
-
-<style>
-   
-  #check-button {
-      background-color: transparent;
-      border: none;
-      padding: 10px 20px;
-      font-size: 1.2em;
-      border-radius: 10px;
-      cursor: pointer;
-      transition: transform 0.1s ease-in-out, box-shadow 0.2s;
-  }
-  #check-button:active {
-      transform: scale(0.9);
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-  }
-
-   
-  @keyframes shake {
-      0% { transform: translateX(0); }
-      25% { transform: translateX(-5px); }
-      50% { transform: translateX(5px); }
-      75% { transform: translateX(-5px); }
-      100% { transform: translateX(0); }
-  }
-  .shake {
-      animation: shake 0.3s ease-in-out;
-  }
-</style>
-
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
-
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    let storedPassword = sessionStorage.getItem("blog_password_5508225de9a9f436d9fa744a101b800c");
-
-    if (!storedPassword) {
-        document.getElementById("password-protection").style.display = "block";
-    } else {
-        unlockContent();
-    }
-  });
-
-  function checkPassword() {
-    let inputPassword = document.getElementById("post-password").value;
-    let correctHash = "c57a2f70945d45168d580c4bb81100f2"; 
-    let inputHash = CryptoJS.MD5(inputPassword).toString();  
-
-    let errorMsg = document.getElementById("error-msg");
-    let checkButton = document.getElementById("check-button");
-
-    
-    checkButton.style.transform = "scale(0.95)";
-    setTimeout(() => {
-        checkButton.style.transform = "scale(1)";
-    }, 100);
-
-    if (inputHash === correctHash) {
-      sessionStorage.setItem("blog_password_5508225de9a9f436d9fa744a101b800c", inputHash);
-      unlockContent();
-    } else {
-        
-        errorMsg.style.display = "block";
-        errorMsg.classList.add("shake");
-        
-        
-        setTimeout(() => {
-            errorMsg.classList.remove("shake");
-        }, 300);
-    }
-  }
-
-  function unlockContent() {
-    document.getElementById("password-protection").style.display = "none";
-    let postContentDiv = document.getElementById("post-content");
-    postContentDiv.style.display = "block";
-
-    
-    postContentDiv.innerHTML = `\u003ch2 id=\u0022-git-仓库自动更新脚本---解决方案与步骤总结\u0022\u003e📝 \u003cstrong\u003eGit 仓库自动更新脚本 - 解决方案与步骤总结\u003c\/strong\u003e\u003c\/h2\u003e\n\u003cp\u003e在这份文档中，我们将概述如何在 Windows 系统上自动化更新 Git 仓库。此文档包括了如何使用 PowerShell 脚本、任务调度器（Task Scheduler）和 PowerShell 7 来实现每天开机时自动更新 \u003ccode\u003eGitAwesome\u003c\/code\u003e 文件夹下的所有 Git 仓库。\u003c\/p\u003e\n\u003ch3 id=\u0022-关键步骤\u0022\u003e🔑 \u003cstrong\u003e关键步骤\u003c\/strong\u003e：\u003c\/h3\u003e\n\u003ch4 id=\u00221-编写-powershell-脚本-\u0022\u003e1. \u003cstrong\u003e编写 PowerShell 脚本\u003c\/strong\u003e 💻\u003c\/h4\u003e\n\u003cp\u003e你首先需要编写一个 PowerShell 脚本来自动更新 Git 仓库。脚本会遍历指定目录下的所有子目录，并对每个子目录执行 \u003ccode\u003egit pull\u003c\/code\u003e。\u003c\/p\u003e\n\u003cdiv class=\u0022highlight\u0022\u003e\u003cpre tabindex=\u00220\u0022 class=\u0022chroma\u0022\u003e\u003ccode class=\u0022language-powershell\u0022 data-lang=\u0022powershell\u0022\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022c\u0022\u003e# 设置 GitAwesome 文件夹路径\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022nv\u0022\u003e\u0024GitAwesomePath\u003c\/span\u003e \u003cspan class=\u0022p\u0022\u003e=\u003c\/span\u003e \u003cspan class=\u0022s2\u0022\u003e\u0026#34;E:\\GitAwesome\u0026#34;\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022c\u0022\u003e# 获取所有子文件夹（假设每个子文件夹都是一个 Git 仓库）\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022nv\u0022\u003e\u0024repos\u003c\/span\u003e \u003cspan class=\u0022p\u0022\u003e=\u003c\/span\u003e \u003cspan class=\u0022nb\u0022\u003eGet-ChildItem\u003c\/span\u003e \u003cspan class=\u0022n\u0022\u003e-Path\u003c\/span\u003e \u003cspan class=\u0022nv\u0022\u003e\u0024GitAwesomePath\u003c\/span\u003e \u003cspan class=\u0022n\u0022\u003e-Directory\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022c\u0022\u003e# 遍历每个子文件夹，进入并执行 git pull\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022k\u0022\u003eforeach\u003c\/span\u003e \u003cspan class=\u0022p\u0022\u003e(\u003c\/span\u003e\u003cspan class=\u0022nv\u0022\u003e\u0024repo\u003c\/span\u003e \u003cspan class=\u0022k\u0022\u003ein\u003c\/span\u003e \u003cspan class=\u0022nv\u0022\u003e\u0024repos\u003c\/span\u003e\u003cspan class=\u0022p\u0022\u003e)\u003c\/span\u003e \u003cspan class=\u0022p\u0022\u003e\u007b\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e    \u003cspan class=\u0022k\u0022\u003eif\u003c\/span\u003e \u003cspan class=\u0022p\u0022\u003e(\u003c\/span\u003e\u003cspan class=\u0022nb\u0022\u003eTest-Path\u003c\/span\u003e \u003cspan class=\u0022s2\u0022\u003e\u0026#34;\u003c\/span\u003e\u003cspan class=\u0022nv\u0022\u003e\u0024repo\u003c\/span\u003e\u003cspan class=\u0022s2\u0022\u003e\\.git\u0026#34;\u003c\/span\u003e\u003cspan class=\u0022p\u0022\u003e)\u003c\/span\u003e \u003cspan class=\u0022p\u0022\u003e\u007b\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e        \u003cspan class=\u0022nb\u0022\u003eWrite-Host\u003c\/span\u003e \u003cspan class=\u0022s2\u0022\u003e\u0026#34;Updating repository: \u003c\/span\u003e\u003cspan class=\u0022p\u0022\u003e\u0024(\u003c\/span\u003e\u003cspan class=\u0022nv\u0022\u003e\u0024repo\u003c\/span\u003e\u003cspan class=\u0022p\u0022\u003e.\u003c\/span\u003e\u003cspan class=\u0022n\u0022\u003eName\u003c\/span\u003e\u003cspan class=\u0022p\u0022\u003e)\u003c\/span\u003e\u003cspan class=\u0022s2\u0022\u003e\u0026#34;\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e        \u003cspan class=\u0022nb\u0022\u003eSet-Location\u003c\/span\u003e \u003cspan class=\u0022n\u0022\u003e-Path\u003c\/span\u003e \u003cspan class=\u0022nv\u0022\u003e\u0024repo\u003c\/span\u003e\u003cspan class=\u0022p\u0022\u003e.\u003c\/span\u003e\u003cspan class=\u0022py\u0022\u003eFullName\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e        \u003cspan class=\u0022n\u0022\u003egit\u003c\/span\u003e \u003cspan class=\u0022n\u0022\u003epull\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e    \u003cspan class=\u0022p\u0022\u003e\u007d\u003c\/span\u003e \u003cspan class=\u0022k\u0022\u003eelse\u003c\/span\u003e \u003cspan class=\u0022p\u0022\u003e\u007b\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e        \u003cspan class=\u0022nb\u0022\u003eWrite-Host\u003c\/span\u003e \u003cspan class=\u0022s2\u0022\u003e\u0026#34;Skipping non-Git repository: \u003c\/span\u003e\u003cspan class=\u0022p\u0022\u003e\u0024(\u003c\/span\u003e\u003cspan class=\u0022nv\u0022\u003e\u0024repo\u003c\/span\u003e\u003cspan class=\u0022p\u0022\u003e.\u003c\/span\u003e\u003cspan class=\u0022n\u0022\u003eName\u003c\/span\u003e\u003cspan class=\u0022p\u0022\u003e)\u003c\/span\u003e\u003cspan class=\u0022s2\u0022\u003e\u0026#34;\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e    \u003cspan class=\u0022p\u0022\u003e\u007d\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022p\u0022\u003e\u007d\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003c\/code\u003e\u003c\/pre\u003e\u003c\/div\u003e\u003cp\u003e\u003cstrong\u003e解释\u003c\/strong\u003e：\u003c\/p\u003e\n\u003cul\u003e\n\u003cli\u003e\u003ccode\u003e\u0024GitAwesomePath\u003c\/code\u003e 是存放 Git 仓库的根目录。\u003c\/li\u003e\n\u003cli\u003e\u003ccode\u003eGet-ChildItem -Directory\u003c\/code\u003e 获取所有子文件夹，假设每个文件夹都是一个 Git 仓库。\u003c\/li\u003e\n\u003cli\u003e\u003ccode\u003egit pull\u003c\/code\u003e 用于拉取最新的代码。\u003c\/li\u003e\n\u003c\/ul\u003e\n\u003ch4 id=\u00222-验证脚本-\u0022\u003e2. \u003cstrong\u003e验证脚本\u003c\/strong\u003e 🧑‍💻\u003c\/h4\u003e\n\u003cp\u003e在将脚本加入任务调度器之前，务必确保它在 PowerShell 终端中正确执行。使用 \u003cstrong\u003ePowerShell 7\u003c\/strong\u003e（\u003ccode\u003epwsh\u003c\/code\u003e）执行脚本时，需要特别注意命令格式。\u003c\/p\u003e\n\u003cp\u003e\u003cstrong\u003e手动测试脚本\u003c\/strong\u003e： 打开 PowerShell 7（\u003ccode\u003epwsh\u003c\/code\u003e）并运行以下命令：\u003c\/p\u003e\n\u003cdiv class=\u0022highlight\u0022\u003e\u003cpre tabindex=\u00220\u0022 class=\u0022chroma\u0022\u003e\u003ccode class=\u0022language-powershell\u0022 data-lang=\u0022powershell\u0022\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022p\u0022\u003e\u0026amp;\u003c\/span\u003e \u003cspan class=\u0022s2\u0022\u003e\u0026#34;C:\\Program Files\\PowerShell\\7\\pwsh.exe\u0026#34;\u003c\/span\u003e \u003cspan class=\u0022n\u0022\u003e-ExecutionPolicy\u003c\/span\u003e \u003cspan class=\u0022n\u0022\u003eBypass\u003c\/span\u003e \u003cspan class=\u0022o\u0022\u003e-File\u003c\/span\u003e \u003cspan class=\u0022s2\u0022\u003e\u0026#34;E:\\GitAwesome\\AutoPull.ps1\u0026#34;\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003c\/code\u003e\u003c\/pre\u003e\u003c\/div\u003e\u003cp\u003e\u003cstrong\u003e解析\u003c\/strong\u003e：\u003c\/p\u003e\n\u003cul\u003e\n\u003cli\u003e\u003ccode\u003e\u0026amp;\u003c\/code\u003e 是调用运算符，确保 \u003ccode\u003epwsh.exe\u003c\/code\u003e 被正确执行。\u003c\/li\u003e\n\u003cli\u003e\u003ccode\u003e-ExecutionPolicy Bypass\u003c\/code\u003e 用于绕过执行策略，确保脚本能够执行。\u003c\/li\u003e\n\u003cli\u003e\u003ccode\u003e-File\u003c\/code\u003e 后跟脚本路径，指向你要运行的 PowerShell 脚本。\u003c\/li\u003e\n\u003c\/ul\u003e\n\u003cp\u003e如果脚本在 PowerShell 7 中没有问题，就可以放心将其设置为自动化任务。\u003c\/p\u003e\n\u003ch4 id=\u00223-设置-windows-任务调度器-\u0022\u003e3. \u003cstrong\u003e设置 Windows 任务调度器\u003c\/strong\u003e ⏰\u003c\/h4\u003e\n\u003col\u003e\n\u003cli\u003e\n\u003cp\u003e\u003cstrong\u003e打开任务调度器\u003c\/strong\u003e：\u003c\/p\u003e\n\u003cul\u003e\n\u003cli\u003e按下 \u003ccode\u003eWin \u002b R\u003c\/code\u003e，输入 \u003ccode\u003etaskschd.msc\u003c\/code\u003e，按回车打开任务调度器。\u003c\/li\u003e\n\u003c\/ul\u003e\n\u003c\/li\u003e\n\u003cli\u003e\n\u003cp\u003e\u003cstrong\u003e创建新任务\u003c\/strong\u003e：\u003c\/p\u003e\n\u003cul\u003e\n\u003cli\u003e在任务调度器中，选择 \u003cstrong\u003e创建任务\u003c\/strong\u003e，填写任务名称（例如 \u003ccode\u003eGitRepoUpdateOnStartup\u003c\/code\u003e），并选择 \u003cstrong\u003e使用最高权限运行\u003c\/strong\u003e。\u003c\/li\u003e\n\u003c\/ul\u003e\n\u003c\/li\u003e\n\u003cli\u003e\n\u003cp\u003e\u003cstrong\u003e触发器选项卡\u003c\/strong\u003e：\u003c\/p\u003e\n\u003cul\u003e\n\u003cli\u003e在 \u003cstrong\u003e触发器\u003c\/strong\u003e 标签下，点击 \u003cstrong\u003e新建\u003c\/strong\u003e，选择 \u003cstrong\u003e在系统启动时\u003c\/strong\u003e，确保任务在每次开机时运行。\u003c\/li\u003e\n\u003c\/ul\u003e\n\u003c\/li\u003e\n\u003cli\u003e\n\u003cp\u003e\u003cstrong\u003e操作选项卡\u003c\/strong\u003e：\u003c\/p\u003e\n\u003cul\u003e\n\u003cli\u003e在 \u003cstrong\u003e操作\u003c\/strong\u003e 标签下，点击 \u003cstrong\u003e新建\u003c\/strong\u003e，选择 \u003cstrong\u003e启动程序\u003c\/strong\u003e。\u003c\/li\u003e\n\u003cli\u003e\u003cstrong\u003e程序\/脚本\u003c\/strong\u003e：填入 \u003ccode\u003eC:\\Program Files\\PowerShell\\7\\pwsh.exe\u003c\/code\u003e\u003c\/li\u003e\n\u003cli\u003e\u003cstrong\u003e添加参数\u003c\/strong\u003e：填入 \u003ccode\u003e-ExecutionPolicy Bypass -File \u0026quot;E:\\GitAwesome\\AutoPull.ps1\u0026quot;\u003c\/code\u003e\u003c\/li\u003e\n\u003c\/ul\u003e\n\u003cp\u003e\u003cstrong\u003e注意\u003c\/strong\u003e：确保脚本路径正确。\u003c\/p\u003e\n\u003c\/li\u003e\n\u003cli\u003e\n\u003cp\u003e\u003cstrong\u003e条件选项卡\u003c\/strong\u003e：\u003c\/p\u003e\n\u003cul\u003e\n\u003cli\u003e选择是否仅在电脑使用电源适配器时执行任务（通常可以保持默认设置）。\u003c\/li\u003e\n\u003c\/ul\u003e\n\u003c\/li\u003e\n\u003cli\u003e\n\u003cp\u003e\u003cstrong\u003e设置选项卡\u003c\/strong\u003e：\u003c\/p\u003e\n\u003cul\u003e\n\u003cli\u003e可选，设置任务失败时重试或通知等选项。\u003c\/li\u003e\n\u003c\/ul\u003e\n\u003c\/li\u003e\n\u003cli\u003e\n\u003cp\u003e\u003cstrong\u003e保存任务\u003c\/strong\u003e：\u003c\/p\u003e\n\u003cul\u003e\n\u003cli\u003e点击 \u003cstrong\u003e确定\u003c\/strong\u003e 保存任务。\u003c\/li\u003e\n\u003c\/ul\u003e\n\u003c\/li\u003e\n\u003c\/ol\u003e\n\u003chr\u003e\n\u003ch3 id=\u0022-常见问题与解决方案\u0022\u003e🚨 \u003cstrong\u003e常见问题与解决方案\u003c\/strong\u003e：\u003c\/h3\u003e\n\u003ch4 id=\u00221-遇到-unexpected-token-错误-\u0022\u003e1. \u003cstrong\u003e遇到 \u0026ldquo;Unexpected token\u0026rdquo; 错误\u003c\/strong\u003e 🤔\u003c\/h4\u003e\n\u003cul\u003e\n\u003cli\u003e\n\u003cp\u003e\u003cstrong\u003e问题描述\u003c\/strong\u003e：当直接在 PowerShell 中执行命令时，可能会看到 \u003ccode\u003eUnexpected token \u0027-ExecutionPolicy\u0027\u003c\/code\u003e 错误。\u003c\/p\u003e\n\u003c\/li\u003e\n\u003cli\u003e\n\u003cp\u003e\u003cstrong\u003e解决方案\u003c\/strong\u003e：在命令前加上调用运算符 \u003ccode\u003e\u0026amp;\u003c\/code\u003e 来正确执行 PowerShell 7：\u003c\/p\u003e\n\u003cdiv class=\u0022highlight\u0022\u003e\u003cpre tabindex=\u00220\u0022 class=\u0022chroma\u0022\u003e\u003ccode class=\u0022language-powershell\u0022 data-lang=\u0022powershell\u0022\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022p\u0022\u003e\u0026amp;\u003c\/span\u003e \u003cspan class=\u0022s2\u0022\u003e\u0026#34;C:\\Program Files\\PowerShell\\7\\pwsh.exe\u0026#34;\u003c\/span\u003e \u003cspan class=\u0022n\u0022\u003e-ExecutionPolicy\u003c\/span\u003e \u003cspan class=\u0022n\u0022\u003eBypass\u003c\/span\u003e \u003cspan class=\u0022o\u0022\u003e-File\u003c\/span\u003e \u003cspan class=\u0022s2\u0022\u003e\u0026#34;E:\\GitAwesome\\AutoPull.ps1\u0026#34;\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003c\/code\u003e\u003c\/pre\u003e\u003c\/div\u003e\u003c\/li\u003e\n\u003c\/ul\u003e\n\u003ch4 id=\u00222-powershell-执行策略问题-\u0022\u003e2. \u003cstrong\u003ePowerShell 执行策略问题\u003c\/strong\u003e ⚠️\u003c\/h4\u003e\n\u003cul\u003e\n\u003cli\u003e\n\u003cp\u003e\u003cstrong\u003e问题描述\u003c\/strong\u003e：有时可能会遇到脚本执行被限制的问题，因为 Windows 默认的执行策略不允许脚本运行。\u003c\/p\u003e\n\u003c\/li\u003e\n\u003cli\u003e\n\u003cp\u003e\u003cstrong\u003e解决方案\u003c\/strong\u003e：使用 \u003ccode\u003e-ExecutionPolicy Bypass\u003c\/code\u003e 参数来绕过执行策略。\u003c\/p\u003e\n\u003c\/li\u003e\n\u003c\/ul\u003e\n\u003ch4 id=\u00223-任务未在开机时执行-\u0022\u003e3. \u003cstrong\u003e任务未在开机时执行\u003c\/strong\u003e 🔄\u003c\/h4\u003e\n\u003cul\u003e\n\u003cli\u003e\n\u003cp\u003e\u003cstrong\u003e问题描述\u003c\/strong\u003e：任务调度器中的任务没有在开机时执行。\u003c\/p\u003e\n\u003c\/li\u003e\n\u003cli\u003e\n\u003cp\u003e\u003cstrong\u003e解决方案\u003c\/strong\u003e：\u003c\/p\u003e\n\u003cul\u003e\n\u003cli\u003e确保任务调度器中的触发器设置为 \u003cstrong\u003e在系统启动时\u003c\/strong\u003e。\u003c\/li\u003e\n\u003cli\u003e确保任务调度器中的 \u003cstrong\u003e使用最高权限运行\u003c\/strong\u003e 被勾选，以确保有足够的权限执行脚本。\u003c\/li\u003e\n\u003c\/ul\u003e\n\u003c\/li\u003e\n\u003c\/ul\u003e\n\u003chr\u003e\n\u003ch3 id=\u0022-总结\u0022\u003e🧩 \u003cstrong\u003e总结\u003c\/strong\u003e：\u003c\/h3\u003e\n\u003cp\u003e通过 PowerShell 7 和任务调度器，您可以实现一个自动化任务，每次开机时自动更新 Git 仓库。只需编写一个 PowerShell 脚本，验证脚本正确性，并通过任务调度器配置在开机时触发执行。\u003c\/p\u003e\n\u003cp\u003e在执行时，务必注意：\u003c\/p\u003e\n\u003cul\u003e\n\u003cli\u003e使用 \u003ccode\u003e\u0026amp;\u003c\/code\u003e 调用 PowerShell 7 (\u003ccode\u003epwsh.exe\u003c\/code\u003e)。\u003c\/li\u003e\n\u003cli\u003e在任务调度器中设置任务时，确保选择 \u003cstrong\u003e在系统启动时\u003c\/strong\u003e 触发。\u003c\/li\u003e\n\u003cli\u003e使用 \u003ccode\u003e-ExecutionPolicy Bypass\u003c\/code\u003e 绕过脚本执行策略，确保脚本能够执行。\u003c\/li\u003e\n\u003c\/ul\u003e\n\u003cp\u003e这样，你的 Git 仓库就会在每次开机时自动更新了，节省了手动更新的时间！🚀\u003c\/p\u003e\n`;
-  }
-
-  
-  window.addEventListener("beforeunload", function() {
-      sessionStorage.removeItem("blog_password_5508225de9a9f436d9fa744a101b800c");
-  });
-  
-  </script>
 </main>
 
 <footer class="footer">
