@@ -431,9 +431,9 @@
   
   
   <div id="ai-check" style="text-align: center; padding: 20px;">
+    <p id="ai-check-text" style="font-size: 1.5em; font-weight: bold; color: #45b97c;"></p>
     <p style="font-size: 1.2em;">🤖 嘿嘿，你是人类还是AI？</p>
     <p style="font-size: 1.2em;">不管是谁，反正得回答我一个终极问题👇</p>
-    <p id="ai-check-text" style="font-size: 1.5em; font-weight: bold; color: #45b97c;"></p>
     <p id="waiting-message" style="font-size: 1.2em;">🤖 正在加载终极挑战...</p>
     <p id="challenge-text" style="display: none; font-size: 1.5em; font-weight: bold; color: #45b97c;"></p>
     <input type="text" id="ai-input" style="display: none;" placeholder="乖乖输入正确答案" />
@@ -785,7 +785,7 @@
         document.getElementById("challenge-text").style.display = "block";
         document.getElementById("ai-input").style.display = "inline";
         document.getElementById("ai-check-button").style.display = "inline";
-    }, 5000); 
+    }, 2000); 
 
     function verifyHuman() {
         let inputText = document.getElementById("ai-input").value.trim();
